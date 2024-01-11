@@ -13,10 +13,6 @@ export function InputBar({onPress, placeholder, title}){
     setInput(newInput);
   }
 
-  // const handleCreatePost = () => {
-  //   navigation.navigate(DiscussRouteNames.CREATE_POST);
-  // } 
-
   return (
     <Card styles={styles.card}>
       <View style={styles.inputBarContainer}>
@@ -27,7 +23,7 @@ export function InputBar({onPress, placeholder, title}){
           style={styles.input}
         />
         <Button
-          title='Create Post'
+          title={title}
           onPress={() => onPress(input)}
           styles={styles.button}
           type={ButtonType.BASIC}

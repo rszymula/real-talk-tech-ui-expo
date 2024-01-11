@@ -35,5 +35,6 @@ export const categories = [
   }
 ];
 
+export const INPUT_PLACEHOLDER = 'Share your SaaS experiences with the community';
 
 

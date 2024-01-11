@@ -3,6 +3,8 @@ import { Text, View, Button, StyleSheet, TouchableOpacity, FlatList, TextInput }
 import { getComments } from '../../../../services/DiscussService';
 import { colors } from '../../../../context/themes';
 import { Separator } from '../../../../common/Separator';
+import { InputBar } from '../../../../common/InputBar';
+import { INPUT_PLACEHOLDER } from '../../../../constants';
 
 function Comment({text, username, upvotes, createdTimestamp}) {
   console.log(text)
@@ -24,12 +26,8 @@ const COMMENT_OFFSET = 10;
 
 function CommentsList({comments}){
 
-  const [newComment, setNewComment] = React.useState('');
-
-  const handleTextChange = () => {
-    setNewComment(newComment)
-  }
-  const handleSubmitComment = () => {
+  const handleSubmitComment = (input) => {
+    console.log("Commented", input)
     // make API call
     // if succcessful call passed in function to store the new state
   }
@@ -47,10 +45,11 @@ function CommentsList({comments}){
         ItemSeparatorComponent={() => <Separator style={styles.separator}/>}
       />
       <View style={styles.inputContainer}>
-        <TextInput onChangeText={handleTextChange}/>
-        <TouchableOpacity onPress={handleSubmitComment}>
-          <Text>^</Text>
-        </TouchableOpacity>
+        <InputBar
+          onPress={handleSubmitComment}
+          title={"^"}
+          placeholder={INPUT_PLACEHOLDER}
+        />
       </View>
     </View>
   )

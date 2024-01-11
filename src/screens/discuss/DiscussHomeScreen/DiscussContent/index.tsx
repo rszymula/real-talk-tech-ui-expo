@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, FlatList, TextInput } from 'react-native';
-import { CategoryNames } from '../../../../constants';
+import { CategoryNames, INPUT_PLACEHOLDER } from '../../../../constants';
 import { Post } from './Post';
 import { getPostsWithCommentIdsAndUpvotes } from '../../../../services/DiscussService';
 import { DiscussRouteNames } from '../..';
@@ -11,8 +11,6 @@ import { colors } from '../../../../context/themes';
 import { InputBar } from '../../../../common/InputBar';
 
 const POST_PAGE_OFFSET = 10;
-
-const INPUT_PLACEHOLDER = 'Share your SaaS experiences with the community';
 
 export function DiscussContent(props){
 
