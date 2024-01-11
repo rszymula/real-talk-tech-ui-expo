@@ -1,3 +1,4 @@
+import React from 'react';
 import { Text, View, Button, StyleSheet } from 'react-native';
 
 export function DiscussContent(props){
@@ -22,5 +23,6 @@ const styles = StyleSheet.create({
     width: "100%",
     borderColor: 'red',
     borderWidth: 2,
+    padding: 16,
   }
 })

@@ -1,25 +1,39 @@
 import { Discuss } from "./screens/discuss/index";
 import { Discover } from "./screens/discover/index";
 
-export enum routeNames {
+export enum RouteNames {
   DISCUSS = "Discuss",
   DISCOVER = "Discover",
 };
 
 export const screens = [
   {
-    name: routeNames.DISCUSS,
+    name: RouteNames.DISCUSS,
     component: Discuss,
   },
   {
-    name: routeNames.DISCOVER,
+    name: RouteNames.DISCOVER,
     component: Discover,
   }
 ]
 
-export enum Categories {
+export enum CategoryNames {
   HOME = "Home",
   AAA = "Aaa",
   BBB = "Bbb",
 };
+
+export const categories = [
+  {
+    name: CategoryNames.HOME,
+  },
+  {
+    name: CategoryNames.AAA,
+  },
+  {
+    name: CategoryNames.BBB,
+  }
+];
+
+
 
