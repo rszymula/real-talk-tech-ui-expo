@@ -9,6 +9,8 @@ export function Discover(props){
     navigation.navigate(RouteNames.DISCUSS)
   }
 
+  console.log("Rendering Discover")
+
   return (
     <View style={styles.container}>
       <Text>

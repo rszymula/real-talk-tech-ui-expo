@@ -19,7 +19,7 @@ export function Discuss(props){
     <View style={styles.container}>
       {/* <Text>WHY</Text> */}
       <DiscussNavBar handleSetCurrentCategory={handleSetCurrentCategory} />
-      <DiscussContent currentCategory={currentCategory} />
+      <DiscussContent currentCategory={currentCategory} navigation={navigation} />
     </View>
   )
 }
@@ -27,9 +27,10 @@ export function Discuss(props){
 const styles = StyleSheet.create({
   container: {
     // width: "100%",
-    // borderColor: 'red',
-    // borderWidth: 2,
+    borderColor: 'red',
+    borderWidth: 2,
     display: 'flex',
     flexDirection: 'row',
+    // margin: 2,
   }
 })
