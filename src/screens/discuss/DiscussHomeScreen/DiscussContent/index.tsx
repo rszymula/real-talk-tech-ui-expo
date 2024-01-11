@@ -6,7 +6,7 @@ import { getPostsWithCommentIdsAndUpvotes } from '../../../../services/DiscussSe
 import { DiscussRouteNames } from '../..';
 import { Card } from '../../../../common/Card';
 import { Separator } from '../../../../common/Separator';
-import { Button } from '../../../../common/Button';
+import { Button, ButtonType } from '../../../../common/Button';
 import { colors } from '../../../../context/themes';
 
 const POST_PAGE_OFFSET = 10;
@@ -34,7 +34,7 @@ function InputBar({navigation}){
           placeholder={INPUT_PLACEHOLDER}
           style={styles.input}
         />
-        <Button title='' onPress={handleCreatePost} />
+        <Button title='Create Post' onPress={handleCreatePost} styles={styles.button} type={ButtonType.BASIC} />
       </View>
     </Card>
   )
@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   button: {
-    width: 256,
+    // width: 256,
+    marginLeft: 16,
   },
   inputBarContainer: {
     display: 'flex',
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
   },
   input: {
     color: colors.textRegular,
+    fontSize: 12,
   },
   card: {
     marginBottom: 16,

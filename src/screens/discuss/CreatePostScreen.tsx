@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, Pressable, TextInput, TouchableOpacity } from 'react-native';
 import { colors } from '../../context/themes';
 import { Card } from '../../common/Card';
-import { Button } from '../../common/Button';
+import { Button, ButtonType } from '../../common/Button';
 
 
 export function CreatePostScreen(props){
@@ -61,8 +61,8 @@ export function CreatePostScreen(props){
           />
         </Card>
         <View style={styles.buttonContainer}>
-          <Button title="Cancel" onPress={handleExit} alternate={true} />
-          <Button title="Create Post" onPress={handleCreatePost} alternate={true} />
+          <Button title="Cancel" onPress={handleExit} type={ButtonType.REVERSE} />
+          <Button title="Create Post" onPress={handleCreatePost} />
         </View>
       </Card>
     </View>

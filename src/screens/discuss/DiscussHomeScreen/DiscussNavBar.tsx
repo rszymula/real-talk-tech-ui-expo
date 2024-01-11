@@ -30,8 +30,8 @@ export function DiscussNavBar(props){
 const styles = StyleSheet.create({
   container: {
     width: "30%",
-    borderColor: 'red',
-    borderWidth: 2,
+    // borderColor: 'red',
+    // borderWidth: 2,
     padding: 16,
   }
 })

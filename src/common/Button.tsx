@@ -1,18 +1,26 @@
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import { colors } from "../context/themes";
 
-enum ButtonType {
+export enum ButtonType {
   BASIC = 'Basic',
   LOUD = 'Loud',
   REVERSE = 'Reverse',
 }
 
 const buttonTypetoStyle = {
-  [ButtonType.BASIC]: {},
+  [ButtonType.BASIC]: {
+    backgroundColor: colors.input,
+    borderColor: colors.border,
+    paddingLeft: 12,
+    paddingRight: 12,
+    paddingTop: 8,
+    paddingBottom: 8,
+    color: 'white',
+  },
   [ButtonType.LOUD]: {},
   [ButtonType.REVERSE]: {
     backgroundColor: colors.input,
-    color: 'white'
+    color: 'white',
   },
 }
 

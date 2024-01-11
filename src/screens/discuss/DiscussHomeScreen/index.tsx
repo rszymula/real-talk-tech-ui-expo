@@ -27,8 +27,8 @@ export function DiscussHomeScreen(props){
 const styles = StyleSheet.create({
   container: {
     // width: "100%",
-    borderColor: 'red',
-    borderWidth: 2,
+    // borderColor: 'red',
+    // borderWidth: 2,
     display: 'flex',
     flexDirection: 'row',
     backgroundColor: colors.background,
