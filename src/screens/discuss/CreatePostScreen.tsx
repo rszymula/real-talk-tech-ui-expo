@@ -38,8 +38,6 @@ export function CreatePostScreen(props){
   return (
     <View style={styles.container}>
       <Card>
-        {/* <Text>CreatePostScreen</Text> */}
-        {/* <Button title={"X"} onPress={handleExit}/> */}
         <Card>
           <View style={styles.labeledInput}>
             <Text style={styles.label}>Category</Text>
@@ -61,23 +59,15 @@ export function CreatePostScreen(props){
           </View>
         </Card>
         <Card>
-          {/* <View style={styles.textbox}> */}
-            <TextInput 
-              onChangeText={setContent}
-              value={content}
-              multiline={true}
-              numberOfLines={12}
-              style={styles.textbox}
-            />
-          {/* </View> */}
+          <TextInput 
+            onChangeText={setContent}
+            value={content}
+            multiline={true}
+            numberOfLines={12}
+            style={styles.textbox}
+          />
         </Card>
-        {/* <Pressable onPress={handleExit}>
-          <Text style={styles.exit}>
-            {"X"}
-          </Text>
-        </Pressable> */}
         <View style={styles.buttonContainer}>
-          {/* <TouchableOpacity style={[styles.button, {backgroundCcolor: colors.input, color: 'white'}]}> */}
           <TouchableOpacity onPress={handleExit}>
             <Text style={[styles.button, {backgroundColor: colors.input, color: 'white'}]}>Cancel</Text>
           </TouchableOpacity>

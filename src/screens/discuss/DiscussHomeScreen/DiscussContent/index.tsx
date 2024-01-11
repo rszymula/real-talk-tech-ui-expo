@@ -59,7 +59,7 @@ export function DiscussContent(props){
         <FlatList 
           data={posts}
           keyExtractor={(item) => `${item.id}`}
-          renderItem={({item}) => <Post {...item} currentCategory={currentCategory} />}
+          renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
         />
       </View>
     </View>

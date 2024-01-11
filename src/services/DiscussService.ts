@@ -166,6 +166,13 @@ const mockCommentUpvotes = [
   },
 ];
 
+export function getComments(postId: number, page: number, count: number){
+  const comments = mockComments
+    .filter(comment => comment.postId = postId)
+    .filter((item, idx) => idx >= page * count && idx < (page + 1) * count)
+  return comments;
+}
+
 export function getPostsWithCommentIdsAndUpvotes(category: CategoryNames, page: number, count: number){
   const posts = mockPosts
     .filter(item => item.category === category)
