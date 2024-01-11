@@ -61,7 +61,18 @@ const mockPosts = [
     // upVotes: 5,
     createdTimestamp: '2023-01-02',
     updatedTimestamp: '2023-01-03',
-  }
+  },
+  {
+    id: 3,
+    userId: 5,
+    //category: CategoryNames.AAA,
+    category: "Aaa",
+    title: 'cars',
+    description: 'so fast',
+    // upVotes: 5,
+    createdTimestamp: '2023-05-12',
+    updatedTimestamp: '2023-07-21',
+  },
 ];
 
 const mockPostUpvotes = [

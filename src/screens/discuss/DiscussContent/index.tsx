@@ -16,13 +16,15 @@ export function DiscussContent(props){
 
   return (
     <View style={styles.container}>
-      <Text>DiscussContent2</Text>
-      <Text>{currentCategory}</Text>
-      <FlatList 
-        data={posts}
-        keyExtractor={(item) => `${item.id}`}
-        renderItem={({item}) => <Post {...item} />}
-      />
+      {/* <Text>DiscussContent2</Text>
+      <Text>{currentCategory}</Text> */}
+      <View style={styles.card}>
+        <FlatList 
+          data={posts}
+          keyExtractor={(item) => `${item.id}`}
+          renderItem={({item}) => <Post {...item} />}
+        />
+      </View>
     </View>
   )
 }
@@ -31,8 +33,12 @@ export function DiscussContent(props){
 const styles = StyleSheet.create({
   container: {
     width: "70%",
-    borderColor: 'green',
-    borderWidth: 2,
-    padding: 16,
-  }
+    borderColor: 'lightgrey',
+    borderWidth: 1,
+    margin: 16,
+    padding: 8,
+  },
+  card: {
+    margin: 0,
+  },
 })

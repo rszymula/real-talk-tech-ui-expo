@@ -21,12 +21,16 @@ import { Text, View, Button, StyleSheet } from 'react-native';
 //   );
 // }
 
-export function Post({ title, description, createdTimestamp }){
+export function Post({ title, description, username, commentIds, createdTimestamp }){
+
+  const commentCount = commentIds?.length || 0;
 
   return (
     <>
       <Text>{title}</Text>
       <Text>{description}</Text>
+      <Text>{commentCount}</Text>
+      <Text>{username}</Text>
       <Text>{createdTimestamp}</Text>
     </>
   )
