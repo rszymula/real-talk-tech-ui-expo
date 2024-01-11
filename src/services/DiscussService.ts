@@ -1,5 +1,44 @@
 import { CategoryNames } from "../constants";
 
+const mockUsers = [
+  {
+    id: 1,
+    username: 'Alice123',
+  },
+  {
+    id: 2,
+    username: 'Bob123',
+  },
+  {
+    id: 3,
+    username: 'Casey123',
+  },
+  {
+    id: 4,
+    username: 'Devin123',
+  },
+  {
+    id: 5,
+    username: 'Erika123',
+  },
+  {
+    id: 6,
+    username: 'Frank123',
+  },
+  {
+    id: 7,
+    username: 'Gabe123',
+  },
+  {
+    id: 8,
+    username: 'Hugo123',
+  },
+  {
+    id: 9,
+    username: 'Ivan123',
+  }
+]
+
 const mockPosts = [
   {
     id: 1,
@@ -9,8 +48,8 @@ const mockPosts = [
     title: 'horses',
     description: 'are cool',
     // upVotes: 5,
-    created: '2023-01-02',
-    updated: '2023-01-03',
+    createdTimestamp: '2023-01-02',
+    updatedTimestamp: '2023-01-03',
   },
   {
     id: 2,
@@ -20,8 +59,8 @@ const mockPosts = [
     title: 'traveling is fun',
     description: 'I like to travel',
     // upVotes: 5,
-    created: '2023-01-02',
-    updated: '2023-01-03',
+    createdTimestamp: '2023-01-02',
+    updatedTimestamp: '2023-01-03',
   }
 ];
 
@@ -55,8 +94,8 @@ const mockComments = [
     postId: 1,
     text: 'wow you are right',
     // upVotes: 2,
-    created: '2023-01-02',
-    updated: '2023-01-02',
+    createdTimestamp: '2023-01-02',
+    updatedTimestamp: '2023-01-02',
   },
   {
     id: 2,
@@ -64,8 +103,8 @@ const mockComments = [
     postId: 1,
     text: 'they really are',
     // upVotes: 2,
-    created: '2023-05-02',
-    updated: '2023-07-09',
+    createdTimestamp: '2023-05-02',
+    updatedTimestamp: '2023-07-09',
   },
   {
     id: 3,
@@ -73,8 +112,8 @@ const mockComments = [
     postId: 2,
     text: 'I went to Europe last summer man',
     // upVotes: 2,
-    created: '2023-02-23',
-    updated: '2023-02-23',
+    createdTimestamp: '2023-02-23',
+    updatedTimestamp: '2023-02-23',
   },
 ]
 
@@ -120,7 +159,16 @@ export function getPostsWithCommentIdsAndUpvotes(category: CategoryNames, page: 
   const posts = mockPosts
     .filter(item => item.category === category)
     .filter((item, idx) => idx >= page * count && idx < (page + 1) * count)
-  const postsWithCommentIds = posts.map(post => {
+
+  const postsWithUsername = posts.map(post => {
+    return {
+      ...post,
+      username: mockUsers.find(user => user.id === post.userId)
+        ?.username || ''
+    }
+  });
+
+  const postsWithCommentIds = postsWithUsername.map(post => {
       return {
         ...post,
         commentIds: mockComments
@@ -129,14 +177,16 @@ export function getPostsWithCommentIdsAndUpvotes(category: CategoryNames, page: 
       }
     }
   );
+
   const postsWithCommentIdsAndUpvotes = postsWithCommentIds.map(post => {
     return {
       ...post,
       upVotes: mockPostUpvotes
         .filter(upvote => upvote.postId === post.id)
         .reduce((acu) => acu + 1, 0)
+      }
     }
-  }
-);
+  );
+
   return postsWithCommentIdsAndUpvotes;
 }
