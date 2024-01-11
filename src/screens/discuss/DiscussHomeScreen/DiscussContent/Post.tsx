@@ -2,15 +2,20 @@ import React from 'react';
 import { Text, View, Button, StyleSheet, TouchableOpacity, FlatList, TextInput } from 'react-native';
 import { getComments } from '../../../../services/DiscussService';
 import { colors } from '../../../../context/themes';
+import { Separator } from '../../../../common/Separator';
 
 function Comment({text, username, upvotes, createdTimestamp}) {
   console.log(text)
   return (
     <>
-      {/* <Text>{username}</Text>
-      <Text>{createdTimestamp}</Text> */}
-      <Text>{text}</Text>
-      {/* <Text>{upvotes}</Text> */}
+      <View>
+        <Text style={[styles.captionText, styles.categoryCaption]}>
+          {`${username} | ${createdTimestamp}`}
+        </Text>
+        {/* <Text>{createdTimestamp}</Text> */}
+        <Text style={[styles.bodyText, styles.description]}>{text}</Text>
+        {/* <Text>{upvotes}</Text> */}
+      </View>
     </>
   )
 }
@@ -30,14 +35,16 @@ function CommentsList({comments}){
   }
 
   return (
-    <>
+    <View>
       <FlatList
+        style={{borderLeftWidth: 0.5, borderColor: colors.border, paddingLeft: 24, marginTop: 12}}
         data={comments}
         renderItem={({item}) => {
           console.log("xyz", item)
           return <Comment {...item}/>
         }}
         keyExtractor={(item) => item.id}
+        ItemSeparatorComponent={() => <Separator style={styles.separator}/>}
       />
       <View style={styles.inputContainer}>
         <TextInput onChangeText={handleTextChange}/>
@@ -45,7 +52,7 @@ function CommentsList({comments}){
           <Text>^</Text>
         </TouchableOpacity>
       </View>
-    </>
+    </View>
   )
 }
 
@@ -65,6 +72,7 @@ export function Post({ id, title, description, username, commentIds, createdTime
 
   React.useEffect(() => {
     if(commentsExpanded && comments.length === 0){
+      console.log("checkID", {id, page, COMMENT_OFFSET})
       const mockComments = getComments(id, page, COMMENT_OFFSET);
       console.log({id, page, COMMENT_OFFSET}, mockComments)
       setComments([...mockComments]);
@@ -107,10 +115,11 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: 'row',
+    marginTop: 32,
   },
   captionText: {
     color: colors.textLowlight,
-    fontSize: 10,
+    fontSize: 8,
   },
   headingText: {
     color: colors.textHighlight,
@@ -152,4 +161,8 @@ const styles = StyleSheet.create({
   actionMember: {
     marginLeft: 16,
   },
+  separator: {
+    marginTop: 12,
+    marginBottom: 12,
+  }
 })

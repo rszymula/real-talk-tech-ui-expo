@@ -101,7 +101,7 @@ const mockPostUpvotes = [
 const mockComments = [
   {
     id: 1,
-    userId: 1,
+    userId: 3,
     postId: 1,
     text: 'wow you are right',
     // upVotes: 2,
@@ -110,7 +110,7 @@ const mockComments = [
   },
   {
     id: 2,
-    userId: 1,
+    userId: 5,
     postId: 1,
     text: 'they really are',
     // upVotes: 2,
@@ -119,7 +119,7 @@ const mockComments = [
   },
   {
     id: 3,
-    userId: 2,
+    userId: 8,
     postId: 2,
     text: 'I went to Europe last summer man',
     // upVotes: 2,
@@ -168,10 +168,18 @@ const mockCommentUpvotes = [
 
 export function getComments(postId: number, page: number, count: number){
   const comments = mockComments
-    .filter(comment => comment.postId = postId)
+    .filter(comment => {
+      return (comment.postId === postId)
+    })
     .filter((item, idx) => idx >= page * count && idx < (page + 1) * count)
-  console.log(comments)
-  return comments;
+  console.log("filtered", {postId, page, count }, comments)
+
+  const commentsWithUsername = comments.map(comment => {
+    return { ...comment, username: mockUsers.find(user => user.id === comment.userId)
+      ?.username || ''};
+  })
+
+  return commentsWithUsername;
 }
 
 export function getPostsWithCommentIdsAndUpvotes(category: CategoryNames, page: number, count: number){

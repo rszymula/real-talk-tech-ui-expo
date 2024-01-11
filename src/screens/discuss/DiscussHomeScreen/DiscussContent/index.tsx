@@ -8,37 +8,11 @@ import { Card } from '../../../../common/Card';
 import { Separator } from '../../../../common/Separator';
 import { Button, ButtonType } from '../../../../common/Button';
 import { colors } from '../../../../context/themes';
+import { InputBar } from '../../../../common/InputBar';
 
 const POST_PAGE_OFFSET = 10;
 
 const INPUT_PLACEHOLDER = 'Share your SaaS experiences with the community';
-
-function InputBar({navigation}){
-
-  const [input, setInput] = React.useState('');
-
-  const handleSetInput = (newInput) => {
-    setInput(newInput);
-  }
-
-  const handleCreatePost = () => {
-    navigation.navigate(DiscussRouteNames.CREATE_POST);
-  } 
-
-  return (
-    <Card styles={styles.card}>
-      <View style={styles.inputBarContainer}>
-        <TextInput 
-          onChangeText={handleSetInput}
-          value={input}
-          placeholder={INPUT_PLACEHOLDER}
-          style={styles.input}
-        />
-        <Button title='Create Post' onPress={handleCreatePost} styles={styles.button} type={ButtonType.BASIC} />
-      </View>
-    </Card>
-  )
-}
 
 export function DiscussContent(props){
 
@@ -57,7 +31,14 @@ export function DiscussContent(props){
   return (
     <Card>
       <View style={styles.container}>
-        <InputBar {...props} />
+        <InputBar 
+          onPress={(input) => {
+            console.log("XXX", input)
+            navigation.navigate(DiscussRouteNames.CREATE_POST, { input })
+          }}
+          title={"Create Post"}
+          placeholder={INPUT_PLACEHOLDER}
+        />
         <Separator />
         <View>
           <FlatList 
@@ -86,7 +67,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // borderColor:'red',
     // borderWidth: 2,
-    padding: 8,
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingTop: 8,
+    paddingBottom: 8,
     backgroundColor: colors.background,
     borderRadius: 4,
   },
