@@ -10,10 +10,13 @@ function PostHeading({ title, description }){
 }
 
 function PostComments({comments}){
+  // console.log(comments)
+
   return (
-    <>
-      {comments.map(comment => <Text>{comment}</Text>)}
-    </>
+    <View>
+      {comments.map(comment => {return <Text>{comment.text}</Text>})}
+      {/* <Text>LKJ</Text> */}
+    </View>
   );
 }
 
@@ -22,7 +25,7 @@ export function Post(props){
   return (
     <>
       <PostHeading {...props} />
-      {/* <PostComments comments={props.comments} /> */}
+      <PostComments comments={props.comments} />
     </>
   )
 }
