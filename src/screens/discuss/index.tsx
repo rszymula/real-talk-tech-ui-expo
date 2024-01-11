@@ -23,7 +23,7 @@ const discussRoutes = [
 
 export function DiscussStackScreen(){
   return (
-    <DiscussStack.Navigator>
+    <DiscussStack.Navigator screenOptions={{headerShown: false}}>
       {discussRoutes.map(item => <DiscussStack.Screen 
         name={item.name}
         component={item.component}

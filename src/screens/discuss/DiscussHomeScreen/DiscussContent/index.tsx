@@ -22,13 +22,16 @@ function InputBar({navigation}){
   } 
 
   return (
-    <View>
+    <View style={styles.inputBarContainer}>
       <TextInput 
         onChangeText={handleSetInput}
         value={input}
         placeholder={INPUT_PLACEHOLDER}
       />
-      <Button title='' onPress={handleCreatePost}/>
+      {/* <View style={styles.button}>
+        <Button title='' onPress={handleCreatePost} />
+      </View> */}
+      <Button title='' onPress={handleCreatePost} />
     </View>
   )
 }
@@ -56,7 +59,7 @@ export function DiscussContent(props){
         <FlatList 
           data={posts}
           keyExtractor={(item) => `${item.id}`}
-          renderItem={({item}) => <Post {...item} />}
+          renderItem={({item}) => <Post {...item} currentCategory={currentCategory} />}
         />
       </View>
     </View>
@@ -66,11 +69,18 @@ export function DiscussContent(props){
 
 const styles = StyleSheet.create({
   container: {
-    width: "70%",
+    // width: "70%",
     borderColor: 'lightgrey',
     borderWidth: 1,
     margin: 16,
     padding: 8,
+  },
+  button: {
+    width: 256,
+  },
+  inputBarContainer: {
+    display: 'flex',
+    flexDirection: 'row',
   },
   card: {
     margin: 0,

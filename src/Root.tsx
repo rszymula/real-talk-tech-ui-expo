@@ -9,7 +9,7 @@ export function Root(){
   return (
     <>
       <NavigationContainer>
-          <Tab.Navigator>
+          <Tab.Navigator screenOptions={{ headerShown: false }}>
             {
               screens.map(screen => {
                 return (
