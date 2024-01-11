@@ -73,15 +73,24 @@ export function Post({ id, title, description, username, commentIds, createdTime
   
   console.log("render", comments, commentsExpanded)
 
+  const commentText = commentCount === 1 ? `${commentCount} Comment` : `${commentCount} Comments`;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.captionText}>{currentCategory}</Text>
-      <Text style={styles.headingText}>{title}</Text>
-      <Text style={styles.bodyText}>{description}</Text>
-      <TouchableOpacity onPress={handleCommentsPress}>
-        <Text style={styles.linkText}>{commentCount}</Text>
-      </TouchableOpacity>
-      <Text style={styles.captionText}>{`${username} | ${createdTimestamp}`}</Text>
+      <Text style={[styles.captionText, styles.categoryCaption]}>{currentCategory}</Text>
+      <Text style={[styles.headingText, styles.title]}>{title}</Text>
+      <Text style={[styles.bodyText, styles.description]}>{description}</Text>
+      <View style={styles.bottom}>
+        <View style={styles.actionGroup}>
+          <TouchableOpacity onPress={handleCommentsPress}>
+            <Text style={[styles.linkText]}>{commentText}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleCommentsPress}>
+            <Text style={[styles.linkText, styles.actionMember]}>^</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={[styles.captionText, styles.userCaption]}>{`${username} | ${createdTimestamp}`}</Text>
+      </View>
       {commentsExpanded ? <CommentsList comments={comments} /> : null}
     </View>
   )
@@ -115,5 +124,32 @@ const styles = StyleSheet.create({
   linkText: {
     color: colors.link,
     fontSize: 12,
+  },
+  categoryCaption: {
+
+  },
+  userCaption: {
+
+  },
+  title: {
+    marginTop: 8,
+  },
+  description: {
+    marginTop: 8,
+  },
+  link: {
+    marginTop: 16,
+  },
+  bottom: {
+    flexDirection: 'row',
+    marginTop: 16,
+    justifyContent: 'space-between',
+  },
+  actionGroup: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  actionMember: {
+    marginLeft: 16,
   },
 })
