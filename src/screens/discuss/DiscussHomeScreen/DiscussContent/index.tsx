@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     padding: 8,
     backgroundColor: colors.background,
+    borderRadius: 4,
   },
   input: {
     color: colors.textRegular,

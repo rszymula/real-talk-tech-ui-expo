@@ -1,5 +1,6 @@
-import { Text, View, Button, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { CategoryNames, categories } from '../../../constants';
+import { Button, ButtonType, buttonTypetoStyle } from '../../../common/Button';
 
 export function DiscussNavBar(props){
 
@@ -15,13 +16,16 @@ export function DiscussNavBar(props){
 
   return (
     <View style={styles.container}>
-      <Text>DiscussNavBar</Text>
-      {categories.map(category => {
-        return <Button
-          title={category.name}
-          onPress={() => handleCategoryPress(category.name)}
-        />
-      })}
+      <Text style={styles.title}>CATEGORIES</Text>
+      <View style={styles.categoriesContainer}>
+        {categories.map(category => {
+          return <Button
+            title={category.name}
+            onPress={() => handleCategoryPress(category.name)}
+            type={ButtonType.BARE}
+          />
+        })}
+      </View>
     </View>
   )
 }
@@ -32,6 +36,13 @@ const styles = StyleSheet.create({
     width: "30%",
     // borderColor: 'red',
     // borderWidth: 2,
-    padding: 16,
+    // paddingLeft: 32,
+  },
+  categoriesContainer: {
+    marginTop: 16,
+  },
+  title: {
+    ...buttonTypetoStyle[ButtonType.BARE],
+    fontSize: 12,
   }
 })
