@@ -52,8 +52,6 @@ export function DiscussContent(props){
 
   return (
     <View style={styles.container}>
-      {/* <Text>DiscussContent2</Text>
-      <Text>{currentCategory}</Text> */}
       <InputBar {...props} />
       <View style={styles.card}>
         <FlatList 

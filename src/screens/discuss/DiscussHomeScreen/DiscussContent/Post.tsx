@@ -18,13 +18,7 @@ const COMMENT_OFFSET = 10;
 
 function CommentsList({comments}){
 
-  console.log("In list", comments)
-
-  // const [page, setPage] = React.useState(0);
-  // const [comments, setComments] = React.useState([]);
   const [newComment, setNewComment] = React.useState('');
-
-  console.log("In list2", comments)
 
   const handleTextChange = () => {
     setNewComment(newComment)
@@ -34,29 +28,16 @@ function CommentsList({comments}){
     // if succcessful call passed in function to store the new state
   }
 
-  console.log("In list3", comments)
-
-  const comments2 = undefined; //[{text: 'sdfsd'}, {text: 'owieuroikj'}]
-
-
-
   return (
     <>
-      {/* <Text>{comments[0]?.text || 'nope'}</Text> */}
-      {/* <FlatList 
-          data={posts}
-          keyExtractor={(item) => `${item.id}`}
-          renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
-        /> */}
-        {!!comments ? comments.map(comment => <Text>{comment.text}</Text>) : null}
-      {/* <FlatList
+      <FlatList
         data={comments}
         renderItem={({item}) => {
           console.log("xyz", item)
           return <Comment {...item}/>
         }}
         keyExtractor={(item) => item.id}
-      /> */}
+      />
       <View style={styles.inputContainer}>
         <TextInput onChangeText={handleTextChange}/>
         <TouchableOpacity onPress={handleSubmitComment}>
@@ -101,7 +82,6 @@ export function Post({ id, title, description, username, commentIds, createdTime
       </TouchableOpacity>
       <Text>{username}</Text>
       <Text>{createdTimestamp}</Text>
-      {/* {commentsExpanded ? <CommentsList commentIds={commentIds} /> : null} */}
       {commentsExpanded ? <CommentsList comments={comments} /> : null}
     </>
   )

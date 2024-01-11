@@ -17,7 +17,6 @@ export function DiscussHomeScreen(props){
 
   return (
     <View style={styles.container}>
-      {/* <Text>WHY</Text> */}
       <DiscussNavBar handleSetCurrentCategory={handleSetCurrentCategory} />
       <DiscussContent currentCategory={currentCategory} navigation={navigation} />
     </View>
