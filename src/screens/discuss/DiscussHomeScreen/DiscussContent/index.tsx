@@ -1,9 +1,13 @@
 import React from 'react';
-import { Text, View, Button, StyleSheet, FlatList, TextInput } from 'react-native';
+import { Text, View, StyleSheet, FlatList, TextInput } from 'react-native';
 import { CategoryNames } from '../../../../constants';
 import { Post } from './Post';
 import { getPostsWithCommentIdsAndUpvotes } from '../../../../services/DiscussService';
 import { DiscussRouteNames } from '../..';
+import { Card } from '../../../../common/Card';
+import { Separator } from '../../../../common/Separator';
+import { Button } from '../../../../common/Button';
+import { colors } from '../../../../context/themes';
 
 const POST_PAGE_OFFSET = 10;
 
@@ -22,17 +26,17 @@ function InputBar({navigation}){
   } 
 
   return (
-    <View style={styles.inputBarContainer}>
-      <TextInput 
-        onChangeText={handleSetInput}
-        value={input}
-        placeholder={INPUT_PLACEHOLDER}
-      />
-      {/* <View style={styles.button}>
+    <Card styles={styles.card}>
+      <View style={styles.inputBarContainer}>
+        <TextInput 
+          onChangeText={handleSetInput}
+          value={input}
+          placeholder={INPUT_PLACEHOLDER}
+          style={styles.input}
+        />
         <Button title='' onPress={handleCreatePost} />
-      </View> */}
-      <Button title='' onPress={handleCreatePost} />
-    </View>
+      </View>
+    </Card>
   )
 }
 
@@ -51,25 +55,25 @@ export function DiscussContent(props){
   console.log("Rendering Discuss")
 
   return (
-    <View style={styles.container}>
-      <InputBar {...props} />
-      <View style={styles.card}>
-        <FlatList 
-          data={posts}
-          keyExtractor={(item) => `${item.id}`}
-          renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
-        />
+    <Card>
+      <View style={styles.container}>
+        <InputBar {...props} />
+        <Separator />
+        <View>
+          <FlatList 
+            data={posts}
+            keyExtractor={(item) => `${item.id}`}
+            renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
+          />
+        </View>
       </View>
-    </View>
+    </Card>
   )
 }
 
 
 const styles = StyleSheet.create({
   container: {
-    // width: "70%",
-    borderColor: 'lightgrey',
-    borderWidth: 1,
     margin: 16,
     padding: 8,
   },
@@ -79,8 +83,15 @@ const styles = StyleSheet.create({
   inputBarContainer: {
     display: 'flex',
     flexDirection: 'row',
+    // borderColor:'red',
+    // borderWidth: 2,
+    padding: 8,
+    backgroundColor: colors.background,
+  },
+  input: {
+    color: colors.textRegular,
   },
   card: {
-    margin: 0,
-  },
+    marginBottom: 16,
+  }
 })

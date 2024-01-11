@@ -1,0 +1,28 @@
+import React from 'react';
+import { Text, View, Button, StyleSheet } from 'react-native';
+
+export function DiscussContent(props){
+
+  const { navigation } = props;
+
+  const handleOnPress = () => {
+    navigation.navigate(routeNames.DISCUSS)
+  }
+
+  return (
+    <>
+      <Text>DiscussContent</Text>
+      <Button title="n" onPress={handleOnPress} />
+    </>
+  )
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+    borderColor: 'red',
+    borderWidth: 2,
+    padding: 16,
+  }
+})

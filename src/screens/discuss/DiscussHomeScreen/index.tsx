@@ -3,6 +3,7 @@ import { Text, View, Button, StyleSheet } from 'react-native';
 import { DiscussNavBar } from './DiscussNavBar';
 import { DiscussContent } from './DiscussContent';
 import { CategoryNames } from '../../../constants';
+import { colors } from '../../../context/themes';
 
 export function DiscussHomeScreen(props){
 
@@ -30,6 +31,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     display: 'flex',
     flexDirection: 'row',
+    backgroundColor: colors.background,
     // margin: 2,
   }
 })

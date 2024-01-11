@@ -1,16 +1,9 @@
 import React from 'react';
-import { Text, View, Button, StyleSheet, Pressable, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, Pressable, TextInput, TouchableOpacity } from 'react-native';
 import { colors } from '../../context/themes';
+import { Card } from '../../common/Card';
+import { Button } from '../../common/Button';
 
-// export function Card({children, style}){
-export function Card({children}){
-  return (
-    // <View style={[styles.card, style]}>
-    <View style={styles.card}>
-      {children}
-    </View>
-  )
-}
 
 export function CreatePostScreen(props){
 
@@ -68,12 +61,8 @@ export function CreatePostScreen(props){
           />
         </Card>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={handleExit}>
-            <Text style={[styles.button, {backgroundColor: colors.input, color: 'white'}]}>Cancel</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleCreatePost}>
-            <Text style={styles.button}>Create Post</Text>
-          </TouchableOpacity>
+          <Button title="Cancel" onPress={handleExit} alternate={true} />
+          <Button title="Create Post" onPress={handleCreatePost} alternate={true} />
         </View>
       </Card>
     </View>
