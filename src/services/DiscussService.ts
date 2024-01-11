@@ -170,6 +170,7 @@ export function getComments(postId: number, page: number, count: number){
   const comments = mockComments
     .filter(comment => comment.postId = postId)
     .filter((item, idx) => idx >= page * count && idx < (page + 1) * count)
+  console.log(comments)
   return comments;
 }
 
@@ -205,6 +206,8 @@ export function getPostsWithCommentIdsAndUpvotes(category: CategoryNames, page: 
       }
     }
   );
+
+  console.log(postsWithCommentIdsAndUpvotes)
 
   return postsWithCommentIdsAndUpvotes;
 }
