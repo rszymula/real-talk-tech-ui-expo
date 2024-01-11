@@ -1,36 +1,33 @@
-import React from 'react';
-import { Text, View, Button, StyleSheet } from 'react-native';
-import { DiscussNavBar } from './DiscussNavBar';
-import { DiscussContent } from './DiscussContent';
-import { CategoryNames } from '../../constants';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { DiscussHomeScreen } from './DiscussHomeScreen/index';
+import { CreatePostScreen } from './CreatePostScreen';
 
-export function Discuss(props){
+const DiscussStack = createNativeStackNavigator();
 
-  const { navigation } = props;
-
-  const [currentCategory, setCurrentCategory] = React.useState(CategoryNames.HOME);
-
-  const handleSetCurrentCategory = (newCategory) => {
-    console.log("handle", newCategory)
-    setCurrentCategory(newCategory)
-  }
-
-  return (
-    <View style={styles.container}>
-      {/* <Text>WHY</Text> */}
-      <DiscussNavBar handleSetCurrentCategory={handleSetCurrentCategory} />
-      <DiscussContent currentCategory={currentCategory} navigation={navigation} />
-    </View>
-  )
+export enum DiscussRouteNames {
+  HOME = 'Home',
+  CREATE_POST = 'CreatePost',
 }
 
-const styles = StyleSheet.create({
-  container: {
-    // width: "100%",
-    borderColor: 'red',
-    borderWidth: 2,
-    display: 'flex',
-    flexDirection: 'row',
-    // margin: 2,
-  }
-})
+const discussRoutes = [
+  {
+    name: DiscussRouteNames.HOME,
+    component: DiscussHomeScreen,
+  },
+  {
+    name: DiscussRouteNames.CREATE_POST,
+    component: CreatePostScreen,
+  },
+]
+
+export function DiscussStackScreen(){
+  return (
+    <DiscussStack.Navigator>
+      {discussRoutes.map(item => <DiscussStack.Screen 
+        name={item.name}
+        component={item.component}
+      />)}
+    </DiscussStack.Navigator>
+  )
+}

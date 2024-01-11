@@ -1,4 +1,4 @@
-import { Discuss } from "./screens/discuss/index";
+import { DiscussStackScreen } from "./screens/discuss/index";
 import { Discover } from "./screens/discover/index";
 
 export enum RouteNames {
@@ -9,7 +9,7 @@ export enum RouteNames {
 export const screens = [
   {
     name: RouteNames.DISCUSS,
-    component: Discuss,
+    component: DiscussStackScreen,
   },
   {
     name: RouteNames.DISCOVER,

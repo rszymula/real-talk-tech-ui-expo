@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text, View, Button, StyleSheet, FlatList, TextInput } from 'react-native';
-import { CategoryNames } from '../../../constants';
+import { CategoryNames } from '../../../../constants';
 import { Post } from './Post';
-import { getPostsWithCommentIdsAndUpvotes } from '../../../services/DiscussService';
+import { getPostsWithCommentIdsAndUpvotes } from '../../../../services/DiscussService';
+import { DiscussRouteNames } from '../..';
 
 const POST_PAGE_OFFSET = 10;
 
@@ -17,7 +18,7 @@ function InputBar({navigation}){
   }
 
   const handleCreatePost = () => {
-    navigation.navigate();
+    navigation.navigate(DiscussRouteNames.CREATE_POST);
   } 
 
   return (
@@ -50,6 +51,7 @@ export function DiscussContent(props){
     <View style={styles.container}>
       {/* <Text>DiscussContent2</Text>
       <Text>{currentCategory}</Text> */}
+      <InputBar {...props} />
       <View style={styles.card}>
         <FlatList 
           data={posts}

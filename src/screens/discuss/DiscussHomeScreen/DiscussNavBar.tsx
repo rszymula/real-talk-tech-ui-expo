@@ -1,5 +1,5 @@
 import { Text, View, Button, StyleSheet } from 'react-native';
-import { CategoryNames, categories } from '../../constants';
+import { CategoryNames, categories } from '../../../constants';
 
 export function DiscussNavBar(props){
 
