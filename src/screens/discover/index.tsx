@@ -1,12 +1,12 @@
 import { Text, View, StyleSheet, Button } from 'react-native';
-import { routeNames } from '../../constants';
+import { RouteNames } from '../../constants';
 
 export function Discover(props){
 
   const { navigation } = props;
 
   const handleOnPress = () => {
-    navigation.navigate(routeNames.DISCUSS)
+    navigation.navigate(RouteNames.DISCUSS)
   }
 
   return (

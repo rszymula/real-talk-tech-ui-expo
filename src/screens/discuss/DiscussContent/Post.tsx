@@ -9,12 +9,13 @@ function PostHeading({ title, description }){
   );
 }
 
-function PostComments({comments}){
+function PostComments({commentIds}){
   // console.log(comments)
 
   return (
     <View>
-      {comments.map(comment => {return <Text>{comment.text}</Text>})}
+      {/* {comments.map(comment => {return <Text>{comment.text}</Text>})} */}
+      {commentIds.map(commentId => {return <Text>{commentId}</Text>})}
       {/* <Text>LKJ</Text> */}
     </View>
   );
@@ -25,7 +26,7 @@ export function Post(props){
   return (
     <>
       <PostHeading {...props} />
-      <PostComments comments={props.comments} />
+      <PostComments commentIds={props.commentIds} />
     </>
   )
 }
