@@ -1,12 +1,13 @@
 import { Text, View, StyleSheet } from 'react-native';
 import { CategoryNames, categories } from '../../../constants';
 import { Button, ButtonType, buttonTypetoStyle } from '../../../common/Button';
+import { colors } from '../../../context/themes';
 
 export function DiscussNavBar(props){
 
   console.log("Whatever")
 
-  const { handleSetCurrentCategory } = props;
+  const { currentCategory, handleSetCurrentCategory } = props;
 
   const handleCategoryPress = (category: CategoryNames) => {
     console.log('pressed', category)
@@ -23,6 +24,7 @@ export function DiscussNavBar(props){
             title={category.name}
             onPress={() => handleCategoryPress(category.name)}
             type={ButtonType.BARE}
+            styles={category.name === currentCategory ? {color: colors.textHighlight} : {}}
           />
         })}
       </View>
