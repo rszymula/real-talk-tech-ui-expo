@@ -27,7 +27,7 @@ export function DiscussContent(props){
   console.log("Rendering Discuss")
 
   return (
-    <Card>
+    <Card styles={{width: 500}}>
       <View style={styles.container}>
         <InputBar 
           onPress={(input) => {
@@ -43,6 +43,7 @@ export function DiscussContent(props){
             data={posts}
             keyExtractor={(item) => `${item.id}`}
             renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
+            ItemSeparatorComponent={() => <Separator />}
           />
         </View>
       </View>

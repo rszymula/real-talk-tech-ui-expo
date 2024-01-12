@@ -25,7 +25,6 @@ export function InputBar({onPress, placeholder, title}){
         <Button
           title={title}
           onPress={() => onPress(input)}
-          styles={styles.button}
           type={ButtonType.BASIC}
         />
       </View>
@@ -34,13 +33,10 @@ export function InputBar({onPress, placeholder, title}){
 }
 
 const styles = StyleSheet.create({
-  button: {
-    // width: 256,
-    marginLeft: 16,
-  },
   inputBarContainer: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-between',
     // borderColor:'red',
     // borderWidth: 2,
     paddingLeft: 16,
@@ -53,6 +49,7 @@ const styles = StyleSheet.create({
   input: {
     color: colors.textRegular,
     fontSize: 12,
+    width: "100%",
   },
   card: {
     marginBottom: 16,

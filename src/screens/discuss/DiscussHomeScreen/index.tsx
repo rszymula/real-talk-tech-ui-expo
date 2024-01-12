@@ -34,5 +34,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     padding: 32,
     // margin: 2,
+    height: "100%",
   }
 })

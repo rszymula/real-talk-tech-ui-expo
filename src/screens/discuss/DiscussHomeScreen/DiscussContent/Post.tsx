@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   inputContainer: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     marginTop: 32,
   },
   captionText: {
