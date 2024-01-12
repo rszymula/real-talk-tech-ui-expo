@@ -4,6 +4,8 @@ import { colors } from '../../context/themes';
 import { Card } from '../../common/Card';
 import { Button, ButtonType } from '../../common/Button';
 
+const TEXT_PLACEHOLDER = 'Enter Text';
+const POST_PLACEHOLDER = 'Enter your post';
 
 export function CreatePostScreen(props){
 
@@ -30,7 +32,7 @@ export function CreatePostScreen(props){
 
   return (
     <View style={styles.container}>
-      <Card>
+      <Card styles={{padding: 16}}>
         <Card>
           <View style={styles.labeledInput}>
             <Text style={styles.label}>Category</Text>
@@ -38,26 +40,29 @@ export function CreatePostScreen(props){
               style={styles.input}
               onChangeText={setCategory}
               value={category}
+              placeholder={TEXT_PLACEHOLDER}
             />
           </View>
         </Card>
-        <Card>
+        <Card styles={{marginTop: 8}}>
           <View style={styles.labeledInput}>
             <Text style={styles.label}>Title</Text>
             <TextInput 
               style={styles.input}
               onChangeText={setTitle}
               value={title}
+              placeholder={TEXT_PLACEHOLDER}
             />
           </View>
         </Card>
-        <Card>
+        <Card styles={{marginTop: 8}}>
           <TextInput 
             onChangeText={setContent}
             value={content}
             multiline={true}
             numberOfLines={12}
             style={styles.textbox}
+            placeholder={POST_PLACEHOLDER}
           />
         </Card>
         <View style={styles.buttonContainer}>
@@ -72,10 +77,11 @@ export function CreatePostScreen(props){
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: 'red',
-    borderWidth: 2,
-    padding: 16,
-    backgroundColor: colors.background
+    // borderColor: 'red',
+    // borderWidth: 2,
+    padding: 32,
+    backgroundColor: colors.background,
+    height: "100%",
   },
   card: {
     borderWidth: 1,
@@ -92,6 +98,7 @@ const styles = StyleSheet.create({
   labeledInput: {
     flexDirection: 'row',
     backgroundColor: colors.input,
+    borderRadius: 4,
   },
   label: {
     padding: 16,
@@ -100,12 +107,16 @@ const styles = StyleSheet.create({
     color: colors.textHighlight,
   },
   input: {
-    width: "100%",
+    // width: "100%",
+    marginLeft: 8,
+    color: colors.textLowlight,
   },
   textbox: {
     // height: 200,
-    color: colors.textHighlight,
+    color: colors.textLowlight,
+    backgroundColor: colors.input,
     padding: 8,
+    borderRadius: 4,
   },
   buttonContainer: {
     margin: 16,

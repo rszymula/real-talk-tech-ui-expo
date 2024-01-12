@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.background,
     flexDirection: 'row',
+    height: "100%",
   },
   title: {
     color: colors.textHighlight,

@@ -5,7 +5,6 @@ import { Root } from './src/Root';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app! 22</Text>
       <StatusBar style="auto" />
       {/* <NavigationContainer>
         <Tab.NavigationContainer>
