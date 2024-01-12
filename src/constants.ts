@@ -1,9 +1,12 @@
 import { DiscussStackScreen } from "./screens/discuss/index";
 import { Discover } from "./screens/discover/index";
+import { Route } from "expo-router/build/Route";
+import { BuyerAIStackStackScreen } from "./screens/buyerai";
 
 export enum RouteNames {
   DISCUSS = "Discuss",
   DISCOVER = "Discover",
+  BUYER_AI = "BuyerAI",
 };
 
 export const screens = [
@@ -14,6 +17,10 @@ export const screens = [
   {
     name: RouteNames.DISCOVER,
     component: Discover,
+  },
+  {
+    name: RouteNames.BUYER_AI,
+    component: BuyerAIStackStackScreen,
   }
 ]
 

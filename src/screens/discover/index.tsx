@@ -1,3 +1,4 @@
+import React from 'react';
 import { Text, View, StyleSheet, FlatList } from 'react-native';
 import { RouteNames } from '../../constants';
 import { colors } from '../../context/themes';
@@ -7,10 +8,10 @@ import { Separator } from '../../common/Separator';
 import { Button, ButtonType } from '../../common/Button';
 
 function Company(props){
-  const { name, type, description} = props;
+  const { id, name, type, description, setViewSolo} = props;
 
   const handleOnPress = () => {
-
+    setViewSolo(id);
   }
 
   return (
@@ -40,6 +41,8 @@ function Company(props){
 
 export function Discover(props){
 
+  const [viewSolo, setViewSolo] = React.useState(-1);
+
   const { navigation } = props;
 
   const handleOnPress = () => {
@@ -49,6 +52,7 @@ export function Discover(props){
   console.log("Rendering Discover")
 
   const companies = getCompanies(0, 5);
+  const selected = companies.find(company => company.id === viewSolo);
 
   return (
     <View style={styles.container}>
@@ -62,13 +66,13 @@ export function Discover(props){
           A long description
         </Text>
         <Card styles={{marginBottom: 32, width: 500}}>
-          <FlatList
+          {!!selected ? (<Company {...selected} style={{margin: 16}} />) : (<FlatList
             style={{margin: 16, backgroundColor: colors.foreground}}
             data={companies}
             keyExtractor={(item) => item.id}
-            renderItem={({item}) => <Company {...item} />}
+            renderItem={({item}) => <Company {...item} setViewSolo={setViewSolo} />}
             ItemSeparatorComponent={() => <Separator style={{marginBottom: 12}} />}
-          />
+          />)}
         </Card>
       </View>
     </View>

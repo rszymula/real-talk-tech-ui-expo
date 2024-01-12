@@ -22,7 +22,6 @@ export function Root(){
             }
           </Tab.Navigator>
       </NavigationContainer>
-      <Text>YY</Text>
     </>
   );
 }

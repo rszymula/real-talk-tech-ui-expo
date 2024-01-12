@@ -29,7 +29,7 @@ export const companies = [
   },
   {
     id: 3,
-    name: "ZohoProjects",
+    name: "Zoho Projects",
     type: CompanyType.DATABASE,
     description: "we are a cool company",
     offices: 5,
