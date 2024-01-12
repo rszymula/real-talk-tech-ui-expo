@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList } from 'react-native';
+import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import { RouteNames } from '../../constants';
 import { colors } from '../../context/themes';
 import { Card } from '../../common/Card';
@@ -61,13 +61,15 @@ function SingleView({selected, setViewSolo}){
 
 function ListView({companies, setViewSolo}){
   return(
-    <FlatList
-      style={{margin: 16, backgroundColor: colors.foreground}}
-      data={companies}
-      keyExtractor={(item) => item.id}
-      renderItem={({item}) => <Company {...item} setViewSolo={setViewSolo} />}
-      ItemSeparatorComponent={() => <Separator style={{marginBottom: 12}} />}
-    />
+    <SafeAreaView>
+      <FlatList
+        style={{margin: 16, backgroundColor: colors.foreground}}
+        data={companies}
+        keyExtractor={(item) => item.id}
+        renderItem={({item}) => <Company {...item} setViewSolo={setViewSolo} />}
+        ItemSeparatorComponent={() => <Separator style={{marginBottom: 12}} />}
+      />
+    </SafeAreaView>
   )
 }
 
@@ -83,7 +85,7 @@ export function Discover(props){
 
   console.log("Rendering Discover")
 
-  const companies = getCompanies(0, 5);
+  const companies = getCompanies(0, 15);
   const selected = companies.find(company => company.id === viewSolo);
 
   return (
@@ -109,6 +111,7 @@ export function Discover(props){
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.background,
+    display: 'flex',
     flexDirection: 'row',
     height: "100%",
   },
@@ -118,4 +121,4 @@ const styles = StyleSheet.create({
     fontSize: 18,
     // fontWeight: 'bold',
   }
-})
+});
