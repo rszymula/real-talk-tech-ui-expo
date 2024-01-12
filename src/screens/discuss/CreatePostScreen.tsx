@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     color: colors.textHighlight,
   },
   input: {
-    // width: "100%",
+    width: "100%",
     marginLeft: 8,
     color: colors.textLowlight,
   },

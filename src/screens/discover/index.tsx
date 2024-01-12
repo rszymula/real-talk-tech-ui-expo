@@ -21,22 +21,54 @@ function Company(props){
           title={""}
           onPress={() => {}}
           type={ButtonType.BASIC}
-          styles={{height: 50, border: 'none'}}
+          styles={{height: 50, width: 100, border: 'none'}}
         />
-        <Button
+        {setViewSolo && <Button
           title={"View Profile"}
           onPress={handleOnPress}
           type={ButtonType.BASIC}
           styles={{color: colors.textLowlight, marginTop: 8}}
-        />
+        />}
       </View>
       <View style={{flexDirection: 'column', marginLeft: 16}}>
         <Text style={{color: colors.textHighlight}}>{name}</Text>
         <Text style={{color: colors.textRegular, marginTop: 4}}>{type}</Text>
-        <Text style={{color: colors.textLowlight, marginTop: 4}}>{description}</Text>
+        <Text style={{color: colors.textLowlight, fontSize: 12, marginTop: 4}}>{description}</Text>
       </View>
     </View>
   );
+}
+
+function SingleView({selected, setViewSolo}){
+  return (
+    <View style={{margin: 16}}>
+      <Company {...selected} style={{margin: 16}} />
+      <Separator />,
+      <Text style={{color: colors.textHighlight, fontSize: 12, marginTop: 4}}>{`HQ: `}</Text>
+      <Text style={{color: colors.textRegular, fontSize: 12, marginTop: 8}}>{`Total Offices: ${selected.offices}`}</Text>
+      <Text style={{color: colors.textLowlight, fontSize: 10, marginTop: 4}}>{`Local Employees : ${selected.localEmployees}`}</Text>
+      <Text style={{color: colors.textLowlight, fontSize: 10}}>{`Total Employees: ${selected.totalEmployees}`}</Text>
+      <Separator style={{marginTop: 16, marginBottom: 8}} />
+      <Button
+        title={"Back"}
+        onPress={() => setViewSolo(-1)}
+        type={ButtonType.BASIC}
+        styles={{color: colors.textLowlight, marginTop: 8 }}
+      />
+    </View>
+  )
+}
+
+function ListView({companies, setViewSolo}){
+  return(
+    <FlatList
+      style={{margin: 16, backgroundColor: colors.foreground}}
+      data={companies}
+      keyExtractor={(item) => item.id}
+      renderItem={({item}) => <Company {...item} setViewSolo={setViewSolo} />}
+      ItemSeparatorComponent={() => <Separator style={{marginBottom: 12}} />}
+    />
+  )
 }
 
 export function Discover(props){
@@ -66,13 +98,8 @@ export function Discover(props){
           A long description
         </Text>
         <Card styles={{marginBottom: 32, width: 500}}>
-          {!!selected ? (<Company {...selected} style={{margin: 16}} />) : (<FlatList
-            style={{margin: 16, backgroundColor: colors.foreground}}
-            data={companies}
-            keyExtractor={(item) => item.id}
-            renderItem={({item}) => <Company {...item} setViewSolo={setViewSolo} />}
-            ItemSeparatorComponent={() => <Separator style={{marginBottom: 12}} />}
-          />)}
+          {!!selected ? (<SingleView selected={selected} setViewSolo={setViewSolo} />)
+          : (<ListView companies={companies} setViewSolo={setViewSolo}/>)}
         </Card>
       </View>
     </View>
