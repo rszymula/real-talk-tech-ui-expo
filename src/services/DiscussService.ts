@@ -73,6 +73,17 @@ const mockPosts = [
     createdTimestamp: '2023-05-12',
     updatedTimestamp: '2023-07-21',
   },
+  {
+    id: 3,
+    userId: 5,
+    //category: CategoryNames.AAA,
+    category: 'Engineering',
+    title: 'ships',
+    description: 'vrooooomm',
+    // upVotes: 5,
+    createdTimestamp: '2023-05-12',
+    updatedTimestamp: '2023-07-21',
+  },
 ];
 
 const mockPostUpvotes = [

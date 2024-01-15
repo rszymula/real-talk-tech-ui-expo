@@ -87,4 +87,6 @@ export const categories = [
 
 export const INPUT_PLACEHOLDER = 'Share your SaaS experiences with the community';
 
+export const BUYERAI_PLACEHOLDER = 'Message Buyer AI...';
+
 

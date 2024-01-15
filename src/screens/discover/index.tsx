@@ -80,7 +80,7 @@ export function Discover(props){
   const { navigation } = props;
 
   const handleOnPress = () => {
-    // navigation.navigate(RouteNames.DISCUSS)
+    navigation.navigate(RouteNames.DISCUSS)
   }
 
   console.log("Rendering Discover")
@@ -92,6 +92,7 @@ export function Discover(props){
     <View style={styles.container}>
       {/* <View style={{justifyContent: 'flex-end'}}> */}
       <View style={{width: "30%"}}></View>
+      <Button title="nav" onPress={handleOnPress}/>
       <View style={{width: 500, alignItems: 'center'}}>
         <Text style={styles.title}>
           Explore the market

@@ -5,7 +5,7 @@ import { Card } from "./Card";
 import React from "react";
 import { colors } from "../context/themes";
 
-export function InputBar({onPress, placeholder, title}){
+export function InputBar({onPress, placeholder, title, style = {}}){
 
   const [input, setInput] = React.useState('');
 
@@ -14,7 +14,7 @@ export function InputBar({onPress, placeholder, title}){
   }
 
   return (
-    <Card styles={styles.card}>
+    <Card styles={[styles.card, style]}>
       <View style={styles.inputBarContainer}>
         <TextInput 
           onChangeText={handleSetInput}

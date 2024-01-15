@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, FlatList, TextInput } from 'react-native';
-import { CategoryNames, INPUT_PLACEHOLDER } from '../../../../constants';
+import { CategoryNames, INPUT_PLACEHOLDER, RouteNames } from '../../../../constants';
 import { Post } from './Post';
 import { getPostsWithCommentIdsAndUpvotes } from '../../../../services/DiscussService';
 import { DiscussRouteNames } from '../..';
@@ -24,11 +24,16 @@ export function DiscussContent(props){
   const { currentCategory, navigation } = props;
   const posts = getPostsWithCommentIdsAndUpvotes(currentCategory, 0, POST_PAGE_OFFSET);
 
+  const handleOnPress = () => {
+    navigation.navigate(RouteNames.DISCOVER)
+  }
+
   console.log("Rendering Discuss")
 
   return (
     <Card styles={{width: 500}}>
       <View style={styles.container}>
+        <Button title={"xcvc"} onPress={handleOnPress}/>
         <InputBar 
           onPress={(input) => {
             console.log("XXX", input)
