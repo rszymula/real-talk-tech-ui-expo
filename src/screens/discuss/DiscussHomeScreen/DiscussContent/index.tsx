@@ -9,6 +9,7 @@ import { Separator } from '../../../../common/Separator';
 import { Button, ButtonType } from '../../../../common/Button';
 import { colors } from '../../../../context/themes';
 import { InputBar } from '../../../../common/InputBar';
+import { TabView, SceneMap } from 'react-native-tab-view';
 
 const POST_PAGE_OFFSET = 10;
 
