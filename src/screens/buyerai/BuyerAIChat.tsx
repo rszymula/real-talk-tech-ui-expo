@@ -32,8 +32,8 @@ export function BuyerAIChat(props) {
   }, [])
 
   const fireAIEvent = () => setTimeout(() => {
-    const id2 = messages[messages.length - 1].id + 1;
-    setMessages(messages => [...messages, {id: id2, userAuthor: false, content: "random AI stuffkdjshfklsdjhflksdjflksdhakjsnfkjaskjfhsn"}])
+    const id = messages[messages.length - 1].id + 1;
+    setMessages(messages => [...messages, {id: id, userAuthor: false, content: "random AI stuffkdjshfklsdjhflksdjflksdhakjsnfkjaskjfhsn"}])
   }, 2000);
 
   const handleTalkToChat = (input) => {
@@ -59,15 +59,6 @@ export function BuyerAIChat(props) {
           </Text>
           {
             messages.map(message => {
-              // const styled = message.userAuthor ? {
-              //   maxWidth: 256,
-              //   color: colors.textHighlight,
-              //   backgroundColor: colors.link,
-              //   fontSize: 12,
-              //   padding: 8,
-              //   marginTop: 16,
-              //   borderRadius: 4
-              // }: {alignSelf: 'flex-end', maxWidth: 256, color: colors.textHighlight, backgroundColor: colors.foreground, fontSize: 12, padding: 8, marginTop: 16, borderRadius: 4, borderColor: colors.border}
               const styled = {
                 maxWidth: 256,
                 color: colors.textHighlight,

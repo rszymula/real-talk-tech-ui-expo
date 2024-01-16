@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text, View, StyleSheet, useWindowDimensions } from 'react-native';
+import { Text, View, StyleSheet, Image, useWindowDimensions } from 'react-native';
 import { colors } from '../context/themes';
 import { DiscussHomeScreen } from './discuss/DiscussHomeScreen';
 import { Discover } from './discover';
-import { categories } from '../constants';
-import { Button } from '../common/Button';
+import { CategoryNames, categories } from '../constants';
+import { Button, ButtonType, buttonTypetoStyle } from '../common/Button';
+import REALTALKTECH from '../../assets/title.png';
 
 const FirstRoute = () => (
   <View style={{ flex: 1, backgroundColor: colors.foreground }} />
@@ -29,30 +30,35 @@ const tabs = [
 
 export function Home(props){
 
-  const {navigation} = props;
+  const [currentCategory, setCurrentCategory] = React.useState(CategoryNames.HOME);
 
   const layout = useWindowDimensions();
+
+  const {navigation} = props;
 
   const handleTabPress = (tab) => {
     navigation.navigate(tab.key)
   }
 
+  const handleCategoryPress = (category: CategoryNames) => {
+    setCurrentCategory(category);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.sideBar}>
-        <Text style={styles.title}>
-          HOME
-        </Text>
+        <Image style={styles.title} source={REALTALKTECH} width={200} height={50}/>
         <View style={styles.categories}>
-          <Text>CATEGORIES</Text>
+          <Text style={{...buttonTypetoStyle[ButtonType.BARE], fontSize: 12}}>CATEGORIES</Text>
           <View style={{marginTop: 8}}>
-            {
-              categories.map(category => {
-                return (
-                  <Text style={{marginTop: 8}}>{category.name}</Text>
-                );
-              })
-            }
+            {categories.map(category => {
+              return <Button
+                title={category.name}
+                onPress={() => handleCategoryPress(category.name)}
+                type={ButtonType.BARE}
+                styles={category.name === currentCategory ? {color: colors.textHighlight} : {}}
+              />
+            })}
           </View>
         </View>
       </View>
@@ -86,11 +92,11 @@ const styles = StyleSheet.create({
     borderColor: 'purple'
   },
   title: {
-    color: colors.textHighlight,
-    paddingTop: 8,
-    paddingBottom: 8,
-    borderWidth: 1,
-    borderColor: 'green'
+    // paddingTop: 8,
+    // paddingBottom: 8,
+    padding: 16,
+    // borderWidth: 1,
+    // borderColor: 'green'
   },
   body: {
     // flexDirection: 'row',

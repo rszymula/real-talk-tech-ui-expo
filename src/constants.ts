@@ -12,12 +12,12 @@ export enum RouteNames {
 
 export const screens = [
   {
-    name: RouteNames.BUYER_AI,
-    component: BuyerAIStackStackScreen,
-  },
-  {
     name: "Home",
     component: Home,
+  },
+  {
+    name: RouteNames.BUYER_AI,
+    component: BuyerAIStackStackScreen,
   },
   {
     name: RouteNames.DISCUSS,
