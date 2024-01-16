@@ -18,14 +18,28 @@ export function BuyerAIChat(props) {
   const follow = !!followup ? ` And followup question ${followup.title}.` : ' And no follow up questions';
   const initialReponse = `Welcome to chat. ${quest}${follow}`;
 
-  const [messages, setMessages] = React.useState([
+  const INIT = [
     {id: 0, userAuthor: false, content: initialReponse},
-    {id: 1, userAuthor: true, content: input},
-  ])
+    ...!!input ? [{id: 1, userAuthor: true, content: input}] : [],
+  ];
+
+  const [messages, setMessages] = React.useState(INIT)
+
+  React.useEffect(() => {
+    if (!!input) {
+      fireAIEvent();
+    }
+  }, [])
+
+  const fireAIEvent = () => setTimeout(() => {
+    const id2 = messages[messages.length - 1].id + 1;
+    setMessages(messages => [...messages, {id: id2, userAuthor: false, content: "random AI stuffkdjshfklsdjhflksdjflksdhakjsnfkjaskjfhsn"}])
+  }, 2000);
 
   const handleTalkToChat = (input) => {
     const id = messages[messages.length - 1].id + 1;
     setMessages([...messages, {id, userAuthor: true, content: input}])
+    fireAIEvent();
   }
 
   return (
