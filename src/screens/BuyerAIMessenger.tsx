@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { Card } from '../common/Card';
-import { InputBar } from '../common/InputBar';
+import { Card } from '../core/Card';
+import { InputBar } from '../core/InputBar';
 import { BUYERAI_PLACEHOLDER } from '../constants';
 import { colors } from '../context/themes';
 

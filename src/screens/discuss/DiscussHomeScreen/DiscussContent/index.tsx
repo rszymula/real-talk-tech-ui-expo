@@ -4,11 +4,11 @@ import { CategoryNames, INPUT_PLACEHOLDER, RouteNames } from '../../../../consta
 import { Post } from './Post';
 import { getPostsWithCommentIdsAndUpvotes } from '../../../../services/DiscussService';
 import { DiscussRouteNames } from '../..';
-import { Card } from '../../../../common/Card';
-import { Separator } from '../../../../common/Separator';
-import { Button, ButtonType } from '../../../../common/Button';
+import { Card } from '../../../../core/Card';
+import { Separator } from '../../../../core/Separator';
+import { Button, ButtonType } from '../../../../core/Button';
 import { colors } from '../../../../context/themes';
-import { InputBar } from '../../../../common/InputBar';
+import { InputBar } from '../../../../core/InputBar';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
 const POST_PAGE_OFFSET = 10;

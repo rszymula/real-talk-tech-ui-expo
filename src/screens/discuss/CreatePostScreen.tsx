@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View, StyleSheet, Pressable, TextInput, TouchableOpacity } from 'react-native';
 import { colors } from '../../context/themes';
-import { Card } from '../../common/Card';
-import { Button, ButtonType } from '../../common/Button';
+import { Card } from '../../core/Card';
+import { Button, ButtonType } from '../../core/Button';
 
 const TEXT_PLACEHOLDER = 'Enter Text';
 const POST_PLACEHOLDER = 'Enter your post';

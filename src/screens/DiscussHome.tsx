@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, View, StyleSheet, FlatList, TextInput, Button } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
-import { Card } from '../common/Card';
-import { InputBar } from '../common/InputBar';
-import { Separator } from '../common/Separator';
+import { Card } from '../core/Card';
+import { InputBar } from '../core/InputBar';
+import { Separator } from '../core/Separator';
 import { RouteNames, INPUT_PLACEHOLDER } from '../constants';
 import { colors } from '../context/themes';
 import { getPostsWithCommentIdsAndUpvotes } from '../services/DiscussService';

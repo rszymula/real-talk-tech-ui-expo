@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
-import { ButtonType, Button } from '../common/Button';
-import { Card } from '../common/Card';
-import { Separator } from '../common/Separator';
+import { ButtonType, Button } from '../core/Button';
+import { Card } from '../core/Card';
+import { Separator } from '../core/Separator';
 import { RouteNames } from '../constants';
 import { colors } from '../context/themes';
 import { getCompanies } from '../services/DiscoverService';

@@ -2,10 +2,10 @@ import React from 'react';
 import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import { RouteNames } from '../../constants';
 import { colors } from '../../context/themes';
-import { Card } from '../../common/Card';
+import { Card } from '../../core/Card';
 import { getCompanies } from '../../services/DiscoverService';
-import { Separator } from '../../common/Separator';
-import { Button, ButtonType } from '../../common/Button';
+import { Separator } from '../../core/Separator';
+import { Button, ButtonType } from '../../core/Button';
 
 function Company(props){
   const { id, name, type, description, setViewSolo} = props;

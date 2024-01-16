@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { ButtonType, Button  } from '../common/Button';
-import { Card } from '../common/Card';
-import { InputBar } from '../common/InputBar';
+import { ButtonType, Button  } from '../core/Button';
+import { Card } from '../core/Card';
+import { InputBar } from '../core/InputBar';
 import { BUYERAI_PLACEHOLDER } from '../constants';
 import { colors } from '../context/themes';
 import { getMainQuestions, getOtherQuestions, getFollowups } from '../services/BuyerIAService';

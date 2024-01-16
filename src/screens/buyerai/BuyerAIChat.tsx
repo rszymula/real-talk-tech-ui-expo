@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { getCompanies } from '../../services/DiscoverService';
-import { Card } from '../../common/Card';
+import { Card } from '../../core/Card';
 import { colors } from '../../context/themes';
 import { BUYERAI_PLACEHOLDER, INPUT_PLACEHOLDER } from '../../constants';
-import { InputBar } from '../../common/InputBar';
+import { InputBar } from '../../core/InputBar';
 import { getFollowups, getMainQuestions, getOtherQuestions } from '../../services/BuyerIAService';
-import { Button, ButtonType } from '../../common/Button';
+import { Button, ButtonType } from '../../core/Button';
 
 export function BuyerAIChat(props) {
 

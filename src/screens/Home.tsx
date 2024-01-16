@@ -4,7 +4,7 @@ import { colors } from '../context/themes';
 import { DiscussHomeScreen } from './discuss/DiscussHomeScreen';
 import { Discover } from './discover';
 import { CategoryNames, categories } from '../constants';
-import { Button, ButtonType, buttonTypetoStyle } from '../common/Button';
+import { Button, ButtonType, buttonTypetoStyle } from '../core/Button';
 import REALTALKTECH from '../../assets/title.png';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
 import { BuyerAIHomeScreen } from './buyerai/BuyerAIHomeScreen';

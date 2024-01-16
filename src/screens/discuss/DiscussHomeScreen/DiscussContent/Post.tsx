@@ -2,8 +2,8 @@ import React from 'react';
 import { Text, View, Button, StyleSheet, TouchableOpacity, FlatList, TextInput } from 'react-native';
 import { getComments } from '../../../../services/DiscussService';
 import { colors } from '../../../../context/themes';
-import { Separator } from '../../../../common/Separator';
-import { InputBar } from '../../../../common/InputBar';
+import { Separator } from '../../../../core/Separator';
+import { InputBar } from '../../../../core/InputBar';
 import { INPUT_PLACEHOLDER } from '../../../../constants';
 
 function Comment({text, username, upvotes, createdTimestamp}) {

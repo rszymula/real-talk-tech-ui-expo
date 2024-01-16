@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet } from 'react-native';
 import { CategoryNames, categories } from '../../../constants';
-import { Button, ButtonType, buttonTypetoStyle } from '../../../common/Button';
+import { Button, ButtonType, buttonTypetoStyle } from '../../../core/Button';
 import { colors } from '../../../context/themes';
 
 export function DiscussNavBar(props){

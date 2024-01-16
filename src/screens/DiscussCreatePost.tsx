@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, Pressable, TextInput, TouchableOpacity } from 'react-native';
-import { ButtonType, Button  } from '../common/Button';
-import { Card } from '../common/Card';
+import { ButtonType, Button  } from '../core/Button';
+import { Card } from '../core/Card';
 import { colors } from '../context/themes';
 
 
