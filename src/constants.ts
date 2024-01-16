@@ -12,6 +12,10 @@ export enum RouteNames {
 
 export const screens = [
   {
+    name: RouteNames.BUYER_AI,
+    component: BuyerAIStackStackScreen,
+  },
+  {
     name: "Home",
     component: Home,
   },
@@ -22,10 +26,6 @@ export const screens = [
   {
     name: RouteNames.DISCOVER,
     component: Discover,
-  },
-  {
-    name: RouteNames.BUYER_AI,
-    component: BuyerAIStackStackScreen,
   },
 ]
 

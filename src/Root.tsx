@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { screens } from './constants';
 import { BuyerAIHomeScreen } from './screens/buyerai/BuyerAIHomeScreen';
+import { BuyerAIStage1 } from './screens/buyerai/BuyerAIStage1';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +24,8 @@ export function Root(){
             }
           </Tab.Navigator>
       </NavigationContainer>
-      {/* <BuyerAIHomeScreen /> */}
+      {/* <BuyerAIHomeScreen />
+      <BuyerAIStage1 /> */}
     </>
   );
 }

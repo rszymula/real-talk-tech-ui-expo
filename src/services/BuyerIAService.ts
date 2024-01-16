@@ -4,19 +4,37 @@ const questions = [
   {
     id: 1,
     title: "Research Solftware Solutions",
-    description: "Find solutions",
+    description: "Enter a one sentence descriptor of max 60 characters",
     main: true,
   },
   {
     id: 2,
-    title: "CompareSoftware Solutions",
-    description: "Compare solutions",
+    title: "Compare Software Solutions",
+    description: "Enter a one sentence descriptor of max 60 characters",
     main: true,
   },
   {
     id: 3,
     title: "Identify the Problem",
-    description: "Identify the scope",
+    description: "Enter a one sentence descriptor of max 60 characters",
+    main: false,
+  },
+  {
+    id: 4,
+    title: "Determine the Results",
+    description: "Enter a one sentence descriptor of max 60 characters",
+    main: false,
+  },
+  {
+    id: 3,
+    title: "Engage Stakeholders",
+    description: "Enter a one sentence descriptor of max 60 characters",
+    main: false,
+  },
+  {
+    id: 4,
+    title: "Build Business Care",
+    description: "Enter a one sentence descriptor of max 60 characters",
     main: false,
   },
 ];
@@ -53,3 +71,18 @@ const followups = [
     title: "Research Solftware Solutions",
   },
 ]
+
+export function getMainQuestions(){
+  const main = questions.filter(item => item.main);
+  return main;
+};
+
+export function getOtherQuestions(){
+  const other = questions.filter(item => !item.main);
+  return other;
+};
+
+export function getFollowups(questionId){
+  const filtered = followups.filter(item => item.questionId === questionId)
+  return filtered;
+}

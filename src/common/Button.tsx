@@ -55,5 +55,6 @@ const stylesBase = StyleSheet.create({
     borderColor: colors.link,
     borderRadius: 4,
     fontSize: 12,
+    // alignSelf: 'center',
   },
 });
