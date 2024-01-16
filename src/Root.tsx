@@ -30,11 +30,11 @@ export function Root(){
       {/* <BuyerAIHomeScreen />
       <BuyerAIStage1 /> */}
       <Text>sdfkj</Text>
-      <Image source={REALTALKTECH} style={{paddingTop: 20, paddingBottom: 20, margin: 20,width: 200, height: 200}}/>
+      {/* <Image source={REALTALKTECH} style={{paddingTop: 20, paddingBottom: 20, margin: 20,width: 200, height: 200}}/>
       {/* <Image source={FAV} height={50} width={200} style={{marginLeft: 200,width: 200, height: 200}}/> */}
-      <Image source={FAV} style={{width: 200, height: 200}}/>
+      {/* <Image source={FAV} style={{width: 200, height: 200}}/>
       <Image source={REALTALKTECH} style={{width: 200, height: 20}}/>
-      <Image source={REALTALKTECH_WHITE} style={{width: 200, height: 20}}/>
+      <Image source={REALTALKTECH_WHITE} style={{width: 200, height: 20}}/> */}
     </>
   );
 }
