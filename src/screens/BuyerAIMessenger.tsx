@@ -35,9 +35,11 @@ export function BuyerAIMessenger(props) {
   }, 2000);
 
   const handleTalkToChat = (input) => {
-    const id = messages[messages.length - 1].id + 1;
-    setMessages([...messages, {id, userAuthor: true, content: input}])
-    fireAIEvent();
+    if(input?.length > 0) {
+      const id = messages[messages.length - 1].id + 1;
+      setMessages([...messages, {id, userAuthor: true, content: input}])
+      fireAIEvent();
+    }
   }
 
   return (

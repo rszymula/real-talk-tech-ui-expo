@@ -1,14 +1,11 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, Button } from 'react-native';
-import { ButtonType } from '../common/Button';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { ButtonType, Button  } from '../common/Button';
 import { Card } from '../common/Card';
 import { InputBar } from '../common/InputBar';
 import { BUYERAI_PLACEHOLDER } from '../constants';
 import { colors } from '../context/themes';
 import { getMainQuestions, getOtherQuestions, getFollowups } from '../services/BuyerIAService';
-import { BuyerAIRouteNames } from './buyerai';
-import { BuyerAIMessenger } from './BuyerAIMessenger';
-
 
 export function BuyerAIFollowup(props) {
 
@@ -24,12 +21,7 @@ export function BuyerAIFollowup(props) {
     navigation.navigate("BuyerAIMessenger", {question: route?.params?.question, followup})
   }
 
-  const main = getMainQuestions();
-  const other = getOtherQuestions();
-
   const followups = getFollowups(route?.params?.question?.id)
-
-  // console.log("MNB", route?.params)
 
   return (
     <View style={styles.container}>

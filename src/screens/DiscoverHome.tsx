@@ -80,10 +80,6 @@ export function DiscoverHome(props){
 
   const { navigation } = props;
 
-  const handleOnPress = () => {
-    navigation.navigate(RouteNames.DISCUSS)
-  }
-
   console.log("Rendering Discover")
 
   const companies = getCompanies(0, 15);

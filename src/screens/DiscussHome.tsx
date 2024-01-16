@@ -1,14 +1,5 @@
 import React from 'react';
 import { Text, View, StyleSheet, FlatList, TextInput, Button } from 'react-native';
-// import { CategoryNames, INPUT_PLACEHOLDER, RouteNames } from '../../../../constants';
-// import { Post } from './Post';
-// import { getPostsWithCommentIdsAndUpvotes } from '../../../../services/DiscussService';
-// import { DiscussRouteNames } from '../..';
-// import { Card } from '../../../../common/Card';
-// import { Separator } from '../../../../common/Separator';
-// import { Button, ButtonType } from '../../../../common/Button';
-// import { colors } from '../../../../context/themes';
-// import { InputBar } from '../../../../common/InputBar';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import { Card } from '../common/Card';
 import { InputBar } from '../common/InputBar';
@@ -24,28 +15,17 @@ const POST_PAGE_OFFSET = 10;
 export function DiscussHome(props){
 
   const [currentPage, setCurrentPage] = React.useState(0);
-  // const [input, setInput] = React.useState('');
-
-  // const handleSetInput = (newInput) => {
-  //   setInput(newInput);
-  // }
 
   const { currentCategory, navigation } = props;
   const posts = getPostsWithCommentIdsAndUpvotes(currentCategory, 0, POST_PAGE_OFFSET);
-
-  const handleOnPress = () => {
-    navigation.navigate(RouteNames.DISCOVER)
-  }
 
   console.log("Rendering Discuss")
 
   return (
     <Card styles={{width: 500, marginTop: 32}}>
       <View style={styles.container}>
-        <Button title={"xcvc"} onPress={handleOnPress}/>
         <InputBar 
           onPress={(input) => {
-            console.log("XXX", input)
             navigation.navigate("DiscussCreatePost", { input })
           }}
           title={"Create Post"}
