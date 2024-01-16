@@ -94,7 +94,7 @@ export function Home(props){
           </View>
         </View>
         <View style={styles.content}>
-          <Component currentCategory={currentCategory} />
+          <Component currentCategory={currentCategory} navigation={navigation} />
         </View>
       </View>
     </View>

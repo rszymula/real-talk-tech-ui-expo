@@ -3,6 +3,9 @@ import { Discover } from "./screens/discover/index";
 import { Route } from "expo-router/build/Route";
 import { BuyerAIStackStackScreen } from "./screens/buyerai";
 import { Home } from "./screens/Home";
+import { DiscussCreatePost } from "./screens/DiscussCreatePost";
+import { BuyerAIFollowup } from "./screens/BuyerAIFollowup";
+import { BuyerAIMessenger } from "./screens/BuyerAIMessenger";
 
 export enum RouteNames {
   DISCUSS = "Discuss",
@@ -27,6 +30,29 @@ export const screens = [
     name: RouteNames.DISCOVER,
     component: Discover,
   },
+]
+
+export enum Routes {
+
+}
+
+export const routes = [
+  {
+    name: "Home",
+    component: Home,
+  },
+  {
+    name: "DiscussCreatePost",
+    component: DiscussCreatePost,
+  },
+  {
+    name: "BuyerAIMessenger",
+    component: BuyerAIMessenger,
+  },
+  {
+    name: "BuyerAIFollowup",
+    component: BuyerAIFollowup,
+  }
 ]
 
 export enum CategoryNames {

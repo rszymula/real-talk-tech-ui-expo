@@ -46,7 +46,7 @@ export function DiscussHome(props){
         <InputBar 
           onPress={(input) => {
             console.log("XXX", input)
-            navigation.navigate(DiscussRouteNames.CREATE_POST, { input })
+            navigation.navigate("DiscussCreatePost", { input })
           }}
           title={"Create Post"}
           placeholder={INPUT_PLACEHOLDER}

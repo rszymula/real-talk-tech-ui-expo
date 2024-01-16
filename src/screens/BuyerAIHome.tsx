@@ -8,6 +8,7 @@ import { colors } from '../context/themes';
 import { getMainQuestions, getOtherQuestions } from '../services/BuyerIAService';
 import { getCompanies } from '../services/DiscoverService';
 import { BuyerAIRouteNames } from './buyerai';
+import { BuyerAIMessenger } from './BuyerAIMessenger';
 
 
 export function BuyerAIHome(props) {
@@ -17,11 +18,11 @@ export function BuyerAIHome(props) {
   const { navigation } = props;
 
   const handleTalkToChat = (input) => {
-    navigation.navigate(BuyerAIRouteNames.CHAT, {input})
+    navigation.navigate("BuyerAIMessenger", {input})
   }
 
   const handleSelect = (question) => {
-    navigation.navigate(BuyerAIRouteNames.FOLLOWUP, {question})
+    navigation.navigate("BuyerAIFollowup", {question})
   }
 
   const main = getMainQuestions();
