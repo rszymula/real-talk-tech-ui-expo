@@ -1,19 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Root } from './src/Root';
+import { TestRoot } from './src/TestRoot';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      {/* <NavigationContainer>
-        <Tab.NavigationContainer>
-          <Tab.Screen 
-            name=
-          />
-        </Tab.NavigationContainer>
-      </NavigationContainer> */}
-      <Root />
+      {/* <Root /> */}
+      <TestRoot />
     </View>
   );
 }
