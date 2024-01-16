@@ -7,8 +7,10 @@ import { CategoryNames, categories } from '../constants';
 import { Button, ButtonType, buttonTypetoStyle } from '../common/Button';
 import REALTALKTECH from '../../assets/title.png';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
-import { DiscussContent } from './discuss/DiscussHomeScreen/DiscussContent';
 import { BuyerAIHomeScreen } from './buyerai/BuyerAIHomeScreen';
+import { DiscussHome } from './DiscussHome';
+import { BuyerAIHome } from './BuyerAIHome';
+import { DiscoverHome } from './DiscoverHome';
 
 const FirstRoute = () => (
   <View style={{ flex: 1, backgroundColor: colors.foreground }} />
@@ -22,37 +24,19 @@ const tabs = [
   {
     key: "Discuss",
     title: "Discuss",
-    component: DiscussContent,
+    component: DiscussHome,
   },
   {
-    key: "Discuss",
+    key: "Discover",
     title: "Discover",
-    component: Discover,
+    component: DiscoverHome,
   },
   {
     key: "BuyerAI",
     title: "BuyerAI",
-    component: BuyerAIHomeScreen,
+    component: BuyerAIHome,
   },
 ];
-
-// const tabs = {
-//   ["Discuss"]: {
-//     key: "Discuss",
-//     title: "Discuss",
-//     component: DiscussHomeScreen,
-//   },
-//   ["Discover"]: {
-//     key: "Discover",
-//     title: "Discover",
-//     component: Discover,
-//   },
-//   ["BuyerAI"]: {
-//     key: "BuyerAI",
-//     title: "BuyerAI",
-//     component: DiscussHomeScreen,
-//   },
-// }
 
 export function Home(props){
 
@@ -75,13 +59,14 @@ export function Home(props){
     console.log(tab.key, currentTab)
     return tab.key === currentTab
   })?.component || null;
-  console.log(Component)
+
+  // console.log(Component)
 
   return (
     <View style={styles.container}>
       <View style={styles.sideBar}>
         <Image source={REALTALKTECH_WHITE} style={{width: 256, height: 32}}/>
-        <View style={styles.categories}>
+        {currentTab === "Discuss" && (<View style={styles.categories}>
           <Text style={{...buttonTypetoStyle[ButtonType.BARE], fontSize: 12}}>CATEGORIES</Text>
           <View style={{marginTop: 8}}>
             {categories.map(category => {
@@ -93,7 +78,7 @@ export function Home(props){
               />
             })}
           </View>
-        </View>
+        </View>)}
       </View>
       <View style={styles.body}>
         <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
@@ -163,6 +148,7 @@ const styles = StyleSheet.create({
     borderColor: 'blue'
   },
   categories: {
+    marginTop: 32,
     borderWidth: 1,
     borderColor: 'yellow'
   },
