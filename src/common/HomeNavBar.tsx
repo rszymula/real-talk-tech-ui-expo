@@ -1,16 +1,13 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, useWindowDimensions } from 'react-native';
 import { colors } from '../context/themes';
-import { DiscussHomeScreen } from './discuss/DiscussHomeScreen';
-import { Discover } from './discover';
-import { CategoryNames, categories } from '../constants';
-import { Button, ButtonType, buttonTypetoStyle } from '../core/Button';
-import REALTALKTECH from '../../assets/title.png';
+import { DiscoverHome } from '../screens/DiscoverHome';
+import { CategoryNames } from '../constants';
+import { Button, ButtonType } from '../core/Button';
+import { BuyerAIHome } from '../screens/BuyerAIHome';
+import { DiscussHome } from '../screens/DiscussHome';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
-import { BuyerAIHomeScreen } from './buyerai/BuyerAIHomeScreen';
-import { DiscussHome } from './DiscussHome';
-import { BuyerAIHome } from './BuyerAIHome';
-import { DiscoverHome } from './DiscoverHome';
+
 
 const FirstRoute = () => (
   <View style={{ flex: 1, backgroundColor: colors.foreground }} />
@@ -38,7 +35,7 @@ const tabs = [
   },
 ];
 
-export function Home(props){
+export function HomeNavBar(props){
 
   const [currentTab, setCurrentTab] = React.useState("Discuss");
   const [currentCategory, setCurrentCategory] = React.useState(CategoryNames.HOME);
@@ -55,6 +52,10 @@ export function Home(props){
     setCurrentCategory(category);
   }
 
+  const handleAddProfilePress = () => {
+    navigation.navigate("ProfileCreateHome")
+  }
+
   const Component = tabs.find(tab => {
     console.log(tab.key, currentTab)
     return tab.key === currentTab
@@ -64,7 +65,21 @@ export function Home(props){
 
   return (
     <View style={styles.container}>
-      <View style={styles.sideBar}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between', borderColor: 'red', borderWidth: 1}}>
+        <Image source={REALTALKTECH_WHITE} style={{width: 192, height: 24, borderColor: 'pink', borderWidth: 1}}/>
+          <View style={styles.topBar}>
+            {
+              tabs.map(tab => {
+                return (
+                  // <Text style={styles.tabButton}>{tab.title}</Text>
+                  <Button title={tab.title} onPress={() => handleTabPress(tab)} styles={styles.tabButton}/>
+                );
+              })
+            }
+          </View>
+        <Button title={"+"} onPress={handleAddProfilePress} type={ButtonType.BASIC} />
+      </View>
+      {/* <View style={styles.sideBar}>
         <Image source={REALTALKTECH_WHITE} style={{width: 256, height: 32}}/>
         {currentTab === "Discuss" && (<View style={styles.categories}>
           <Text style={{...buttonTypetoStyle[ButtonType.BARE], fontSize: 12}}>CATEGORIES</Text>
@@ -87,7 +102,7 @@ export function Home(props){
               tabs.map(tab => {
                 return (
                   // <Text style={styles.tabButton}>{tab.title}</Text>
-                  <Button title={tab.title} onPress={() => handleTabPress(tab)} type={tab.key === currentTab ? ButtonType.LOUD : ButtonType.BASIC} styles={[styles.tabButton, tab.key === currentTab ? {} : {color: colors.textRegular}]}/>
+                  <Button title={tab.title} onPress={() => handleTabPress(tab)} styles={styles.tabButton}/>
                 );
               })
             }
@@ -96,7 +111,7 @@ export function Home(props){
         <View style={styles.content}>
           <Component currentCategory={currentCategory} navigation={navigation} />
         </View>
-      </View>
+      </View> */}
     </View>
   )
 }
@@ -104,9 +119,9 @@ export function Home(props){
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.background,
-    flexDirection: 'row',
+    // flexDirection: 'row',
     padding: 32,
-    // borderWidth: 1,
+    borderWidth: 1,
     borderColor: 'purple'
   },
   title: {
@@ -119,7 +134,7 @@ const styles = StyleSheet.create({
   body: {
     // flexDirection: 'row',
     marginLeft: 32,
-    // borderWidth: 1,
+    borderWidth: 1,
     borderColor: 'red'
   },
   topBar: {
@@ -127,29 +142,29 @@ const styles = StyleSheet.create({
     // marginLeft: 4,
     // marginRight: 4,
     // alignSelf: 'center',
-    // borderWidth: 1,
+    borderWidth: 1,
     borderColor: 'orange'
   },
   tabButton: {
-    marginLeft: 4,
-    marginRight: 4,
+    margin: 0,
     paddingLeft: 4,
     paddingRight: 4,
     paddingTop: 4,
     paddingBottom: 4,
     borderRadius: 2,
+    fontSize: 12,
   },
   content: {
-    // borderWidth: 1,
+    borderWidth: 1,
     borderColor: 'lightGray'
   },
   sideBar: {
-    // borderWidth: 1,
+    borderWidth: 1,
     borderColor: 'blue'
   },
   categories: {
     marginTop: 32,
-    // borderWidth: 1,
+    borderWidth: 1,
     borderColor: 'yellow'
   },
 });

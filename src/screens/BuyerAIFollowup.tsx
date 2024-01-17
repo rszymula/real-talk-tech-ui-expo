@@ -26,6 +26,7 @@ export function BuyerAIFollowup(props) {
   return (
     <View style={styles.container}>
       {/* <View style={{width: 500, alignItems: 'center'}}> */}
+      <View style={{marginLeft: 256}}></View>
       <View style={{alignItems: 'center'}}>
         <Text style={styles.title}>
           Buyer AI

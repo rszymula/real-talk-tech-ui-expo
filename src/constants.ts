@@ -6,6 +6,9 @@ import { Home } from "./screens/Home";
 import { DiscussCreatePost } from "./screens/DiscussCreatePost";
 import { BuyerAIFollowup } from "./screens/BuyerAIFollowup";
 import { BuyerAIMessenger } from "./screens/BuyerAIMessenger";
+import { ProfileCreateHome } from "./screens/ProfileCreateHome";
+import { ProfileQuestion } from "./screens/ProfileQuestion";
+import { HomeNavBar } from "./common/HomeNavBar";
 
 export enum RouteNames {
   DISCUSS = "Discuss",
@@ -40,6 +43,7 @@ export const routes = [
   {
     name: "Home",
     component: Home,
+    // component: HomeNavBar,
   },
   {
     name: "DiscussCreatePost",
@@ -52,7 +56,16 @@ export const routes = [
   {
     name: "BuyerAIFollowup",
     component: BuyerAIFollowup,
+  },
+  {
+    name: "ProfileCreateHome",
+    component: ProfileCreateHome,
+  },
+  {
+    name: "ProfileQuestion",
+    component: ProfileQuestion,
   }
+
 ]
 
 export enum CategoryNames {

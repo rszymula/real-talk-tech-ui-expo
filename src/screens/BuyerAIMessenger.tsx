@@ -45,6 +45,7 @@ export function BuyerAIMessenger(props) {
   return (
     <View style={styles.container}>
       {/* <View style={{width: 500, alignItems: 'center'}}> */}
+      <View style={{marginLeft: 300}}></View>
       <View style={{alignItems: 'center'}}>
         <Text style={styles.title}>
           Buyer AI

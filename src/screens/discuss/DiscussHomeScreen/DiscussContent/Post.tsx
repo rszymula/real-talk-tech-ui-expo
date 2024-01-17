@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   captionText: {
     color: colors.textLowlight,
-    fontSize: 8,
+    fontSize: 12,
   },
   headingText: {
     color: colors.textHighlight,

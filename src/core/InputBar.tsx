@@ -5,7 +5,7 @@ import { Card } from "./Card";
 import React from "react";
 import { colors } from "../context/themes";
 
-export function InputBar({onPress, placeholder, title, style = {}}){
+export function InputBar({onPress, placeholder, title = null, style = {}, numLines=3}){
 
   const [input, setInput] = React.useState('');
 
@@ -21,12 +21,13 @@ export function InputBar({onPress, placeholder, title, style = {}}){
           value={input}
           placeholder={placeholder}
           style={styles.input}
+          numberOfLines={numLines}
         />
-        <Button
+        {!!title && <Button
           title={title}
           onPress={() => onPress(input)}
           type={ButtonType.BASIC}
-        />
+        />}
       </View>
     </Card>
   )

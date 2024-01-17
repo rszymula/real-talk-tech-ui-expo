@@ -7,8 +7,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      {/* <Root /> */}
-      <TestRoot />
+      <Root />
+      {/* <TestRoot /> */}
     </View>
   );
 }
