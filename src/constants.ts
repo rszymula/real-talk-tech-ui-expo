@@ -39,34 +39,34 @@ export enum Routes {
 
 }
 
-export const routes = [
-  {
-    name: "Home",
-    component: Home,
-    // component: HomeNavBar,
-  },
-  {
-    name: "DiscussCreatePost",
-    component: DiscussCreatePost,
-  },
-  {
-    name: "BuyerAIMessenger",
-    component: BuyerAIMessenger,
-  },
-  {
-    name: "BuyerAIFollowup",
-    component: BuyerAIFollowup,
-  },
-  {
-    name: "ProfileCreateHome",
-    component: ProfileCreateHome,
-  },
-  {
-    name: "ProfileQuestion",
-    component: ProfileQuestion,
-  }
+// export const routes = [
+//   {
+//     name: "Home",
+//     // component: Home,
+//     component: HomeNavBar,
+//   },
+//   {
+//     name: "DiscussCreatePost",
+//     component: DiscussCreatePost,
+//   },
+//   {
+//     name: "BuyerAIMessenger",
+//     component: BuyerAIMessenger,
+//   },
+//   {
+//     name: "BuyerAIFollowup",
+//     component: BuyerAIFollowup,
+//   },
+//   {
+//     name: "ProfileCreateHome",
+//     component: ProfileCreateHome,
+//   },
+//   {
+//     name: "ProfileQuestion",
+//     component: ProfileQuestion,
+//   }
 
-]
+// ]
 
 export enum CategoryNames {
   HOME = "Home",

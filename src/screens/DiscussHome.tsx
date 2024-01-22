@@ -22,26 +22,30 @@ export function DiscussHome(props){
   console.log("Rendering Discuss")
 
   return (
-    <Card styles={{width: 500, marginTop: 32}}>
-      <View style={styles.container}>
-        <InputBar 
-          onPress={(input) => {
-            navigation.navigate("DiscussCreatePost", { input })
-          }}
-          title={"Create Post"}
-          placeholder={INPUT_PLACEHOLDER}
-        />
-        <Separator />
-        <View>
-          <FlatList 
-            data={posts}
-            keyExtractor={(item) => `${item.id}`}
-            renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
-            ItemSeparatorComponent={() => <Separator />}
-          />
-        </View>
+    <View style={styles.container}>
+      <View style={styles.sidebar}>
+        <Card styles={{width: 512, marginTop: 32}}>
+          <View style={styles.container}>
+            <InputBar 
+              onPress={(input) => {
+                navigation.navigate("DiscussCreatePost", { input })
+              }}
+              title={"Create Post"}
+              placeholder={INPUT_PLACEHOLDER}
+            />
+            <Separator />
+            <View>
+              <FlatList 
+                data={posts}
+                keyExtractor={(item) => `${item.id}`}
+                renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
+                ItemSeparatorComponent={() => <Separator />}
+              />
+            </View>
+          </View>
+        </Card>
       </View>
-    </Card>
+    </View>
   )
 }
 
@@ -50,6 +54,9 @@ const styles = StyleSheet.create({
   container: {
     margin: 16,
     padding: 8,
+  },
+  sidebar: {
+    marginLeft: 256,
   },
   button: {
     // width: 256,

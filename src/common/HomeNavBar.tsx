@@ -17,23 +17,38 @@ const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: colors.foreground }} />
 );
 
+// const tabs = [
+//   {
+//     key: "Discuss",
+//     title: "Discuss",
+//     component: DiscussHome,
+//   },
+//   {
+//     key: "Discover",
+//     title: "Discover",
+//     component: DiscoverHome,
+//   },
+//   {
+//     key: "BuyerAI",
+//     title: "BuyerAI",
+//     component: BuyerAIHome,
+//   },
+// ];
+
 const tabs = [
   {
-    key: "Discuss",
-    title: "Discuss",
-    component: DiscussHome,
+    routeName: "DiscussHome",
+    title: "Discuss"
   },
   {
-    key: "Discover",
-    title: "Discover",
-    component: DiscoverHome,
+    routeName: "DiscoverHome",
+    title: "Discover"
   },
   {
-    key: "BuyerAI",
-    title: "BuyerAI",
-    component: BuyerAIHome,
+    routeName: "BuyerAIHome",
+    title: "Buyer AI"
   },
-];
+]
 
 export function HomeNavBar(props){
 
@@ -45,7 +60,8 @@ export function HomeNavBar(props){
   const {navigation} = props;
 
   const handleTabPress = (tab) => {
-    setCurrentTab(tab.key)
+    // setCurrentTab(tab.key)
+    navigation.navigate(tab.routeName)
   }
 
   const handleCategoryPress = (category: CategoryNames) => {
@@ -56,10 +72,10 @@ export function HomeNavBar(props){
     navigation.navigate("ProfileCreateHome")
   }
 
-  const Component = tabs.find(tab => {
-    console.log(tab.key, currentTab)
-    return tab.key === currentTab
-  })?.component || null;
+  // const Component = tabs.find(tab => {
+  //   console.log(tab.routeName, currentTab)
+  //   return tab.routeName === currentTab
+  // })?.component || null;
 
   // console.log(Component)
 
