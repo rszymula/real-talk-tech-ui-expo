@@ -26,9 +26,7 @@ const tabNames = tabs.map(tab => tab.routeName);
 function getMostRecentTabRoute(routes: Array<any>){
   // using routes?.reverse()?.find does not work, since it seems to first sort and then do binary search. We need it sorted as it wsa to start
   for(let i = routes.length - 1; i < routes.length; i--){
-    console.log("Hmmm", routes[i].name)
     if(tabNames.includes(routes[i].name)){
-      console.log("YES", routes[i].name)
       return routes[i].name
     }
   }
@@ -55,8 +53,8 @@ export function HomeNavBar(props){
   }
 
   return (
-    <View style={{flexDirection: 'row', justifyContent: 'space-between', borderColor: 'red', borderWidth: 1}}>
-      <Image source={REALTALKTECH_WHITE} style={{width: 192, height: 24, borderColor: 'yellow', borderWidth: 1}}/>
+    <View style={styles.container}>
+      <Image source={REALTALKTECH_WHITE} style={styles.title}/>
         <View style={styles.topBar}>
           {
             tabs.map(tab => {
@@ -72,21 +70,28 @@ export function HomeNavBar(props){
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderColor: 'red',
+    // borderWidth: 1
+  },
   title: {
-    padding: 16,
-    // borderWidth: 1,
-    // borderColor: 'green'
+    width: 192,
+    height: 24,
+    borderColor: 'yellow',
+    // borderWidth: 1
   },
   body: {
     marginLeft: 32,
     borderWidth: 1,
-    borderColor: 'red'
+    // borderColor: 'red'
   },
   topBar: {
     width: 256,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor: 'yellow'
   },
   tabButton: {
@@ -98,16 +103,16 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   content: {
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor: 'lightGray'
   },
   sideBar: {
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor: 'blue'
   },
   categories: {
     marginTop: 32,
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor: 'yellow'
   },
 });

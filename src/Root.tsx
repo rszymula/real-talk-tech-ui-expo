@@ -99,15 +99,31 @@ function SideBar(props){
   //   )
   // }
   return (
-    <View style={{marginTop: 16, borderWidth: 1, borderColor: 'red', backgroundColor: colors.background, flexDirection: 'row', justifyContent: 'space-between'}}>
-      <View style={{flexDirection: 'column', width: 192, borderWidth: 1, borderColor: 'yellow'}}>
+    <View style={{
+      marginTop: 16,
+      // borderWidth: 1,
+      borderColor: 'red',
+      backgroundColor: colors.background,
+      flexDirection: 'row',
+      justifyContent: 'space-between'
+    }}>
+      <View style={{
+        flexDirection: 'column',
+        width: 192,
+        // borderWidth: 1, 
+        borderColor: 'yellow'
+      }}>
         {props.hasCategories ? (
           <Categories currentCategory={currentCategory} handleCategoryPress={handleCategoryPress} />
           ) : <></>
         }
       </View>
       <props.Component {...props} currentCategory={currentCategory} />
-      <View style={{width: 32, borderWidth: 1, borderColor: 'yellow'}}></View>
+      <View style={{
+        width: 32,
+        // borderWidth: 1,
+        borderColor: 'yellow'
+      }}></View>
     </View>
   )
 }
@@ -158,7 +174,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     padding: 32,
     height: "100%",
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor: 'purple',
   },
   container: {
