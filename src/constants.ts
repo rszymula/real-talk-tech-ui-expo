@@ -10,6 +10,8 @@ import { ProfileCreateHome } from "./screens/ProfileCreateHome";
 import { ProfileQuestion } from "./screens/ProfileQuestion";
 import { HomeNavBar } from "./common/HomeNavBar";
 
+export const defaultTab = "DiscussHome";
+
 export enum RouteNames {
   DISCUSS = "Discuss",
   DISCOVER = "Discover",

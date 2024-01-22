@@ -57,7 +57,7 @@ export function BuyerAIHome(props) {
                 return (
                   <>
                     {idx !== 0 && <View style={{width: 8}}></View>}
-                    <Card styles={{backgroundColor: colors.input, flexShrink: 1}}>
+                    <Card styles={{backgroundColor: colors.input, flexShrink: 1, padding: 8}}>
                       <View style={{width: 64, height: 64, borderWidth: 1, borderColor: colors.textLowlight, alignSelf: 'center'}}></View>
                       <Text style={{color: colors.textRegular, marginTop: 8}}>{question.title}</Text>
                       <Text style={{color: colors.textLowlight, marginTop: 4}}>{question.description}</Text>
@@ -72,7 +72,7 @@ export function BuyerAIHome(props) {
             {
               other.map(question => {
                 return (
-                  <Card styles={{marginTop: 8, backgroundColor: colors.input, flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <Card styles={{marginTop: 8, backgroundColor: colors.input, flexDirection: 'row', justifyContent: 'space-between', padding: 8}}>
                     <View>
                       <Text style={{color: colors.textRegular}}>{question.title}</Text>
                       <Text style={{color: colors.textLowlight, marginTop: 4}}>{question.description}</Text>
