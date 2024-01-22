@@ -11,23 +11,67 @@ import { DiscussCreatePost } from './screens/DiscussCreatePost';
 import { DiscussHome } from './screens/DiscussHome';
 import { BuyerAIHome } from './screens/BuyerAIHome';
 import { colors } from './context/themes';
+import { CategoryNames, categories } from './constants';
+import { ButtonType, buttonTypetoStyle, Button } from './core/Button';
 
 const Stack = createNativeStackNavigator();
 
-function sideBarProvider(Component){
-  return (props) => {
+function Categories({navigation, Component}){
+
+  const [currentCategory, handleSetCurrentCategory] = React.useState<CategoryNames>(CategoryNames.HOME);
+
+  const handleCategoryPress = (categoryInput: CategoryNames) => {
+    console.log('pressed', categoryInput)
+    handleSetCurrentCategory(categoryInput);
+  }
+
+  return (
+    <View style={{backgroundColor: colors.background, flexDirection: 'row'}}>
+      <View style={{flexDirection: 'column'}}>
+        {categories.map(category => <Text style={{color: colors.textHighlight}}>{category.name}</Text>)}
+        <Text style={styles.title}>CATEGORIES</Text>
+        <View>
+          {categories.map(category => {
+            return <Button
+              title={category.name}
+              onPress={() => handleCategoryPress(category.name)}
+              type={ButtonType.BARE}
+              styles={category.name === currentCategory ? {color: colors.textHighlight} : {}}
+            />
+          })}
+        </View>
+      </View>
+      {/* <Component {...props} currentCategory={currentCategory} /> */}
+      <Component navigation={navigation} currentCategory={currentCategory} />
+      {/* {props.children({currentCategory})} */}
+    </View>
+  )
+}
+
+
+function useSideBarProvider(Component, hasCategories = false){
+
+  return ({navigation}) => {
+    if(hasCategories){
+      return (
+        // <Categories {...props} >
+        //   <Component />
+        // </Categories>
+        <Categories navigation={navigation} Component={Component}/>
+      )
+    }
     return (
       <View style={{backgroundColor: colors.background}}>
         <View style={styles.sidebar}>
-          <Component {...props} />
+          <Component navigation={navigation} />
         </View>
       </View>
     )
   }
 }
 
-function navBarProvider(Component){
-  const ComponentWithSideBar = sideBarProvider(Component)
+function navBarProvider(Component, hasCategories = false){
+  const ComponentWithSideBar = useSideBarProvider(Component, hasCategories)
   return ({navigation}) => {
     return (
       <>
@@ -43,7 +87,7 @@ function navBarProvider(Component){
 export const routes = [
   {
     name: "DiscussHome",
-    component: navBarProvider(DiscussHome),
+    component: navBarProvider(DiscussHome, true),
   },
   {
     name: "DiscoverHome",
@@ -51,7 +95,7 @@ export const routes = [
   },
   {
     name: "DiscussCreatePost",
-    component: sideBarProvider(DiscussCreatePost),
+    component: useSideBarProvider(DiscussCreatePost),
   },
   {
     name: "BuyerAIHome",
@@ -115,4 +159,8 @@ const styles = StyleSheet.create({
   sidebar: {
     marginLeft: 256,
   },
+  title: {
+    ...buttonTypetoStyle[ButtonType.BARE],
+    fontSize: 12,
+  }
 })
