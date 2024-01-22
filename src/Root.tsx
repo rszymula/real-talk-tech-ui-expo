@@ -16,34 +16,6 @@ import { ButtonType, buttonTypetoStyle, Button } from './core/Button';
 
 const Stack = createNativeStackNavigator();
 
-function CategoriesX({navigation, Component}){
-
-  const [currentCategory, setCurrentCategory] = React.useState<CategoryNames>(CategoryNames.HOME);
-
-  const handleCategoryPress = (categoryInput: CategoryNames) => {
-    setCurrentCategory(categoryInput);
-  }
-
-  return (
-    <View style={{backgroundColor: colors.background, flexDirection: 'row'}}>
-      <View style={{flexDirection: 'column', width: 256}}>
-        <Text style={styles.title}>CATEGORIES</Text>
-        <View>
-          {categories.map(category => {
-            return <Button
-              title={category.name}
-              onPress={() => handleCategoryPress(category.name)}
-              type={ButtonType.BARE}
-              styles={category.name === currentCategory ? {color: colors.textHighlight} : {}}
-            />
-          })}
-        </View>
-      </View>
-      <Component navigation={navigation} currentCategory={currentCategory} />
-    </View>
-  )
-}
-
 function Categories({currentCategory, handleCategoryPress}){
   return (
     <View>
@@ -70,25 +42,40 @@ function SideBar({navigation, Component, hasCategories}){
     setCurrentCategory(categoryInput);
   }
 
-  if(hasCategories){
-    return (
-      <View style={{backgroundColor: colors.background, flexDirection: 'row'}}>
-        <View style={{flexDirection: 'column', width: 256}}>
-          <Text style={styles.title}>CATEGORIES</Text>
-          <Categories currentCategory={currentCategory} handleCategoryPress={handleCategoryPress} />
-        </View>
-        <Component navigation={navigation} currentCategory={currentCategory} />
+  // if(hasCategories){
+  //   return (
+  //     <View style={{backgroundColor: colors.background, flexDirection: 'row'}}>
+  //       <View style={{flexDirection: 'column', width: 256}}>
+  //         <Text style={styles.title}>CATEGORIES</Text>
+  //         <Categories currentCategory={currentCategory} handleCategoryPress={handleCategoryPress} />
+  //       </View>
+  //       <Component navigation={navigation} currentCategory={currentCategory} />
+  //     </View>
+  //   )
+  // }else{
+  //   return (
+  //     <View style={{backgroundColor: colors.background}}>
+  //       <View style={styles.sidebar}>
+  //         <Component navigation={navigation} />
+  //       </View>
+  //     </View>
+  //   )
+  // }
+
+  return (
+    <View style={{backgroundColor: colors.background, flexDirection: 'row'}}>
+      <View style={{flexDirection: 'column', width: 256}}>
+        {hasCategories ? (
+          <View>
+            <Text style={styles.title}>CATEGORIES</Text>
+            <Categories currentCategory={currentCategory} handleCategoryPress={handleCategoryPress} />
+          </View>
+          ) : <></>
+        }
       </View>
-    )
-  }else{
-    return (
-      <View style={{backgroundColor: colors.background}}>
-        <View style={styles.sidebar}>
-          <Component navigation={navigation} />
-        </View>
-      </View>
-    )
-  }
+      <Component navigation={navigation} currentCategory={currentCategory} />
+    </View>
+  )
 }
 
 
