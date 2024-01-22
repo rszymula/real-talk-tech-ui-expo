@@ -87,20 +87,18 @@ export function DiscoverHome(props){
 
   return (
     <View style={styles.container}>
-      {/* <View style={{justifyContent: 'flex-end'}}> */}
-      <View style={styles.sidebar}>
-        <View style={{width: 512, alignItems: 'center'}}>
-          <Text style={styles.title}>
-            Explore the market
-          </Text>
-          <Text style={{color: colors.textLowlight, margin: 8,}}>
-            A long description
-          </Text>
-          <Card styles={{marginBottom: 32, width: 500}}>
-            {!!selected ? (<SingleView selected={selected} setViewSolo={setViewSolo} />)
-            : (<ListView companies={companies} setViewSolo={setViewSolo}/>)}
-          </Card>
-        </View>
+    {/* <View style={{justifyContent: 'flex-end'}}> */}
+      <View style={{width: 512, alignItems: 'center'}}>
+        <Text style={styles.title}>
+          Explore the market
+        </Text>
+        <Text style={{color: colors.textLowlight, margin: 8,}}>
+          A long description
+        </Text>
+        <Card styles={{marginBottom: 32, width: 500}}>
+          {!!selected ? (<SingleView selected={selected} setViewSolo={setViewSolo} />)
+          : (<ListView companies={companies} setViewSolo={setViewSolo}/>)}
+        </Card>
       </View>
     </View>
   )
@@ -112,9 +110,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     height: "100%",
-  },
-  sidebar: {
-    marginLeft: 256,
   },
   title: {
     color: colors.textHighlight,

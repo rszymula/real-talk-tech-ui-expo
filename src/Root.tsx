@@ -16,17 +16,17 @@ import { ButtonType, buttonTypetoStyle, Button } from './core/Button';
 
 const Stack = createNativeStackNavigator();
 
-function Categories({navigation, Component}){
+function CategoriesX({navigation, Component}){
 
-  const [currentCategory, handleSetCurrentCategory] = React.useState<CategoryNames>(CategoryNames.HOME);
+  const [currentCategory, setCurrentCategory] = React.useState<CategoryNames>(CategoryNames.HOME);
 
   const handleCategoryPress = (categoryInput: CategoryNames) => {
-    handleSetCurrentCategory(categoryInput);
+    setCurrentCategory(categoryInput);
   }
 
   return (
     <View style={{backgroundColor: colors.background, flexDirection: 'row'}}>
-      <View style={{flexDirection: 'column'}}>
+      <View style={{flexDirection: 'column', width: 256}}>
         <Text style={styles.title}>CATEGORIES</Text>
         <View>
           {categories.map(category => {
@@ -44,13 +44,50 @@ function Categories({navigation, Component}){
   )
 }
 
+function Categories({currentCategory, handleCategoryPress}){
+  return (
+    <View>
+      <Text style={styles.title}>CATEGORIES</Text>
+      <View>
+        {categories.map(category => {
+          return <Button
+            title={category.name}
+            onPress={() => handleCategoryPress(category.name)}
+            type={ButtonType.BARE}
+            styles={category.name === currentCategory ? {color: colors.textHighlight} : {}}
+          />
+        })}
+      </View>
+    </View>
+  )
+}
 
-function useSideBarProvider(Component, hasCategories = false){
+function SideBar({navigation, Component}){
+
+  const [currentCategory, setCurrentCategory] = React.useState<CategoryNames>(CategoryNames.HOME);
+
+  const handleCategoryPress = (categoryInput: CategoryNames) => {
+    setCurrentCategory(categoryInput);
+  }
+
+  return (
+    <View style={{backgroundColor: colors.background, flexDirection: 'row'}}>
+      <View style={{flexDirection: 'column', width: 256}}>
+        <Text style={styles.title}>CATEGORIES</Text>
+        <Categories currentCategory={currentCategory} handleCategoryPress={handleCategoryPress} />
+      </View>
+      <Component navigation={navigation} currentCategory={currentCategory} />
+    </View>
+  )
+}
+
+
+function sideBarProvider(Component, hasCategories = false){
 
   return ({navigation}) => {
     if(hasCategories){
       return (
-        <Categories navigation={navigation} Component={Component}/>
+        <SideBar navigation={navigation} Component={Component}/>
       )
     }
     return (
@@ -64,7 +101,7 @@ function useSideBarProvider(Component, hasCategories = false){
 }
 
 function navBarProvider(Component, hasCategories = false){
-  const ComponentWithSideBar = useSideBarProvider(Component, hasCategories)
+  const ComponentWithSideBar = sideBarProvider(Component, hasCategories)
   return ({navigation}) => {
     return (
       <>
@@ -88,7 +125,7 @@ export const routes = [
   },
   {
     name: "DiscussCreatePost",
-    component: useSideBarProvider(DiscussCreatePost),
+    component: sideBarProvider(DiscussCreatePost),
   },
   {
     name: "BuyerAIHome",
