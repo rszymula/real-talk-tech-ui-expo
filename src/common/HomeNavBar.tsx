@@ -24,11 +24,15 @@ const tabs = [
 const tabNames = tabs.map(tab => tab.routeName);
 
 function getMostRecentTabRoute(routes: Array<any>){
-
-  return routes?.reverse()?.find(route => {
-    console.log({tabNames, rn: route.name})
-    return tabNames.includes(route.name)
-  })?.name || ''
+  // using routes?.reverse()?.find does not work, since it seems to first sort and then do binary search. We need it sorted as it wsa to start
+  for(let i = routes.length - 1; i < routes.length; i--){
+    console.log("Hmmm", routes[i].name)
+    if(tabNames.includes(routes[i].name)){
+      console.log("YES", routes[i].name)
+      return routes[i].name
+    }
+  }
+  return ''
 }
 
 export function HomeNavBar(props){

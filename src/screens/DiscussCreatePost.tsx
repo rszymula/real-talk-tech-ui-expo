@@ -34,58 +34,49 @@ export function DiscussCreatePost(props){
   }
 
   return (
-    <View style={styles.container}>
-      <Card styles={{padding: 16}}>
-        <Card>
-          <View style={styles.labeledInput}>
-            <Text style={styles.label}>Category</Text>
-            <TextInput 
-              style={styles.input}
-              onChangeText={setCategory}
-              value={category}
-              placeholder={TEXT_PLACEHOLDER}
-            />
-          </View>
-        </Card>
-        <Card styles={{marginTop: 8}}>
-          <View style={styles.labeledInput}>
-            <Text style={styles.label}>Title</Text>
-            <TextInput 
-              style={styles.input}
-              onChangeText={setTitle}
-              value={title}
-              placeholder={TEXT_PLACEHOLDER}
-            />
-          </View>
-        </Card>
-        <Card styles={{marginTop: 8}}>
+    <Card styles={{padding: 16}}>
+      <Card>
+        <View style={styles.labeledInput}>
+          <Text style={styles.label}>Category</Text>
           <TextInput 
-            onChangeText={setContent}
-            value={content}
-            multiline={true}
-            numberOfLines={12}
-            style={styles.textbox}
-            placeholder={POST_PLACEHOLDER}
+            style={styles.input}
+            onChangeText={setCategory}
+            value={category}
+            placeholder={TEXT_PLACEHOLDER}
           />
-        </Card>
-        <View style={styles.buttonContainer}>
-          <Button title="Cancel" onPress={handleExit} type={ButtonType.REVERSE} />
-          <Button title="Create Post" onPress={handleCreatePost} />
         </View>
       </Card>
-    </View>
+      <Card styles={{marginTop: 8}}>
+        <View style={styles.labeledInput}>
+          <Text style={styles.label}>Title</Text>
+          <TextInput 
+            style={styles.input}
+            onChangeText={setTitle}
+            value={title}
+            placeholder={TEXT_PLACEHOLDER}
+          />
+        </View>
+      </Card>
+      <Card styles={{marginTop: 8}}>
+        <TextInput 
+          onChangeText={setContent}
+          value={content}
+          multiline={true}
+          numberOfLines={12}
+          style={styles.textbox}
+          placeholder={POST_PLACEHOLDER}
+        />
+      </Card>
+      <View style={styles.buttonContainer}>
+        <Button title="Cancel" onPress={handleExit} type={ButtonType.REVERSE} />
+        <Button title="Create Post" onPress={handleCreatePost} />
+      </View>
+    </Card>
   )
 }
 
 
 const styles = StyleSheet.create({
-  container: {
-    // borderColor: 'red',
-    // borderWidth: 2,
-    padding: 32,
-    backgroundColor: colors.background,
-    height: "100%",
-  },
   card: {
     borderWidth: 1,
     borderColor: colors.border,
