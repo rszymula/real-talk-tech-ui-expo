@@ -62,7 +62,7 @@ function Categories({currentCategory, handleCategoryPress}){
   )
 }
 
-function SideBar({navigation, Component}){
+function SideBar({navigation, Component, hasCategories}){
 
   const [currentCategory, setCurrentCategory] = React.useState<CategoryNames>(CategoryNames.HOME);
 
@@ -70,32 +70,32 @@ function SideBar({navigation, Component}){
     setCurrentCategory(categoryInput);
   }
 
-  return (
-    <View style={{backgroundColor: colors.background, flexDirection: 'row'}}>
-      <View style={{flexDirection: 'column', width: 256}}>
-        <Text style={styles.title}>CATEGORIES</Text>
-        <Categories currentCategory={currentCategory} handleCategoryPress={handleCategoryPress} />
+  if(hasCategories){
+    return (
+      <View style={{backgroundColor: colors.background, flexDirection: 'row'}}>
+        <View style={{flexDirection: 'column', width: 256}}>
+          <Text style={styles.title}>CATEGORIES</Text>
+          <Categories currentCategory={currentCategory} handleCategoryPress={handleCategoryPress} />
+        </View>
+        <Component navigation={navigation} currentCategory={currentCategory} />
       </View>
-      <Component navigation={navigation} currentCategory={currentCategory} />
-    </View>
-  )
-}
-
-
-function sideBarProvider(Component, hasCategories = false){
-
-  return ({navigation}) => {
-    if(hasCategories){
-      return (
-        <SideBar navigation={navigation} Component={Component}/>
-      )
-    }
+    )
+  }else{
     return (
       <View style={{backgroundColor: colors.background}}>
         <View style={styles.sidebar}>
           <Component navigation={navigation} />
         </View>
       </View>
+    )
+  }
+}
+
+
+function sideBarProvider(Component, hasCategories = false){
+  return ({navigation}) => {
+    return (
+      <SideBar navigation={navigation} Component={Component} hasCategories={hasCategories}/>
     )
   }
 }
