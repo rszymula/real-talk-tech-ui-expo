@@ -100,6 +100,10 @@ function navBarProvider(Component, hasCategories = false){
 
 export const routes = [
   {
+    name: "BuyerAIHome",
+    component: navBarProvider(BuyerAIHome),
+  },
+  {
     name: "DiscussHome",
     component: navBarProvider(DiscussHome, true),
   },
@@ -111,10 +115,10 @@ export const routes = [
     name: "DiscussCreatePost",
     component: sideBarProvider(DiscussCreatePost),
   },
-  {
-    name: "BuyerAIHome",
-    component: navBarProvider(BuyerAIHome),
-  },
+  // {
+  //   name: "BuyerAIHome",
+  //   component: navBarProvider(BuyerAIHome),
+  // },
   {
     name: "BuyerAIMessenger",
     component: navBarProvider(BuyerAIMessenger),

@@ -25,7 +25,7 @@ export function InputBar({onPress, placeholder, title = null, style = {}, numLin
           title={title}
           onPress={() => onPress(input)}
           type={ButtonType.BASIC}
-          styles={{marginLeft: 8}}
+          styles={{marginLeft: 8, color: colors.textHighlight}}
         />}
       </View>
     </View>

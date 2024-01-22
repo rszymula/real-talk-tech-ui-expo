@@ -64,11 +64,11 @@ function ListView({companies, setViewSolo}){
   return(
     <SafeAreaView>
       <FlatList
-        style={{margin: 16, backgroundColor: colors.foreground}}
+        style={{backgroundColor: colors.foreground}}
         data={companies}
         keyExtractor={(item) => item.id}
         renderItem={({item}) => <Company {...item} setViewSolo={setViewSolo} />}
-        ItemSeparatorComponent={() => <Separator style={{marginBottom: 12}} />}
+        ItemSeparatorComponent={() => <Separator style={{marginTop: 16, marginBottom: 16}} />}
       />
     </SafeAreaView>
   )
@@ -106,10 +106,6 @@ export function DiscoverHome(props){
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.background,
-    display: 'flex',
-    flexDirection: 'row',
-    height: "100%",
   },
   title: {
     color: colors.textHighlight,

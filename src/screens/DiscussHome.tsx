@@ -22,7 +22,7 @@ export function DiscussHome(props){
   console.log("Rendering Discuss")
 
   return (
-      <Card styles={{width: 512, padding: 16}}>
+      <Card styles={{width: 512}}>
         <InputBar 
           onPress={(input) => {
             navigation.navigate("DiscussCreatePost", { input })
@@ -30,7 +30,7 @@ export function DiscussHome(props){
           title={"Create Post"}
           placeholder={INPUT_PLACEHOLDER}
         />
-        <Separator />
+        <Separator style={{marginTop: 16}} />
         <View>
           <FlatList 
             data={posts}

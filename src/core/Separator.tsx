@@ -10,7 +10,7 @@ export function Separator({style = {}}){
 
 const styles = StyleSheet.create({
   default: {
-    height: 0.5,
+    height: 0,
     borderTopWidth: 0.5,
     borderColor: colors.border,
     marginTop: 8,
