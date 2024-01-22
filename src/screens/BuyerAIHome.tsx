@@ -3,12 +3,10 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { ButtonType, Button } from '../core/Button';
 import { Card } from '../core/Card';
 import { InputBar } from '../core/InputBar';
-import { BUYERAI_PLACEHOLDER } from '../constants';
+import { BUYERAI_PLACEHOLDER, RouteNames } from '../constants';
 import { colors } from '../context/themes';
 import { getMainQuestions, getOtherQuestions } from '../services/BuyerIAService';
 import { getCompanies } from '../services/DiscoverService';
-import { BuyerAIRouteNames } from './buyerai';
-import { BuyerAIMessenger } from './BuyerAIMessenger';
 
 
 export function BuyerAIHome(props) {
@@ -18,12 +16,11 @@ export function BuyerAIHome(props) {
   const { navigation } = props;
 
   const handleTalkToChat = (input) => {
-    navigation.navigate("BuyerAIMessenger", {input})
+    navigation.navigate(RouteNames.BUYER_AI_MESSENGER, {input})
   }
 
   const handleSelect = (question) => {
-    console.log("ZZ", question)
-    navigation.navigate("BuyerAIFollowup", {question})
+    navigation.navigate(RouteNames.BUYER_AI_FOLLOWUP, {question})
   }
 
   const main = getMainQuestions();

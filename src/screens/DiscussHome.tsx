@@ -19,13 +19,11 @@ export function DiscussHome(props){
   const { currentCategory, navigation } = props;
   const posts = getPostsWithCommentIdsAndUpvotes(currentCategory, 0, POST_PAGE_OFFSET);
 
-  console.log("Rendering Discuss")
-
   return (
       <Card styles={{width: 512}}>
         <InputBar 
           onPress={(input) => {
-            navigation.navigate("DiscussCreatePost", { input })
+            navigation.navigate(RouteNames.DISCUSS_CREATE_POST, { input })
           }}
           title={"Create Post"}
           placeholder={INPUT_PLACEHOLDER}

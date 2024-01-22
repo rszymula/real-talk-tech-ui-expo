@@ -11,10 +11,45 @@ import { DiscussCreatePost } from './screens/DiscussCreatePost';
 import { DiscussHome } from './screens/DiscussHome';
 import { BuyerAIHome } from './screens/BuyerAIHome';
 import { colors } from './context/themes';
-import { CategoryNames, categories } from './constants';
+import { CategoryNames, RouteNames, categories } from './constants';
 import { ButtonType, buttonTypetoStyle, Button } from './core/Button';
 import { ProfileCreateHome } from './screens/ProfileCreateHome';
 import { ProfileQuestion } from './screens/ProfileQuestion';
+
+export const routes = [
+  {
+    name: RouteNames.DISCUSS_HOME,
+    component: navBarProvider(DiscussHome, true),
+  },
+  {
+    name: RouteNames.DISCUSS_CREATE_POST,
+    component: sideBarProvider(DiscussCreatePost),
+  },
+  {
+    name: RouteNames.DISCOVER_HOME,
+    component: navBarProvider(DiscoverHome),
+  },
+  {
+    name: RouteNames.BUYER_AI_HOME,
+    component: navBarProvider(BuyerAIHome),
+  },
+  {
+    name: RouteNames.BUYER_AI_MESSENGER,
+    component: navBarProvider(BuyerAIMessenger),
+  },
+  {
+    name: RouteNames.BUYER_AI_FOLLOWUP,
+    component: navBarProvider(BuyerAIFollowup),
+  },
+  {
+    name: RouteNames.PROFILE_CREATE_HOME,
+    component: ProfileCreateHome,
+  },
+  {
+    name: RouteNames.PROFILE_QUESTION,
+    component: ProfileQuestion,
+  },
+]
 
 const Stack = createNativeStackNavigator();
 
@@ -99,45 +134,6 @@ function navBarProvider(Component, hasCategories = false){
     )
   }
 }
-
-export const routes = [
-  {
-    name: "BuyerAIHome",
-    component: navBarProvider(BuyerAIHome),
-  },
-  {
-    name: "DiscussHome",
-    component: navBarProvider(DiscussHome, true),
-  },
-  {
-    name: "DiscoverHome",
-    component: navBarProvider(DiscoverHome),
-  },
-  {
-    name: "DiscussCreatePost",
-    component: sideBarProvider(DiscussCreatePost),
-  },
-  // {
-  //   name: "BuyerAIHome",
-  //   component: navBarProvider(BuyerAIHome),
-  // },
-  {
-    name: "BuyerAIMessenger",
-    component: navBarProvider(BuyerAIMessenger),
-  },
-  {
-    name: "BuyerAIFollowup",
-    component: navBarProvider(BuyerAIFollowup),
-  },
-  {
-    name: "ProfileCreateHome",
-    component: ProfileCreateHome,
-  },
-  {
-    name: "ProfileQuestion",
-    component: ProfileQuestion,
-  },
-]
 
 export function Root(){
   return (

@@ -1,79 +1,18 @@
-import { DiscussStackScreen } from "./screens/discuss/index";
-import { Discover } from "./screens/discover/index";
-import { Route } from "expo-router/build/Route";
-import { BuyerAIStackStackScreen } from "./screens/buyerai";
-import { Home } from "./screens/Home";
-import { DiscussCreatePost } from "./screens/DiscussCreatePost";
-import { BuyerAIFollowup } from "./screens/BuyerAIFollowup";
-import { BuyerAIMessenger } from "./screens/BuyerAIMessenger";
-import { ProfileCreateHome } from "./screens/ProfileCreateHome";
-import { ProfileQuestion } from "./screens/ProfileQuestion";
-import { HomeNavBar } from "./common/HomeNavBar";
-
-export const defaultTab = "DiscussHome";
-
 export enum RouteNames {
-  DISCUSS = "Discuss",
-  DISCOVER = "Discover",
-  BUYER_AI = "BuyerAI",
+  DISCUSS_HOME = "DiscussHome",
+  DISCUSS_CREATE_POST = "DiscussCreatePost",
+  DISCOVER_HOME = "DiscoverHome",
+  BUYER_AI_HOME = "BuyerAIHome",
+  BUYER_AI_FOLLOWUP = "BuyerAIFollowup",
+  BUYER_AI_MESSENGER = "BuyerAIMessenger",
+  PROFILE_CREATE_HOME = "ProfileCreateHome",
+  PROFILE_QUESTION = "ProfileQuestion",
 };
 
-export const screens = [
-  {
-    name: "Home",
-    component: Home,
-  },
-  {
-    name: RouteNames.BUYER_AI,
-    component: BuyerAIStackStackScreen,
-  },
-  {
-    name: RouteNames.DISCUSS,
-    component: DiscussStackScreen,
-  },
-  {
-    name: RouteNames.DISCOVER,
-    component: Discover,
-  },
-]
-
-export enum Routes {
-
-}
-
-// export const routes = [
-//   {
-//     name: "Home",
-//     // component: Home,
-//     component: HomeNavBar,
-//   },
-//   {
-//     name: "DiscussCreatePost",
-//     component: DiscussCreatePost,
-//   },
-//   {
-//     name: "BuyerAIMessenger",
-//     component: BuyerAIMessenger,
-//   },
-//   {
-//     name: "BuyerAIFollowup",
-//     component: BuyerAIFollowup,
-//   },
-//   {
-//     name: "ProfileCreateHome",
-//     component: ProfileCreateHome,
-//   },
-//   {
-//     name: "ProfileQuestion",
-//     component: ProfileQuestion,
-//   }
-
-// ]
+export const DEFAULT_TAB = "DiscussHome";
 
 export enum CategoryNames {
   HOME = "Home",
-  // AAA = "Aaa",
-  // BBB = "Bbb",
   AI = 'AI',
   ENGINEERING = 'Engineering',
   OPERATIONS = 'Operations',

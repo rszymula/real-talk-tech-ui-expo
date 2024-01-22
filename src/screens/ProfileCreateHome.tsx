@@ -3,6 +3,7 @@ import { View, Text, FlatList, Image, StyleSheet, TextInput } from 'react-native
 import { ButtonType, Button } from '../core/Button';
 import { colors } from '../context/themes';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
+import { RouteNames } from '../constants';
 
 export function ProfileCreateHome({navigation}) {
 
@@ -12,7 +13,7 @@ export function ProfileCreateHome({navigation}) {
   const [bio, setBio] = React.useState('');
 
   const handleNextPress = () => {
-    navigation.navigate("ProfileQuestion", {firstName, lastName, username, bio, step: "Industry"})
+    navigation.navigate(RouteNames.PROFILE_QUESTION, {firstName, lastName, username, bio, step: "Industry"})
   }
 
   return (

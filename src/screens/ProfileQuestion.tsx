@@ -1,20 +1,26 @@
 import React from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TextInput } from 'react-native';
 import { ButtonType, Button } from '../core/Button';
-import { BUYERAI_PLACEHOLDER, defaultTab } from '../constants';
+import { BUYERAI_PLACEHOLDER, DEFAULT_TAB, RouteNames } from '../constants';
 import { colors } from '../context/themes';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
 
+enum ProfileStep {
+  INDUSTRY = "Industry",
+  DO = "Do",
+  SOFTWARE = "Software",
+}
+
 const steps = {
-  "Industry": {
-    next: "Do",
+  [ProfileStep.INDUSTRY]: {
+    next: ProfileStep.DO,
     description: "What industry are you in?",
   },
-  "Do": {
-    next: "Software",
+  [ProfileStep.DO]: {
+    next: ProfileStep.SOFTWARE,
     description: "What do you do?",
   },
-  "Software": {
+  [ProfileStep.SOFTWARE]: {
     next: null,
     description: "What type of software do you want to learn about and/or discuss?",
   },
@@ -31,11 +37,10 @@ export function ProfileQuestion({route, navigation}) {
   const handleNextPress = () => {
     console.log(next)
     if(!next){
-      navigation.navigate(defaultTab)
+      navigation.navigate(DEFAULT_TAB)
     }else{
-      navigation.navigate('ProfileQuestion', {...route.params, step: next, [step]: item})
+      navigation.navigate(RouteNames.PROFILE_QUESTION, {...route.params, step: next, [step]: item})
     }
-    
   }
 
   return (

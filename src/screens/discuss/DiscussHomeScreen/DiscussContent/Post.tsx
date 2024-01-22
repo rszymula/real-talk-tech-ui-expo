@@ -66,7 +66,7 @@ export function Post({ id, title, description, username, commentIds, createdTime
 
   const handleCommentsPress = () => {
     setCommentsExpanded(!commentsExpanded)
-    //navigation.navigate()
+    // navigation.navigate()
   }
 
   React.useEffect(() => {

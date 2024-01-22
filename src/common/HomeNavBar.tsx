@@ -3,20 +3,20 @@ import { Text, View, StyleSheet, Image, useWindowDimensions } from 'react-native
 import { colors } from '../context/themes';
 import { Button, ButtonType } from '../core/Button';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
-import { defaultTab } from '../constants';
+import { DEFAULT_TAB, RouteNames } from '../constants';
 
 
 const tabs = [
   {
-    routeName: "DiscussHome",
+    routeName: RouteNames.DISCUSS_HOME,
     title: "Discuss"
   },
   {
-    routeName: "DiscoverHome",
+    routeName: RouteNames.DISCOVER_HOME,
     title: "Discover"
   },
   {
-    routeName: "BuyerAIHome",
+    routeName: RouteNames.BUYER_AI_HOME,
     title: "Buyer AI"
   },
 ]
@@ -47,7 +47,7 @@ export function HomeNavBar(props){
   }
 
   const handleAddProfilePress = () => {
-    navigation.navigate("ProfileCreateHome")
+    navigation.navigate(RouteNames.PROFILE_CREATE_HOME)
   }
 
   return (

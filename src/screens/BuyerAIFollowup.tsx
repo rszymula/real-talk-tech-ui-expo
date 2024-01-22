@@ -3,7 +3,7 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { ButtonType, Button  } from '../core/Button';
 import { Card } from '../core/Card';
 import { InputBar } from '../core/InputBar';
-import { BUYERAI_PLACEHOLDER } from '../constants';
+import { BUYERAI_PLACEHOLDER, RouteNames } from '../constants';
 import { colors } from '../context/themes';
 import { getMainQuestions, getOtherQuestions, getFollowups } from '../services/BuyerIAService';
 
@@ -12,13 +12,11 @@ export function BuyerAIFollowup(props) {
   const { navigation, route } = props;
 
   const handleTalkToChat = (input) => {
-    navigation.navigate("BuyerAIMessenger", {question: route?.params?.question, input})
+    navigation.navigate(RouteNames.BUYER_AI_MESSENGER, {question: route?.params?.question, input})
   }
 
   const handleSelect = (followup) => {
-    console.log(`selected ${followup}`)
-    console.log(followup)
-    navigation.navigate("BuyerAIMessenger", {question: route?.params?.question, followup})
+    navigation.navigate(RouteNames.BUYER_AI_MESSENGER, {question: route?.params?.question, followup})
   }
 
   const followups = getFollowups(route?.params?.question?.id)
