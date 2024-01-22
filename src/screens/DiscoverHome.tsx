@@ -95,7 +95,7 @@ export function DiscoverHome(props){
         <Text style={{color: colors.textLowlight, margin: 8,}}>
           A long description
         </Text>
-        <Card styles={{marginBottom: 32, width: 500}}>
+        <Card styles={{marginBottom: 32, width: 512}}>
           {!!selected ? (<SingleView selected={selected} setViewSolo={setViewSolo} />)
           : (<ListView companies={companies} setViewSolo={setViewSolo}/>)}
         </Card>

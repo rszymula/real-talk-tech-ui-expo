@@ -50,7 +50,7 @@ export function DiscussHome(props){
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
+    padding: 16,
   },
   button: {
     // width: 256,

@@ -18,7 +18,7 @@ const Stack = createNativeStackNavigator();
 
 function Categories({currentCategory, handleCategoryPress}){
   return (
-    <View style={{marginLeft: 80}}>
+    <View>
       <Text style={styles.title}>CATEGORIES</Text>
       <View>
         {categories.map(category => {
@@ -61,16 +61,16 @@ function SideBar({navigation, Component, hasCategories}){
   //     </View>
   //   )
   // }
-
   return (
-    <View style={{backgroundColor: colors.background, flexDirection: 'row'}}>
-      <View style={{flexDirection: 'column', width: 256}}>
+    <View style={{borderWidth: 1, borderColor: 'red', backgroundColor: colors.background, flexDirection: 'row', justifyContent: 'space-between'}}>
+      <View style={{flexDirection: 'column', width: 192, borderWidth: 1, borderColor: 'yellow'}}>
         {hasCategories ? (
           <Categories currentCategory={currentCategory} handleCategoryPress={handleCategoryPress} />
           ) : <></>
         }
       </View>
       <Component navigation={navigation} currentCategory={currentCategory} />
+      <View style={{width: 32, borderWidth: 1, borderColor: 'yellow'}}></View>
     </View>
   )
 }
@@ -88,12 +88,12 @@ function navBarProvider(Component, hasCategories = false){
   const ComponentWithSideBar = sideBarProvider(Component, hasCategories)
   return ({navigation}) => {
     return (
-      <>
+      <View style={styles.rootContainer}>
         <HomeNavBar navigation={navigation} />
         <View style={styles.container}>
           <ComponentWithSideBar navigation={navigation} />
         </View>
-      </>
+      </View>
     )
   }
 }
@@ -144,11 +144,19 @@ export function Root(){
 }
 
 const styles = StyleSheet.create({
-  container: {
+  rootContainer: {
     backgroundColor: colors.background,
-    display: 'flex',
-    flexDirection: 'row',
+    padding: 32,
     height: "100%",
+    borderWidth: 1,
+    borderColor: 'purple',
+  },
+  container: {
+    // backgroundColor: colors.background,
+    // display: 'flex',
+    // flexDirection: 'row',
+    // justifyContent: 'space-around',
+    // margin: 32,
   },
   sidebar: {
     marginLeft: 256,
