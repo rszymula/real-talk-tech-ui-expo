@@ -21,14 +21,12 @@ function Categories({navigation, Component}){
   const [currentCategory, handleSetCurrentCategory] = React.useState<CategoryNames>(CategoryNames.HOME);
 
   const handleCategoryPress = (categoryInput: CategoryNames) => {
-    console.log('pressed', categoryInput)
     handleSetCurrentCategory(categoryInput);
   }
 
   return (
     <View style={{backgroundColor: colors.background, flexDirection: 'row'}}>
       <View style={{flexDirection: 'column'}}>
-        {categories.map(category => <Text style={{color: colors.textHighlight}}>{category.name}</Text>)}
         <Text style={styles.title}>CATEGORIES</Text>
         <View>
           {categories.map(category => {
@@ -41,9 +39,7 @@ function Categories({navigation, Component}){
           })}
         </View>
       </View>
-      {/* <Component {...props} currentCategory={currentCategory} /> */}
       <Component navigation={navigation} currentCategory={currentCategory} />
-      {/* {props.children({currentCategory})} */}
     </View>
   )
 }
@@ -54,9 +50,6 @@ function useSideBarProvider(Component, hasCategories = false){
   return ({navigation}) => {
     if(hasCategories){
       return (
-        // <Categories {...props} >
-        //   <Component />
-        // </Categories>
         <Categories navigation={navigation} Component={Component}/>
       )
     }
@@ -114,21 +107,6 @@ export const routes = [
 export function Root(){
   return (
     <>
-      {/* <NavigationContainer>
-          <Tab.Navigator screenOptions={{ headerShown: false }}>
-            {
-              screens.map(screen => {
-                return (
-                  <Tab.Screen
-                    name={screen.name}
-                    component={screen.component}
-                  />
-                );
-              })
-            }
-          </Tab.Navigator>
-      </NavigationContainer> */}
-
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
           {
@@ -145,11 +123,6 @@ export function Root(){
 }
 
 const styles = StyleSheet.create({
-  // container: {
-  //   width: "100%",
-  //   // borderColor: 'red',
-  //   // borderWidth: 2,
-  // }
   container: {
     backgroundColor: colors.background,
     display: 'flex',
