@@ -44,7 +44,6 @@ export function HomeNavBar(props){
 
   const handleTabPress = (tab) => {
     navigation.navigate(tab.routeName)
-    // setActiveTab(tab.routeName);
   }
 
   const handleAddProfilePress = () => {
@@ -52,41 +51,29 @@ export function HomeNavBar(props){
   }
 
   return (
-    <View style={styles.container}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', borderColor: 'red', borderWidth: 1}}>
-        <Image source={REALTALKTECH_WHITE} style={{width: 192, height: 24, borderColor: 'yellow', borderWidth: 1}}/>
-          <View style={styles.topBar}>
-            {
-              tabs.map(tab => {
-                return (
-                  <Button title={tab.title} onPress={() => handleTabPress(tab)} styles={styles.tabButton} type={tab.routeName === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC}/>
-                );
-              })
-            }
-          </View>
-        <Button title={"+"} onPress={handleAddProfilePress} type={ButtonType.BASIC} />
-      </View>
+    <View style={{flexDirection: 'row', justifyContent: 'space-between', borderColor: 'red', borderWidth: 1}}>
+      <Image source={REALTALKTECH_WHITE} style={{width: 192, height: 24, borderColor: 'yellow', borderWidth: 1}}/>
+        <View style={styles.topBar}>
+          {
+            tabs.map(tab => {
+              return (
+                <Button title={tab.title} onPress={() => handleTabPress(tab)} styles={styles.tabButton} type={tab.routeName === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC}/>
+              );
+            })
+          }
+        </View>
+      <Button title={"+"} onPress={handleAddProfilePress} type={ButtonType.BASIC} />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    // backgroundColor: colors.background,
-    // // flexDirection: 'row',
-    // padding: 32,
-    // borderWidth: 1,
-    // borderColor: 'purple'
-  },
   title: {
-    // paddingTop: 8,
-    // paddingBottom: 8,
     padding: 16,
     // borderWidth: 1,
     // borderColor: 'green'
   },
   body: {
-    // flexDirection: 'row',
     marginLeft: 32,
     borderWidth: 1,
     borderColor: 'red'
@@ -95,9 +82,6 @@ const styles = StyleSheet.create({
     width: 256,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    // marginLeft: 4,
-    // marginRight: 4,
-    // alignSelf: 'center',
     borderWidth: 1,
     borderColor: 'yellow'
   },

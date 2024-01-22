@@ -13,6 +13,8 @@ import { BuyerAIHome } from './screens/BuyerAIHome';
 import { colors } from './context/themes';
 import { CategoryNames, categories } from './constants';
 import { ButtonType, buttonTypetoStyle, Button } from './core/Button';
+import { ProfileCreateHome } from './screens/ProfileCreateHome';
+import { ProfileQuestion } from './screens/ProfileQuestion';
 
 const Stack = createNativeStackNavigator();
 
@@ -126,7 +128,15 @@ export const routes = [
   {
     name: "BuyerAIFollowup",
     component: navBarProvider(BuyerAIFollowup),
-  }
+  },
+  {
+    name: "ProfileCreateHome",
+    component: ProfileCreateHome,
+  },
+  {
+    name: "ProfileQuestion",
+    component: ProfileQuestion,
+  },
 ]
 
 export function Root(){

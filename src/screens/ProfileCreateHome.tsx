@@ -1,14 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TextInput } from 'react-native';
 import { ButtonType, Button } from '../core/Button';
-import { Card } from '../core/Card';
-import { InputBar } from '../core/InputBar';
-import { BUYERAI_PLACEHOLDER } from '../constants';
 import { colors } from '../context/themes';
-import { getMainQuestions, getOtherQuestions } from '../services/BuyerIAService';
-import { getCompanies } from '../services/DiscoverService';
-import { BuyerAIRouteNames } from './buyerai';
-import { BuyerAIMessenger } from './BuyerAIMessenger';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
 
 export function ProfileCreateHome({navigation}) {
@@ -29,15 +22,9 @@ export function ProfileCreateHome({navigation}) {
         <Text style={styles.title}>
             Setup your profile
           </Text>
-          <Text style={{color: colors.textLowlight, margin: 8,}}>
+          <Text style={{color: colors.textLowlight, margin: 8}}>
             spmething something something
           </Text>
-          {/* <InputBar onPress={undefined} placeholder={"Enter your first name"} title={undefined} />
-          <InputBar onPress={undefined} placeholder={"Enter your last name (optional)"} title={undefined}/>
-          <InputBar onPress={undefined} placeholder={"Create your username"} title={undefined} />
-          <InputBar onPress={undefined} placeholder={"Enter bio description"} title={undefined} numLines={3}/>
-           */}
-           {/* <View style={styles.inputContainer}> */}
             <TextInput 
               onChangeText={setFirstName}
               value={firstName}
@@ -62,8 +49,6 @@ export function ProfileCreateHome({navigation}) {
               placeholder={"Enter bio description"}
               style={styles.input}
             />
-            {/* <Text>fuuuck</Text>
-          </View> */}
           <Button title="Next Step" onPress={handleNextPress} styles={{marginTop: 8}}/>
       </View>
     </View>
@@ -71,10 +56,6 @@ export function ProfileCreateHome({navigation}) {
 }
 
 const styles = StyleSheet.create({
-  // inputContainer: {
-  //   borderColor: 'red',
-  //   borderWidth: 1,
-  // },
   input: {
     borderColor: colors.border,
     borderWidth: 1,

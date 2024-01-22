@@ -1,14 +1,8 @@
 import React from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TextInput } from 'react-native';
 import { ButtonType, Button } from '../core/Button';
-import { Card } from '../core/Card';
-import { InputBar } from '../core/InputBar';
-import { BUYERAI_PLACEHOLDER } from '../constants';
+import { BUYERAI_PLACEHOLDER, defaultTab } from '../constants';
 import { colors } from '../context/themes';
-import { getMainQuestions, getOtherQuestions } from '../services/BuyerIAService';
-import { getCompanies } from '../services/DiscoverService';
-import { BuyerAIRouteNames } from './buyerai';
-import { BuyerAIMessenger } from './BuyerAIMessenger';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
 
 const steps = {
@@ -37,7 +31,7 @@ export function ProfileQuestion({route, navigation}) {
   const handleNextPress = () => {
     console.log(next)
     if(!next){
-      navigation.navigate("Home")
+      navigation.navigate(defaultTab)
     }else{
       navigation.navigate('ProfileQuestion', {...route.params, step: next, [step]: item})
     }
@@ -67,10 +61,6 @@ export function ProfileQuestion({route, navigation}) {
 }
 
 const styles = StyleSheet.create({
-  // inputContainer: {
-  //   borderColor: 'red',
-  //   borderWidth: 1,
-  // },
   input: {
     borderColor: colors.border,
     borderWidth: 1,
