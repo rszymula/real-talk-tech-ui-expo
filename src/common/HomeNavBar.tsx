@@ -21,6 +21,16 @@ const tabs = [
   },
 ]
 
+const tabNames = tabs.map(tab => tab.routeName);
+
+function getMostRecentTabRoute(routes: Array<any>){
+
+  return routes?.reverse()?.find(route => {
+    console.log({tabNames, rn: route.name})
+    return tabNames.includes(route.name)
+  })?.name || ''
+}
+
 export function HomeNavBar(props){
 
   const layout = useWindowDimensions();
@@ -28,7 +38,9 @@ export function HomeNavBar(props){
   const {navigation} = props;
 
   const navState = navigation.getState()
-  const currentRouteName = navState.routes?.[navState.routes.length - 1]?.name ?? '';
+  const currentRouteName = getMostRecentTabRoute(navState.routes);
+
+  console.log({currentRouteName})
 
   const handleTabPress = (tab) => {
     navigation.navigate(tab.routeName)

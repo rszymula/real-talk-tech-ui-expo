@@ -43,59 +43,49 @@ export function BuyerAIMessenger(props) {
   }
 
   return (
-    <View style={styles.container}>
-      {/* <View style={{width: 500, alignItems: 'center'}}> */}
-      <View style={{marginLeft: 300}}></View>
-      <View style={{alignItems: 'center'}}>
-        <Text style={styles.title}>
-          Buyer AI
+    <View style={{alignItems: 'center'}}>
+      <Text style={styles.title}>
+        Buyer AI
+      </Text>
+      <Text style={{color: colors.textLowlight, margin: 8,}}>
+        Simplyfying Software Selection with Smarter Solutions
+      </Text>
+      <Card styles={{marginBottom: 32, padding: 16, marginTop: 8}}>
+        <Text style={{color: colors.textHighlight, alignSelf: 'center'}}>
+          You are now chatting with BuyerjourneyAI
         </Text>
-        <Text style={{color: colors.textLowlight, margin: 8,}}>
-          Simplyfying Software Selection with Smarter Solutions
-        </Text>
-        <Card styles={{marginBottom: 32, padding: 16, marginTop: 8}}>
-          <Text style={{color: colors.textHighlight, alignSelf: 'center'}}>
-            You are now chatting with BuyerjourneyAI
-          </Text>
-          {
-            messages.map(message => {
-              const styled = {
-                maxWidth: 256,
-                color: colors.textHighlight,
-                backgroundColor: colors.link,
-                fontSize: 12,
-                padding: 8,
-                marginTop: 16,
-                borderRadius: 4
-              };
-              return (
-                <>
-                  <Text style={[styled, message.userAuthor ? {alignSelf: 'flex-end', backgroundColor: colors.foreground, borderWidth: 1, borderColor: colors.link} : {}]}>
-                    {message.content}
-                  </Text>
-                </>
-              )
-            })
-          }
-          <InputBar
-            onPress={handleTalkToChat}
-            title={"^"}
-            placeholder={BUYERAI_PLACEHOLDER}
-            style={{marginTop: 16, width: 500}}
-          />
-        </Card>
-      </View>
+        {
+          messages.map(message => {
+            const styled = {
+              maxWidth: 256,
+              color: colors.textHighlight,
+              backgroundColor: colors.link,
+              fontSize: 12,
+              padding: 8,
+              marginTop: 16,
+              borderRadius: 4
+            };
+            return (
+              <>
+                <Text style={[styled, message.userAuthor ? {alignSelf: 'flex-end', backgroundColor: colors.foreground, borderWidth: 1, borderColor: colors.link} : {}]}>
+                  {message.content}
+                </Text>
+              </>
+            )
+          })
+        }
+        <InputBar
+          onPress={handleTalkToChat}
+          title={"^"}
+          placeholder={BUYERAI_PLACEHOLDER}
+          style={{marginTop: 16, width: 512}}
+        />
+      </Card>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.background,
-    display: 'flex',
-    flexDirection: 'row',
-    height: "100%",
-  },
   title: {
     color: colors.textHighlight,
     marginTop: 32,

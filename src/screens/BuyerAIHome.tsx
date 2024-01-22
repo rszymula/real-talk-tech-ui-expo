@@ -31,7 +31,6 @@ export function BuyerAIHome(props) {
 
   return (
     <View style={{width: 512}}>
-      {/* <View style={{width: 500, alignItems: 'center'}}> */}
       <View>
         <Text style={[styles.title, {alignSelf: 'center'}]}>
           Buyer AI
@@ -40,18 +39,6 @@ export function BuyerAIHome(props) {
           Simplyfying Software Selection with Smarter Solutions
         </Text>
         <Card>
-          {/* <View style={{flexDirection: 'row'}}>
-            <Card styles={{flexShrink: 1}}>
-              <Text style={{color: colors.textHighlight}}>
-                Where are you in your buying journey? lksdjflkdsjfldskfjsdlkfjsdlfksdjlfksdjlfkdsjlfkdsjflkdsjlfksjdlfksjdlfkjdslfkjdslkfjdslkfjdslkfjdslfkjsdlkfjdslfkjl
-              </Text>
-            </Card>
-            <Card styles={{flexShrink: 1}}>
-              <Text style={{color: colors.textHighlight}}>
-                Where are you in your buying journey? lksdjflkdsjfldskfjsdlkfjsdlfksdjlfksdjlfkdsjlfkdsjflkdsjlfksjdlfksjdlfkjdslfkjdslkfjdslkfjdslkfjdslfkjsdlkfjdslfkjl
-              </Text>
-            </Card>
-          </View> */}
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             {
               main.map((question, idx) => {
@@ -89,7 +76,6 @@ export function BuyerAIHome(props) {
             onPress={handleTalkToChat}
             title={"^"}
             placeholder={BUYERAI_PLACEHOLDER}
-            // style={{margin: 8}}
           />
         </Card>
       </View>
