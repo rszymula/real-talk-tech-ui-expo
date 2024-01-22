@@ -34,7 +34,7 @@ function Categories({currentCategory, handleCategoryPress}){
   )
 }
 
-function SideBar({navigation, route, Component, hasCategories}){
+function SideBar(props){
 
   const [currentCategory, setCurrentCategory] = React.useState<CategoryNames>(CategoryNames.HOME);
 
@@ -64,12 +64,12 @@ function SideBar({navigation, route, Component, hasCategories}){
   return (
     <View style={{marginTop: 16, borderWidth: 1, borderColor: 'red', backgroundColor: colors.background, flexDirection: 'row', justifyContent: 'space-between'}}>
       <View style={{flexDirection: 'column', width: 192, borderWidth: 1, borderColor: 'yellow'}}>
-        {hasCategories ? (
+        {props.hasCategories ? (
           <Categories currentCategory={currentCategory} handleCategoryPress={handleCategoryPress} />
           ) : <></>
         }
       </View>
-      <Component navigation={navigation} route={route} currentCategory={currentCategory} />
+      <props.Component {...props} currentCategory={currentCategory} />
       <View style={{width: 32, borderWidth: 1, borderColor: 'yellow'}}></View>
     </View>
   )
@@ -77,21 +77,21 @@ function SideBar({navigation, route, Component, hasCategories}){
 
 
 function sideBarProvider(Component, hasCategories = false){
-  return ({navigation, route}) => {
+  return (props) => {
     return (
-      <SideBar navigation={navigation} route={route} Component={Component} hasCategories={hasCategories}/>
+      <SideBar {...props} Component={Component} hasCategories={hasCategories}/>
     )
   }
 }
 
 function navBarProvider(Component, hasCategories = false){
   const ComponentWithSideBar = sideBarProvider(Component, hasCategories)
-  return ({navigation, route}) => {
+  return (props) => {
     return (
       <View style={styles.rootContainer}>
-        <HomeNavBar navigation={navigation} route={route} />
+        <HomeNavBar {...props} />
         <View style={styles.container}>
-          <ComponentWithSideBar navigation={navigation} route={route} />
+          <ComponentWithSideBar {...props} />
         </View>
       </View>
     )
