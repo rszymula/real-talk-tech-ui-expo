@@ -22,57 +22,23 @@ export function DiscussHome(props){
   console.log("Rendering Discuss")
 
   return (
-    <View style={styles.container}>
-      <Card styles={{width: 512}}>
-        <View style={styles.container}>
-          <InputBar 
-            onPress={(input) => {
-              navigation.navigate("DiscussCreatePost", { input })
-            }}
-            title={"Create Post"}
-            placeholder={INPUT_PLACEHOLDER}
+      <Card styles={{width: 512, padding: 16}}>
+        <InputBar 
+          onPress={(input) => {
+            navigation.navigate("DiscussCreatePost", { input })
+          }}
+          title={"Create Post"}
+          placeholder={INPUT_PLACEHOLDER}
+        />
+        <Separator />
+        <View>
+          <FlatList 
+            data={posts}
+            keyExtractor={(item) => `${item.id}`}
+            renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
+            ItemSeparatorComponent={() => <Separator />}
           />
-          <Separator />
-          <View>
-            <FlatList 
-              data={posts}
-              keyExtractor={(item) => `${item.id}`}
-              renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
-              ItemSeparatorComponent={() => <Separator />}
-            />
-          </View>
         </View>
       </Card>
-    </View>
   )
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-  button: {
-    // width: 256,
-    marginLeft: 16,
-  },
-  inputBarContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    // borderColor:'red',
-    // borderWidth: 2,
-    paddingLeft: 16,
-    paddingRight: 16,
-    paddingTop: 8,
-    paddingBottom: 8,
-    backgroundColor: colors.background,
-    borderRadius: 4,
-  },
-  input: {
-    color: colors.textRegular,
-    fontSize: 12,
-  },
-  card: {
-    marginBottom: 16,
-  }
-})

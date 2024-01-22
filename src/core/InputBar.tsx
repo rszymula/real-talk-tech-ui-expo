@@ -1,7 +1,5 @@
 import { View, TextInput, StyleSheet } from "react-native";
-import { DiscussRouteNames } from "../screens/discuss";
 import { Button, ButtonType } from "./Button";
-import { Card } from "./Card";
 import React from "react";
 import { colors } from "../context/themes";
 
@@ -14,7 +12,7 @@ export function InputBar({onPress, placeholder, title = null, style = {}, numLin
   }
 
   return (
-    <Card styles={[styles.card, style]}>
+    <View style={[styles.card, style]}>
       <View style={styles.inputBarContainer}>
         <TextInput 
           onChangeText={handleSetInput}
@@ -27,9 +25,10 @@ export function InputBar({onPress, placeholder, title = null, style = {}, numLin
           title={title}
           onPress={() => onPress(input)}
           type={ButtonType.BASIC}
+          styles={{marginLeft: 8}}
         />}
       </View>
-    </Card>
+    </View>
   )
 }
 
@@ -53,6 +52,8 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   card: {
-    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 4,
   },
 });
