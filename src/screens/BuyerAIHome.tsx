@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
   },
   title: {
     color: colors.textHighlight,
-    marginTop: 32,
     fontSize: 18,
     // fontWeight: 'bold',
   }

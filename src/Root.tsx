@@ -18,7 +18,7 @@ const Stack = createNativeStackNavigator();
 
 function Categories({currentCategory, handleCategoryPress}){
   return (
-    <View>
+    <View style={{marginLeft: 80}}>
       <Text style={styles.title}>CATEGORIES</Text>
       <View>
         {categories.map(category => {
@@ -66,10 +66,7 @@ function SideBar({navigation, Component, hasCategories}){
     <View style={{backgroundColor: colors.background, flexDirection: 'row'}}>
       <View style={{flexDirection: 'column', width: 256}}>
         {hasCategories ? (
-          <View>
-            <Text style={styles.title}>CATEGORIES</Text>
-            <Categories currentCategory={currentCategory} handleCategoryPress={handleCategoryPress} />
-          </View>
+          <Categories currentCategory={currentCategory} handleCategoryPress={handleCategoryPress} />
           ) : <></>
         }
       </View>

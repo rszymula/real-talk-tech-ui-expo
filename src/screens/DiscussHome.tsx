@@ -23,7 +23,7 @@ export function DiscussHome(props){
 
   return (
     <View style={styles.container}>
-      <Card styles={{width: 512, marginTop: 32}}>
+      <Card styles={{width: 512}}>
         <View style={styles.container}>
           <InputBar 
             onPress={(input) => {
@@ -50,7 +50,6 @@ export function DiscussHome(props){
 
 const styles = StyleSheet.create({
   container: {
-    margin: 16,
     padding: 8,
   },
   button: {
