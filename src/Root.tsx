@@ -34,7 +34,7 @@ function Categories({currentCategory, handleCategoryPress}){
   )
 }
 
-function SideBar({navigation, Component, hasCategories}){
+function SideBar({navigation, route, Component, hasCategories}){
 
   const [currentCategory, setCurrentCategory] = React.useState<CategoryNames>(CategoryNames.HOME);
 
@@ -62,14 +62,14 @@ function SideBar({navigation, Component, hasCategories}){
   //   )
   // }
   return (
-    <View style={{borderWidth: 1, borderColor: 'red', backgroundColor: colors.background, flexDirection: 'row', justifyContent: 'space-between'}}>
+    <View style={{marginTop: 16, borderWidth: 1, borderColor: 'red', backgroundColor: colors.background, flexDirection: 'row', justifyContent: 'space-between'}}>
       <View style={{flexDirection: 'column', width: 192, borderWidth: 1, borderColor: 'yellow'}}>
         {hasCategories ? (
           <Categories currentCategory={currentCategory} handleCategoryPress={handleCategoryPress} />
           ) : <></>
         }
       </View>
-      <Component navigation={navigation} currentCategory={currentCategory} />
+      <Component navigation={navigation} route={route} currentCategory={currentCategory} />
       <View style={{width: 32, borderWidth: 1, borderColor: 'yellow'}}></View>
     </View>
   )
@@ -77,21 +77,21 @@ function SideBar({navigation, Component, hasCategories}){
 
 
 function sideBarProvider(Component, hasCategories = false){
-  return ({navigation}) => {
+  return ({navigation, route}) => {
     return (
-      <SideBar navigation={navigation} Component={Component} hasCategories={hasCategories}/>
+      <SideBar navigation={navigation} route={route} Component={Component} hasCategories={hasCategories}/>
     )
   }
 }
 
 function navBarProvider(Component, hasCategories = false){
   const ComponentWithSideBar = sideBarProvider(Component, hasCategories)
-  return ({navigation}) => {
+  return ({navigation, route}) => {
     return (
       <View style={styles.rootContainer}>
-        <HomeNavBar navigation={navigation} />
+        <HomeNavBar navigation={navigation} route={route} />
         <View style={styles.container}>
-          <ComponentWithSideBar navigation={navigation} />
+          <ComponentWithSideBar navigation={navigation} route={route} />
         </View>
       </View>
     )

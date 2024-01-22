@@ -22,6 +22,7 @@ export function BuyerAIHome(props) {
   }
 
   const handleSelect = (question) => {
+    console.log("ZZ", question)
     navigation.navigate("BuyerAIFollowup", {question})
   }
 

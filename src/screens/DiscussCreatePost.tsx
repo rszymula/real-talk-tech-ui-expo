@@ -14,7 +14,9 @@ export function DiscussCreatePost(props){
   const [title, setTitle] = React.useState('');
   const [content, setContent] = React.useState('');
 
-  const { navigation } = props;
+  const { navigation, route } = props;
+
+  console.log("QQ", route)
 
   const handleCreatePost = () => {
     const postData  = {

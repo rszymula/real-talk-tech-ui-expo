@@ -11,6 +11,8 @@ export function BuyerAIFollowup(props) {
 
   const { navigation, route } = props;
 
+  console.log("WEWEWE", route)
+
   const handleTalkToChat = (input) => {
     navigation.navigate("BuyerAIMessenger", {question: route?.params?.question, input})
   }
