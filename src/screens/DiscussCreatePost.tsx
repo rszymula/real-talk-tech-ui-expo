@@ -34,8 +34,8 @@ export function DiscussCreatePost(props){
   }
 
   return (
-    <Card styles={{padding: 16}}>
-      <Card>
+    <Card styles={{width: 512}}>
+      <View style={styles.container}>
         <View style={styles.labeledInput}>
           <Text style={styles.label}>Category</Text>
           <TextInput 
@@ -45,9 +45,7 @@ export function DiscussCreatePost(props){
             placeholder={TEXT_PLACEHOLDER}
           />
         </View>
-      </Card>
-      <Card styles={{marginTop: 8}}>
-        <View style={styles.labeledInput}>
+        <View style={[styles.labeledInput, styles.item]}>
           <Text style={styles.label}>Title</Text>
           <TextInput 
             style={styles.input}
@@ -56,20 +54,18 @@ export function DiscussCreatePost(props){
             placeholder={TEXT_PLACEHOLDER}
           />
         </View>
-      </Card>
-      <Card styles={{marginTop: 8}}>
         <TextInput 
           onChangeText={setContent}
           value={content}
           multiline={true}
           numberOfLines={12}
-          style={styles.textbox}
+          style={[styles.textbox, styles.item]}
           placeholder={POST_PLACEHOLDER}
         />
-      </Card>
-      <View style={styles.buttonContainer}>
-        <Button title="Cancel" onPress={handleExit} type={ButtonType.REVERSE} />
-        <Button title="Create Post" onPress={handleCreatePost} />
+        <View style={[styles.buttonContainer, styles.item]}>
+          <Button title="Cancel" onPress={handleExit} type={ButtonType.REVERSE} />
+          <Button title="Create Post" onPress={handleCreatePost} />
+        </View>
       </View>
     </Card>
   )
@@ -77,12 +73,11 @@ export function DiscussCreatePost(props){
 
 
 const styles = StyleSheet.create({
-  card: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 4,
-    margin: 16,
-    backgroundColor: colors.foreground,
+  container: {
+    justifyContent: 'space-between',
+  },
+  item: {
+    marginTop: 8,
   },
   exit: {
     color: colors.textRegular,
@@ -93,6 +88,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: colors.input,
     borderRadius: 4,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   label: {
     padding: 16,
@@ -102,18 +99,18 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "100%",
-    marginLeft: 8,
+    paddingLeft: 8,
     color: colors.textLowlight,
   },
   textbox: {
-    // height: 200,
     color: colors.textLowlight,
     backgroundColor: colors.input,
     padding: 8,
     borderRadius: 4,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   buttonContainer: {
-    margin: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

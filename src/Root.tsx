@@ -24,7 +24,7 @@ export const routes = [
   },
   {
     name: RouteNames.DISCUSS_CREATE_POST,
-    component: sideBarProvider(DiscussCreatePost),
+    component: navBarProvider(DiscussCreatePost, false, false),
   },
   {
     name: RouteNames.DISCOVER_HOME,
@@ -142,12 +142,12 @@ function sideBarProvider(Component, hasCategories = false){
   }
 }
 
-function navBarProvider(Component, hasCategories = false){
+function navBarProvider(Component, hasCategories = false, hasTabs = true){
   const ComponentWithSideBar = sideBarProvider(Component, hasCategories)
   return (props) => {
     return (
       <View style={styles.rootContainer}>
-        <HomeNavBar {...props} />
+        <HomeNavBar {...props} hasTabs={hasTabs} />
         <View style={styles.container}>
           <ComponentWithSideBar {...props} />
         </View>

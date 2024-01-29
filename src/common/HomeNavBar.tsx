@@ -37,7 +37,7 @@ export function HomeNavBar(props){
 
   const layout = useWindowDimensions();
 
-  const {navigation} = props;
+  const {navigation, hasTabs = true} = props;
 
   const navState = navigation.getState()
   const currentRouteName = getMostRecentTabRoute(navState.routes);
@@ -55,7 +55,7 @@ export function HomeNavBar(props){
   return (
     <View style={styles.container}>
       <Image source={REALTALKTECH_WHITE} style={styles.title}/>
-        <View style={styles.topBar}>
+        {hasTabs && (<View style={styles.topBar}>
           {
             tabs.map(tab => {
               return (
@@ -63,7 +63,7 @@ export function HomeNavBar(props){
               );
             })
           }
-        </View>
+        </View>)}
       <Button title={"+"} onPress={handleAddProfilePress} type={ButtonType.BASIC} />
     </View>
   )
