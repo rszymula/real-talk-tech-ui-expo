@@ -63,4 +63,6 @@ export function getCompanies(page = 0, count = 5){
   return companies.filter((item, idx) => idx >= page * count && idx < (page + 1) * count);
 }
 
-
+export function getCompany(id){
+  return companies.filter(item => item.id === id);
+}

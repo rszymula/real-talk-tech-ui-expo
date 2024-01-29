@@ -15,6 +15,7 @@ import { CategoryNames, RouteNames, categories } from './constants';
 import { ButtonType, buttonTypetoStyle, Button } from './core/Button';
 import { ProfileCreateHome } from './screens/ProfileCreateHome';
 import { ProfileQuestion } from './screens/ProfileQuestion';
+import { DiscoverCompanyProfile } from './screens/DiscoverCompanyProfile';
 
 export const routes = [
   {
@@ -28,6 +29,10 @@ export const routes = [
   {
     name: RouteNames.DISCOVER_HOME,
     component: navBarProvider(DiscoverHome),
+  },
+  {
+    name: RouteNames.DISCOVER_COMPANY_PROFILE,
+    component: navBarProvider(DiscoverCompanyProfile),
   },
   {
     name: RouteNames.BUYER_AI_HOME,

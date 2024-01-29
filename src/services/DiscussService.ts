@@ -382,3 +382,92 @@ export function getPostsWithCommentIdsAndUpvotes(category: CategoryNames, page: 
 
   return postsWithCommentIdsAndUpvotes;
 }
+
+
+
+/*
+const returnedPosts = {
+  metadata: {  (we already know this stuff, but still nice to have)
+    categoryId: null,
+    userId: 1,
+    page: 0,
+    count: 4,
+  },
+  posts: [
+    {
+      id: 1,
+      user: {
+        id: 3,
+        username: "Janie",
+      },
+      categoryId: 1, (needed for the all categories call. For the specific categories calls, can be omitted but could keep it in for simplicity)
+      commentIds: [1, 2, 3, ....],
+      title: 'horses',
+      description: 'are cool',
+      upvotes: 5,
+      userVote: -1, (How current user votes on this post. Can be -1, 0, or 1. Have this come back as a nullable boolean?)
+      createdTimestamp: '2023-01-02',
+      updatedTimestamp: '2023-01-03',
+    },
+    {
+      id: 2,
+      user: {
+        id: 5,
+        username: "Bob",
+      },
+      categoryId: 2,  (needed for the all categories call. For the specific categories calls, can be omitted but could keep it in for simplicity)
+      commentIds: [8, 9, 23, 45, ....],
+      title: 'traveling is fun',
+      description: 'I like to travel',
+      upvotes: 5,
+      userUpvotes: 0, (How current user votes on this post. Can be -1, 0, or 1. Have this come back as a nullable boolean?)
+      createdTimestamp: '2023-01-02',
+      updatedTimestamp: '2023-01-03',
+    },
+    ...
+  ]
+
+
+}
+*/
+
+
+
+/*
+
+const mockComments = {
+  metadata: {  (we already know this stuff, but still nice to have)
+    postId: 1,
+    userId: 1,
+    page: 0,
+    count: 10,
+  },
+  comments: [
+    {
+      id: 1,
+      user: {
+        id: 8,
+        username: "Joey",
+      },
+      text: 'wow you are right',
+      upvotes: 82,
+      userUpvotes: 1, (How current user votes on this post. Can be -1, 0, or 1. Have this come back as a nullable boolean?)
+      createdTimestamp: '2023-01-02',
+      updatedTimestamp: '2023-01-02',
+    },
+    {
+      id: 2,
+      user: {
+        id: 18,
+        username: "Marisa",
+      },
+      text: 'they really are',
+      upvotes: 2,
+      userUpvotes: -1, (How current user votes on this post. Can be -1, 0, or 1. Have this come back as a nullable boolean?)
+      createdTimestamp: '2023-05-02',
+      updatedTimestamp: '2023-07-09',
+    },
+  ],
+};
+
+*/

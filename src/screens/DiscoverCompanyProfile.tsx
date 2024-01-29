@@ -5,16 +5,11 @@ import { Card } from '../core/Card';
 import { Separator } from '../core/Separator';
 import { RouteNames } from '../constants';
 import { colors } from '../context/themes';
-import { getCompanies } from '../services/DiscoverService';
+import { getCompanies, getCompany } from '../services/DiscoverService';
 
 
-function Company(props){
-  const { id, name, type, description, navigation} = props;
-
-  const handleOnPress = () => {
-    console.log("NAVZ")
-    navigation.navigate(RouteNames.DISCOVER_COMPANY_PROFILE, {companyId: id})
-  }
+function CompanyDetail(props){
+  const { name, type, description} = props;
 
   return (
     <View style={{flexDirection: 'row'}}>
@@ -24,12 +19,6 @@ function Company(props){
           onPress={() => {}}
           type={ButtonType.BASIC}
           styles={{height: 50, width: 100, border: 'none'}}
-        />
-        <Button
-          title={"View Profile"}
-          onPress={handleOnPress}
-          type={ButtonType.BASIC}
-          styles={{color: colors.textLowlight, marginTop: 8}}
         />
       </View>
       <View style={{flexDirection: 'column', marginLeft: 16}}>
@@ -41,31 +30,38 @@ function Company(props){
   );
 }
 
-function ListView({companies, navigation}){
-  return(
-    <SafeAreaView>
-      <FlatList
-        style={{backgroundColor: colors.foreground}}
-        data={companies}
-        keyExtractor={(item) => item.id}
-        renderItem={({item}) => <Company {...item} navigation={navigation} />}
-        ItemSeparatorComponent={() => <Separator style={{marginTop: 16, marginBottom: 16}} />}
+function SingleView({selected, navigation}){
+const handleBackPress = () => {
+    navigation.goBack();
+  }
+  return (
+    <View style={{margin: 16}}>
+      <CompanyDetail {...selected} style={{margin: 16}} />
+      <Separator />,
+      <Text style={{color: colors.textHighlight, fontSize: 12, marginTop: 4}}>{`HQ: `}</Text>
+      <Text style={{color: colors.textRegular, fontSize: 12, marginTop: 8}}>{`Total Offices: ${selected.offices}`}</Text>
+      <Text style={{color: colors.textLowlight, fontSize: 10, marginTop: 4}}>{`Local Employees : ${selected.localEmployees}`}</Text>
+      <Text style={{color: colors.textLowlight, fontSize: 10}}>{`Total Employees: ${selected.totalEmployees}`}</Text>
+      <Separator style={{marginTop: 16, marginBottom: 8}} />
+      <Button
+        title={"Back"}
+        onPress={handleBackPress}
+        type={ButtonType.BASIC}
+        styles={{color: colors.textLowlight, marginTop: 8 }}
       />
-    </SafeAreaView>
+    </View>
   )
 }
 
-export function DiscoverHome(props){
+export function DiscoverCompanyProfile(props){
 
-  const { navigation } = props;
+  const { navigation, companyId } = props;
+  const company = getCompany(companyId);
 
-  console.log("Rendering Discover")
-
-  const companies = getCompanies(0, 15);
+  console.log("Rendering Discover CP")
 
   return (
     <View style={styles.container}>
-    {/* <View style={{justifyContent: 'flex-end'}}> */}
       <View style={{width: 512, alignItems: 'center'}}>
         <Text style={styles.title}>
           Explore the market
@@ -74,7 +70,7 @@ export function DiscoverHome(props){
           A long description
         </Text>
         <Card styles={{marginBottom: 32, width: 512}}>
-          <ListView companies={companies} navigation={navigation} />
+          <SingleView selected={company} navigation={navigation} />
         </Card>
       </View>
     </View>
