@@ -19,9 +19,7 @@ function Comment({text, username, upvotes, createdTimestamp}) {
         <Text style={[styles.captionText, styles.categoryCaption]}>
           {`${username} | ${createdTimestamp}`}
         </Text>
-        {/* <Text>{createdTimestamp}</Text> */}
         <Text style={[styles.bodyText, styles.description]}>{text}</Text>
-        {/* <Text>{upvotes}</Text> */}
       </View>
     </>
   )
@@ -68,7 +66,6 @@ function Post({ id, title, description, username, commentIds, createdTimestamp, 
 
   const handleCommentsPress = () => {
     setCommentsExpanded(!commentsExpanded)
-    // navigation.navigate()
   }
 
   React.useEffect(() => {

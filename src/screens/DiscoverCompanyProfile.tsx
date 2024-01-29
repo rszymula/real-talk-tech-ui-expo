@@ -5,7 +5,8 @@ import { Card } from '../core/Card';
 import { Separator } from '../core/Separator';
 import { RouteNames } from '../constants';
 import { colors } from '../context/themes';
-import { getCompanies, getCompany } from '../services/DiscoverService';
+// import { getCompanies, getCompany } from '../services/DiscoverService';
+import { store } from '../store/basicStore';
 
 
 function CompanyDetail(props){
@@ -59,6 +60,8 @@ export function DiscoverCompanyProfile(props){
 
   const { navigation, route } = props;
   const { companyId } = route?.params;
+
+  const { getCompany } = store;
   const company = getCompany(companyId);
 
   return (

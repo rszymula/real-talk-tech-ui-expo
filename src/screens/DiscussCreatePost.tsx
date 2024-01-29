@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Pressable, TextInput, TouchableOpacity } from '
 import { ButtonType, Button  } from '../core/Button';
 import { Card } from '../core/Card';
 import { colors } from '../context/themes';
+import { store } from '../store/basicStore';
 
 
 const TEXT_PLACEHOLDER = 'Enter Text';
@@ -10,13 +11,13 @@ const POST_PLACEHOLDER = 'Enter your post';
 
 export function DiscussCreatePost(props){
 
+  const { createPost, getPostsWithCommentIdsAndUpvotes } = store;
+
   const [category, setCategory] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [content, setContent] = React.useState('');
 
   const { navigation, route } = props;
-
-  console.log("QQ", route)
 
   const handleCreatePost = () => {
     const postData  = {
@@ -26,6 +27,10 @@ export function DiscussCreatePost(props){
     };
     // make API call
     // if API call successful, call passed in function that updates state
+    // TODO use id, createdTimestamp, and updatedTimestamp from api call return
+    createPost({id: 999, title, description: content, category})
+    const posts = getPostsWithCommentIdsAndUpvotes(category, 0, 100)
+    console.log(posts)
     handleExit();
   }
 

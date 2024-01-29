@@ -5,15 +5,17 @@ import { Card } from '../core/Card';
 import { InputBar } from '../core/InputBar';
 import { BUYERAI_PLACEHOLDER, RouteNames } from '../constants';
 import { colors } from '../context/themes';
-import { getMainQuestions, getOtherQuestions } from '../services/BuyerIAService';
-import { getCompanies } from '../services/DiscoverService';
+// import { getMainQuestions, getOtherQuestions } from '../services/BuyerIAService';
+// import { getCompanies } from '../services/DiscoverService';
+import { store } from '../store/basicStore';
 
 
 export function BuyerAIHome(props) {
 
-  const companies = getCompanies()
-
   const { navigation } = props;
+
+  const { getCompanies, getMainQuestions, getOtherQuestions } = store;
+  const companies = getCompanies()
 
   const handleTalkToChat = (input) => {
     navigation.navigate(RouteNames.BUYER_AI_MESSENGER, {input})

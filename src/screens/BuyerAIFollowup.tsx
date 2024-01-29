@@ -5,11 +5,13 @@ import { Card } from '../core/Card';
 import { InputBar } from '../core/InputBar';
 import { BUYERAI_PLACEHOLDER, RouteNames } from '../constants';
 import { colors } from '../context/themes';
-import { getMainQuestions, getOtherQuestions, getFollowups } from '../services/BuyerIAService';
+//import { getMainQuestions, getOtherQuestions, getFollowups } from '../services/BuyerIAService';
+import { store } from '../store/basicStore';
 
 export function BuyerAIFollowup(props) {
 
   const { navigation, route } = props;
+  const { getFollowups } = store;
 
   const handleTalkToChat = (input) => {
     navigation.navigate(RouteNames.BUYER_AI_MESSENGER, {question: route?.params?.question, input})

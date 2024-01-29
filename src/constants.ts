@@ -71,6 +71,14 @@ export const categories = [
   },
 ];
 
+export enum CompanyType {
+  DATABASE = 'Database',
+  ANALYTICS = 'Analytics',
+  CLOUD = 'Cloud',
+  PERFORMANCE = 'Performance',
+};
+
+
 export const INPUT_PLACEHOLDER = 'Share your SaaS experiences with the community';
 
 export const BUYERAI_PLACEHOLDER = 'Message Buyer AI...';

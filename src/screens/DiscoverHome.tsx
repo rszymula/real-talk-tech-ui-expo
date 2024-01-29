@@ -5,14 +5,13 @@ import { Card } from '../core/Card';
 import { Separator } from '../core/Separator';
 import { RouteNames } from '../constants';
 import { colors } from '../context/themes';
-import { getCompanies } from '../services/DiscoverService';
-
+// import { getCompanies } from '../services/DiscoverService';
+import { store } from '../store/basicStore';
 
 function Company(props){
   const { id, name, type, description, navigation} = props;
 
   const handleOnPress = () => {
-    console.log("NAVZ")
     navigation.navigate(RouteNames.DISCOVER_COMPANY_PROFILE, {companyId: id})
   }
 
@@ -59,8 +58,7 @@ export function DiscoverHome(props){
 
   const { navigation } = props;
 
-  console.log("Rendering Discover")
-
+  const { getCompanies } = store;
   const companies = getCompanies(0, 15);
 
   return (
