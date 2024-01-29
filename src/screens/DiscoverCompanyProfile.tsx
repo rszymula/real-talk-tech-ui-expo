@@ -31,9 +31,13 @@ function CompanyDetail(props){
 }
 
 function SingleView({selected, navigation}){
-const handleBackPress = () => {
+
+  console.log("RSZ", selected)
+
+  const handleBackPress = () => {
     navigation.goBack();
   }
+
   return (
     <View style={{margin: 16}}>
       <CompanyDetail {...selected} style={{margin: 16}} />
@@ -55,8 +59,11 @@ const handleBackPress = () => {
 
 export function DiscoverCompanyProfile(props){
 
-  const { navigation, companyId } = props;
+  const { navigation, route } = props;
+  console.log("RZ", route)
+  const { companyId } = route?.params;
   const company = getCompany(companyId);
+  console.log("RZ2", companyId, company)
 
   console.log("Rendering Discover CP")
 
