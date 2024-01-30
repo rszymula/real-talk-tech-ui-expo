@@ -1,13 +1,53 @@
 import React from 'react';
-import { Text, View, StyleSheet, Pressable, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, Modal, StyleSheet, Pressable, TextInput, TouchableOpacity } from 'react-native';
 import { ButtonType, Button  } from '../core/Button';
 import { Card } from '../core/Card';
 import { colors } from '../context/themes';
 import { store } from '../store/basicStore';
+import { Dropdown } from '../core/Dropdown';
+import { CategoryNames, categories } from '../constants';
 
 
 const TEXT_PLACEHOLDER = 'Enter Text';
 const POST_PLACEHOLDER = 'Enter your post';
+
+function SelectedCategories(props){
+  return (
+    <View style={{flexDirection: 'column', justifyContent: 'space-around'}}>
+      {props.selectedCategories.map(item => (<Text>{item.name}</Text>))}
+    </View>
+  )
+}
+
+function DropdownModal(props) {
+  const [visible, setVisible] = React.useState(true);
+  const handlePress = () => {
+    console.log("PRESSZ")
+    setVisible(!visible)
+  }
+  return (
+    <View>
+      <Modal
+        animationType='slide'
+        transparent={false}
+        onRequestClose={() => {
+          setVisible(!visible)
+        }}
+        visible={visible}
+      >
+        <View>
+          <Text>Dropdown Modal</Text>
+          <Pressable 
+            onPress={handlePress}
+          >
+            <Text>Press Me to Close</Text>
+          </Pressable>
+        </View>
+      </Modal>
+    </View>
+  )
+}
+
 
 export function DiscussCreatePost(props){
 
@@ -17,7 +57,16 @@ export function DiscussCreatePost(props){
   const [title, setTitle] = React.useState('');
   const [content, setContent] = React.useState('');
 
+  const [showDropdown, setShowdropdown] = React.useState(false);
+  const [selectedCategories, setSelectedCategories] = React.useState([]);
+
+  // const showDropdown = category.length > 0
+
   const { navigation, route } = props;
+
+  const handleTypeCategory = (text) => {
+    setCategory(text)
+  }
 
   const handleCreatePost = () => {
     const postData  = {
@@ -34,22 +83,37 @@ export function DiscussCreatePost(props){
     handleExit();
   }
 
+  const onSelectCategory = (item) => {
+    console.log("SELZ", item)
+    setSelectedCategories(selectedCategories => [...selectedCategories, item])
+  }
+
   const handleExit = () => {
     navigation.goBack();
   }
 
+  // const handleCategoryFocus = (focus) => {
+  //   console.log("XYZ", focus)
+  //   // setShowdropdown(showDropdown => )
+  // }
+
   return (
     <Card styles={{width: 512}}>
       <View style={styles.container}>
-        <View style={styles.labeledInput}>
+        <View style={[styles.labeledInput, {zIndex: 100}]}>
+        {showDropdown && (<Dropdown items={categories} onSelect={onSelectCategory} style={styles.dropdown}/>)}
           <Text style={styles.label}>Category</Text>
           <TextInput 
-            style={styles.input}
-            onChangeText={setCategory}
+            style={[styles.input]}
+            onChangeText={handleTypeCategory}
             value={category}
             placeholder={TEXT_PLACEHOLDER}
+            onFocus={() => setShowdropdown(true)}
+            //onBlur={() => setShowdropdown(false)}
           />
         </View>
+        <SelectedCategories selectedCategories={selectedCategories}/>
+        <DropdownModal />
         <View style={[styles.labeledInput, styles.item]}>
           <Text style={styles.label}>Title</Text>
           <TextInput 
@@ -130,5 +194,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     fontSize: 12,
   },
-
+  dropdown: {
+    top: 48,
+    left: 96,
+  },
 })

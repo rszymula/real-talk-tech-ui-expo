@@ -37,6 +37,7 @@ export function BuyerAIMessenger(props) {
   const handleTalkToChat = (input) => {
     if(input?.length > 0) {
       const id = messages[messages.length - 1].id + 1;
+      // TODO shouln't it be setMessages(messages => [...messages, {id, userAuthor: true, content: input}])
       setMessages([...messages, {id, userAuthor: true, content: input}])
       fireAIEvent();
     }
