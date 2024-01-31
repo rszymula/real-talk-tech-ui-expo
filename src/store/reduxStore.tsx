@@ -35,13 +35,40 @@ export function createStore(reducer){
 //   }
 // }
 
-export function reducer(state = {count: 0}, action){
+const rootState = {
+  users: [],
+  usersLoading: false,
+  usersError: null,
+  posts: [],
+  postsLoading: false,
+  postsError: null,
+  comments: [],
+  commentsLoading: false,
+  commentsError: null,
+  companies: [],
+  companiesLoading: false,
+  companiesError: null,
+  // questions: [],
+  // usersLoading: false,
+  // usersError: null,
+  // followups: [],
+  // usersLoading: false,
+  // usersError: null,
+}
+
+export function reducer(state = rootState, action){
   console.log("R1", state)
   switch(action.type){
-    case 'INCREMENT':
-      return {...state, count: state.count + 1}
-    case 'DECREMENT':
-      return {...state, count: state.count - 1}
+    case 'GET_POSTS':
+      return {...state, posts: [...state.posts, action.payload]}
+    case 'GET_COMMENTS':
+      return {...state, comments: [...state.comments, action.payload]}
+    case 'GET_COMPANIES':
+      return {...state, companies: [...state.companies, action.payload]}
+    // case 'GET_QUESTIONS':
+    //   return {...state, questions: [...state.questions, action.payload]}
+    // case 'GET_FOLLOWUPS':
+    //   return {...state, followups: [...state.followups, action.payload]}
     default:
       return state
   }
