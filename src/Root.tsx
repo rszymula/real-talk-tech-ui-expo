@@ -17,6 +17,7 @@ import { ProfileCreateHome } from './screens/ProfileCreateHome';
 import { ProfileQuestion } from './screens/ProfileQuestion';
 import { DiscoverCompanyProfile } from './screens/DiscoverCompanyProfile';
 import { ReduxContext, connect, createStore, reducer } from './store/reduxStore';
+import { DiscoverList } from './screens/DiscoverList';
 
 export const routes = [
   {
@@ -30,6 +31,10 @@ export const routes = [
   {
     name: RouteNames.DISCOVER_HOME,
     component: navBarProvider(DiscoverHome),
+  },
+  {
+    name: RouteNames.DISCOVER_LIST,
+    component: navBarProvider(DiscoverList),
   },
   {
     name: RouteNames.DISCOVER_COMPANY_PROFILE,

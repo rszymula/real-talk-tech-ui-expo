@@ -7,27 +7,18 @@ import { RouteNames } from '../constants';
 import { colors } from '../context/themes';
 // import { getCompanies, getCompany } from '../services/DiscoverService';
 import { store } from '../store/basicStore';
+import { ListItem } from '../common/ListItem';
 
 
 function CompanyDetail(props){
   const { name, type, description} = props;
 
   return (
-    <View style={{flexDirection: 'row'}}>
-      <View style={{flexDirection: 'column'}}>
-        <Button
-          title={""}
-          onPress={() => {}}
-          type={ButtonType.BASIC}
-          styles={{height: 50, width: 100, border: 'none'}}
-        />
-      </View>
-      <View style={{flexDirection: 'column', marginLeft: 16}}>
-        <Text style={{color: colors.textHighlight}}>{name}</Text>
-        <Text style={{color: colors.textRegular, marginTop: 4}}>{type}</Text>
-        <Text style={{color: colors.textLowlight, fontSize: 12, marginTop: 4}}>{description}</Text>
-      </View>
-    </View>
+      <ListItem
+        heading={name}
+        subheading={type}
+        body={description}
+      />
   );
 }
 

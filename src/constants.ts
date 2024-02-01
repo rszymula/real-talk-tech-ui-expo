@@ -2,6 +2,7 @@ export enum RouteNames {
   DISCUSS_HOME = "DiscussHome",
   DISCUSS_CREATE_POST = "DiscussCreatePost",
   DISCOVER_HOME = "DiscoverHome",
+  DISCOVER_LIST = "DiscoverList",
   DISCOVER_COMPANY_PROFILE = "DiscoverCompanyProfile",
   BUYER_AI_HOME = "BuyerAIHome",
   BUYER_AI_FOLLOWUP = "BuyerAIFollowup",
@@ -28,6 +29,16 @@ export enum CategoryNames {
   FOUNDER = 'Founder',
   INVESTOR_VC = 'Investor/VC',
 };
+
+export enum ToolTypes {
+  SALES = 'Sales',
+  MARKETING = 'Marketing',
+  ANALYTICS_SOFTWARE = 'Analytics Tools & Software',
+  CAD_PLM = 'CAD & PLM',
+  COLLAB_PRODUCTIVITY = 'Collaboration & Productivity',
+  COMMERCE = 'Commerce',
+  // TODO add the rest
+}
 
 export const categories = [
   {
