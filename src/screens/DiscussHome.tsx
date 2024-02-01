@@ -6,7 +6,8 @@ import { InputBar } from '../core/InputBar';
 import { Separator } from '../core/Separator';
 import { RouteNames, INPUT_PLACEHOLDER } from '../constants';
 import { colors } from '../context/themes';
-import { getComments, getPostsWithCommentIdsAndUpvotes } from '../services/DiscussService';
+// import { getComments, getPostsWithCommentIdsAndUpvotes } from '../services/DiscussService';
+import { store } from '../store/basicStore';
 
 const POST_PAGE_OFFSET = 10;
 const COMMENT_OFFSET = 10;
@@ -39,7 +40,6 @@ function CommentsList({comments}){
         style={{borderLeftWidth: 0.5, borderColor: colors.border, paddingLeft: 24, marginTop: 12}}
         data={comments}
         renderItem={({item}) => {
-          console.log("xyz", item)
           return <Comment {...item}/>
         }}
         keyExtractor={(item) => item.id}
@@ -58,6 +58,8 @@ function CommentsList({comments}){
 
 function Post({ id, title, description, username, commentIds, createdTimestamp, currentCategory, navigation }){
 
+  const { getComments } = store;
+
   const commentCount = commentIds?.length || 0;
 
   const [commentsExpanded, setCommentsExpanded] = React.useState(false);
@@ -70,14 +72,14 @@ function Post({ id, title, description, username, commentIds, createdTimestamp, 
 
   React.useEffect(() => {
     if(commentsExpanded && comments.length === 0){
-      console.log("checkID", {id, page, COMMENT_OFFSET})
+      // console.log("checkID", {id, page, COMMENT_OFFSET})
       const mockComments = getComments(id, page, COMMENT_OFFSET);
-      console.log({id, page, COMMENT_OFFSET}, mockComments)
+      // console.log({id, page, COMMENT_OFFSET}, mockComments)
       setComments([...mockComments]);
     }
   }, [commentsExpanded])
   
-  console.log("render", comments, commentsExpanded)
+  // console.log("render", comments, commentsExpanded)
 
   const commentText = commentCount === 1 ? `${commentCount} Comment` : `${commentCount} Comments`;
 
@@ -103,6 +105,8 @@ function Post({ id, title, description, username, commentIds, createdTimestamp, 
 }
 
 export function DiscussHome(props){
+
+  const { getPostsWithCommentIdsAndUpvotes } = store;
 
   const [currentPage, setCurrentPage] = React.useState(0);
 

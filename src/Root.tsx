@@ -157,7 +157,7 @@ function navBarProvider(Component, hasCategories = false, hasTabs = true){
   }
 }
 
-export function Root2(){
+export function Root(){
   const store = createStore(reducer);
   return (
     <>
@@ -178,48 +178,48 @@ export function Root2(){
   );
 }
 
-export function B(props){
-  return (
-    <>
-      <Text>B1</Text>
-      <Text>{props.thing}</Text>
-      <Button onPress={() => props.inc()} title="inc" />
-      <Text>B2</Text>
-    </>
-  )
-}
-const mapStateToProps = function(state){
-  return ({
-    thing: state.count,
-  })
-}
-const mapDispatchToProps = function(dispatch){
-  return ({
-    inc: () => dispatch({type: "INCREMENT"})
-  })
-}
-const BR = connect(mapStateToProps, mapDispatchToProps)(B)
+// export function B(props){
+//   return (
+//     <>
+//       <Text>B1</Text>
+//       <Text>{props.thing}</Text>
+//       <Button onPress={() => props.inc()} title="inc" />
+//       <Text>B2</Text>
+//     </>
+//   )
+// }
+// const mapStateToProps = function(state){
+//   return ({
+//     thing: state.count,
+//   })
+// }
+// const mapDispatchToProps = function(dispatch){
+//   return ({
+//     inc: () => dispatch({type: "INCREMENT"})
+//   })
+// }
+// const BR = connect(mapStateToProps, mapDispatchToProps)(B)
 
-export function A(props){
-  return (
-    <>
-      <Text>A1</Text>
-      <BR/>
-      <Text>A2</Text>
-    </>
-  )
-}
+// export function A(props){
+//   return (
+//     <>
+//       <Text>A1</Text>
+//       <BR/>
+//       <Text>A2</Text>
+//     </>
+//   )
+// }
 
-export function Root(){
-  const store = createStore(reducer);
-  return (
-    <>
-      <ReduxContext.Provider value={store}>
-        <A/>
-      </ReduxContext.Provider>
-    </>
-  );
-}
+// export function Root2(){
+//   const store = createStore(reducer);
+//   return (
+//     <>
+//       <ReduxContext.Provider value={store}>
+//         <A/>
+//       </ReduxContext.Provider>
+//     </>
+//   );
+// }
 
 const styles = StyleSheet.create({
   rootContainer: {

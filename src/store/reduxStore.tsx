@@ -35,7 +35,7 @@ export function createStore(reducer){
 //   }
 // }
 
-const rootState = {
+const initialState = {
   users: [],
   usersLoading: false,
   usersError: null,
@@ -56,7 +56,7 @@ const rootState = {
   // usersError: null,
 }
 
-export function reducer(state = rootState, action){
+export function reducer(state = initialState, action){
   console.log("R1", state)
   switch(action.type){
     case 'GET_POSTS':
