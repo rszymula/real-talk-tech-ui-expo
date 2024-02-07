@@ -18,6 +18,10 @@ import { ProfileQuestion } from './screens/ProfileQuestion';
 import { DiscoverCompanyProfile } from './screens/DiscoverCompanyProfile';
 import { ReduxContext, connect, createStore, reducer } from './store/reduxStore';
 import { DiscoverList } from './screens/DiscoverList';
+import { ProfileUser } from './screens/ProfileUser';
+import { ProfileWelcome } from './screens/ProfileWelcome';
+import { ProfileLogin } from './screens/ProfileLogin';
+import { MarketplaceHome } from './screens/MarketplaceHome';
 
 export const routes = [
   {
@@ -41,6 +45,10 @@ export const routes = [
     component: navBarProvider(DiscoverCompanyProfile),
   },
   {
+    name: RouteNames.MARKETPLACE_HOME,
+    component: navBarProvider(MarketplaceHome),
+  },
+  {
     name: RouteNames.BUYER_AI_HOME,
     component: navBarProvider(BuyerAIHome),
   },
@@ -51,6 +59,18 @@ export const routes = [
   {
     name: RouteNames.BUYER_AI_FOLLOWUP,
     component: navBarProvider(BuyerAIFollowup),
+  },
+  {
+    name: RouteNames.PROFILE_USER,
+    component: navBarProvider(ProfileUser),
+  },
+  {
+    name: RouteNames.PROFILE_WELCOME,
+    component: ProfileWelcome,
+  },
+  {
+    name: RouteNames.PROFILE_LOGIN,
+    component: ProfileLogin,
   },
   {
     name: RouteNames.PROFILE_CREATE_HOME,

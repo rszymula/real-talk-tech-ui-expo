@@ -19,34 +19,34 @@ function SelectedCategories(props){
   )
 }
 
-function DropdownModal(props) {
-  const [visible, setVisible] = React.useState(true);
-  const handlePress = () => {
-    console.log("PRESSZ")
-    setVisible(!visible)
-  }
-  return (
-    <View>
-      <Modal
-        animationType='slide'
-        transparent={false}
-        onRequestClose={() => {
-          setVisible(!visible)
-        }}
-        visible={visible}
-      >
-        <View>
-          <Text>Dropdown Modal</Text>
-          <Pressable 
-            onPress={handlePress}
-          >
-            <Text>Press Me to Close</Text>
-          </Pressable>
-        </View>
-      </Modal>
-    </View>
-  )
-}
+// function DropdownModal(props) {
+//   const [visible, setVisible] = React.useState(true);
+//   const handlePress = () => {
+//     console.log("PRESSZ")
+//     setVisible(!visible)
+//   }
+//   return (
+//     <View>
+//       <Modal
+//         animationType='slide'
+//         transparent={false}
+//         onRequestClose={() => {
+//           setVisible(!visible)
+//         }}
+//         visible={visible}
+//       >
+//         <View>
+//           <Text>Dropdown Modal</Text>
+//           <Pressable 
+//             onPress={handlePress}
+//           >
+//             <Text>Press Me to Close</Text>
+//           </Pressable>
+//         </View>
+//       </Modal>
+//     </View>
+//   )
+// }
 
 
 export function DiscussCreatePost(props){
@@ -113,7 +113,7 @@ export function DiscussCreatePost(props){
           />
         </View>
         <SelectedCategories selectedCategories={selectedCategories}/>
-        <DropdownModal />
+        {/* <DropdownModal /> */}
         <View style={[styles.labeledInput, styles.item]}>
           <Text style={styles.label}>Title</Text>
           <TextInput 

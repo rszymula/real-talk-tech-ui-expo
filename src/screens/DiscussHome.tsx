@@ -114,24 +114,24 @@ export function DiscussHome(props){
   const posts = getPostsWithCommentIdsAndUpvotes(currentCategory, 0, POST_PAGE_OFFSET);
 
   return (
-      <Card styles={{width: 512}}>
-        <InputBar 
-          onPress={(input) => {
-            navigation.navigate(RouteNames.DISCUSS_CREATE_POST, { input })
-          }}
-          title={"Create Post"}
-          placeholder={INPUT_PLACEHOLDER}
+    <Card styles={{width: 512}}>
+      <InputBar 
+        onPress={(input) => {
+          navigation.navigate(RouteNames.DISCUSS_CREATE_POST, { input })
+        }}
+        title={"Create Post"}
+        placeholder={INPUT_PLACEHOLDER}
+      />
+      <Separator style={{marginTop: 16}} />
+      <View>
+        <FlatList 
+          data={posts}
+          keyExtractor={(item) => `${item.id}`}
+          renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
+          ItemSeparatorComponent={() => <Separator />}
         />
-        <Separator style={{marginTop: 16}} />
-        <View>
-          <FlatList 
-            data={posts}
-            keyExtractor={(item) => `${item.id}`}
-            renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
-            ItemSeparatorComponent={() => <Separator />}
-          />
-        </View>
-      </Card>
+      </View>
+    </Card>
   )
 }
 

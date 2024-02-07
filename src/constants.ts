@@ -4,9 +4,13 @@ export enum RouteNames {
   DISCOVER_HOME = "DiscoverHome",
   DISCOVER_LIST = "DiscoverList",
   DISCOVER_COMPANY_PROFILE = "DiscoverCompanyProfile",
+  MARKETPLACE_HOME = "MarketplaceHome",
   BUYER_AI_HOME = "BuyerAIHome",
   BUYER_AI_FOLLOWUP = "BuyerAIFollowup",
   BUYER_AI_MESSENGER = "BuyerAIMessenger",
+  PROFILE_USER = "ProfileUser",
+  PROFILE_WELCOME = "ProfileWelcome",
+  PROFILE_LOGIN = "ProfileLogin",
   PROFILE_CREATE_HOME = "ProfileCreateHome",
   PROFILE_QUESTION = "ProfileQuestion",
 };

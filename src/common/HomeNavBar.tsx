@@ -16,17 +16,21 @@ const tabs = [
     title: "Discover"
   },
   {
+    routeName: RouteNames.MARKETPLACE_HOME,
+    title: "Marketplace",
+  },
+  {
     routeName: RouteNames.BUYER_AI_HOME,
     title: "Buyer AI"
   },
 ]
 
-const tabNames = tabs.map(tab => tab.routeName);
+const navRouteNames = [...tabs.map(tab => tab.routeName), RouteNames.PROFILE_USER, RouteNames.PROFILE_CREATE_HOME];
 
-function getMostRecentTabRoute(routes: Array<any>){
+function getMostRecentNavRoute(routes: Array<any>){
   // using routes?.reverse()?.find does not work, since it seems to first sort and then do binary search. We need it sorted as it wsa to start
   for(let i = routes.length - 1; i < routes.length; i--){
-    if(tabNames.includes(routes[i].name)){
+    if(navRouteNames.includes(routes[i].name)){
       return routes[i].name
     }
   }
@@ -40,7 +44,7 @@ export function HomeNavBar(props){
   const {navigation, hasTabs = true} = props;
 
   const navState = navigation.getState()
-  const currentRouteName = getMostRecentTabRoute(navState.routes);
+  const currentRouteName = getMostRecentNavRoute(navState.routes);
 
   console.log({currentRouteName})
 
@@ -48,8 +52,12 @@ export function HomeNavBar(props){
     navigation.navigate(tab.routeName)
   }
 
+  const handleViewProfilePress = () => {
+    navigation.navigate(RouteNames.PROFILE_USER)
+  }
+
   const handleAddProfilePress = () => {
-    navigation.navigate(RouteNames.PROFILE_CREATE_HOME)
+    navigation.navigate(RouteNames.PROFILE_WELCOME)
   }
 
   return (
@@ -64,7 +72,10 @@ export function HomeNavBar(props){
             })
           }
         </View>)}
-      <Button title={"+"} onPress={handleAddProfilePress} type={ButtonType.BASIC} />
+      <View style={{flexDirection: 'row'}}>
+        <Button title={"P"} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
+        <Button title={"+"} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
+      </View>
     </View>
   )
 }
@@ -99,6 +110,7 @@ const styles = StyleSheet.create({
     paddingRight: 4,
     paddingTop: 4,
     paddingBottom: 4,
+    margin: 4,
     borderRadius: 2,
     fontSize: 12,
   },

@@ -5,15 +5,19 @@ import { colors } from '../context/themes';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
 import { RouteNames } from '../constants';
 
-export function ProfileCreateHome({navigation}) {
+export function ProfileCreateHome({route, navigation}) {
+
+  console.log("ESPECIALLY you")
 
   const [firstName, setFirstName] = React.useState('');
   const [lastName, setLastName] = React.useState('');
   const [username, setUsername] = React.useState('');
   const [bio, setBio] = React.useState('');
 
+  const { email, password } = route?.params;
+
   const handleNextPress = () => {
-    navigation.navigate(RouteNames.PROFILE_QUESTION, {firstName, lastName, username, bio, step: "Industry"})
+    navigation.navigate(RouteNames.PROFILE_QUESTION, {email, password, firstName, lastName, username, bio, step: "Industry"})
   }
 
   return (
@@ -24,7 +28,7 @@ export function ProfileCreateHome({navigation}) {
             Setup your profile
           </Text>
           <Text style={{color: colors.textLowlight, margin: 8}}>
-            spmething something something
+            Choose to join anonymously or as yourself
           </Text>
             <TextInput 
               onChangeText={setFirstName}

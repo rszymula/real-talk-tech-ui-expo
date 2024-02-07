@@ -36,9 +36,10 @@ export function createStore(reducer){
 // }
 
 const initialState = {
+  userId: -1, 
   users: [],
-  usersLoading: false,
-  usersError: null,
+  userLoading: false,
+  userError: null,
   posts: [],
   postsLoading: false,
   postsError: null,

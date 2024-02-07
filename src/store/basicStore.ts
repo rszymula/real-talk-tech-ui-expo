@@ -6,10 +6,11 @@ import { mockComments, mockPostUpvotes, mockPosts, mockUsers } from "../mocks/di
 
 function Store(){
 
-  // const postsStore = []
-  const postsStore = mockPosts
+  const userId = 1
   // const usersStore = []
   const usersStore = mockUsers
+  // const postsStore = []
+  const postsStore = mockPosts
   // const commentsStore = []
   const commentsStore = mockComments
   // const postUpvotesStore = []
@@ -98,8 +99,13 @@ function Store(){
     postsStore.push(post)
   }
 
+  function getUser(){
+    const user = usersStore.find(user => user.id === userId)
+    return user
+  }
 
-  return { getPostsWithCommentIdsAndUpvotes, getComments, getCompanies, getCompany, getMainQuestions, getOtherQuestions, getFollowups, createPost }
+
+  return { getPostsWithCommentIdsAndUpvotes, getComments, getCompanies, getCompany, getMainQuestions, getOtherQuestions, getFollowups, createPost, getUser }
 }
 
 export const store = Store();
