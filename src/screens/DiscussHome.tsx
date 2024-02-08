@@ -4,10 +4,12 @@ import { TabView, SceneMap } from 'react-native-tab-view';
 import { Card } from '../core/Card';
 import { InputBar } from '../core/InputBar';
 import { Separator } from '../core/Separator';
-import { RouteNames, INPUT_PLACEHOLDER } from '../constants';
+import { RouteNames, INPUT_PLACEHOLDER, CategoryNames } from '../constants';
 import { colors } from '../context/themes';
 // import { getComments, getPostsWithCommentIdsAndUpvotes } from '../services/DiscussService';
 import { store } from '../store/basicStore';
+import { connect } from '../store/reduxStore';
+import { mockFeedResponse } from '../mocks/discussMocks';
 
 const POST_PAGE_OFFSET = 10;
 const COMMENT_OFFSET = 10;
@@ -104,14 +106,27 @@ function Post({ id, title, description, username, commentIds, createdTimestamp, 
   )
 }
 
-export function DiscussHome(props){
+function RawDiscussHome(props){
 
-  const { getPostsWithCommentIdsAndUpvotes } = store;
+  const {currentCategory, navigation, posts, get} = props
+  const postsByCategory = posts[currentCategory]
 
-  const [currentPage, setCurrentPage] = React.useState(0);
+  console.log("PZ", posts, currentCategory)
 
-  const { currentCategory, navigation } = props;
-  const posts = getPostsWithCommentIdsAndUpvotes(currentCategory, 0, POST_PAGE_OFFSET);
+  React.useEffect(() => {
+    console.log("BZ", currentCategory)
+    const filtered = currentCategory === CategoryNames.HOME ? 
+      mockFeedResponse :
+      mockFeedResponse.filter(item => item.categories.includes(currentCategory))
+    const data = {
+      [currentCategory]: filtered
+    }
+    get(data);
+  }, [currentCategory])
+
+  // const { getPostsWithCommentIdsAndUpvotes } = store;
+  // const [currentPage, setCurrentPage] = React.useState(0);
+  // const posts = getPostsWithCommentIdsAndUpvotes(currentCategory, 0, POST_PAGE_OFFSET);
 
   return (
     <Card styles={{width: 512}}>
@@ -125,7 +140,7 @@ export function DiscussHome(props){
       <Separator style={{marginTop: 16}} />
       <View>
         <FlatList 
-          data={posts}
+          data={postsByCategory}
           keyExtractor={(item) => `${item.id}`}
           renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
           ItemSeparatorComponent={() => <Separator />}
@@ -134,6 +149,8 @@ export function DiscussHome(props){
     </Card>
   )
 }
+
+export const DiscussHome = connect((state) => ({posts: state.posts}), (dispatch) => ({get: (data) => dispatch({type: "GET_POSTS", payload: data})}))(RawDiscussHome);
 
 const styles = StyleSheet.create({
   container: {

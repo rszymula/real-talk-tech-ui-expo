@@ -61,7 +61,23 @@ export function reducer(state = initialState, action){
   console.log("R1", state)
   switch(action.type){
     case 'GET_POSTS':
-      return {...state, posts: [...state.posts, action.payload]}
+      return {
+        ...state,
+        posts: {
+          ...state.posts,
+          ...action.payload,
+        }
+      }
+      // return {
+      //   ...state,
+      //   posts: {
+      //     ...state.posts,
+      //     [action.payload.category]:[
+      //       ...state.posts[action.payload.category],
+      //       action.payload.data
+      //     ]
+      //   }
+      // }
     case 'GET_COMMENTS':
       return {...state, comments: [...state.comments, action.payload]}
     case 'GET_COMPANIES':

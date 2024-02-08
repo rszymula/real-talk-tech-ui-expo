@@ -338,3 +338,64 @@ export const mockCommentUpvotes = [
     updatedTimestamp: '2023-01-03',
   },
 ];
+
+
+export const mockFeedResponse = [
+  {
+    "id" : 41,
+    "title" : "Mock title 41",
+    "body" : "Mock body 41",
+    "user" : {
+      "id" : 2,
+      "username" : "test_user"
+    },
+    "vendors" : [
+      "vendor3"
+    ],
+    "categories" : [
+      "Engineering"
+    ],
+    "commentCount" : 0,
+    "upvoteCount" : 0,
+    "userUpvote" : null,
+    "createdTimestamp" : "2024-02-07T21:05:15.286000",
+  },
+  {
+    "id" : 42,
+    "title" : "Mock title 42",
+    "body" : "Mock body 42",
+    "user" : {
+      "id" : 2,
+      "username" : "test_user"
+    },
+    "vendors" : [
+      "vendor3"
+    ],
+    "categories" : [
+      "Engineering"
+    ],
+    "commentCount" : 0,
+    "upvoteCount" : 0,
+    "userUpvote" : null,
+    "createdTimestamp" : "2024-02-07T21:05:15.286000",
+  },
+  {
+    "id" : 43,
+    "title" : "Mock title 43",
+    "body" : "Mock body 43",
+    "user" : {
+      "id" : 2,
+      "username" : "test_user"
+    },
+    "vendors" : [
+      "vendor3"
+    ],
+    "categories" : [
+      "Operations"
+    ],
+    "commentCount" : 0,
+    "upvoteCount" : 0,
+    "userUpvote" : null,
+    "createdTimestamp" : "2024-02-07T21:05:15.286000",
+  },
+]
