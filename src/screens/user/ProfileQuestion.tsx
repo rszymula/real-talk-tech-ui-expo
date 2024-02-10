@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TextInput } from 'react-native';
-import { ButtonType, Button } from '../core/Button';
-import { BUYERAI_PLACEHOLDER, DEFAULT_TAB, RouteNames } from '../constants';
-import { colors } from '../context/themes';
+import { ButtonType, Button } from '../../core/Button';
+import { BUYERAI_PLACEHOLDER, DEFAULT_TAB, RouteNames } from '../../constants';
+import { colors } from '../../context/themes';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
 
 enum ProfileStep {

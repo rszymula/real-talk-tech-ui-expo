@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TextInput } from 'react-native';
-import { ButtonType, Button } from '../core/Button';
-import { colors } from '../context/themes';
+import { ButtonType, Button } from '../../core/Button';
+import { colors } from '../../context/themes';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
-import { RouteNames } from '../constants';
+import { RouteNames } from '../../constants';
 
 export function ProfileCreateHome({route, navigation}) {
 

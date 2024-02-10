@@ -1,27 +1,21 @@
 import React from 'react';
 import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
-import { ButtonType, Button } from '../core/Button';
-import { Card } from '../core/Card';
-import { Separator } from '../core/Separator';
-import { RouteNames } from '../constants';
-import { colors } from '../context/themes';
+import { ButtonType, Button } from '../../core/Button';
+import { Card } from '../../core/Card';
+import { Separator } from '../../core/Separator';
+import { RouteNames } from '../../constants';
+import { colors } from '../../context/themes';
 // import { getCompanies } from '../services/DiscoverService';
-import { store } from '../store/basicStore';
-import { ListItem } from '../common/ListItem';
-import { Link } from '../core/Link';
-import { getCompaniesWithPromos } from '../services/MarketplaceService';
+import { store } from '../../store/basicStore';
+import { ListItem } from '../../common/ListItem';
+import { Link } from '../../core/Link';
 
 function Company(props){
-  const { id, name, type, description, previous, current, units, navigation} = props;
+  const { id, name, type, description, navigation} = props;
 
   const handleOnPress = () => {
     navigation.navigate(RouteNames.DISCOVER_COMPANY_PROFILE, {companyId: id})
   }
-
-  const percentage = (previous - current) / previous
-  const off = `${percentage?.toFixed(2) || ''}% off`
-  const cur = `$${current} ${units}`
-  const prev = `$${previous} ${units}`
 
   return (
     <ListItem
@@ -30,13 +24,7 @@ function Company(props){
       body={description}
       buttonLabel="View Profile"
       onPress={handleOnPress}
-    >
-      <View style={{alignItems: 'flex-end'}}>
-        <Text style={{color: colors.link}}>{off}</Text>
-        <Text style={{color: colors.textRegular, marginTop: 4}}>{cur}</Text>
-        <Text style={{color: colors.textLowlight, fontSize: 12, marginTop: 4}}>{prev}</Text>
-      </View>
-    </ListItem>
+    />
   );
 }
 
@@ -54,29 +42,42 @@ function ListView({companies, navigation}){
   )
 }
 
-export function MarketplaceList(props){
+export function DiscoverList(props){
 
   const { navigation } = props;
 
   const { getCompanies } = store;
-  const companies = getCompaniesWithPromos(0, 5)
+  const companies = getCompanies(0, 15);
+
+  const handleCreateServiceProfilePress = () => {
+    // TODO
+  }
 
   return (
     <View style={styles.container}>
     {/* <View style={{justifyContent: 'flex-end'}}> */}
       <View style={{width: 512, alignItems: 'center'}}>
         <Text style={styles.title}>
-          Marketplace
+          Explore the market
         </Text>
         <Text style={{color: colors.textLowlight, margin: 8}}>
-          Premium listings and deals for the community
+          A long description
         </Text>
+        {/* <View style={{margin: 8, flexDirection: 'row'}}>
+          <Text style={{color: colors.textLowlight}}>
+            Don't see your service?
+          </Text>
+          <Text style={{color: colors.link, marginLeft: 4}}>
+            Create a service profile
+          </Text>
+        </View> */}
+        <Link style={{margin: 8}} textLeft="Don't see your service?" textLink="Create a service profile" onPress={handleCreateServiceProfilePress} />
         <Card styles={{marginBottom: 32, width: 512}}>
           <ListView companies={companies} navigation={navigation} />
         </Card>
       </View>
     </View>
-)
+  )
 }
 
 const styles = StyleSheet.create({

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, View, Modal, StyleSheet, Pressable, TextInput, TouchableOpacity } from 'react-native';
-import { ButtonType, Button  } from '../core/Button';
-import { Card } from '../core/Card';
-import { colors } from '../context/themes';
-import { store } from '../store/basicStore';
-import { Dropdown } from '../core/Dropdown';
-import { CategoryNames, categories } from '../constants';
+import { ButtonType, Button  } from '../../core/Button';
+import { Card } from '../../core/Card';
+import { colors } from '../../context/themes';
+import { store } from '../../store/basicStore';
+import { Dropdown } from '../../core/Dropdown';
+import { CategoryNames, categories } from '../../constants';
 
 
 const TEXT_PLACEHOLDER = 'Enter Text';

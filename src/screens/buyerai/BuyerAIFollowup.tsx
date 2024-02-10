@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { ButtonType, Button  } from '../core/Button';
-import { Card } from '../core/Card';
-import { InputBar } from '../core/InputBar';
-import { BUYERAI_PLACEHOLDER, RouteNames } from '../constants';
-import { colors } from '../context/themes';
+import { ButtonType, Button  } from '../../core/Button';
+import { Card } from '../../core/Card';
+import { InputBar } from '../../core/InputBar';
+import { BUYERAI_PLACEHOLDER, RouteNames } from '../../constants';
+import { colors } from '../../context/themes';
 //import { getMainQuestions, getOtherQuestions, getFollowups } from '../services/BuyerIAService';
-import { store } from '../store/basicStore';
+import { store } from '../../store/basicStore';
 
 export function BuyerAIFollowup(props) {
 

@@ -4,24 +4,24 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useContext } from 'react';
 import { HomeNavBar } from './common/HomeNavBar';
-import { BuyerAIFollowup } from './screens/BuyerAIFollowup';
-import { BuyerAIMessenger } from './screens/BuyerAIMessenger';
-import { DiscoverHome } from './screens/DiscoverHome';
-import { DiscussCreatePost } from './screens/DiscussCreatePost';
-import { DiscussHome } from './screens/DiscussHome';
-import { BuyerAIHome } from './screens/BuyerAIHome';
+import { BuyerAIFollowup } from './screens/buyerai/BuyerAIFollowup';
+import { BuyerAIMessenger } from './screens/buyerai/BuyerAIMessenger';
+import { DiscoverHome } from './screens/discover/DiscoverHome';
+import { DiscussCreatePost } from './screens/discuss/DiscussCreatePost';
+import { DiscussHome } from './screens/discuss/DiscussHome';
+import { BuyerAIHome } from './screens/buyerai/BuyerAIHome';
 import { colors } from './context/themes';
 import { CategoryNames, RouteNames, categories } from './constants';
 import { ButtonType, buttonTypetoStyle, Button } from './core/Button';
-import { ProfileCreateHome } from './screens/ProfileCreateHome';
-import { ProfileQuestion } from './screens/ProfileQuestion';
-import { DiscoverCompanyProfile } from './screens/DiscoverCompanyProfile';
+import { ProfileCreateHome } from './screens/user/ProfileCreateHome';
+import { ProfileQuestion } from './screens/user/ProfileQuestion';
+import { DiscoverCompanyProfile } from './screens/discover/DiscoverCompanyProfile';
 import { ReduxContext, connect, createStore, reducer } from './store/reduxStore';
-import { DiscoverList } from './screens/DiscoverList';
-import { ProfileUser } from './screens/ProfileUser';
-import { ProfileWelcome } from './screens/ProfileWelcome';
-import { ProfileLogin } from './screens/ProfileLogin';
-import { MarketplaceHome } from './screens/MarketplaceHome';
+import { DiscoverList } from './screens/discover/DiscoverList';
+import { ProfileUser } from './screens/user/ProfileUser';
+import { ProfileWelcome } from './screens/user/ProfileWelcome';
+import { ProfileLogin } from './screens/user/ProfileLogin';
+import { MarketplaceHome } from './screens/marketplace/MarketplaceHome';
 
 export const routes = [
   {

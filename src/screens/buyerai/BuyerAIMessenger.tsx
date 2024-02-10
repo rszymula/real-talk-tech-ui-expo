@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { Card } from '../core/Card';
-import { InputBar } from '../core/InputBar';
-import { BUYERAI_PLACEHOLDER } from '../constants';
-import { colors } from '../context/themes';
+import { Card } from '../../core/Card';
+import { InputBar } from '../../core/InputBar';
+import { BUYERAI_PLACEHOLDER } from '../../constants';
+import { colors } from '../../context/themes';
 
 
 export function BuyerAIMessenger(props) {
