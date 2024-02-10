@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import { colors } from "../context/themes";
+import { colors } from "../../context/themes";
 import { Button, ButtonType } from "../core/Button";
 
 

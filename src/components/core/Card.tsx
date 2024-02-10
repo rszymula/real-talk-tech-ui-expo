@@ -1,5 +1,5 @@
 import { Text, View, Button, StyleSheet, Pressable, TextInput, TouchableOpacity } from 'react-native';
-import { colors } from '../context/themes';
+import { colors } from '../../context/themes';
 
 export function Card({children, styles = {}}){
   return (

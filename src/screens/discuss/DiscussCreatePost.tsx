@@ -1,11 +1,13 @@
 import React from 'react';
 import { Text, View, Modal, StyleSheet, Pressable, TextInput, TouchableOpacity } from 'react-native';
-import { ButtonType, Button  } from '../../core/Button';
-import { Card } from '../../core/Card';
+import { ButtonType, Button  } from '../../components/core/Button';
+import { Card } from '../../components/core/Card';
 import { colors } from '../../context/themes';
-import { store } from '../../store/basicStore';
-import { Dropdown } from '../../core/Dropdown';
-import { CategoryNames, categories } from '../../constants';
+import { store } from '../../state/basicStore';
+import { Dropdown } from '../../components/core/Dropdown';
+import { CategoryNames, categories } from '../../constants/constants';
+import { SelectedItems } from '../../components/common/SelectedItems';
+import { getCompanies } from '../../services/DiscoverService';
 
 
 const TEXT_PLACEHOLDER = 'Enter Text';
@@ -54,18 +56,27 @@ export function DiscussCreatePost(props){
   const { createPost, getPostsWithCommentIdsAndUpvotes } = store;
 
   const [category, setCategory] = React.useState('');
+  const [vendor, setVendor] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [content, setContent] = React.useState('');
 
-  const [showDropdown, setShowdropdown] = React.useState(false);
+  const [showVendorDropdown, setShowVendorDropdown] = React.useState(false);
+  const [showCategoryDropdown, setShowCategoryDropdown] = React.useState(false);
   const [selectedCategories, setSelectedCategories] = React.useState([]);
+  const [selectedVendors, setSelectedVendors] = React.useState([]);
 
   // const showDropdown = category.length > 0
 
   const { navigation, route } = props;
 
+  const vendors = getCompanies()
+
   const handleTypeCategory = (text) => {
     setCategory(text)
+  }
+
+  const handleTypeVendor = (text) => {
+    setVendor(text)
   }
 
   const handleCreatePost = () => {
@@ -88,6 +99,21 @@ export function DiscussCreatePost(props){
     setSelectedCategories(selectedCategories => [...selectedCategories, item])
   }
 
+  const handleDeleteCategory = (item) => {
+    console.log({selectedCategories, item})
+    setSelectedCategories(selectedCategories => selectedCategories.filter(category => category.name !== item))
+  }
+  
+  const onSelectVendor= (item) => {
+    console.log("SELZ", item)
+    setSelectedVendors(selectedVendors => [...selectedVendors, item])
+  }
+
+  const handleDeleteVendor = (item) => {
+    console.log({selectedVendors, item})
+    setSelectedVendors(selectedVendors => selectedVendors.filter(vendors => vendors.name !== item))
+  }
+
   const handleExit = () => {
     navigation.goBack();
   }
@@ -101,18 +127,19 @@ export function DiscussCreatePost(props){
     <Card styles={{width: 512}}>
       <View style={styles.container}>
         <View style={[styles.labeledInput, {zIndex: 100}]}>
-        {showDropdown && (<Dropdown items={categories} onSelect={onSelectCategory} style={styles.dropdown}/>)}
+          {showCategoryDropdown && (<Dropdown items={categories} onSelect={onSelectCategory} style={styles.dropdown}/>)}
           <Text style={styles.label}>Category</Text>
           <TextInput 
             style={[styles.input]}
             onChangeText={handleTypeCategory}
             value={category}
             placeholder={TEXT_PLACEHOLDER}
-            onFocus={() => setShowdropdown(true)}
-            //onBlur={() => setShowdropdown(false)}
+            onFocus={() => setShowCategoryDropdown(true)}
+            onBlur={() => setTimeout(() => setShowCategoryDropdown(false), 100)}
           />
         </View>
-        <SelectedCategories selectedCategories={selectedCategories}/>
+        {/* <SelectedCategories selectedCategories={selectedCategories}/> */}
+        <SelectedItems items={selectedCategories.map(item => item.name)} onDelete={handleDeleteCategory}/>
         {/* <DropdownModal /> */}
         <View style={[styles.labeledInput, styles.item]}>
           <Text style={styles.label}>Title</Text>
@@ -131,6 +158,20 @@ export function DiscussCreatePost(props){
           style={[styles.textbox, styles.item]}
           placeholder={POST_PLACEHOLDER}
         />
+        <View style={[styles.labeledInput, {zIndex: 100, marginTop: 8}]}>
+          {showVendorDropdown && (<Dropdown items={vendors} onSelect={onSelectVendor} style={styles.dropdown}/>)}
+          <Text style={styles.label}>Tag Software</Text>
+          <TextInput 
+            style={[styles.input]}
+            onChangeText={handleTypeVendor}
+            value={vendor}
+            placeholder={TEXT_PLACEHOLDER}
+            onFocus={() => setShowVendorDropdown(true)}
+            onBlur={() => setTimeout(() => setShowVendorDropdown(false), 100)}
+          />
+        </View>
+        {/* <SelectedCategories selectedCategories={selectedCategories}/> */}
+        <SelectedItems items={selectedVendors.map(item => item.name)} onDelete={handleDeleteVendor}/>
         <View style={[styles.buttonContainer, styles.item]}>
           <Button title="Cancel" onPress={handleExit} type={ButtonType.REVERSE} />
           <Button title="Create Post" onPress={handleCreatePost} />

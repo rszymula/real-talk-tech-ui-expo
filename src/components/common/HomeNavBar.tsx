@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, useWindowDimensions } from 'react-native';
-import { colors } from '../context/themes';
+import { colors } from '../../context/themes';
 import { Button, ButtonType } from '../core/Button';
-import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
-import { DEFAULT_TAB, RouteNames } from '../constants';
+import REALTALKTECH_WHITE from '../../assets/titleWhite.png'; //'../../assets/titleWhite.png';
+import { DEFAULT_TAB, RouteNames } from '../../constants/constants';
 
 
 const tabs = [

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { colors } from '../context/themes';
+import { colors } from '../../context/themes';
 
 export function Separator({style = {}}){
   return (

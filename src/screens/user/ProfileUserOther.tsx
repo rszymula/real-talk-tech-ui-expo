@@ -12,12 +12,14 @@ import { FullWindowOverlay } from 'react-native-screens';
 import { SelectedItems } from '../../components/common/SelectedItems';
 
 
-export function ProfileUser(props){
+export function ProfileUserOther(props){
 
   const { navigation, route } = props;
 
+  const {id} = route?.params
+
   const { getUser } = store;
-  const user = getUser();
+  const user = getUser(id);
 
   const techStack = [
     "Java", "Typescript", "Python", "C++"
@@ -25,36 +27,23 @@ export function ProfileUser(props){
 
   return (
     <View style={styles.container}>
-      {/* <View style={{width: 512, alignItems: 'center'}}> */}
-      <View style={{width: 512}}>
-        <Text style={styles.h2}>
-          Your Profile
-        </Text>
-        <Button title="Edit Profile" onPress={() => {}} type={ButtonType.BASIC} styles={{alignSelf: 'flex-start', marginTop: 8, color: colors.textRegular, backgroundColor: colors.foreground}}/>
+      <View style={{width: 512, alignItems: 'center'}}>
         <Text style={styles.title}>
           {`@${user.username}`}
         </Text>
-        <Text style={{color: colors.textLowlight, margin: 8,}}>
+        <Text style={{color: colors.textLowlight, margin: 8}}>
           {`${user.firstName} ${user?.lastName || ''}`}
         </Text>
         <Card styles={{backgroundColor: colors.input, flexDirection: 'row', justifyContent: 'space-between'}}>
-          <View style={{flexDirection: 'column'}}>
+        <View style={{flexDirection: 'column'}}>
             <Text style={styles.captionText}>{"Bio"}</Text>
             {/* <Text style={{maxWidth: 384, alignSelf: 'center', color: colors.textRegular, marginTop: 8 }}>{user.bio}</Text> */}
             <Text style={{maxWidth: 512, color: colors.textRegular, marginTop: 8 }}>{user.bio}</Text>
           </View>
-          {/* <Button title="Edit" onPress={() => {}} type={ButtonType.BASIC} styles={{color: colors.textRegular, backgroundColor: colors.foreground, alignItems: 'center' }}/> */}
         </Card>
         <Text style={styles.h2}>
-          Your Tech Stack
+          Endore Tech Stack
         </Text>
-        {/* <View style={{flexDirection: 'row', marginTop: 8}}>
-          {techStack.map(item => {
-            return (
-              <Text style={styles.techItem}>{item}</Text>
-            )
-          })}
-        </View> */}
         <SelectedItems items={techStack} style={{marginTop: 8}}/>
       </View>
 

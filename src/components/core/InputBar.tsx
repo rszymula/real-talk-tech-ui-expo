@@ -1,7 +1,7 @@
 import { View, TextInput, StyleSheet } from "react-native";
 import { Button, ButtonType } from "./Button";
 import React from "react";
-import { colors } from "../context/themes";
+import { colors } from "../../context/themes";
 
 export function InputBar({onPress, placeholder, title = null, style = {}, numLines=3}){
 

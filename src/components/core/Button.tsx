@@ -1,5 +1,5 @@
 import { TouchableOpacity, Text, View, StyleSheet } from "react-native";
-import { colors } from "../context/themes";
+import { colors } from "../../context/themes";
 
 export enum ButtonType {
   BASIC = 'Basic',

@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import { colors } from "../context/themes";
+import { colors } from "../../context/themes";
 
 export function Link({textLink, onPress, textLeft = '', textRight = '', style={}}){
   return (

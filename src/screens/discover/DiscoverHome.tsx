@@ -1,13 +1,13 @@
 import React from 'react';
 import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
-import { ButtonType, Button } from '../../core/Button';
-import { Card } from '../../core/Card';
-import { Separator } from '../../core/Separator';
-import { RouteNames } from '../../constants';
+import { ButtonType, Button } from '../../components/core/Button';
+import { Card } from '../../components/core/Card';
+import { Separator } from '../../components/core/Separator';
+import { RouteNames } from '../../constants/constants';
 import { colors } from '../../context/themes';
 // import { getCompanies } from '../services/DiscoverService';
-import { store } from '../../store/basicStore';
-import { GridView } from '../../common/GridView';
+import { store } from '../../state/basicStore';
+import { GridView } from '../../components/common/GridView';
 
 
 export function DiscoverHome(props){

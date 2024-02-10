@@ -1,12 +1,12 @@
-import { CategoryNames } from "../constants";
-import { mockFollowups, mockQuestions } from "../mocks/buyerAIMocks";
-import { mockCompanies } from "../mocks/discoverMocks";
-import { mockComments, mockPostUpvotes, mockPosts, mockUsers } from "../mocks/discussMocks";
+import { CategoryNames } from "../constants/constants";
+import { mockFollowups, mockQuestions } from "../data/buyerAIMocks";
+import { mockCompanies } from "../data/discoverMocks";
+import { mockComments, mockPostUpvotes, mockPosts, mockUsers } from "../data/discussMocks";
 
 
 function Store(){
 
-  const userId = 1
+  //const userId = 1
   // const usersStore = []
   const usersStore = mockUsers
   // const postsStore = []
@@ -99,7 +99,7 @@ function Store(){
     postsStore.push(post)
   }
 
-  function getUser(){
+  function getUser(userId = 1){
     const user = usersStore.find(user => user.id === userId)
     return user
   }

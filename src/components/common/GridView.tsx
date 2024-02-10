@@ -1,8 +1,8 @@
 import { FlatList, Text, View, Image } from "react-native";
 import SPLASH from '../../assets/splash.png';
 import { Card } from "../core/Card";
-import { colors } from "../context/themes";
-import { RouteNames } from "../constants";
+import { colors } from "../../context/themes";
+import { RouteNames } from "../../constants/constants";
 
 export function GridView(props){
   const { columnsCount = 3, data, onPress, navigation } = props;

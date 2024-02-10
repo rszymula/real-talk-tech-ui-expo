@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TextInput } from 'react-native';
-import { ButtonType, Button } from '../../core/Button';
+import { ButtonType, Button } from '../../components/core/Button';
 import { colors } from '../../context/themes';
-import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
-import { RouteNames } from '../../constants';
-import { Link } from '../../core/Link';
+import REALTALKTECH_WHITE from '../../assets/titleWhite.png'; // '../../assets/titleWhite.png';
+import { RouteNames } from '../../constants/constants';
+import { Link } from '../../components/core/Link';
 
 export function ProfileWelcome({navigation}) {
 

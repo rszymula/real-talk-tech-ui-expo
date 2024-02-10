@@ -1,5 +1,7 @@
 // import { CategoryNames } from "../constants";
 
+import { categories } from "../constants/constants";
+
 const mockCommentTag = [
   {
     id: 1,
@@ -480,7 +482,7 @@ export function fetchPosts(dispatch){
       return res.json()
     }).then(json => {
       console.log("XYZ", json)
-      dispatch({type: "POSTS_SUCCESS", payload: json.posts})
+      dispatch({type: "POSTS_SUCCESS", payload: {category: categories.find(cat => cat.id === categoryId)?.name, data: json.posts}})
     })
   }
 }

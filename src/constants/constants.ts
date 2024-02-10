@@ -9,6 +9,7 @@ export enum RouteNames {
   BUYER_AI_FOLLOWUP = "BuyerAIFollowup",
   BUYER_AI_MESSENGER = "BuyerAIMessenger",
   PROFILE_USER = "ProfileUser",
+  PROFILE_USER_OTHER = "ProfileUserOther",
   PROFILE_WELCOME = "ProfileWelcome",
   PROFILE_LOGIN = "ProfileLogin",
   PROFILE_CREATE_HOME = "ProfileCreateHome",
@@ -46,42 +47,55 @@ export enum ToolTypes {
 
 export const categories = [
   {
+    id: 1,
     name: CategoryNames.HOME,
   },
   {
+    id: 2,
     name: CategoryNames.ENGINEERING,
   },
   {
+    id: 3,
     name: CategoryNames.OPERATIONS,
   },
   {
+    id: 4,
     name: CategoryNames.MARKETING,
   },
   {
+    id: 5,
     name: CategoryNames.SALES,
   },
   {
+    id: 6,
     name: CategoryNames.CUSTOMER_SUCCESS,
   },
   {
+    id: 7,
     name: CategoryNames.DATA,
   },
   {
+    id: 8,
     name: CategoryNames.PRODUCT,
   },
   {
+    id: 9,
     name: CategoryNames.HR_AND_TALENT,
   },
   {
+    id: 10,
     name: CategoryNames.FINANCE,
   },
   {
+    id: 11,
     name: CategoryNames.LEADERHIP_EXEC,
   },
   {
+    id: 12,
     name: CategoryNames.FOUNDER,
   },
   {
+    id: 13,
     name: CategoryNames.INVESTOR_VC,
   },
 ];

@@ -1,4 +1,4 @@
-import { CompanyType } from "../constants";
+import { CompanyType } from "../constants/constants";
 
 
 export const mockCompanies = [

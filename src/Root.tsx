@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useContext } from 'react';
-import { HomeNavBar } from './common/HomeNavBar';
+import { HomeNavBar } from './components/common/HomeNavBar';
 import { BuyerAIFollowup } from './screens/buyerai/BuyerAIFollowup';
 import { BuyerAIMessenger } from './screens/buyerai/BuyerAIMessenger';
 import { DiscoverHome } from './screens/discover/DiscoverHome';
@@ -11,14 +11,15 @@ import { DiscussCreatePost } from './screens/discuss/DiscussCreatePost';
 import { DiscussHome } from './screens/discuss/DiscussHome';
 import { BuyerAIHome } from './screens/buyerai/BuyerAIHome';
 import { colors } from './context/themes';
-import { CategoryNames, RouteNames, categories } from './constants';
-import { ButtonType, buttonTypetoStyle, Button } from './core/Button';
+import { CategoryNames, RouteNames, categories } from './constants/constants';
+import { ButtonType, buttonTypetoStyle, Button } from './components/core/Button';
 import { ProfileCreateHome } from './screens/user/ProfileCreateHome';
 import { ProfileQuestion } from './screens/user/ProfileQuestion';
 import { DiscoverCompanyProfile } from './screens/discover/DiscoverCompanyProfile';
-import { ReduxContext, connect, createStore, reducer } from './store/reduxStore';
+import { ReduxContext, connect, createStore, reducer } from './state/reduxStore';
 import { DiscoverList } from './screens/discover/DiscoverList';
 import { ProfileUser } from './screens/user/ProfileUser';
+import { ProfileUserOther } from './screens/user/ProfileUserOther';
 import { ProfileWelcome } from './screens/user/ProfileWelcome';
 import { ProfileLogin } from './screens/user/ProfileLogin';
 import { MarketplaceHome } from './screens/marketplace/MarketplaceHome';
@@ -63,6 +64,10 @@ export const routes = [
   {
     name: RouteNames.PROFILE_USER,
     component: navBarProvider(ProfileUser),
+  },
+  {
+    name: RouteNames.PROFILE_USER_OTHER,
+    component: navBarProvider(ProfileUserOther),
   },
   {
     name: RouteNames.PROFILE_WELCOME,
@@ -185,7 +190,7 @@ function navBarProvider(Component, hasCategories = false, hasTabs = true){
 export function Root(){
   const store = createStore(reducer);
   return (
-    <>
+    <View style={{backgroundColor: colors.background}}>
       <ReduxContext.Provider value={store}>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{headerShown: false}}>
@@ -199,7 +204,7 @@ export function Root(){
           </Stack.Navigator>
         </NavigationContainer>
       </ReduxContext.Provider>
-    </>
+    </View>
   );
 }
 
@@ -250,7 +255,7 @@ const styles = StyleSheet.create({
   rootContainer: {
     backgroundColor: colors.background,
     padding: 32,
-    height: "100%",
+    // height: "100%",
     // borderWidth: 1,
     borderColor: 'purple',
   },

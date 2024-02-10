@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { CategoryNames } from '../constants';
+import { CategoryNames } from '../constants/constants';
 
 export const ReduxContext = React.createContext(undefined);
 

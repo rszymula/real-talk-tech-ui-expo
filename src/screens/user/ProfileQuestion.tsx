@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TextInput } from 'react-native';
-import { ButtonType, Button } from '../../core/Button';
-import { BUYERAI_PLACEHOLDER, DEFAULT_TAB, RouteNames } from '../../constants';
+import { ButtonType, Button } from '../../components/core/Button';
+import { BUYERAI_PLACEHOLDER, DEFAULT_TAB, RouteNames } from '../../constants/constants';
 import { colors } from '../../context/themes';
-import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
+import REALTALKTECH_WHITE from '../../assets/titleWhite.png'; // '../../assets/titleWhite.png';
 
 enum ProfileStep {
   INDUSTRY = "Industry",

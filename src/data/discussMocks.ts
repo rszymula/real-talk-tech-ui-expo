@@ -1,4 +1,4 @@
-import { CategoryNames } from "../constants";
+import { CategoryNames } from "../constants/constants";
 
 export const mockCommentTag = [
   {

@@ -1,16 +1,16 @@
 import React from 'react';
 import { Text, View, StyleSheet, FlatList, TextInput, Button, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
-import { Card } from '../../core/Card';
-import { InputBar } from '../../core/InputBar';
-import { Separator } from '../../core/Separator';
-import { RouteNames, INPUT_PLACEHOLDER, CategoryNames } from '../../constants';
+import { Card } from '../../components/core/Card';
+import { InputBar } from '../../components/core/InputBar';
+import { Separator } from '../../components/core/Separator';
+import { RouteNames, INPUT_PLACEHOLDER, CategoryNames } from '../../constants/constants';
 import { colors } from '../../context/themes';
 // import { getComments, getPostsWithCommentIdsAndUpvotes } from '../services/DiscussService';
-import { store } from '../../store/basicStore';
-import { connect } from '../../store/reduxStore';
-import { mockFeedResponse } from '../../mocks/discussMocks';
-import { Link } from '../../core/Link';
+import { store } from '../../state/basicStore';
+import { connect } from '../../state/reduxStore';
+import { mockFeedResponse } from '../../data/discussMocks';
+import { Link } from '../../components/core/Link';
 import { fetchComments, fetchPosts, makeComment } from '../../services/DiscussService';
 import { createUser } from '../../services/UserServices';
 
@@ -61,9 +61,10 @@ function CommentsList({comments}){
   )
 }
 
-function Post({ id, title, body, username, commentIds, createdTimestamp, currentCategory, navigation }){
+function Post({ id, title, body, user, commentIds, createdTimestamp, currentCategory, navigation }){
 
   console.log("AZ", title, body)
+  const {id: userId, username} = user;
 
   const { getComments } = store;
 
@@ -75,6 +76,10 @@ function Post({ id, title, body, username, commentIds, createdTimestamp, current
 
   const handleCommentsPress = () => {
     setCommentsExpanded(!commentsExpanded)
+  }
+
+  const handleUsernamePress = () => {
+    navigation.navigate(RouteNames.PROFILE_USER_OTHER, {id: userId})
   }
 
   React.useEffect(() => {
@@ -104,7 +109,9 @@ function Post({ id, title, body, username, commentIds, createdTimestamp, current
             <Text style={[styles.linkText, styles.actionMember]}>^</Text>
           </TouchableOpacity>
         </View>
-        <Text style={[styles.captionText, styles.userCaption]}>{`${username} | ${createdTimestamp}`}</Text>
+        <TouchableOpacity onPress={handleUsernamePress}>
+          <Text style={[styles.captionText, styles.userCaption]}>{`${username} | ${createdTimestamp}`}</Text>
+        </TouchableOpacity>
       </View>
       {commentsExpanded ? <CommentsList comments={comments} /> : null}
     </View>
@@ -134,7 +141,7 @@ function RawDiscussHome(props){
     console.log("RANDZ", rand, data)
 
 
-    // fetchPosts(1, 1)
+    //fetchPosts(1, 1)
 
     getPosts(1, 1)
 
