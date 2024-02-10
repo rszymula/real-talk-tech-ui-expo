@@ -471,3 +471,53 @@ const mockComments = {
 };
 
 */
+
+
+export function fetchPosts(dispatch){
+  return (categoryId, userId, page = 1) => {
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/feed?categoryId=${categoryId}&userId=${userId}`
+    fetch(url).then(res => {
+      return res.json()
+    }).then(json => {
+      console.log("XYZ", json)
+      dispatch({type: "POSTS_SUCCESS", payload: json.posts})
+    })
+  }
+}
+
+export function fetchComments(dispatch){
+  return (postId, page = 1) => {
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/getCommentsForPost?postId=45`
+    fetch(url).then(res => {
+      return res.json()
+    }).then(json => {
+      console.log("ZCOMMENTS", json)
+      dispatch({type: "POSTS_SUCCESS", payload: json.posts})
+    })
+  }
+}
+
+export function makeComment(dispatch){
+  return (postId) => {
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/makeComment`
+    const params = {
+      method: "POST",
+      
+      body: JSON.stringify({
+        postId: 45,
+        userId: 1,
+        taggedUsernames: [],
+        commentText: "hey there",
+      })
+    }
+    fetch(url, params).then(res => {
+      // return res.json()
+      return res.text()
+    }).then(json => {
+      console.log("ZCOMMENTS", json)
+      dispatch({type: "POSTS_SUCCESS", payload: json})
+    }).catch((err) => {
+      console.log("ERRZ", err)
+    })
+  }
+}

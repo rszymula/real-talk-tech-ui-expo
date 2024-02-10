@@ -66,3 +66,5 @@ export function getCompanies(page = 0, count = 5){
 export function getCompany(id){
   return companies.find(item => item.id === id);
 }
+
+

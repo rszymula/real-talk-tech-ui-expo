@@ -338,7 +338,28 @@ export const mockCommentUpvotes = [
     updatedTimestamp: '2023-01-03',
   },
 ];
-
+export const mockCommentsResponse = [
+  {
+    id: 1,
+    commentText: "mock comment 1",
+    totalUpvotes: 10,
+    userVote: null,
+    user: {
+      id: 3,
+      username: "test_user"
+    },
+  },
+  {
+    id: 1,
+    commentText: "mock comment 1",
+    totalUpvotes: 10,
+    userVote: null,
+    user: {
+      id: 3,
+      username: "test_user"
+    },
+  }
+]
 
 export const mockFeedResponse = [
   {
@@ -399,3 +420,45 @@ export const mockFeedResponse = [
     "createdTimestamp" : "2024-02-07T21:05:15.286000",
   },
 ]
+
+
+
+
+const mockPostsNormalized = {
+  posts: {
+    1: {
+      id: 1,
+      title: "HI",
+      body: "wow",
+      userId: 4,
+      categoryIds: [2, 3, 45],
+      vendorIds: [2, 21, 34],
+      upVoteCount: 5,
+      userUpvote: true,
+    },
+    3: {
+      id: 3,
+      title: "cooool",
+      body: "this is a body",
+      userId: 4,
+      categoryIds: [2, 12],
+      vendorIds: [1],
+      upVoteCount: 4,
+      userUpvote: null,
+    }
+  },
+  users: {
+    4: {
+      id: 3,
+      username: "bobby2",
+      // fullName: "Bobby Wagner",
+      // company: "HERE",
+      // email: "bob2@gmail.com",
+      // linkedinUrl: "www.linkedin.com/bob123",
+      // bio: "her there whats up"
+    }
+  },
+  feed: [1, 3],
+}
+
+

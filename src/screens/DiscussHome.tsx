@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList, TextInput, Button, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, FlatList, TextInput, Button, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import { Card } from '../core/Card';
 import { InputBar } from '../core/InputBar';
@@ -10,6 +10,9 @@ import { colors } from '../context/themes';
 import { store } from '../store/basicStore';
 import { connect } from '../store/reduxStore';
 import { mockFeedResponse } from '../mocks/discussMocks';
+import { Link } from '../core/Link';
+import { fetchComments, fetchPosts, makeComment } from '../services/DiscussService';
+import { createUser } from '../services/UserServices';
 
 const POST_PAGE_OFFSET = 10;
 const COMMENT_OFFSET = 10;
@@ -58,7 +61,9 @@ function CommentsList({comments}){
   )
 }
 
-function Post({ id, title, description, username, commentIds, createdTimestamp, currentCategory, navigation }){
+function Post({ id, title, body, username, commentIds, createdTimestamp, currentCategory, navigation }){
+
+  console.log("AZ", title, body)
 
   const { getComments } = store;
 
@@ -74,9 +79,9 @@ function Post({ id, title, description, username, commentIds, createdTimestamp, 
 
   React.useEffect(() => {
     if(commentsExpanded && comments.length === 0){
-      // console.log("checkID", {id, page, COMMENT_OFFSET})
+      
       const mockComments = getComments(id, page, COMMENT_OFFSET);
-      // console.log({id, page, COMMENT_OFFSET}, mockComments)
+
       setComments([...mockComments]);
     }
   }, [commentsExpanded])
@@ -89,7 +94,7 @@ function Post({ id, title, description, username, commentIds, createdTimestamp, 
     <View style={styles.container}>
       <Text style={[styles.captionText, styles.categoryCaption]}>{currentCategory}</Text>
       <Text style={[styles.headingText, styles.title]}>{title}</Text>
-      <Text style={[styles.bodyText, styles.description]}>{description}</Text>
+      <Text style={[styles.bodyText, styles.description]}>{body}</Text>
       <View style={styles.bottom}>
         <View style={styles.actionGroup}>
           <TouchableOpacity onPress={handleCommentsPress}>
@@ -108,25 +113,46 @@ function Post({ id, title, description, username, commentIds, createdTimestamp, 
 
 function RawDiscussHome(props){
 
-  const {currentCategory, navigation, posts, get} = props
+  const {currentCategory, navigation, posts, postsLoading, postsError, getPosts} = props
+  console.log("QZ", posts)
   const postsByCategory = posts[currentCategory]
 
-  console.log("PZ", posts, currentCategory)
+  console.log("PZ", posts, currentCategory, postsByCategory)
 
   React.useEffect(() => {
+    console.log("FUUUZZ", currentCategory)
+    // loading(currentCategory)
     console.log("BZ", currentCategory)
     const filtered = currentCategory === CategoryNames.HOME ? 
       mockFeedResponse :
       mockFeedResponse.filter(item => item.categories.includes(currentCategory))
     const data = {
-      [currentCategory]: filtered
+      category: currentCategory,
+      data: filtered,
     }
-    get(data);
+    const rand = Math.random();
+    console.log("RANDZ", rand, data)
+
+
+    // fetchPosts(1, 1)
+
+    getPosts(1, 1)
+
+    // setTimeout(() => {
+    //   if(rand > 0.01){
+    //     get(data);
+    //   }else{
+    //     error(currentCategory)
+    //   }
+    // }, 1000)
+
   }, [currentCategory])
 
   // const { getPostsWithCommentIdsAndUpvotes } = store;
   // const [currentPage, setCurrentPage] = React.useState(0);
   // const posts = getPostsWithCommentIdsAndUpvotes(currentCategory, 0, POST_PAGE_OFFSET);
+
+  console.log("PZZZ", postsByCategory)
 
   return (
     <Card styles={{width: 512}}>
@@ -146,11 +172,24 @@ function RawDiscussHome(props){
           ItemSeparatorComponent={() => <Separator />}
         />
       </View>
+      {postsLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
+      <View style={{margin: 32}}>
+        <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading data..."}</Text>
+        <Link onPress={() => {}} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
+      </View>
     </Card>
   )
 }
 
-export const DiscussHome = connect((state) => ({posts: state.posts}), (dispatch) => ({get: (data) => dispatch({type: "GET_POSTS", payload: data})}))(RawDiscussHome);
+const stp = (state) => ({posts: state.posts, postsLoading: state.postsLoading, postsError: state.postsError});
+const dtp = (dispatch) => ({
+  getPosts: fetchPosts(dispatch), 
+  // get: (data) => dispatch({type: "POSTS_SUCCESS", payload: data}),
+  // loading: (category) => dispatch({type: "POSTS_LOADING", payload: category}),
+  // error: (category) => dispatch({type: "POSTS_ERROR", payload: category}),
+})
+
+export const DiscussHome = connect(stp, dtp)(RawDiscussHome);
 
 const styles = StyleSheet.create({
   container: {

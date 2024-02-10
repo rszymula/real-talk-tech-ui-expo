@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { CategoryNames } from '../constants';
 
 export const ReduxContext = React.createContext(undefined);
 
@@ -40,13 +41,13 @@ const initialState = {
   users: [],
   userLoading: false,
   userError: null,
-  posts: [],
-  postsLoading: false,
-  postsError: null,
+  posts: Object.values(CategoryNames).filter(item => isNaN(Number(item))).reduce((acc, item) => (acc[item] = [], acc), {}),
+  postsLoading: {},
+  postsError: {},
   comments: [],
   commentsLoading: false,
   commentsError: null,
-  companies: [],
+  companies: [1, 2],
   companiesLoading: false,
   companiesError: null,
   // questions: [],
@@ -58,29 +59,86 @@ const initialState = {
 }
 
 export function reducer(state = initialState, action){
-  console.log("R1", state)
+
+  // const test = Object.keys(CategoryNames).filter(item => isNaN(Number(item))).reduce((acc, item) => (acc[item] = [], acc), {})
+  // console.log("FTEST", test)
+
+  console.log("R1222", state, action)
   switch(action.type){
-    case 'GET_POSTS':
-      return {
-        ...state,
-        posts: {
-          ...state.posts,
-          ...action.payload,
-        }
-      }
+    case 'POSTS_SUCCESS':
+      console.log("ESZ", action)
       // return {
       //   ...state,
       //   posts: {
       //     ...state.posts,
-      //     [action.payload.category]:[
-      //       ...state.posts[action.payload.category],
-      //       action.payload.data
-      //     ]
+      //     ...action.payload,
+      //   },
+      //   postsLoading: {
+      //     ...state.postsLoading,
+      //     ...action.payload,
+      //   },
+      //   postsError: {
+      //     ...state.postsError,
+      //     ...action.payload,
       //   }
       // }
-    case 'GET_COMMENTS':
+
+      const fuck = {
+        ...state.posts,
+        [action.payload.category]:[
+          ...state.posts[action.payload.category],
+          ...action.payload.data
+        ]
+      }
+
+      console.log("HZZZ", fuck, state.posts, state.posts[action.payload.category], action.payload.category, action.payload.data)
+
+      return {
+        ...state,
+        posts: {
+          ...state.posts,
+          [action.payload.category]:[
+            ...state.posts[action.payload.category],
+            ...action.payload.data
+          ]
+        },
+        postsLoading: {
+          ...state.postsLoading,
+          [action.payload.category]: false,
+        },
+        postsError: {
+          ...state.postsError,
+          [action.payload.category]: false,
+        },
+      }
+    case 'POSTS_LOADING':
+      console.log("FZZZ", action.payload)
+      return {
+        ...state,
+        postsLoading: {
+          ...state.postsLoading,
+          [action.payload]: true,
+        },
+        postsError: {
+          ...state.postsError,
+          [action.payload]: false,
+        },
+      }
+    case 'ERROR':
+      return {
+        ...state,
+        postsLoading: {
+          ...state.postsLoading,
+          [action.payload]: false,
+        },
+        postsError: {
+          ...state.postsError,
+          [action.payload]: true,
+        },
+      }
+    case 'COMMENTS_SUCCESS':
       return {...state, comments: [...state.comments, action.payload]}
-    case 'GET_COMPANIES':
+    case 'COMPANIES_SUCCESS':
       return {...state, companies: [...state.companies, action.payload]}
     // case 'GET_QUESTIONS':
     //   return {...state, questions: [...state.questions, action.payload]}
