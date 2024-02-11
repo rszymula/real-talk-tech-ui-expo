@@ -190,7 +190,7 @@ function RawDiscussHome(props){
 
 const stp = (state) => ({posts: state.posts, postsLoading: state.postsLoading, postsError: state.postsError});
 const dtp = (dispatch) => ({
-  getPosts: fetchPosts(dispatch), 
+  getPosts: createUser(dispatch), 
   // get: (data) => dispatch({type: "POSTS_SUCCESS", payload: data}),
   // loading: (category) => dispatch({type: "POSTS_LOADING", payload: category}),
   // error: (category) => dispatch({type: "POSTS_ERROR", payload: category}),

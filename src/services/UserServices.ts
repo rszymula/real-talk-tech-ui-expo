@@ -8,12 +8,13 @@ export function createUser(dispatch){
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        first_name: "bob",
-        last_name: "the builder",
+        // first_name: "bob",
+        fullname: "bob the builder",
         username: "thebob1",
         email: "bob1@gmail.com",
         password: "bob123",
         techStack: [],
+        currentCompany: "HERE",
       })
     }
     fetch(url, params).then(res => {

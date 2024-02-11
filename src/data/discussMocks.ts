@@ -451,11 +451,26 @@ const mockPostsNormalized = {
     4: {
       id: 3,
       username: "bobby2",
+      // endorsements: [5, 7, 8]
+      endorsements: [
+        {
+          vendorId: 5,
+          count: 17,
+        }
+      ],
       // fullName: "Bobby Wagner",
       // company: "HERE",
       // email: "bob2@gmail.com",
       // linkedinUrl: "www.linkedin.com/bob123",
       // bio: "her there whats up"
+    }
+  },
+  endorsements: {
+    1: {
+      id: 1,
+      endorserId: 4,
+      endorseeId: 1,
+      vendor: 2,
     }
   },
   feed: [1, 3],

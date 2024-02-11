@@ -8,6 +8,8 @@ import { Dropdown } from '../../components/core/Dropdown';
 import { CategoryNames, categories } from '../../constants/constants';
 import { SelectedItems } from '../../components/common/SelectedItems';
 import { getCompanies } from '../../services/DiscoverService';
+import { RTextInput } from '../../components/core/RTextInput';
+import { RLabeledTextInput } from '../../components/core/RLabeledTextInput';
 
 
 const TEXT_PLACEHOLDER = 'Enter Text';
@@ -118,51 +120,50 @@ export function DiscussCreatePost(props){
     navigation.goBack();
   }
 
-  // const handleCategoryFocus = (focus) => {
-  //   console.log("XYZ", focus)
-  //   // setShowdropdown(showDropdown => )
-  // }
-
   return (
     <Card styles={{width: 512}}>
       <View style={styles.container}>
-        <View style={[styles.labeledInput, {zIndex: 100}]}>
+        {/* <View style={[styles.labeledInput, {zIndex: 100}]}>
           {showCategoryDropdown && (<Dropdown items={categories} onSelect={onSelectCategory} style={styles.dropdown}/>)}
           <Text style={styles.label}>Category</Text>
           <TextInput 
-            style={[styles.input]}
+            style={[styles.inputText]}
             onChangeText={handleTypeCategory}
             value={category}
             placeholder={TEXT_PLACEHOLDER}
             onFocus={() => setShowCategoryDropdown(true)}
             onBlur={() => setTimeout(() => setShowCategoryDropdown(false), 100)}
           />
-        </View>
-        {/* <SelectedCategories selectedCategories={selectedCategories}/> */}
+        </View> */}
+        <RTextInput 
+          style={{marginTop: 8, position: 'relative', zIndex: 100}}
+          label="Category"
+          onChangeText={handleTypeCategory}
+          value={category}
+          placeholder="Enter Text"
+          selections={categories}
+          onSelect={onSelectCategory}
+        />
         <SelectedItems items={selectedCategories.map(item => item.name)} onDelete={handleDeleteCategory}/>
-        {/* <DropdownModal /> */}
-        <View style={[styles.labeledInput, styles.item]}>
-          <Text style={styles.label}>Title</Text>
-          <TextInput 
-            style={styles.input}
-            onChangeText={setTitle}
-            value={title}
-            placeholder={TEXT_PLACEHOLDER}
-          />
-        </View>
-        <TextInput 
+        <RTextInput 
+          style={{marginTop: 8}}
+          label="Title"
+          onChangeText={setTitle}
+          value={title}
+          placeholder="Enter Text"
+        />
+        <RTextInput 
+          style={{marginTop: 8}}
           onChangeText={setContent}
           value={content}
-          multiline={true}
+          placeholder="Enter your post"
           numberOfLines={12}
-          style={[styles.textbox, styles.item]}
-          placeholder={POST_PLACEHOLDER}
         />
         <View style={[styles.labeledInput, {zIndex: 100, marginTop: 8}]}>
           {showVendorDropdown && (<Dropdown items={vendors} onSelect={onSelectVendor} style={styles.dropdown}/>)}
           <Text style={styles.label}>Tag Software</Text>
           <TextInput 
-            style={[styles.input]}
+            style={[styles.inputText]}
             onChangeText={handleTypeVendor}
             value={vendor}
             placeholder={TEXT_PLACEHOLDER}
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
     borderRightColor: colors.border,
     color: colors.textHighlight,
   },
-  input: {
+  inputText: {
     width: "100%",
     paddingLeft: 8,
     color: colors.textLowlight,
