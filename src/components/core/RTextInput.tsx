@@ -14,7 +14,7 @@ export function RTextInput({
   style={}
 }){
   
-  const [hoverItem, setHoverItem] = React.useState(undefined);
+  // const [hoverItem, setHoverItem] = React.useState(undefined);
   const [showDropdown, setShowDropdown] = React.useState(false)
   //const zIndex = selections ? 100 : 0;
 

@@ -500,21 +500,48 @@ export function fetchComments(dispatch){
 }
 
 export function makeComment(dispatch){
-  return (postId) => {
+  return (userId, postId, text, taggedUsernames = []) => {
     const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/makeComment`
     const params = {
       method: "POST",
       
       body: JSON.stringify({
-        postId: 45,
-        userId: 1,
-        taggedUsernames: [],
-        commentText: "hey there",
+        postId,
+        userId,
+        taggedUsernames: taggedUsernames,
+        commentText: text,
       })
     }
     fetch(url, params).then(res => {
-      // return res.json()
-      return res.text()
+      return res.json()
+      // return res.text()
+    }).then(json => {
+      console.log("ZCOMMENTS", json)
+      dispatch({type: "POSTS_SUCCESS", payload: json})
+    }).catch((err) => {
+      console.log("ERRZ", err)
+    })
+  }
+}
+
+export function makePost(dispatch){
+  return (userId, title, body, categories, vendors, isAnonymous) => {
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/makeComment`
+    const params = {
+      method: "POST",
+      
+      body: JSON.stringify({
+        userId,
+        title,
+        body,
+        categories,
+        vendors,
+        isAnonymous,
+      })
+    }
+    fetch(url, params).then(res => {
+      return res.json()
+      // return res.text()
     }).then(json => {
       console.log("ZCOMMENTS", json)
       dispatch({type: "POSTS_SUCCESS", payload: json})

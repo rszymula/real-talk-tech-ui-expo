@@ -7,21 +7,23 @@ import { store } from '../../state/basicStore';
 import { Dropdown } from '../../components/core/Dropdown';
 import { CategoryNames, categories } from '../../constants/constants';
 import { SelectedItems } from '../../components/common/SelectedItems';
-import { getCompanies } from '../../services/DiscoverService';
+import { fetchVendors, getCompanies } from '../../services/DiscoverService';
 import { RTextInput } from '../../components/core/RTextInput';
 import { RLabeledTextInput } from '../../components/core/RLabeledTextInput';
+import { connect } from '../../state/reduxStore';
+import { makeComment, makePost } from '../../services/DiscussService';
 
 
-const TEXT_PLACEHOLDER = 'Enter Text';
-const POST_PLACEHOLDER = 'Enter your post';
+// const TEXT_PLACEHOLDER = 'Enter Text';
+// const POST_PLACEHOLDER = 'Enter your post';
 
-function SelectedCategories(props){
-  return (
-    <View style={{flexDirection: 'column', justifyContent: 'space-around'}}>
-      {props.selectedCategories.map(item => (<Text>{item.name}</Text>))}
-    </View>
-  )
-}
+// function SelectedCategories(props){
+//   return (
+//     <View style={{flexDirection: 'column', justifyContent: 'space-around'}}>
+//       {props.selectedCategories.map(item => (<Text>{item.name}</Text>))}
+//     </View>
+//   )
+// }
 
 // function DropdownModal(props) {
 //   const [visible, setVisible] = React.useState(true);
@@ -53,9 +55,9 @@ function SelectedCategories(props){
 // }
 
 
-export function DiscussCreatePost(props){
+export function RawDiscussCreatePost(props){
 
-  const { createPost, getPostsWithCommentIdsAndUpvotes } = store;
+  // const { createPost, getPostsWithCommentIdsAndUpvotes, makePost } = store;
 
   const [category, setCategory] = React.useState('');
   const [vendor, setVendor] = React.useState('');
@@ -69,9 +71,15 @@ export function DiscussCreatePost(props){
 
   // const showDropdown = category.length > 0
 
-  const { navigation, route } = props;
+  const { navigation, route, makePost, vendors, fetchVendors } = props;
 
-  const vendors = getCompanies()
+  // const vendors = getCompanies()
+
+  console.log({categories, vendors})
+
+  React.useEffect(() => {
+    fetchVendors();
+  }, [])
 
   const handleTypeCategory = (text) => {
     setCategory(text)
@@ -80,6 +88,8 @@ export function DiscussCreatePost(props){
   const handleTypeVendor = (text) => {
     setVendor(text)
   }
+
+  // document.cookie = "userId: 123";
 
   const handleCreatePost = () => {
     const postData  = {
@@ -90,9 +100,10 @@ export function DiscussCreatePost(props){
     // make API call
     // if API call successful, call passed in function that updates state
     // TODO use id, createdTimestamp, and updatedTimestamp from api call return
-    createPost({id: 999, title, description: content, category})
-    const posts = getPostsWithCommentIdsAndUpvotes(category, 0, 100)
-    console.log(posts)
+    makePost(1, title, content, categories, vendors, false)
+    // createPost({id: 999, title, description: content, category})
+    // const posts = getPostsWithCommentIdsAndUpvotes(category, 0, 100)
+    // console.log(posts)
     handleExit();
   }
 
@@ -159,7 +170,7 @@ export function DiscussCreatePost(props){
           placeholder="Enter your post"
           numberOfLines={12}
         />
-        <View style={[styles.labeledInput, {zIndex: 100, marginTop: 8}]}>
+        {/* <View style={[styles.labeledInput, {zIndex: 100, marginTop: 8}]}>
           {showVendorDropdown && (<Dropdown items={vendors} onSelect={onSelectVendor} style={styles.dropdown}/>)}
           <Text style={styles.label}>Tag Software</Text>
           <TextInput 
@@ -170,7 +181,16 @@ export function DiscussCreatePost(props){
             onFocus={() => setShowVendorDropdown(true)}
             onBlur={() => setTimeout(() => setShowVendorDropdown(false), 100)}
           />
-        </View>
+        </View> */}
+        <RTextInput 
+          style={{marginTop: 8, position: 'relative', zIndex: 100}}
+          label="Tag Software"
+          onChangeText={handleTypeVendor}
+          value={vendor}
+          placeholder="Enter Text"
+          selections={vendors}
+          onSelect={onSelectVendor}
+        />
         {/* <SelectedCategories selectedCategories={selectedCategories}/> */}
         <SelectedItems items={selectedVendors.map(item => item.name)} onDelete={handleDeleteVendor}/>
         <View style={[styles.buttonContainer, styles.item]}>
@@ -181,6 +201,15 @@ export function DiscussCreatePost(props){
     </Card>
   )
 }
+
+const stp = (state) => ({
+  vendors: state.vendors,
+})
+const dtp = (dispatch) => ({
+  makePost: makePost(dispatch),
+  fetchVendors: fetchVendors(dispatch),
+});
+export const DiscussCreatePost = connect(stp, dtp)(RawDiscussCreatePost);
 
 
 const styles = StyleSheet.create({
@@ -241,3 +270,4 @@ const styles = StyleSheet.create({
     left: 96,
   },
 })
+

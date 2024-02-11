@@ -67,4 +67,16 @@ export function getCompany(id){
   return companies.find(item => item.id === id);
 }
 
+export function fetchVendors(dispatch){
+  return (page = 1) => {
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/getCommentsForPost?postId=45`
+    fetch(url).then(res => {
+      return res.json()
+    }).then(json => {
+      console.log("VENDORS", json)
+      dispatch({type: "VENDORS_SUCCESS", payload: json.posts})
+    })
+  }
+}
+
 

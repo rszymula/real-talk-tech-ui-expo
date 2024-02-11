@@ -56,6 +56,9 @@ const initialState = {
   // followups: [],
   // usersLoading: false,
   // usersError: null,
+  vendors: [{id: 1, name: "Asana"}, {id: 2, name: "Square"}],
+  vendorsLoading: false,
+  vendorsError: null,
 }
 
 export function reducer(state = initialState, action){
@@ -124,7 +127,7 @@ export function reducer(state = initialState, action){
           [action.payload]: false,
         },
       }
-    case 'ERROR':
+    case 'POSTS_ERROR':
       return {
         ...state,
         postsLoading: {
@@ -137,9 +140,43 @@ export function reducer(state = initialState, action){
         },
       }
     case 'COMMENTS_SUCCESS':
-      return {...state, comments: [...state.comments, action.payload]}
-    case 'COMPANIES_SUCCESS':
-      return {...state, companies: [...state.companies, action.payload]}
+      return {
+        ...state,
+        comments: [...state.comments, ...action.payload],
+        commentsLoading: false,
+        commentsError: false,
+      }
+    case 'COMMENTS_LOADING':
+      return {
+        ...state,
+        commentsLoading: true,
+        commentsError: false,
+      }
+    case 'COMMENTS_ERROR':
+      return {
+        ...state,
+        commentsLoading: false,
+        commentsError: true,
+      }
+    case 'VENDORS_SUCCESS':
+      return {
+        ...state,
+        vendors: [...state.vendors, ...action.payload],
+        vendorsLoading: false,
+        vendorsError: false,
+      }
+    case 'VENDORS_LOADING':
+      return {
+        ...state,
+        vendorsLoading: true,
+        vendorsError: false,
+      }
+    case 'VENDORS_ERROR':
+      return {
+        ...state,
+        vendorsLoading: false,
+        vendorsError: true,
+      }
     // case 'GET_QUESTIONS':
     //   return {...state, questions: [...state.questions, action.payload]}
     // case 'GET_FOLLOWUPS':

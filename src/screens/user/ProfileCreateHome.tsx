@@ -91,6 +91,15 @@ export function ProfileCreateHome({route, navigation}) {
               onFocus={() => setShowVendorDropdown(true)}
               onBlur={() => setTimeout(() => setShowVendorDropdown(false), 100)}
             />
+             {/* <RTextInput 
+              style={{marginTop: 8, position: 'relative', zIndex: 100}}
+              label="Tag Software"
+              onChangeText={handleTypeVendor}
+              value={vendor}
+              placeholder="Enter Text"
+              selections={vendors}
+              onSelect={onSelectVendor}
+            /> */}
           </View>
           {/* <SelectedCategories selectedCategories={selectedCategories}/> */}
           <SelectedItems items={selectedVendors.map(item => item.name)} onDelete={handleDeleteVendor}/>

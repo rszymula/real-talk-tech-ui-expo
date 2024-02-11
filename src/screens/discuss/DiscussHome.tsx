@@ -4,7 +4,7 @@ import { TabView, SceneMap } from 'react-native-tab-view';
 import { Card } from '../../components/core/Card';
 import { InputBar } from '../../components/core/InputBar';
 import { Separator } from '../../components/core/Separator';
-import { RouteNames, INPUT_PLACEHOLDER, CategoryNames } from '../../constants/constants';
+import { RouteNames, INPUT_PLACEHOLDER, CategoryNames, categories } from '../../constants/constants';
 import { colors } from '../../context/themes';
 // import { getComments, getPostsWithCommentIdsAndUpvotes } from '../services/DiscussService';
 import { store } from '../../state/basicStore';
@@ -61,18 +61,20 @@ function CommentsList({comments}){
   )
 }
 
-function Post({ id, title, body, user, commentIds, createdTimestamp, currentCategory, navigation }){
+
+
+function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentCategory, navigation, fetchComments, comments, commentsLoading, commentsError}){
 
   console.log("AZ", title, body)
   const {id: userId, username} = user;
 
-  const { getComments } = store;
+  // const { getComments } = store;
 
   const commentCount = commentIds?.length || 0;
 
   const [commentsExpanded, setCommentsExpanded] = React.useState(false);
-  const [page, setPage] = React.useState(0);
-  const [comments, setComments] = React.useState([]);
+  // const [page, setPage] = React.useState(0);
+  // const [comments, setComments] = React.useState([]);
 
   const handleCommentsPress = () => {
     setCommentsExpanded(!commentsExpanded)
@@ -83,12 +85,11 @@ function Post({ id, title, body, user, commentIds, createdTimestamp, currentCate
   }
 
   React.useEffect(() => {
-    if(commentsExpanded && comments.length === 0){
-      
-      const mockComments = getComments(id, page, COMMENT_OFFSET);
-
-      setComments([...mockComments]);
-    }
+    // if(commentsExpanded && comments.length === 0){
+    //   const mockComments = getComments(id, page, COMMENT_OFFSET);
+    //   setComments([...mockComments]);
+    // }
+    fetchComments(id)
   }, [commentsExpanded])
   
   // console.log("render", comments, commentsExpanded)
@@ -113,16 +114,34 @@ function Post({ id, title, body, user, commentIds, createdTimestamp, currentCate
           <Text style={[styles.captionText, styles.userCaption]}>{`${username} | ${createdTimestamp}`}</Text>
         </TouchableOpacity>
       </View>
-      {commentsExpanded ? <CommentsList comments={comments} /> : null}
+      {commentsExpanded ? 
+        (<>
+          <CommentsList comments={comments} />
+          {commentsLoading && <ActivityIndicator style={{marginTop: 16}} />}
+          <View style={{margin: 32}}>
+            <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading data..."}</Text>
+            <Link onPress={() => {fetchComments(id)}} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
+          </View>
+        </>) : null
+      }
     </View>
   )
 }
 
+const stpPost = (state) => ({comments: state.comments, commentsLoading: state.commentsLoading, commentsError: state.commentsError});
+const dtpPost  = (dispatch) => ({
+  fetchComments: fetchComments(dispatch),
+})
+export const Post = connect(stpPost , dtpPost )(RawPost);
+
+
+
 function RawDiscussHome(props){
 
-  const {currentCategory, navigation, posts, postsLoading, postsError, getPosts} = props
+  const {currentCategory, navigation, posts, postsLoading, postsError, fetchPosts} = props
   console.log("QZ", posts)
   const postsByCategory = posts[currentCategory]
+  const categoryId = categories.find(item => item.name === currentCategory) || 0
 
   console.log("PZ", posts, currentCategory, postsByCategory)
 
@@ -142,8 +161,7 @@ function RawDiscussHome(props){
 
 
     //fetchPosts(1, 1)
-
-    getPosts(1, 1)
+    fetchPosts(categoryId, 1)
 
     // setTimeout(() => {
     //   if(rand > 0.01){
@@ -182,21 +200,21 @@ function RawDiscussHome(props){
       {postsLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
       <View style={{margin: 32}}>
         <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading data..."}</Text>
-        <Link onPress={() => {}} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
+        <Link onPress={() => {fetchPosts(categoryId, 1)}} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
       </View>
     </Card>
   )
 }
 
-const stp = (state) => ({posts: state.posts, postsLoading: state.postsLoading, postsError: state.postsError});
-const dtp = (dispatch) => ({
-  getPosts: createUser(dispatch), 
+const stpDiscussHome = (state) => ({posts: state.posts, postsLoading: state.postsLoading, postsError: state.postsError});
+const dtpDiscussHome  = (dispatch) => ({
+  fetchPosts: fetchPosts(dispatch), 
   // get: (data) => dispatch({type: "POSTS_SUCCESS", payload: data}),
   // loading: (category) => dispatch({type: "POSTS_LOADING", payload: category}),
   // error: (category) => dispatch({type: "POSTS_ERROR", payload: category}),
 })
 
-export const DiscussHome = connect(stp, dtp)(RawDiscussHome);
+export const DiscussHome = connect(stpDiscussHome , dtpDiscussHome )(RawDiscussHome);
 
 const styles = StyleSheet.create({
   container: {
