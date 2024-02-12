@@ -5,6 +5,7 @@ import { colors } from '../../context/themes';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png'; //'../../assets/titleWhite.png';
 import { RouteNames } from '../../constants/constants';
 import { Link } from '../../components/core/Link';
+import { RTextInput } from '../../components/core/RTextInput';
 
 export function ProfileLogin({navigation}) {
 
@@ -31,13 +32,13 @@ export function ProfileLogin({navigation}) {
           <Text style={{color: colors.textLowlight, margin: 8}}>
             Login to join the conversation!
           </Text>
-            <TextInput 
+            <RTextInput 
               onChangeText={setEmail}
               value={email}
               placeholder={"Enter your email"}
               style={styles.input}
             />
-            <TextInput 
+            <RTextInput 
               onChangeText={setPassword}
               value={password}
               placeholder={"Enter your password"}
@@ -52,14 +53,14 @@ export function ProfileLogin({navigation}) {
 
 const styles = StyleSheet.create({
   input: {
-    borderColor: colors.border,
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: 8,
-    margin: 8,
-    color: colors.textRegular,
-    fontSize: 12,
-    width: 256,
+    // borderColor: colors.border,
+    // borderWidth: 1,
+    // borderRadius: 4,
+    // padding: 8,
+    marginTop: 8,
+    // color: colors.textRegular,
+    // fontSize: 12,
+    // width: 256,
   },
   container: {
     backgroundColor: colors.background,

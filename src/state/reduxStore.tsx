@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { CategoryNames } from '../constants/constants';
+import { CategoryNames, categories } from '../constants/constants';
 
 export const ReduxContext = React.createContext(undefined);
 
@@ -37,6 +37,9 @@ export function createStore(reducer){
 // }
 
 const initialState = {
+  industry: [], // What industry are you in?
+  categories, // What do you do?
+  interests: [], // What software / tech interests you?
   userId: -1, 
   users: [],
   userLoading: false,

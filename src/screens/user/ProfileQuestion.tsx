@@ -4,6 +4,8 @@ import { ButtonType, Button } from '../../components/core/Button';
 import { BUYERAI_PLACEHOLDER, DEFAULT_TAB, RouteNames } from '../../constants/constants';
 import { colors } from '../../context/themes';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png'; // '../../assets/titleWhite.png';
+import { RTextInput } from '../../components/core/RTextInput';
+import { connect } from '../../state/reduxStore';
 
 enum ProfileStep {
   INDUSTRY = "Industry",
@@ -11,36 +13,54 @@ enum ProfileStep {
   SOFTWARE = "Software",
 }
 
-const steps = {
-  [ProfileStep.INDUSTRY]: {
-    next: ProfileStep.DO,
-    description: "What industry are you in?",
-  },
-  [ProfileStep.DO]: {
-    next: ProfileStep.SOFTWARE,
-    description: "What do you do?",
-  },
-  [ProfileStep.SOFTWARE]: {
-    next: null,
-    description: "What type of software do you want to learn about and/or discuss?",
-  },
+function getStepDetailsFunc(industry, categories, interests){
+  return function(step){
+    switch(step){
+      case ProfileStep.INDUSTRY:
+        return {
+          next: ProfileStep.DO,
+          description: "What industry are you in?",
+          selections: industry,
+        };
+      case ProfileStep.DO:
+        return {
+          next: ProfileStep.SOFTWARE,
+          description: "What do you do?",
+          selections: categories,
+        };
+      case ProfileStep.SOFTWARE:
+        return {
+          next: null,
+          description: "What type of software do you want to learn about and/or discuss?",
+          selections: interests,
+        };
+      default:
+        return categories;
+    }
+  }
 }
 
 
-export function ProfileQuestion({route, navigation}) {
+function RawProfileQuestion({route, navigation, industry, categories, interests}) {
 
-  const [item, setItem] = React.useState('')
+  const [text, setText] = React.useState('')
+  const [items, setItems] = React.useState([])
 
   const {step} = route.params;
-  const next = steps[step].next
+  const stepDetails = getStepDetailsFunc(industry, categories, interests)(step)
+  const {next, description, selections} = stepDetails
 
   const handleNextPress = () => {
     console.log(next)
     if(!next){
       navigation.navigate(DEFAULT_TAB)
     }else{
-      navigation.navigate(RouteNames.PROFILE_QUESTION, {...route.params, step: next, [step]: item})
+      navigation.navigate(RouteNames.PROFILE_QUESTION, {...route.params, step: next, [step]: items})
     }
+  }
+
+  const handleOnSelect = (item) => {
+    setItems(items => ([...items, item]))
   }
 
   return (
@@ -48,38 +68,42 @@ export function ProfileQuestion({route, navigation}) {
       <View style={{alignItems: 'center', margin: 32}}>
       <Image source={REALTALKTECH_WHITE} style={{width: 256, height: 32}}/>
         <Text style={styles.title}>
-            {steps[step].description}
+            {description}
           </Text>
           <Text style={{color: colors.textLowlight, margin: 8,}}>
-            spmething something something
+            something something something
           </Text>
-            <TextInput 
-              onChangeText={setItem}
-              value={item}
-              placeholder={"Choose Option"}
-              style={styles.input}
-            />
+          <RTextInput 
+            onChangeText={setText}
+            value={text}
+            placeholder={"Choose Option"}
+            selections={selections}
+            onSelect={handleOnSelect}
+            style={styles.input}
+          />
           <Button title={!!next ? "Next Step" : "Finish"} onPress={handleNextPress} styles={{marginTop: 8}}/>
       </View>
     </View>
   )
 }
 
+const stp = (state) => ({
+  industry: state.industry,
+  categories: state.categories,
+  interests: state.interests,
+});
+const dtp = (dispatch) => ({
+});
+export const ProfileQuestion = connect(stp, dtp)(RawProfileQuestion);
+
 const styles = StyleSheet.create({
   input: {
-    borderColor: colors.border,
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: 8,
-    margin: 8,
-    color: colors.textRegular,
-    fontSize: 12,
-    width: 256,
+    marginTop: 8,
   },
-  container: {
-    backgroundColor: colors.background,
-    height: "100%",
-  },
+  // container: {
+  //   backgroundColor: colors.background,
+  //   // height: "100%",
+  // },
   title: {
     color: colors.textHighlight,
     marginTop: 32,

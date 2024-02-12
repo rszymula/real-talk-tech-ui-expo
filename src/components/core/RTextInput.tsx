@@ -65,12 +65,6 @@ export function RTextInput({
 }
 
 const styles = StyleSheet.create({
-  textbox: {
-    color: colors.textLowlight,
-    backgroundColor: colors.input,
-    padding: 8,
-    width: "100%",
-  },
   labeledInput: {
     flexDirection: 'row',
     backgroundColor: colors.input,
@@ -79,10 +73,25 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
   },
   label: {
-    padding: 16,
+    alignSelf: 'center',
+    // paddingLeft: 8,
+    // paddingRight: 8,
+    fontSize: 12,
+    padding: 8,
     borderRightWidth: 1,
     borderRightColor: colors.border,
+    // borderColor: 'red',
+    // borderWidth: 1,
     color: colors.textHighlight,
+  },
+  textbox: {
+    color: colors.textRegular,
+    fontSize: 12,
+    backgroundColor: colors.input,
+    padding: 8,
+    borderRadius: 4,
+    // width: "100%",
+    flex: 1,
   },
   dropdown: {
     position: 'absolute',

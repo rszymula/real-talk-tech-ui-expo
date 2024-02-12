@@ -7,6 +7,7 @@ import { RouteNames } from '../../constants/constants';
 import { SelectedItems } from '../../components/common/SelectedItems';
 import { Dropdown } from '../../components/core/Dropdown';
 import { getCompanies } from '../../services/DiscoverService';
+import { RTextInput } from '../../components/core/RTextInput';
 
 export function ProfileCreateHome({route, navigation}) {
 
@@ -56,31 +57,33 @@ export function ProfileCreateHome({route, navigation}) {
           <Text style={{color: colors.textLowlight, margin: 8}}>
             Choose to join anonymously or as yourself
           </Text>
-            <TextInput 
+          <View>
+            <RTextInput 
               onChangeText={setFirstName}
               value={firstName}
               placeholder={"Enter your first name"}
               style={styles.inputText}
             />
-            <TextInput 
+            <RTextInput 
               onChangeText={setLastName}
               value={lastName}
-              placeholder={"Enter your last name"}
+              placeholder={"Enter your last name (optional)"}
               style={styles.inputText}
             />
-            <TextInput 
+            <RTextInput 
               onChangeText={setUsername}
               value={username}
               placeholder={"Create your username"}
               style={styles.inputText}
             />
-            <TextInput
+            <RTextInput
               onChangeText={setBio}
               value={bio}
               placeholder={"Enter bio description"}
+              numberOfLines={12}
               style={styles.inputText}
             />
-            <View style={[styles.labeledInput, {zIndex: 100, marginTop: 8}]}>
+            {/* <View style={[styles.labeledInput, {zIndex: 100, marginTop: 8}]}>
             {showVendorDropdown && (<Dropdown items={vendors} onSelect={onSelectVendor} style={styles.dropdown}/>)}
             <Text style={styles.label}>Tag Software</Text>
             <TextInput 
@@ -91,20 +94,21 @@ export function ProfileCreateHome({route, navigation}) {
               onFocus={() => setShowVendorDropdown(true)}
               onBlur={() => setTimeout(() => setShowVendorDropdown(false), 100)}
             />
-             {/* <RTextInput 
-              style={{marginTop: 8, position: 'relative', zIndex: 100}}
-              label="Tag Software"
-              onChangeText={handleTypeVendor}
-              value={vendor}
-              placeholder="Enter Text"
-              selections={vendors}
-              onSelect={onSelectVendor}
-            /> */}
-          </View>
+          </View> */}
+          <RTextInput 
+            style={{marginTop: 8, position: 'relative', zIndex: 100}}
+            label="Tag Software"
+            onChangeText={handleTypeVendor}
+            value={vendor}
+            placeholder="Enter Text"
+            selections={vendors}
+            onSelect={onSelectVendor}
+          />
           {/* <SelectedCategories selectedCategories={selectedCategories}/> */}
           <SelectedItems items={selectedVendors.map(item => item.name)} onDelete={handleDeleteVendor}/>
         
-          <Button title="Next Step" onPress={handleNextPress} styles={{marginTop: 8}}/>
+          <Button title="Next Step" onPress={handleNextPress} styles={{marginTop: 8, flex: 1, position: 'relative'}}/>
+        </View>
       </View>
     </View>
   )
@@ -144,9 +148,10 @@ const styles = StyleSheet.create({
     color: colors.textHighlight,
   },
   inputText: {
-    width: "100%",
-    paddingLeft: 8,
-    color: colors.textLowlight,
+    // width: "100%",
+    // paddingLeft: 8,
+    marginTop: 8,
+    //color: colors.textLowlight,
   },
   dropdown: {
     top: 48,
