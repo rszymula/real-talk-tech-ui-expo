@@ -6,8 +6,10 @@ import REALTALKTECH_WHITE from '../../assets/titleWhite.png'; //'../../assets/ti
 import { RouteNames } from '../../constants/constants';
 import { Link } from '../../components/core/Link';
 import { RTextInput } from '../../components/core/RTextInput';
+import { connect } from '../../state/reduxStore';
+import { login } from '../../services/UserServices';
 
-export function ProfileLogin({navigation}) {
+function RawProfileLogin({navigation, login}) {
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -19,6 +21,7 @@ export function ProfileLogin({navigation}) {
 
   const handleLoginPress = () => {
     // TODO do a bunch of user account validation authentication authorization stuff
+    login(email, password)
     navigation.navigate(RouteNames.DISCUSS_HOME)
   }
 
@@ -50,6 +53,14 @@ export function ProfileLogin({navigation}) {
     </View>
   )
 }
+
+const stp = (state) => ({
+
+})
+const dtp = (dispatch) => ({
+  login: login(dispatch),
+})
+export const ProfileLogin = connect(stp, dtp)(RawProfileLogin)
 
 const styles = StyleSheet.create({
   input: {

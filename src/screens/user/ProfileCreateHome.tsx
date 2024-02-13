@@ -8,14 +8,15 @@ import { SelectedItems } from '../../components/common/SelectedItems';
 import { Dropdown } from '../../components/core/Dropdown';
 import { getCompanies } from '../../services/DiscoverService';
 import { RTextInput } from '../../components/core/RTextInput';
+import { connect } from '../../state/reduxStore';
 
-export function ProfileCreateHome({route, navigation}) {
+export function ProfileCreateHome({route, navigation, signup}) {
 
-  console.log("ESPECIALLY you")
-
-  const [firstName, setFirstName] = React.useState('');
-  const [lastName, setLastName] = React.useState('');
+  // const [firstName, setFirstName] = React.useState('');
+  // const [lastName, setLastName] = React.useState('');
+  const [fullname, setFullname] = React.useState('');
   const [username, setUsername] = React.useState('');
+  const [company, setCompany] = React.useState('');
   const [bio, setBio] = React.useState('');
 
   const { email, password } = route?.params;
@@ -44,7 +45,9 @@ export function ProfileCreateHome({route, navigation}) {
   }
 
   const handleNextPress = () => {
-    navigation.navigate(RouteNames.PROFILE_QUESTION, {email, password, firstName, lastName, username, bio, step: "Industry"})
+    // const answers = {email, password, firstName, lastName, username, bio}
+    // navigation.navigate(RouteNames.PROFILE_QUESTION, {answers, step: "Industry"})
+    navigation.navigate(RouteNames.PROFILE_QUESTION, {email, password, fullname, username, bio, company, techStack: selectedVendors, step: "Industry"})
   }
 
   return (
@@ -59,6 +62,12 @@ export function ProfileCreateHome({route, navigation}) {
           </Text>
           <View>
             <RTextInput 
+              onChangeText={setFullname}
+              value={fullname}
+              placeholder={"Enter your full name"}
+              style={styles.inputText}
+            />
+            {/* <RTextInput 
               onChangeText={setFirstName}
               value={firstName}
               placeholder={"Enter your first name"}
@@ -69,11 +78,17 @@ export function ProfileCreateHome({route, navigation}) {
               value={lastName}
               placeholder={"Enter your last name (optional)"}
               style={styles.inputText}
-            />
+            /> */}
             <RTextInput 
               onChangeText={setUsername}
               value={username}
               placeholder={"Create your username"}
+              style={styles.inputText}
+            />
+            <RTextInput 
+              onChangeText={setCompany}
+              value={company}
+              placeholder={"Enter your current company"}
               style={styles.inputText}
             />
             <RTextInput
@@ -113,6 +128,14 @@ export function ProfileCreateHome({route, navigation}) {
     </View>
   )
 }
+
+// const stp = (state) => ({
+
+// })
+// const dtp = (dispatch) => ({
+//   signup: signup(dispatch),
+// })
+// export const CreateProfile = connect(stp, dtp)(RawProfileCreateHome)
 
 const styles = StyleSheet.create({
   input: {

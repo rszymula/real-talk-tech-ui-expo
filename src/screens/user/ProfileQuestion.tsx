@@ -6,6 +6,7 @@ import { colors } from '../../context/themes';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png'; // '../../assets/titleWhite.png';
 import { RTextInput } from '../../components/core/RTextInput';
 import { connect } from '../../state/reduxStore';
+import { signup } from '../../services/UserServices';
 
 enum ProfileStep {
   INDUSTRY = "Industry",
@@ -21,18 +22,21 @@ function getStepDetailsFunc(industry, categories, interests){
           next: ProfileStep.DO,
           description: "What industry are you in?",
           selections: industry,
+          // field: "industry",
         };
       case ProfileStep.DO:
         return {
           next: ProfileStep.SOFTWARE,
           description: "What do you do?",
           selections: categories,
+          // field: "categories",
         };
       case ProfileStep.SOFTWARE:
         return {
           next: null,
           description: "What type of software do you want to learn about and/or discuss?",
           selections: interests,
+          // field: "interests",
         };
       default:
         return categories;
@@ -41,20 +45,54 @@ function getStepDetailsFunc(industry, categories, interests){
 }
 
 
-function RawProfileQuestion({route, navigation, industry, categories, interests}) {
+const bodySignup = {
+  fullname: 'mike smith',
+  username: 'msmith21',
+  email: 'msmitty1@gmail.com',
+  password: 'pass123',
+  techStack: [],
+  currentCompany: "HERE",
+  industryInvolvement: [],
+  workCategories: [],
+  linkedinUrl: "www.linedin.com/mikeyman",
+  bio: "a little bit aboutme",
+  interestAreas: [],
+}
+
+function RawProfileQuestion({route, navigation, industry, categories, interests, signup}) {
 
   const [text, setText] = React.useState('')
   const [items, setItems] = React.useState([])
 
-  const {step} = route.params;
+  // const {step, answers} = route.params;
+  // const { email, password, firstName, lastName, username, bio, selectedIndustry, selectedCategories, selectedInterests } = answers
+  const { step } = route.params
   const stepDetails = getStepDetailsFunc(industry, categories, interests)(step)
   const {next, description, selections} = stepDetails
 
   const handleNextPress = () => {
     console.log(next)
     if(!next){
+      const body = {
+        fullname: route.params.fullname,
+        username: route.params.username,
+        email: route.params.email,
+        password: route.params.password,
+        techStack: route.params.techStack,
+        currentCompany: route.params.company,
+        industryInvolvement: route.params[ProfileStep.INDUSTRY],
+        workCategories: route.params[ProfileStep.DO],
+        linkedinUrl: route.params.linkedinUrl,
+        bio: route.params.bio,
+        interestAreas: route.params[ProfileStep.SOFTWARE],
+      }
+      signup(body)
       navigation.navigate(DEFAULT_TAB)
     }else{
+      // const answers = {
+      //   ...route.params.answers,
+      //   [step]: 
+      // }
       navigation.navigate(RouteNames.PROFILE_QUESTION, {...route.params, step: next, [step]: items})
     }
   }
@@ -93,6 +131,7 @@ const stp = (state) => ({
   interests: state.interests,
 });
 const dtp = (dispatch) => ({
+  signup: signup(dispatch),
 });
 export const ProfileQuestion = connect(stp, dtp)(RawProfileQuestion);
 

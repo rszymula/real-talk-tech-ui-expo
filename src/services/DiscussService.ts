@@ -526,10 +526,9 @@ export function makeComment(dispatch){
 
 export function makePost(dispatch){
   return (userId, title, body, categories, vendors, isAnonymous) => {
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/makeComment`
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/makePost`
     const params = {
       method: "POST",
-      
       body: JSON.stringify({
         userId,
         title,
@@ -543,10 +542,10 @@ export function makePost(dispatch){
       return res.json()
       // return res.text()
     }).then(json => {
-      console.log("ZCOMMENTS", json)
-      dispatch({type: "POSTS_SUCCESS", payload: json})
+      console.log("GOOD-makePost", json)
+      // dispatch({type: "POSTS_SUCCESS", payload: json})
     }).catch((err) => {
-      console.log("ERRZ", err)
+      console.log("ERR-makePost", err)
     })
   }
 }

@@ -184,6 +184,25 @@ export function reducer(state = initialState, action){
     //   return {...state, questions: [...state.questions, action.payload]}
     // case 'GET_FOLLOWUPS':
     //   return {...state, followups: [...state.followups, action.payload]}
+    case 'USER_SUCCESS':
+      return {
+        ...state,
+        users: [...state.users, action.payload],
+        userLoading: false,
+        userError: false,
+      }
+    case 'USER_LOADING':
+      return {
+        ...state,
+        userLoading: true,
+        userError: false,
+      }
+    case 'USER_ERROR':
+      return {
+        ...state,
+        userLoading: false,
+        userError: true,
+      }
     default:
       return state
   }
