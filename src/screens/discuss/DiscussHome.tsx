@@ -146,7 +146,6 @@ function RawDiscussHome(props){
   console.log("PZ", posts, currentCategory, postsByCategory)
 
   React.useEffect(() => {
-    console.log("FUUUZZ", currentCategory)
     // loading(currentCategory)
     console.log("BZ", currentCategory)
     const filtered = currentCategory === CategoryNames.HOME ? 

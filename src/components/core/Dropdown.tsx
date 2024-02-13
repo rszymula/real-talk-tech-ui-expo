@@ -102,12 +102,10 @@ export function Dropdown({
     // // if(hoverCurr === hoverLast){
     // //   onHoverOut()
     // // }
-    // console.log("FUUUUUCK")
     // // setHoverCurr(hoverCurr => EMPTY)
     // setHoverCurr(EMPTY)
     // //console.log({hoverCurr})
     // setTimeout(() => {
-    //   console.log("PISS", hoverCurr)
     //   if(hoverCurr === EMPTY){
     //     console.log("DID IT")
     //     onHoverOut()

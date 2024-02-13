@@ -29,7 +29,6 @@ export function RTextInput({
           items={filteredSelections}
           onSelect={onSelect}
           onHoverOut={() => {
-            console.log("HORREEEEZ")
             setShowDropdown(false)
           }}
           //hoverItem={hoverItem}
