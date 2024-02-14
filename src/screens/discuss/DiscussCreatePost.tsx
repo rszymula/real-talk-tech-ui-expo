@@ -71,7 +71,7 @@ export function RawDiscussCreatePost(props){
 
   // const showDropdown = category.length > 0
 
-  const { navigation, route, makePost, vendors, fetchVendors } = props;
+  const { navigation, route, makePost, vendors, fetchVendors, auth } = props;
 
   // const vendors = getCompanies()
 
@@ -92,15 +92,22 @@ export function RawDiscussCreatePost(props){
   // document.cookie = "userId: 123";
 
   const handleCreatePost = () => {
-    const postData  = {
-      category,
+    // const postData  = {
+    //   category,
+    //   title,
+    //   content,
+    // };
+    console.log({
       title,
       content,
-    };
+      selectedCategories,
+      vendors,
+      auth
+    })
     // make API call
     // if API call successful, call passed in function that updates state
     // TODO use id, createdTimestamp, and updatedTimestamp from api call return
-    makePost(1, title, content, categories, vendors, false)
+    makePost(title, content, selectedCategories, vendors, false, auth)
     // createPost({id: 999, title, description: content, category})
     // const posts = getPostsWithCommentIdsAndUpvotes(category, 0, 100)
     // console.log(posts)
@@ -204,6 +211,7 @@ export function RawDiscussCreatePost(props){
 
 const stp = (state) => ({
   vendors: state.vendors,
+  auth: state.auth,
 })
 const dtp = (dispatch) => ({
   makePost: makePost(dispatch),

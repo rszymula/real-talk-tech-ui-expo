@@ -47,7 +47,8 @@ export function ProfileCreateHome({route, navigation, signup}) {
   const handleNextPress = () => {
     // const answers = {email, password, firstName, lastName, username, bio}
     // navigation.navigate(RouteNames.PROFILE_QUESTION, {answers, step: "Industry"})
-    navigation.navigate(RouteNames.PROFILE_QUESTION, {email, password, fullname, username, bio, company, techStack: selectedVendors, step: "Industry"})
+    const techStack = selectedVendors.map(vendor => vendor.id)
+    navigation.navigate(RouteNames.PROFILE_QUESTION, {email, password, fullname, username, bio, company, techStack, step: "Industry"})
   }
 
   return (

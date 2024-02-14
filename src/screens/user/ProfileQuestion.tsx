@@ -84,7 +84,8 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
         workCategories: route.params[ProfileStep.DO],
         linkedinUrl: route.params.linkedinUrl,
         bio: route.params.bio,
-        interestAreas: route.params[ProfileStep.SOFTWARE],
+        // interestAreas: route.params[ProfileStep.SOFTWARE],
+        interestAreas: items,
       }
       signup(body)
       navigation.navigate(DEFAULT_TAB)

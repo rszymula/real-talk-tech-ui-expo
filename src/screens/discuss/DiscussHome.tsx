@@ -17,27 +17,30 @@ import { createUser } from '../../services/UserServices';
 const POST_PAGE_OFFSET = 10;
 const COMMENT_OFFSET = 10;
 
-function Comment({text, username, upvotes, createdTimestamp}) {
-  console.log(text)
+function Comment({commentText, username, upvotes, creationTime}) {
+  console.log(commentText)
   return (
     <>
       <View>
         <Text style={[styles.captionText, styles.categoryCaption]}>
-          {`${username} | ${createdTimestamp}`}
+          {`${username} | ${creationTime}`}
         </Text>
-        <Text style={[styles.bodyText, styles.description]}>{text}</Text>
+        <Text style={[styles.bodyText, styles.description]}>{commentText}</Text>
       </View>
     </>
   )
 }
 
-function CommentsList({comments}){
+function CommentsList({comments, postId, makeComment}){
 
   const handleSubmitComment = (input) => {
     console.log("Commented", input)
     // make API call
     // if succcessful call passed in function to store the new state
+    makeComment(postId, "comment text here")
   }
+
+  console.log("LISTW", comments)
 
   return (
     <View>
@@ -63,14 +66,15 @@ function CommentsList({comments}){
 
 
 
-function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentCategory, navigation, fetchComments, comments, commentsLoading, commentsError}){
+function RawPost({ id, title, body, user, numComments, createdTimestamp, currentCategory, navigation, fetchComments, makeComment, comments, commentsLoading, commentsError}){
 
-  console.log("AZ", title, body)
+  // console.log("AZ", title, body)
   const {id: userId, username} = user;
 
   // const { getComments } = store;
 
-  const commentCount = commentIds?.length || 0;
+  // const commentCount = commentIds?.length || 0;
+  // const numComments = commentIds?.length || 0;
 
   const [commentsExpanded, setCommentsExpanded] = React.useState(false);
   // const [page, setPage] = React.useState(0);
@@ -89,12 +93,16 @@ function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentC
     //   const mockComments = getComments(id, page, COMMENT_OFFSET);
     //   setComments([...mockComments]);
     // }
-    fetchComments(id)
+    if(commentsExpanded){
+      fetchComments(id)
+    }
+    //fetchComments(id)
   }, [commentsExpanded])
   
   // console.log("render", comments, commentsExpanded)
 
-  const commentText = commentCount === 1 ? `${commentCount} Comment` : `${commentCount} Comments`;
+  // const commentText = commentCount === 1 ? `${commentCount} Comment` : `${commentCount} Comments`;
+  const commentText = numComments === 1 ? `${numComments} Comment` : `${numComments} Comments`;
 
   return (
     <View style={styles.container}>
@@ -116,7 +124,7 @@ function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentC
       </View>
       {commentsExpanded ? 
         (<>
-          <CommentsList comments={comments} />
+          <CommentsList comments={comments} postId={id} makeComment={makeComment} />
           {commentsLoading && <ActivityIndicator style={{marginTop: 16}} />}
           <View style={{margin: 32}}>
             <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading data..."}</Text>
@@ -131,6 +139,7 @@ function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentC
 const stpPost = (state) => ({comments: state.comments, commentsLoading: state.commentsLoading, commentsError: state.commentsError});
 const dtpPost  = (dispatch) => ({
   fetchComments: fetchComments(dispatch),
+  makeComment: makeComment(dispatch)
 })
 export const Post = connect(stpPost , dtpPost )(RawPost);
 
@@ -138,12 +147,12 @@ export const Post = connect(stpPost , dtpPost )(RawPost);
 
 function RawDiscussHome(props){
 
-  const {currentCategory, navigation, posts, postsLoading, postsError, fetchPosts} = props
-  console.log("QZ", posts)
-  const postsByCategory = posts[currentCategory]
+  const {currentCategory, navigation, feed, feedLoading, postsError, fetchPosts, auth} = props
+  console.log("QZ", feed)
+  const postsByCategory = feed[currentCategory]
   const categoryId = categories.find(item => item.name === currentCategory) || 0
 
-  console.log("PZ", posts, currentCategory, postsByCategory)
+  console.log("PZ", feed, currentCategory, postsByCategory)
 
   React.useEffect(() => {
     // loading(currentCategory)
@@ -158,9 +167,9 @@ function RawDiscussHome(props){
     const rand = Math.random();
     console.log("RANDZ", rand, data)
 
-
+    const categoryId = categories.find(item => item.name === currentCategory)?.id || -1
     //fetchPosts(1, 1)
-    fetchPosts(categoryId, 1)
+    fetchPosts(categoryId, auth)
 
     // setTimeout(() => {
     //   if(rand > 0.01){
@@ -196,7 +205,7 @@ function RawDiscussHome(props){
           ItemSeparatorComponent={() => <Separator />}
         />
       </View>
-      {postsLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
+      {feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
       <View style={{margin: 32}}>
         <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading data..."}</Text>
         <Link onPress={() => {fetchPosts(categoryId, 1)}} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
@@ -205,7 +214,12 @@ function RawDiscussHome(props){
   )
 }
 
-const stpDiscussHome = (state) => ({posts: state.posts, postsLoading: state.postsLoading, postsError: state.postsError});
+const stpDiscussHome = (state) => ({
+  feed: state.feed,
+  feedLoading: state.feedLoading,
+  feedError: state.feedError,
+  auth: state.auth,
+});
 const dtpDiscussHome  = (dispatch) => ({
   fetchPosts: fetchPosts(dispatch), 
   // get: (data) => dispatch({type: "POSTS_SUCCESS", payload: data}),

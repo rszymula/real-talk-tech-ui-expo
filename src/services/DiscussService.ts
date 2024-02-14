@@ -386,125 +386,66 @@ export function getPostsWithCommentIdsAndUpvotes(category: CategoryNames, page: 
 }
 
 
-
-/*
-const returnedPosts = {
-  metadata: {  (we already know this stuff, but still nice to have)
-    categoryId: null,
-    userId: 1,
-    page: 0,
-    count: 4,
-  },
-  posts: [
-    {
-      id: 1,
-      user: {
-        id: 3,
-        username: "Janie",
-      },
-      categoryId: 1, (needed for the all categories call. For the specific categories calls, can be omitted but could keep it in for simplicity)
-      commentIds: [1, 2, 3, ....],
-      title: 'horses',
-      description: 'are cool',
-      upvotes: 5,
-      userVote: -1, (How current user votes on this post. Can be -1, 0, or 1. Have this come back as a nullable boolean?)
-      createdTimestamp: '2023-01-02',
-      updatedTimestamp: '2023-01-03',
-    },
-    {
-      id: 2,
-      user: {
-        id: 5,
-        username: "Bob",
-      },
-      categoryId: 2,  (needed for the all categories call. For the specific categories calls, can be omitted but could keep it in for simplicity)
-      commentIds: [8, 9, 23, 45, ....],
-      title: 'traveling is fun',
-      description: 'I like to travel',
-      upvotes: 5,
-      userUpvotes: 0, (How current user votes on this post. Can be -1, 0, or 1. Have this come back as a nullable boolean?)
-      createdTimestamp: '2023-01-02',
-      updatedTimestamp: '2023-01-03',
-    },
-    ...
-  ]
-
-
-}
-*/
-
-
-
-/*
-
-const mockComments = {
-  metadata: {  (we already know this stuff, but still nice to have)
-    postId: 1,
-    userId: 1,
-    page: 0,
-    count: 10,
-  },
-  comments: [
-    {
-      id: 1,
-      user: {
-        id: 8,
-        username: "Joey",
-      },
-      text: 'wow you are right',
-      upvotes: 82,
-      userUpvotes: 1, (How current user votes on this post. Can be -1, 0, or 1. Have this come back as a nullable boolean?)
-      createdTimestamp: '2023-01-02',
-      updatedTimestamp: '2023-01-02',
-    },
-    {
-      id: 2,
-      user: {
-        id: 18,
-        username: "Marisa",
-      },
-      text: 'they really are',
-      upvotes: 2,
-      userUpvotes: -1, (How current user votes on this post. Can be -1, 0, or 1. Have this come back as a nullable boolean?)
-      createdTimestamp: '2023-05-02',
-      updatedTimestamp: '2023-07-09',
-    },
-  ],
-};
-
-*/
-
-
 export function fetchPosts(dispatch){
-  return (categoryId, userId, page = 1) => {
+  return (categoryId, auth, page = 1) => {
+    // const {userId, token} = auth;
+    const userId = 17
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
     const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/feed?categoryId=${categoryId}&userId=${userId}`
-    fetch(url).then(res => {
+    const params = {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    }
+    console.log("POSTSZ", url, params)
+    fetch(url, params).then(res => {
       return res.json()
     }).then(json => {
-      console.log("XYZ", json)
+      console.log("GOOD-fetchPosts", json)
       dispatch({type: "POSTS_SUCCESS", payload: {category: categories.find(cat => cat.id === categoryId)?.name, data: json.posts}})
+    }).catch((err) => {
+      console.log("ERR-fetchPosts", err)
     })
   }
 }
 
 export function fetchComments(dispatch){
-  return (postId, page = 1) => {
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/getCommentsForPost?postId=45`
-    fetch(url).then(res => {
+  return (postId, auth, page = 1) => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
+    // const {userId, token} = auth;
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/getCommentsForPost?postId=${postId}`
+    const params = {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    }
+    fetch(url, params).then(res => {
       return res.json()
     }).then(json => {
-      console.log("ZCOMMENTS", json)
-      dispatch({type: "POSTS_SUCCESS", payload: json.posts})
+      console.log("GOOD-fetchComments", json)
+      dispatch({type: "COMMENTS_SUCCESS", payload: json.comments})
+    }).catch((err) => {
+      console.log("ERR-fetchComments", err)
     })
   }
 }
 
 export function makeComment(dispatch){
-  return (userId, postId, text, taggedUsernames = []) => {
+  return (postId, text, taggedUsernames = [], auth) => {
+    const userId = 17
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
+    // const {userId, token} = auth;
     const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/makeComment`
     const params = {
       method: "POST",
-      
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({
         postId,
         userId,
@@ -516,27 +457,34 @@ export function makeComment(dispatch){
       return res.json()
       // return res.text()
     }).then(json => {
-      console.log("ZCOMMENTS", json)
-      dispatch({type: "POSTS_SUCCESS", payload: json})
+      console.log("GOOD-makeComment", json)
+      // dispatch({type: "POSTS_SUCCESS", payload: json})
     }).catch((err) => {
-      console.log("ERRZ", err)
+      console.log("ERR-makeComment", err)
     })
   }
 }
 
 export function makePost(dispatch){
-  return (userId, title, body, categories, vendors, isAnonymous) => {
+  return (title, body, categories, vendors, isAnonymous, auth) => {
+    const {userId, token} = auth;
+    const rawBody = {
+      userId,
+      title,
+      body,
+      categories: categories.map(item => item.id),
+      vendors: vendors.map(item => item.id),
+      isAnonymous,
+    }
+    console.log("MPW", rawBody)
     const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/makePost`
     const params = {
       method: "POST",
-      body: JSON.stringify({
-        userId,
-        title,
-        body,
-        categories,
-        vendors,
-        isAnonymous,
-      })
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify(rawBody)
     }
     fetch(url, params).then(res => {
       return res.json()

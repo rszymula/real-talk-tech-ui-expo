@@ -40,13 +40,17 @@ const initialState = {
   industry: [], // What industry are you in?
   categories, // What do you do?
   interests: [], // What software / tech interests you?
-  userId: -1, 
+  auth: {
+    userId: -1,
+    token: "",
+  },
   users: [],
   userLoading: false,
   userError: null,
-  posts: Object.values(CategoryNames).filter(item => isNaN(Number(item))).reduce((acc, item) => (acc[item] = [], acc), {}),
-  postsLoading: {},
-  postsError: {},
+  feed: Object.values(CategoryNames).filter(item => isNaN(Number(item))).reduce((acc, item) => (acc[item] = [], acc), {}),
+  posts: {},
+  feedLoading: {},
+  feedError: {},
   comments: [],
   commentsLoading: false,
   commentsError: null,
@@ -66,79 +70,58 @@ const initialState = {
 
 export function reducer(state = initialState, action){
 
-  // const test = Object.keys(CategoryNames).filter(item => isNaN(Number(item))).reduce((acc, item) => (acc[item] = [], acc), {})
-  // console.log("FTEST", test)
-
-  console.log("R1222", state, action)
+  console.log("STOREW", state, action)
   switch(action.type){
     case 'POSTS_SUCCESS':
       console.log("ESZ", action)
-      // return {
-      //   ...state,
-      //   posts: {
-      //     ...state.posts,
-      //     ...action.payload,
-      //   },
-      //   postsLoading: {
-      //     ...state.postsLoading,
-      //     ...action.payload,
-      //   },
-      //   postsError: {
-      //     ...state.postsError,
-      //     ...action.payload,
-      //   }
-      // }
 
-      const fuck = {
-        ...state.posts,
+      const logthis = {
+        ...state.feed,
         [action.payload.category]:[
-          ...state.posts[action.payload.category],
+          ...state.feed[action.payload.category],
           ...action.payload.data
         ]
       }
-
-      console.log("HZZZ", fuck, state.posts, state.posts[action.payload.category], action.payload.category, action.payload.data)
-
       return {
         ...state,
-        posts: {
-          ...state.posts,
+        feed: {
+          ...state.feed,
           [action.payload.category]:[
-            ...state.posts[action.payload.category],
-            ...action.payload.data
+            ...state.feed[action.payload.category],
+            ...action.payload.data// .map(item => item.id)
           ]
         },
-        postsLoading: {
-          ...state.postsLoading,
+        feedLoading: {
+          ...state.feedLoading,
           [action.payload.category]: false,
         },
-        postsError: {
-          ...state.postsError,
+        feedError: {
+          ...state.feedError,
           [action.payload.category]: false,
         },
       }
     case 'POSTS_LOADING':
-      console.log("FZZZ", action.payload)
+      // console.log("FZZZ", action.payload)
       return {
         ...state,
-        postsLoading: {
-          ...state.postsLoading,
+        feedLoading: {
+          ...state.feedLoading,
           [action.payload]: true,
         },
-        postsError: {
-          ...state.postsError,
+        feedError: {
+          ...state.feedError,
           [action.payload]: false,
         },
       }
     case 'POSTS_ERROR':
       return {
         ...state,
-        postsLoading: {
-          ...state.postsLoading,
+        feedLoading: {
+          ...state.feedLoading,
           [action.payload]: false,
         },
-        postsError: {
-          ...state.postsError,
+        feedError: {
+          ...state.feedError,
           [action.payload]: true,
         },
       }
@@ -184,24 +167,24 @@ export function reducer(state = initialState, action){
     //   return {...state, questions: [...state.questions, action.payload]}
     // case 'GET_FOLLOWUPS':
     //   return {...state, followups: [...state.followups, action.payload]}
-    case 'USER_SUCCESS':
+    case 'LOGIN_SUCCESS':
       return {
         ...state,
-        users: [...state.users, action.payload],
-        userLoading: false,
-        userError: false,
+        auth: action.payload,
+        authLoading: false,
+        authError: false,
       }
-    case 'USER_LOADING':
+    case 'LOGIN_LOADING':
       return {
         ...state,
-        userLoading: true,
-        userError: false,
+        authLoading: true,
+        authError: false,
       }
-    case 'USER_ERROR':
+    case 'LOGIN_ERROR':
       return {
         ...state,
-        userLoading: false,
-        userError: true,
+        authLoading: false,
+        authError: true,
       }
     default:
       return state
@@ -214,7 +197,7 @@ export function connect(mapStateToProps, mapDispatchToProps){
     return (props) => {
       const store = useContext(ReduxContext);
 
-      console.log("A1", store, store.getState())
+      // console.log("A1", store, store.getState())
 
       const [forcedUpdates, setForcedUpdates] = React.useState(0)
       const [, forceUpdate] = React.useReducer(s => s + 1, 0)

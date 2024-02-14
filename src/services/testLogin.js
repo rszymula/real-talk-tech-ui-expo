@@ -56,5 +56,5 @@ const login = (username, password, token = DEFAULT_TOKEN) => {
     console.log("ERR-login", err)
   })
 }
-login("msmith21", "pass123")
+login("qwe", "qwe")
 
