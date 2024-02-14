@@ -51,7 +51,8 @@ const initialState = {
   posts: {},
   feedLoading: {},
   feedError: {},
-  comments: [],
+  // comments: [],
+  comments: {},
   commentsLoading: false,
   commentsError: null,
   companies: [1, 2],
@@ -82,14 +83,21 @@ export function reducer(state = initialState, action){
           ...action.payload.data
         ]
       }
-      return {
+      const res = {
         ...state,
         feed: {
           ...state.feed,
           [action.payload.category]:[
             ...state.feed[action.payload.category],
-            ...action.payload.data// .map(item => item.id)
+            ...action.payload.data.map(item => item.id)
           ]
+        },
+        posts: {
+          ...state.posts,
+          ...action.payload.data.reduce((accum, cur) => {
+            accum[cur.id] = cur
+            return accum;
+          }, {}),
         },
         feedLoading: {
           ...state.feedLoading,
@@ -100,6 +108,8 @@ export function reducer(state = initialState, action){
           [action.payload.category]: false,
         },
       }
+    console.log("123123", res)
+    return res
     case 'POSTS_LOADING':
       // console.log("FZZZ", action.payload)
       return {
@@ -128,7 +138,11 @@ export function reducer(state = initialState, action){
     case 'COMMENTS_SUCCESS':
       return {
         ...state,
-        comments: [...state.comments, ...action.payload],
+        // comments: {...state.comments, ...action.payload},
+        comments: {...state.comments, ...action.payload.reduce(
+            (accum, cur) => accum[cur.id] = cur, {}
+          )
+        },
         commentsLoading: false,
         commentsError: false,
       }

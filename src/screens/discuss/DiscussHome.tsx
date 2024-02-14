@@ -147,12 +147,12 @@ export const Post = connect(stpPost , dtpPost )(RawPost);
 
 function RawDiscussHome(props){
 
-  const {currentCategory, navigation, feed, feedLoading, postsError, fetchPosts, auth} = props
+  const {currentCategory, navigation, feed, posts, feedLoading, postsError, fetchPosts, auth} = props
   console.log("QZ", feed)
-  const postsByCategory = feed[currentCategory]
+  const postsByCategory = feed[currentCategory].map(item => posts[item])
   const categoryId = categories.find(item => item.name === currentCategory) || 0
 
-  console.log("PZ", feed, currentCategory, postsByCategory)
+  // console.log("PZ", feed, currentCategory, postsByCategory)
 
   React.useEffect(() => {
     // loading(currentCategory)
@@ -216,6 +216,7 @@ function RawDiscussHome(props){
 
 const stpDiscussHome = (state) => ({
   feed: state.feed,
+  posts: state.posts,
   feedLoading: state.feedLoading,
   feedError: state.feedError,
   auth: state.auth,
