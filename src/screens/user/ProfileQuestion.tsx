@@ -7,6 +7,7 @@ import REALTALKTECH_WHITE from '../../assets/titleWhite.png'; // '../../assets/t
 import { RTextInput } from '../../components/core/RTextInput';
 import { connect } from '../../state/reduxStore';
 import { signup } from '../../services/UserServices';
+import { SelectedItems } from '../../components/common/SelectedItems';
 
 enum ProfileStep {
   INDUSTRY = "Industry",
@@ -66,6 +67,7 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
 
   const [text, setText] = React.useState('')
   const [items, setItems] = React.useState([])
+  console.log("ITEMS SATART", items)
 
   // const {step, answers} = route.params;
   // const { email, password, firstName, lastName, username, bio, selectedIndustry, selectedCategories, selectedInterests } = answers
@@ -83,12 +85,12 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
         password: route.params.password,
         techStack: route.params.techStack,
         currentCompany: route.params.company,
-        industryInvolvement: route.params[ProfileStep.INDUSTRY],
-        workCategories: route.params[ProfileStep.DO],
+        industryInvolvement: route.params[ProfileStep.INDUSTRY],//.map(item => item.name),
+        workCategories: route.params[ProfileStep.DO],//.map(item => item.name),
         linkedinUrl: route.params.linkedinUrl,
         bio: route.params.bio,
         // interestAreas: route.params[ProfileStep.SOFTWARE],
-        interestAreas: items,
+        interestAreas: items,//.map(item => item.name),
       }
       console.log("SIGNUPW", body)
       signup(body)
@@ -98,12 +100,21 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
       //   ...route.params.answers,
       //   [step]: 
       // }
-      navigation.navigate(RouteNames.PROFILE_QUESTION, {...route.params, step: next, [step]: items})
+      console.log("ITEMS SEND", items)
+      const stepItems = [...items]
+      setItems([])
+      navigation.navigate(RouteNames.PROFILE_QUESTION, {...route.params, step: next, [step]: stepItems})
     }
   }
 
-  const handleOnSelect = (item) => {
-    setItems(items => ([...items, item]))
+  const handleOnSelect = (newItem) => {
+    if(items.every(item => item.name !== newItem.name)){
+      setItems(items => ([...items, newItem]))
+    }
+  }
+
+  const handleRemoveItem = (deleteItem) => {
+    setItems(items => items.filter(item => item.name !== deleteItem))
   }
 
   return (
@@ -124,6 +135,7 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
             onSelect={handleOnSelect}
             style={styles.input}
           />
+          <SelectedItems style={{marginTop: 4}} items={items.map(item => item.name)} onDelete={handleRemoveItem}/>
           <Button title={!!next ? "Next Step" : "Finish"} onPress={handleNextPress} styles={{marginTop: 8}}/>
       </View>
     </View>

@@ -64,11 +64,11 @@ const INTERESTS_DEFAULT = [
   },
   {
     id: 4,
-    name: "interest3",
+    name: "interest4",
   },
   {
     id: 5,
-    name: "interest4",
+    name: "interest5",
   }
 ];
 

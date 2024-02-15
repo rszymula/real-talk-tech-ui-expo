@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Text, View, StyleSheet, FlatList, TextInput, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import { Card } from '../../components/core/Card';
 import { InputBar } from '../../components/core/InputBar';
@@ -16,18 +16,45 @@ import { createUser } from '../../services/UserServices';
 import { Button } from '../../components/core/Button';
 import UP from '../../assets/up.png';
 import SETTINGS from '../../assets/settings.png';
+import UPVOTE_DEFAULT from '../../assets/upvote_default.png';
+import UPVOTE_ACTIVE from '../../assets/upvote_active.png';
+import DOWNVOTE_DEFAULT from '../../assets/downvote_default.png';
+import DOWNVOTE_ACTIVE from '../../assets/downvote_active.png';
 
 const POST_PAGE_OFFSET = 10;
 const COMMENT_OFFSET = 10;
 
-function Comment({commentText, username, upvotes, creationTime}) {
+function Username(){
+
+}
+
+function Comment({commentText, username, upvotes, creationTime, navigation}) {
   console.log("oiuoiu", commentText)
+  
+  const handleUsernamePress = () => {
+    navigation.navigate(RouteNames.PROFILE_USER_OTHER, {username})
+  }
+
   return (
     <>
       <View>
-        <Text style={[styles.captionText, styles.categoryCaption]}>
+        {/* <Text style={styles.captionText}>
           {`${username} | ${creationTime}`}
-        </Text>
+        </Text> */}
+        <View style={{flexDirection: 'row'}}>
+          <Text style={styles.captionText}>
+            {`Commented by `}
+          </Text>
+          {username ? (
+              <TouchableOpacity onPress={handleUsernamePress}>
+                <Text style={styles.userCaption}>
+                  {`${username} `}
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <Text style={styles.captionText}>{"Anonymous "}</Text>)} 
+          <Text style={styles.captionText}>{`| ${creationTime}`}</Text>
+        </View>
         <Text style={[styles.bodyText, styles.description]}>{commentText}</Text>
       </View>
     </>
@@ -40,7 +67,7 @@ function checkHasAll(list, obj){
   return hasAll
 }
 
-function CommentsList({commentIds, comments, postId, makeComment, fetchComments, auth}){
+function CommentsList({commentIds, comments, postId, makeComment, fetchComments, navigation, auth}){
 
   const handleSubmitComment = (input) => {
     console.log("Commented", input)
@@ -66,7 +93,7 @@ function CommentsList({commentIds, comments, postId, makeComment, fetchComments,
         style={{borderLeftWidth: 0.5, borderColor: colors.border, paddingLeft: 24, marginTop: 12}}
         data={commentList}
         renderItem={({item}) => {
-          return <Comment {...item}/>
+          return <Comment {...item} navigation={navigation}/>
         }}
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <Separator style={styles.separator}/>}
@@ -125,7 +152,7 @@ function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentC
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.captionText, styles.categoryCaption]}>{currentCategory}</Text>
+      <Text style={styles.captionText}>{currentCategory}</Text>
       <Text style={[styles.headingText, styles.title]}>{title}</Text>
       <Text style={[styles.bodyText, styles.description]}>{body}</Text>
       <View style={styles.bottom}>
@@ -133,32 +160,44 @@ function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentC
           <TouchableOpacity onPress={handleCommentsPress}>
             <Text style={[styles.linkText]}>{commentText}</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleCommentsPress}>
+          {/* <TouchableOpacity onPress={handleCommentsPress}>
             <Text style={[styles.linkText, styles.actionMember]}>^</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           {/* <Button image={SETTINGS} onPress={handleUpvotePress} styles={{}} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
           <Button title={"+"} onPress={handleDownvotePress} styles={{}} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} /> */}
-          <Button image={UP} onPress={handleUpvotePress} styles={{}} />
-          <Button image={SETTINGS} onPress={handleUpvotePress} styles={{}} />
+          {/* <Button image={UPVOTE_DEFAULT} onPress={handleUpvotePress} styles={styles.voteButton} />
+          <Button image={DOWNVOTE_DEFAULT} onPress={handleUpvotePress} styles={styles.voteButton} /> */}
+          {/* <View style={{backgroundColor: 'white'}}> */}
+            {/* <Text>kjhsdkf</Text>
+            <Image source={UP} style={{height: 16, width: 16}}/> */}
+            <TouchableOpacity onPress={handleUpvotePress} style={{marginLeft: 8}}>
+              <Image source={UPVOTE_DEFAULT} style={{height: 16, width: 16}} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleDownvotePress} style={{marginLeft: 8}}>
+              <Image source={DOWNVOTE_DEFAULT} style={{height: 16, width: 16}}  />
+            </TouchableOpacity>
+          {/* </View> */}
         </View>
-        <TouchableOpacity onPress={handleUsernamePress} style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row'}}>
           {/* <View style={{flexDirection: 'row'}}> */}
             <Text style={styles.captionText}>{`Posted by `}</Text>
-            <Text style={styles.userCaption}>{`${username} `}</Text>
+            {username ? (<TouchableOpacity onPress={handleUsernamePress}>
+              <Text style={styles.userCaption}>{`${username} `}</Text>
+            </TouchableOpacity>) : <Text style={styles.captionText}>{"Anonymous "}</Text>} 
             <Text style={styles.captionText}>{`| ${createdTimestamp}`}</Text>
           {/* </View> */}
-        </TouchableOpacity>
+        </View>
       </View>
       {/* <Button title='upvote' onPress={() => upvote(id, false, auth)}/>
       <Button title='upvote' onPress={() => upvote(id, true, auth)}/> */}
       {commentsExpanded ? 
         (<>
-          <CommentsList commentIds={commentIds} comments={comments} postId={id} makeComment={makeComment} fetchComments={fetchComments} auth={auth} />
+          <CommentsList commentIds={commentIds} comments={comments} postId={id} makeComment={makeComment} fetchComments={fetchComments} navigation={navigation} auth={auth} />
           {commentsLoading && <ActivityIndicator style={{marginTop: 16}} />}
-          <View style={{margin: 32}}>
-            <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading data..."}</Text>
+          {commentsError && (<View style={{margin: 32}}>
+            <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading comments..."}</Text>
             <Link onPress={() => {fetchComments(id)}} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
-          </View>
+          </View>)}
         </>) : null
       }
     </View>
@@ -177,7 +216,7 @@ export const Post = connect(stpPost , dtpPost )(RawPost);
 
 function RawDiscussHome(props){
 
-  const {currentCategory, navigation, feed, posts, feedLoading, postsError, fetchPosts, auth} = props
+  const {currentCategory, navigation, feed, posts, feedLoading, feedError, fetchPosts, auth} = props
   console.log("QZ", feed)
   const postsByCategory = feed[currentCategory].map(item => posts[item])
   const categoryId = categories.find(item => item.name === currentCategory) || 0
@@ -216,6 +255,7 @@ function RawDiscussHome(props){
   // const posts = getPostsWithCommentIdsAndUpvotes(currentCategory, 0, POST_PAGE_OFFSET);
 
   console.log("PZZZ", postsByCategory)
+  console.log("E2", feedError)
 
   return (
     <Card styles={{width: 512}}>
@@ -236,10 +276,10 @@ function RawDiscussHome(props){
         />
       </View>
       {feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
-      <View style={{margin: 32}}>
+      {feedError[currentCategory] && (<View style={{margin: 32}}>
         <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading data..."}</Text>
         <Link onPress={() => {fetchPosts(categoryId, 1)}} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
-      </View>
+      </View>)}
     </Card>
   )
 }
@@ -291,9 +331,6 @@ const styles = StyleSheet.create({
     color: colors.link,
     fontSize: 12,
   },
-  categoryCaption: {
-
-  },
   title: {
     marginTop: 8,
   },
@@ -312,7 +349,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     borderColor: 'green',
-    borderWidth: 1,
+    // borderWidth: 1,
   },
   actionMember: {
     marginLeft: 16,
@@ -320,5 +357,16 @@ const styles = StyleSheet.create({
   separator: {
     marginTop: 12,
     marginBottom: 12,
-  }
+  },
+  voteButton: {
+    paddingLeft: 4,
+    paddingRight: 4,
+    paddingTop: 4,
+    paddingBottom: 4,
+    margin: 4,
+    borderRadius: 2,
+    fontSize: 12,
+    // borderColor: 'red',
+    // borderWidth: 1,
+  },
 })

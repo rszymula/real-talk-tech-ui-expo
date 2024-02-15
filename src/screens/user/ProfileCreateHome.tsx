@@ -47,7 +47,7 @@ export function ProfileCreateHome({route, navigation, signup}) {
   const handleNextPress = () => {
     // const answers = {email, password, firstName, lastName, username, bio}
     // navigation.navigate(RouteNames.PROFILE_QUESTION, {answers, step: "Industry"})
-    const techStack = selectedVendors.map(vendor => vendor.id)
+    const techStack = selectedVendors.map(selected => selected.id)
     navigation.navigate(RouteNames.PROFILE_QUESTION, {email, password, fullname, username, bio, company, techStack, step: "Industry"})
   }
 
@@ -121,7 +121,11 @@ export function ProfileCreateHome({route, navigation, signup}) {
             onSelect={onSelectVendor}
           />
           {/* <SelectedCategories selectedCategories={selectedCategories}/> */}
-          <SelectedItems items={selectedVendors.map(item => item.name)} onDelete={handleDeleteVendor}/>
+          <SelectedItems
+            itemStyle={{color: colors.border, backgroundColor: colors.input}}
+            items={selectedVendors.map(item => item.name)}
+            onDelete={handleDeleteVendor}
+          />
         
           <Button title="Next Step" onPress={handleNextPress} styles={{marginTop: 8, flex: 1, position: 'relative'}}/>
         </View>

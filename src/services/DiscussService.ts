@@ -388,6 +388,7 @@ export function getPostsWithCommentIdsAndUpvotes(category: CategoryNames, page: 
 
 export function fetchPosts(dispatch){
   return (categoryId, auth, page = 1) => {
+    dispatch({type: "POSTS_LOADING"})
     const {userId, token} = auth;
     // const userId = 17
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
@@ -407,6 +408,7 @@ export function fetchPosts(dispatch){
       dispatch({type: "POSTS_SUCCESS", payload: {category: categories.find(cat => cat.id === categoryId)?.name, data: json.posts}})
     }).catch((err) => {
       console.log("ERR-fetchPosts", err)
+      dispatch({type: "POSTS_ERROR"})
     })
   }
 }
@@ -442,6 +444,7 @@ export function upvote(dispatch){
 
 export function fetchComments(dispatch){
   return (postId, auth, page = 1) => {
+    dispatch({type: "COMMENTS_LOADING"})
     console.log("C1")
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
     const {userId, token} = auth;
@@ -462,6 +465,7 @@ export function fetchComments(dispatch){
       dispatch({type: "COMMENTS_SUCCESS", payload: json.comments})
     }).catch((err) => {
       console.log("ERR-fetchComments", err)
+      dispatch({type: "COMMENTS_ERROR"})
     })
   }
 }

@@ -162,7 +162,7 @@ export function RawDiscussCreatePost(props){
           selections={categories}
           onSelect={onSelectCategory}
         />
-        <SelectedItems items={selectedCategories.map(item => item.name)} onDelete={handleDeleteCategory}/>
+        <SelectedItems itemStyle={{color: colors.border, backgroundColor: colors.input}} items={selectedCategories.map(item => item.name)} onDelete={handleDeleteCategory}/>
         <RTextInput 
           style={{marginTop: 8}}
           label="Title"
@@ -199,7 +199,7 @@ export function RawDiscussCreatePost(props){
           onSelect={onSelectVendor}
         />
         {/* <SelectedCategories selectedCategories={selectedCategories}/> */}
-        <SelectedItems items={selectedVendors.map(item => item.name)} onDelete={handleDeleteVendor}/>
+        <SelectedItems itemStyle={{color: colors.border, backgroundColor: colors.input}} items={selectedVendors.map(item => item.name)} onDelete={handleDeleteVendor}/>
         <View style={[styles.buttonContainer, styles.item]}>
           <Button title="Cancel" onPress={handleExit} type={ButtonType.REVERSE} />
           <Button title="Create Post" onPress={handleCreatePost} />

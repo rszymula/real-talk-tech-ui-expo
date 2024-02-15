@@ -83,9 +83,9 @@ export function fetchVendors(dispatch){
   return (auth, page = 1) => {
     console.log("FVW2")
     const {userId, token} = auth;
-    const url2 = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/categories`;
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/items/1`;
-    const url3 = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/user/1`;
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/categories`;
+    // const url2 = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/items/1`;
+    // const url3 = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/user/1`;
     const params = {
       method: "GET",
       headers: {
@@ -93,27 +93,28 @@ export function fetchVendors(dispatch){
         'Authorization': `Bearer ${token}`,
       },
     }
-    fetch(url, params).then(res => {
+    fetch(`${url}/1`, params).then(res => {
       console.log("FVW3")
       return res.json()
     }).then(json => {
-      console.log("FVW5", json)
+      // console.log("FVW5", json)
       // console.log("FVW4", json)
       // const groups = json.categories
-      // Promise.all(groups.map(group => fetch(`${urlVendors}/${group}`, params)))
-      //   .then(responses =>
-      //     Promise.all(responses.map(res => res.json()))
-      //   ).then(jsons => {
-      //     // return jsons
-      //     const res = {
-      //       vendors: jsons,
-      //       vendorGroups: groups,
-      //     }
-      //     console.log("VENDORS", res)
-      //     dispatch({type: "VENDORS_SUCCESS", payload: res})
-      //   })
-      // console.log("VENDORS", json)
-      // dispatch({type: "VENDORS_SUCCESS", payload: json})
+      const groups = [1, 2, 3, 4, 5]
+      Promise.all(groups.map(group => fetch(`${url}/${group}`, params)))
+        .then(responses =>
+          Promise.all(responses.map(res => res.json()))
+        ).then(jsons => {
+          // return jsons
+          const res = {
+            vendors: jsons,
+            vendorGroups: groups,
+          }
+          console.log("VENDORS", res)
+          dispatch({type: "VENDORS_SUCCESS", payload: res})
+        })
+      console.log("VENDORS", json)
+      dispatch({type: "VENDORS_SUCCESS", payload: json})
     })
   }
 }
