@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList, TextInput, Button, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Text, View, StyleSheet, FlatList, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import { Card } from '../../components/core/Card';
 import { InputBar } from '../../components/core/InputBar';
@@ -11,14 +11,17 @@ import { store } from '../../state/basicStore';
 import { connect } from '../../state/reduxStore';
 import { mockFeedResponse } from '../../data/discussMocks';
 import { Link } from '../../components/core/Link';
-import { fetchComments, fetchPosts, makeComment } from '../../services/DiscussService';
+import { fetchComments, fetchPosts, makeComment, upvote } from '../../services/DiscussService';
 import { createUser } from '../../services/UserServices';
+import { Button } from '../../components/core/Button';
+import UP from '../../assets/up.png';
+import SETTINGS from '../../assets/settings.png';
 
 const POST_PAGE_OFFSET = 10;
 const COMMENT_OFFSET = 10;
 
 function Comment({commentText, username, upvotes, creationTime}) {
-  console.log(commentText)
+  console.log("oiuoiu", commentText)
   return (
     <>
       <View>
@@ -31,7 +34,13 @@ function Comment({commentText, username, upvotes, creationTime}) {
   )
 }
 
-function CommentsList({comments, postId, makeComment}){
+function checkHasAll(list, obj){
+  const keys = Object.keys(obj);
+  const hasAll = list.every(id => keys.includes(`${id}`))
+  return hasAll
+}
+
+function CommentsList({commentIds, comments, postId, makeComment, fetchComments, auth}){
 
   const handleSubmitComment = (input) => {
     console.log("Commented", input)
@@ -40,13 +49,32 @@ function CommentsList({comments, postId, makeComment}){
     makeComment(postId, "comment text here")
   }
 
-  console.log("LISTW", comments)
+  React.useEffect(() => {
+    // const reduced = commentIds.reduce((accum, curr) => {
+    //   return comments[curr] ? true : false
+    // }, true)
+    // console.log("A1")
+    // const hasAll = checkHasAll(commentIds, comments)
+    // if(!hasAll) {
+    //   console.log("A2")
+    //   fetchComments(postId, auth)
+    // }
+    fetchComments(postId, auth)
+    //fetchComments(id)
+  }, [])
+
+  // console.log("LISTW", commentIds)
+  console.log("A3")
+  const hasAll = checkHasAll(commentIds, comments)
+  console.log({hasAll, commentIds, comments})
+  const commentList = hasAll ? commentIds.map(commentId => comments[commentId]) : [];
+  console.log({commentIds, comments, commentList})
 
   return (
     <View>
       <FlatList
         style={{borderLeftWidth: 0.5, borderColor: colors.border, paddingLeft: 24, marginTop: 12}}
-        data={comments}
+        data={commentList}
         renderItem={({item}) => {
           return <Comment {...item}/>
         }}
@@ -66,7 +94,7 @@ function CommentsList({comments, postId, makeComment}){
 
 
 
-function RawPost({ id, title, body, user, numComments, createdTimestamp, currentCategory, navigation, fetchComments, makeComment, comments, commentsLoading, commentsError}){
+function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentCategory, navigation, fetchComments, makeComment, comments, commentsLoading, commentsError, upvote, auth}){
 
   // console.log("AZ", title, body)
   const {id: userId, username} = user;
@@ -88,21 +116,33 @@ function RawPost({ id, title, body, user, numComments, createdTimestamp, current
     navigation.navigate(RouteNames.PROFILE_USER_OTHER, {id: userId})
   }
 
-  React.useEffect(() => {
-    // if(commentsExpanded && comments.length === 0){
-    //   const mockComments = getComments(id, page, COMMENT_OFFSET);
-    //   setComments([...mockComments]);
-    // }
-    if(commentsExpanded){
-      fetchComments(id)
-    }
-    //fetchComments(id)
-  }, [commentsExpanded])
+  const handleUpvotePress = () => {
+
+  }
+
+  const handleDownvotePress = () => {
+    
+  }
+
+  // React.useEffect(() => {
+  //   // if(commentsExpanded && comments.length === 0){
+  //   //   const mockComments = getComments(id, page, COMMENT_OFFSET);
+  //   //   setComments([...mockComments]);
+  //   // }
+  //   if(commentsExpanded){
+  //     fetchComments(id, auth)
+  //   }
+  //   //fetchComments(id)
+  // }, [commentsExpanded])
   
   // console.log("render", comments, commentsExpanded)
 
   // const commentText = commentCount === 1 ? `${commentCount} Comment` : `${commentCount} Comments`;
-  const commentText = numComments === 1 ? `${numComments} Comment` : `${numComments} Comments`;
+  const commentCount = commentIds.length;
+  const commentText = commentCount === 1 ? `${commentCount} Comment` : `${commentCount} Comments`;
+
+  // const commentList = commentIds.map(commentId => comments[commentId]);
+  // console.log({commentIds, comments, commentList})
 
   return (
     <View style={styles.container}>
@@ -117,14 +157,24 @@ function RawPost({ id, title, body, user, numComments, createdTimestamp, current
           <TouchableOpacity onPress={handleCommentsPress}>
             <Text style={[styles.linkText, styles.actionMember]}>^</Text>
           </TouchableOpacity>
+          {/* <Button image={SETTINGS} onPress={handleUpvotePress} styles={{}} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
+          <Button title={"+"} onPress={handleDownvotePress} styles={{}} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} /> */}
+          <Button image={UP} onPress={handleUpvotePress} styles={{}} />
+          <Button image={SETTINGS} onPress={handleUpvotePress} styles={{}} />
         </View>
-        <TouchableOpacity onPress={handleUsernamePress}>
-          <Text style={[styles.captionText, styles.userCaption]}>{`${username} | ${createdTimestamp}`}</Text>
+        <TouchableOpacity onPress={handleUsernamePress} style={{flexDirection: 'row'}}>
+          {/* <View style={{flexDirection: 'row'}}> */}
+            <Text style={styles.captionText}>{`Posted by `}</Text>
+            <Text style={styles.userCaption}>{`${username} `}</Text>
+            <Text style={styles.captionText}>{`| ${createdTimestamp}`}</Text>
+          {/* </View> */}
         </TouchableOpacity>
       </View>
+      {/* <Button title='upvote' onPress={() => upvote(id, false, auth)}/>
+      <Button title='upvote' onPress={() => upvote(id, true, auth)}/> */}
       {commentsExpanded ? 
         (<>
-          <CommentsList comments={comments} postId={id} makeComment={makeComment} />
+          <CommentsList commentIds={commentIds} comments={comments} postId={id} makeComment={makeComment} fetchComments={fetchComments} auth={auth} />
           {commentsLoading && <ActivityIndicator style={{marginTop: 16}} />}
           <View style={{margin: 32}}>
             <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading data..."}</Text>
@@ -136,10 +186,11 @@ function RawPost({ id, title, body, user, numComments, createdTimestamp, current
   )
 }
 
-const stpPost = (state) => ({comments: state.comments, commentsLoading: state.commentsLoading, commentsError: state.commentsError});
+const stpPost = (state) => ({comments: state.comments, commentsLoading: state.commentsLoading, commentsError: state.commentsError, auth: state.auth});
 const dtpPost  = (dispatch) => ({
   fetchComments: fetchComments(dispatch),
-  makeComment: makeComment(dispatch)
+  makeComment: makeComment(dispatch),
+  upvote: upvote(dispatch),
 })
 export const Post = connect(stpPost , dtpPost )(RawPost);
 
@@ -156,16 +207,16 @@ function RawDiscussHome(props){
 
   React.useEffect(() => {
     // loading(currentCategory)
-    console.log("BZ", currentCategory)
-    const filtered = currentCategory === CategoryNames.HOME ? 
-      mockFeedResponse :
-      mockFeedResponse.filter(item => item.categories.includes(currentCategory))
-    const data = {
-      category: currentCategory,
-      data: filtered,
-    }
-    const rand = Math.random();
-    console.log("RANDZ", rand, data)
+    // console.log("BZ", currentCategory)
+    // const filtered = currentCategory === CategoryNames.HOME ? 
+    //   mockFeedResponse :
+    //   mockFeedResponse.filter(item => item.categories.includes(currentCategory))
+    // const data = {
+    //   category: currentCategory,
+    //   data: filtered,
+    // }
+    // const rand = Math.random();
+    // console.log("RANDZ", rand, data)
 
     const categoryId = categories.find(item => item.name === currentCategory)?.id || -1
     //fetchPosts(1, 1)
@@ -244,6 +295,10 @@ const styles = StyleSheet.create({
     color: colors.textLowlight,
     fontSize: 12,
   },
+  userCaption: {
+    color: colors.link,
+    fontSize: 12,
+  },
   headingText: {
     color: colors.textHighlight,
     fontSize: 12,
@@ -258,9 +313,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   categoryCaption: {
-
-  },
-  userCaption: {
 
   },
   title: {
@@ -280,6 +332,8 @@ const styles = StyleSheet.create({
   actionGroup: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    borderColor: 'green',
+    borderWidth: 1,
   },
   actionMember: {
     marginLeft: 16,

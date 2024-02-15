@@ -32,7 +32,7 @@ export enum CategoryNames {
   FINANCE = 'Finance',
   LEADERHIP_EXEC = 'Leadership/Exec',
   FOUNDER = 'Founder',
-  INVESTOR_VC = 'Investor/VC',
+  COMMUNITY = 'Community',
 };
 
 export enum ToolTypes {
@@ -96,7 +96,7 @@ export const categories = [
   },
   {
     id: 13,
-    name: CategoryNames.INVESTOR_VC,
+    name: CategoryNames.COMMUNITY,
   },
 ];
 

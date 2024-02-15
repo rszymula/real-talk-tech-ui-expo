@@ -78,7 +78,7 @@ export function RawDiscussCreatePost(props){
   console.log({categories, vendors})
 
   React.useEffect(() => {
-    fetchVendors();
+    // fetchVendors();
   }, [])
 
   const handleTypeCategory = (text) => {
@@ -168,7 +168,7 @@ export function RawDiscussCreatePost(props){
           label="Title"
           onChangeText={setTitle}
           value={title}
-          placeholder="Enter Text"
+          placeholder="Enter post title"
         />
         <RTextInput 
           style={{marginTop: 8}}

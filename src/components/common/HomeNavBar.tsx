@@ -4,7 +4,8 @@ import { colors } from '../../context/themes';
 import { Button, ButtonType } from '../core/Button';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png'; //'../../assets/titleWhite.png';
 import { DEFAULT_TAB, RouteNames } from '../../constants/constants';
-
+import SETTINGS from '../../assets/settings.png';
+import NOTIFICATIONS from '../../assets/notifications.png';
 
 const tabs = [
   {
@@ -72,9 +73,10 @@ export function HomeNavBar(props){
             })
           }
         </View>)}
-      <View style={{flexDirection: 'row'}}>
-        <Button title={"P"} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
-        <Button title={"+"} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
+        {/* image={SETTINGS} */}
+      <View style={{flexDirection: 'row', borderColor: 'green', borderWidth: 1}}>
+      <Button image={NOTIFICATIONS} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
+        <Button image={SETTINGS} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
       </View>
     </View>
   )
@@ -85,7 +87,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderColor: 'red',
-    // borderWidth: 1
+    borderWidth: 1
   },
   title: {
     width: 192,
@@ -113,6 +115,8 @@ const styles = StyleSheet.create({
     margin: 4,
     borderRadius: 2,
     fontSize: 12,
+    // borderColor: 'red',
+    // borderWidth: 1,
   },
   content: {
     // borderWidth: 1,

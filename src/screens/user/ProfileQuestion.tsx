@@ -21,6 +21,7 @@ function getStepDetailsFunc(industry, categories, interests){
         return {
           next: ProfileStep.DO,
           description: "What industry are you in?",
+          placeholder: "Select industry",
           selections: industry,
           // field: "industry",
         };
@@ -28,6 +29,7 @@ function getStepDetailsFunc(industry, categories, interests){
         return {
           next: ProfileStep.SOFTWARE,
           description: "What do you do?",
+          placeholder: "Select role",
           selections: categories,
           // field: "categories",
         };
@@ -35,6 +37,7 @@ function getStepDetailsFunc(industry, categories, interests){
         return {
           next: null,
           description: "What type of software do you want to learn about and/or discuss?",
+          placeholder: "Select your interests",
           selections: interests,
           // field: "interests",
         };
@@ -68,7 +71,7 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
   // const { email, password, firstName, lastName, username, bio, selectedIndustry, selectedCategories, selectedInterests } = answers
   const { step } = route.params
   const stepDetails = getStepDetailsFunc(industry, categories, interests)(step)
-  const {next, description, selections} = stepDetails
+  const {next, description, selections, placeholder} = stepDetails
 
   const handleNextPress = () => {
     console.log(next)
@@ -110,12 +113,12 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
             {description}
           </Text>
           <Text style={{color: colors.textLowlight, margin: 8,}}>
-            something something something
+            Choose all that apply
           </Text>
           <RTextInput 
             onChangeText={setText}
             value={text}
-            placeholder={"Choose Option"}
+            placeholder={placeholder}
             selections={selections}
             onSelect={handleOnSelect}
             style={styles.input}

@@ -29,7 +29,7 @@ export function ProfileWelcome({navigation}) {
             Welcome!
           </Text>
           <Text style={{color: colors.textLowlight, margin: 8}}>
-            Let's Customize Your Experience!
+            Let's Customize Your Experience
           </Text>
             <RTextInput 
               onChangeText={setEmail}

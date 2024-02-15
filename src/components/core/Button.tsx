@@ -1,4 +1,4 @@
-import { TouchableOpacity, Text, View, StyleSheet } from "react-native";
+import { TouchableOpacity, Text, View, StyleSheet, Image } from "react-native";
 import { colors } from "../../context/themes";
 
 export enum ButtonType {
@@ -55,12 +55,26 @@ export const buttonTypetoStyle = {
   },
 }
 
-export function Button({onPress, title, type = ButtonType.LOUD, styles = {}}){
+export function Button({onPress, title = null, image = null, type = ButtonType.LOUD, styles = {}}){
   const typeStyle = buttonTypetoStyle[type]
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <Text style={[typeStyle, styles]}>{title}</Text>
+      <>
+        {image && 
+          <View style={[typeStyle, styles]}>
+            <Image source={image}  
+              style={{
+                width: 16,
+                height: 16,
+                // borderColor: 'red',
+                // borderWidth: 1,
+              }} 
+            />
+          </View>
+        }
+        {title && <Text style={[typeStyle, styles]}>{title}</Text>}
+      </>
     </TouchableOpacity>
   );
 }

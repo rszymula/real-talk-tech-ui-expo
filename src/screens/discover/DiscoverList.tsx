@@ -58,11 +58,11 @@ export function DiscoverList(props){
     {/* <View style={{justifyContent: 'flex-end'}}> */}
       <View style={{width: 512, alignItems: 'center'}}>
         <Text style={styles.title}>
-          Explore the market
+          Top Sales Tools
         </Text>
-        <Text style={{color: colors.textLowlight, margin: 8}}>
+        {/* <Text style={{color: colors.textLowlight, margin: 8}}>
           A long description
-        </Text>
+        </Text> */}
         {/* <View style={{margin: 8, flexDirection: 'row'}}>
           <Text style={{color: colors.textLowlight}}>
             Don't see your service?
@@ -71,7 +71,7 @@ export function DiscoverList(props){
             Create a service profile
           </Text>
         </View> */}
-        <Link style={{margin: 8}} textLeft="Don't see your service?" textLink="Create a service profile" onPress={handleCreateServiceProfilePress} />
+        <Link style={{margin: 8}} textLeft="Don't see your company?" textLink="Create a service profile" onPress={handleCreateServiceProfilePress} />
         <Card styles={{marginBottom: 32, width: 512}}>
           <ListView companies={companies} navigation={navigation} />
         </Card>

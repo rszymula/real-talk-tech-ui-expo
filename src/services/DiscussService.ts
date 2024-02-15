@@ -388,10 +388,10 @@ export function getPostsWithCommentIdsAndUpvotes(category: CategoryNames, page: 
 
 export function fetchPosts(dispatch){
   return (categoryId, auth, page = 1) => {
-    // const {userId, token} = auth;
-    const userId = 17
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/feed?categoryId=${categoryId}&userId=${userId}`
+    const {userId, token} = auth;
+    // const userId = 17
+    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/feed?categoryId=2&userId=${userId}`
     const params = {
       method: "GET",
       headers: {
@@ -411,10 +411,40 @@ export function fetchPosts(dispatch){
   }
 }
 
+export function upvote(dispatch){
+  return (postId, down, auth) => {
+    const {userId, token} = auth;
+    // const userId = 17
+    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/upvotePost`
+    const params = {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        isDownvote: down,
+        postId,
+      }),
+    }
+    console.log("POSTSZ", url, params)
+    fetch(url, params).then(res => {
+      return res.json()
+    }).then(json => {
+      console.log("GOOD-upvote", json)
+      //dispatch({type: "POSTS_SUCCESS", payload: {category: categories.find(cat => cat.id === categoryId)?.name, data: json.posts}})
+    }).catch((err) => {
+      console.log("ERR-upvote", err)
+    })
+  }
+}
+
 export function fetchComments(dispatch){
   return (postId, auth, page = 1) => {
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
-    // const {userId, token} = auth;
+    console.log("C1")
+    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
+    const {userId, token} = auth;
     const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/getCommentsForPost?postId=${postId}`
     const params = {
       method: "GET",
@@ -423,7 +453,9 @@ export function fetchComments(dispatch){
         'Authorization': `Bearer ${token}`,
       },
     }
+    console.log("C2")
     fetch(url, params).then(res => {
+      console.log("C3")
       return res.json()
     }).then(json => {
       console.log("GOOD-fetchComments", json)
@@ -436,9 +468,9 @@ export function fetchComments(dispatch){
 
 export function makeComment(dispatch){
   return (postId, text, taggedUsernames = [], auth) => {
-    const userId = 17
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
-    // const {userId, token} = auth;
+    // const userId = 17
+    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
+    const {userId, token} = auth;
     const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/makeComment`
     const params = {
       method: "POST",
@@ -472,7 +504,7 @@ export function makePost(dispatch){
       userId,
       title,
       body,
-      categories: categories.map(item => item.id),
+      categories: categories.map(item => item.name),
       vendors: vendors.map(item => item.id),
       isAnonymous,
     }

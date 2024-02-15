@@ -40,6 +40,7 @@ const initialState = {
   industry: [], // What industry are you in?
   categories, // What do you do?
   interests: [], // What software / tech interests you?
+  vendorGroups: [],
   auth: {
     userId: -1,
     token: "",
@@ -136,16 +137,25 @@ export function reducer(state = initialState, action){
         },
       }
     case 'COMMENTS_SUCCESS':
-      return {
+      const res2 = {
         ...state,
         // comments: {...state.comments, ...action.payload},
-        comments: {...state.comments, ...action.payload.reduce(
-            (accum, cur) => accum[cur.id] = cur, {}
-          )
+        comments: {
+          ...state.comments,
+          ...action.payload.reduce((accum, cur) => {
+            accum[cur.id] = cur
+            return accum
+          }, {}),
         },
+        // posts: {
+        //   ...state.posts,
+        //   [postId]: {...state.posts[postId], commentIds: [action.payload.map(item => item.id)]}
+        // },
         commentsLoading: false,
         commentsError: false,
       }
+      console.log("098890", res2)
+      return res2
     case 'COMMENTS_LOADING':
       return {
         ...state,

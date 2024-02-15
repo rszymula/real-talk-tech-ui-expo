@@ -67,16 +67,54 @@ export function getCompany(id){
   return companies.find(item => item.id === id);
 }
 
+// export function fetchVendors(dispatch){
+//   return (page = 1) => {
+//     const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/getCommentsForPost?postId=45`
+//     fetch(url).then(res => {
+//       return res.json()
+//     }).then(json => {
+//       console.log("VENDORS", json)
+//       dispatch({type: "VENDORS_SUCCESS", payload: json.posts})
+//     })
+//   }
+// }
+
 export function fetchVendors(dispatch){
-  return (page = 1) => {
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/getCommentsForPost?postId=45`
-    fetch(url).then(res => {
+  return (auth, page = 1) => {
+    console.log("FVW2")
+    const {userId, token} = auth;
+    const url2 = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/categories`;
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/items/1`;
+    const url3 = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/user/1`;
+    const params = {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    }
+    fetch(url, params).then(res => {
+      console.log("FVW3")
       return res.json()
     }).then(json => {
-      console.log("VENDORS", json)
-      dispatch({type: "VENDORS_SUCCESS", payload: json.posts})
+      console.log("FVW5", json)
+      // console.log("FVW4", json)
+      // const groups = json.categories
+      // Promise.all(groups.map(group => fetch(`${urlVendors}/${group}`, params)))
+      //   .then(responses =>
+      //     Promise.all(responses.map(res => res.json()))
+      //   ).then(jsons => {
+      //     // return jsons
+      //     const res = {
+      //       vendors: jsons,
+      //       vendorGroups: groups,
+      //     }
+      //     console.log("VENDORS", res)
+      //     dispatch({type: "VENDORS_SUCCESS", payload: res})
+      //   })
+      // console.log("VENDORS", json)
+      // dispatch({type: "VENDORS_SUCCESS", payload: json})
     })
   }
 }
-
 
