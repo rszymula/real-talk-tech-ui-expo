@@ -3,6 +3,12 @@ import { colors } from "../../context/themes";
 import { Dropdown } from "./Dropdown";
 import React from "react";
 
+const DEFAULT_STYLE = {
+  top: 32,
+  left: 0,
+  width: "100%",
+}
+
 export function RTextInput({
   value,
   onChangeText,
@@ -11,7 +17,8 @@ export function RTextInput({
   label=null,
   selections = [],
   onSelect = (selection) => {},
-  style={}
+  style={},
+  dropdownStyle=DEFAULT_STYLE
 }){
   
   // const [hoverItem, setHoverItem] = React.useState(undefined);
@@ -33,7 +40,7 @@ export function RTextInput({
           }}
           //hoverItem={hoverItem}
           //setHoverItem={(item) => {console.log(item); setHoverItem(item)}}
-          style={styles.dropdown}
+          style={[styles.dropdown, {top: dropdownStyle.top, left: dropdownStyle.left, width: dropdownStyle.width}]}
         />)
       }
       <View style={styles.labeledInput}>
@@ -94,8 +101,7 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     position: 'absolute',
-    // zIndex: 100,
-    top: 48,
-    left: 96,
+    // top: 48,
+    // left: 96,
   },
 });

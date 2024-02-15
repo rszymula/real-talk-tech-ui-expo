@@ -90,6 +90,7 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
         // interestAreas: route.params[ProfileStep.SOFTWARE],
         interestAreas: items,
       }
+      console.log("SIGNUPW", body)
       signup(body)
       navigation.navigate(DEFAULT_TAB)
     }else{
@@ -142,6 +143,8 @@ export const ProfileQuestion = connect(stp, dtp)(RawProfileQuestion);
 const styles = StyleSheet.create({
   input: {
     marginTop: 8,
+    position: 'relative',
+    zIndex: 100,
   },
   // container: {
   //   backgroundColor: colors.background,

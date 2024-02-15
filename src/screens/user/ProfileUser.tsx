@@ -10,18 +10,19 @@ import { store } from '../../state/basicStore';
 import { ListItem } from '../../components/common/ListItem';
 import { FullWindowOverlay } from 'react-native-screens';
 import { SelectedItems } from '../../components/common/SelectedItems';
+import { connect } from '../../state/reduxStore';
 
 
-export function ProfileUser(props){
+export function RawProfileUser(props){
 
-  const { navigation, route } = props;
+  const { navigation, route, user } = props;
 
-  const { getUser } = store;
-  const user = getUser();
+  // const { getUser } = store;
+  // const user = getUser();
 
-  const techStack = [
-    "Java", "Typescript", "Python", "C++"
-  ];
+  // const techStack = [
+  //   "Java", "Typescript", "Python", "C++"
+  // ];
 
   return (
     <View style={styles.container}>
@@ -55,12 +56,19 @@ export function ProfileUser(props){
             )
           })}
         </View> */}
-        <SelectedItems items={techStack} style={{marginTop: 8}}/>
+        <SelectedItems items={user.techstack} style={{marginTop: 8}}/>
       </View>
 
     </View>
   )
 }
+
+const stp = (state) => ({
+  user: state.users[state.auth.userId],
+});
+const dtp = (dispatch) => ({
+});
+export const ProfileUser = connect(stp, dtp)(RawProfileUser);
 
 const styles = StyleSheet.create({
   container: {

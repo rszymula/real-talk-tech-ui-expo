@@ -50,23 +50,13 @@ function CommentsList({commentIds, comments, postId, makeComment, fetchComments,
   }
 
   React.useEffect(() => {
-    // const reduced = commentIds.reduce((accum, curr) => {
-    //   return comments[curr] ? true : false
-    // }, true)
-    // console.log("A1")
-    // const hasAll = checkHasAll(commentIds, comments)
-    // if(!hasAll) {
-    //   console.log("A2")
-    //   fetchComments(postId, auth)
-    // }
-    fetchComments(postId, auth)
-    //fetchComments(id)
+    const hasAll = checkHasAll(commentIds, comments)
+    if(!hasAll) {
+      fetchComments(postId, auth)
+    }
   }, [])
 
-  // console.log("LISTW", commentIds)
-  console.log("A3")
   const hasAll = checkHasAll(commentIds, comments)
-  console.log({hasAll, commentIds, comments})
   const commentList = hasAll ? commentIds.map(commentId => comments[commentId]) : [];
   console.log({commentIds, comments, commentList})
 
@@ -96,24 +86,16 @@ function CommentsList({commentIds, comments, postId, makeComment, fetchComments,
 
 function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentCategory, navigation, fetchComments, makeComment, comments, commentsLoading, commentsError, upvote, auth}){
 
-  // console.log("AZ", title, body)
   const {id: userId, username} = user;
 
-  // const { getComments } = store;
-
-  // const commentCount = commentIds?.length || 0;
-  // const numComments = commentIds?.length || 0;
-
   const [commentsExpanded, setCommentsExpanded] = React.useState(false);
-  // const [page, setPage] = React.useState(0);
-  // const [comments, setComments] = React.useState([]);
 
   const handleCommentsPress = () => {
     setCommentsExpanded(!commentsExpanded)
   }
 
   const handleUsernamePress = () => {
-    navigation.navigate(RouteNames.PROFILE_USER_OTHER, {id: userId})
+    navigation.navigate(RouteNames.PROFILE_USER_OTHER, {id: userId, username})
   }
 
   const handleUpvotePress = () => {
@@ -140,9 +122,6 @@ function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentC
   // const commentText = commentCount === 1 ? `${commentCount} Comment` : `${commentCount} Comments`;
   const commentCount = commentIds.length;
   const commentText = commentCount === 1 ? `${commentCount} Comment` : `${commentCount} Comments`;
-
-  // const commentList = commentIds.map(commentId => comments[commentId]);
-  // console.log({commentIds, comments, commentList})
 
   return (
     <View style={styles.container}>

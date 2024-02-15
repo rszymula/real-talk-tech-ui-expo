@@ -45,7 +45,17 @@ export function login(dispatch){
       const decodedToken = jwtDecode(json.token)
       console.log("GOOD-login", json, decodedToken)
       // dispatch({type: "POSTS_SUCCESS", payload: json})
-      dispatch({type: "LOGIN_SUCCESS", payload: {token: json.token, username, userId: decodedToken.sub}})
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: {
+          auth: {
+            token: json.token,
+            username,
+            userId: decodedToken.sub
+          },
+          user: json.userDetails
+        }
+      })
     }).catch((err) => {
       console.log("ERR-login", err)
     })
@@ -53,7 +63,9 @@ export function login(dispatch){
 }
 
 export function fetchUser(dispatch){
-  return (username, token = DEFAULT_TOKEN) => {
+  return (username, auth) => {
+    dispatch({type: "USER_LOADING"})
+    const {userId, token} = auth;
     const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/user/${username}`
     const params = {
       method: "GET",
@@ -66,7 +78,7 @@ export function fetchUser(dispatch){
       return res.json()
     }).then(json => {
       console.log("GOOD-fetchUser", json)
-      // dispatch({type: "POSTS_SUCCESS", payload: json})
+      dispatch({type: "USER_SUCCESS", payload: json.userDetails})
     }).catch((err) => {
       console.log("ERR-fetchUser", err)
     })
@@ -74,7 +86,8 @@ export function fetchUser(dispatch){
 }
 
 export function endorseUser(dispatch){
-  return (body, token = DEFAULT_TOKEN) => {
+  return (body, auth) => {
+    const {userId, token} = auth;
     const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/endorseUser`
     const params = {
       method: "PUT",

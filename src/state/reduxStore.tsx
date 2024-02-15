@@ -36,10 +36,46 @@ export function createStore(reducer){
 //   }
 // }
 
+const INDUSTRY_DEFAULT = [
+  {
+    id: 1,
+    name: "industry1",
+  },
+  {
+    id: 2,
+    name: "industry2",
+  }
+];
+
+const CATEGORIES_DEFAULT = categories//.map(item => item.name)
+
+const INTERESTS_DEFAULT = [
+  {
+    id: 1,
+    name: "interest1",
+  },
+  {
+    id: 2,
+    name: "interest2",
+  },
+  {
+    id: 3,
+    name: "interest3",
+  },
+  {
+    id: 4,
+    name: "interest3",
+  },
+  {
+    id: 5,
+    name: "interest4",
+  }
+];
+
 const initialState = {
-  industry: [], // What industry are you in?
-  categories, // What do you do?
-  interests: [], // What software / tech interests you?
+  industry: INDUSTRY_DEFAULT, // What industry are you in?
+  categories: CATEGORIES_DEFAULT, // What do you do?
+  interests: INTERESTS_DEFAULT, // What software / tech interests you?
   vendorGroups: [],
   auth: {
     userId: -1,
@@ -194,7 +230,8 @@ export function reducer(state = initialState, action){
     case 'LOGIN_SUCCESS':
       return {
         ...state,
-        auth: action.payload,
+        auth: action.payload.auth,
+        users: {...state.users, [action.payload.user.id]: action.payload.user},
         authLoading: false,
         authError: false,
       }
@@ -209,6 +246,25 @@ export function reducer(state = initialState, action){
         ...state,
         authLoading: false,
         authError: true,
+      }
+    case 'USER_SUCCESS':
+      return {
+        ...state,
+        users: {...state.users, [action.payload.username]: action.payload},
+        userLoading: false,
+        userError: false,
+      }
+    case 'USER_LOADING':
+      return {
+        ...state,
+        userLoading: true,
+        userError: false,
+      }
+    case 'USER_ERROR':
+      return {
+        ...state,
+        userLoading: false,
+        userError: true,
       }
     default:
       return state
