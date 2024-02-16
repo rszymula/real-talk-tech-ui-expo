@@ -4,7 +4,7 @@ import { TabView, SceneMap } from 'react-native-tab-view';
 import { Card } from '../../components/core/Card';
 import { InputBar } from '../../components/core/InputBar';
 import { Separator } from '../../components/core/Separator';
-import { RouteNames, INPUT_PLACEHOLDER, CategoryNames, categories } from '../../constants/constants';
+import { RouteNames, INPUT_PLACEHOLDER, CategoryNames, categories, POSTS_COUNT_PER_PAGE, COMMENTS_COUNT_PER_PAGE } from '../../constants/constants';
 import { colors } from '../../context/themes';
 // import { getComments, getPostsWithCommentIdsAndUpvotes } from '../services/DiscussService';
 import { store } from '../../state/basicStore';
@@ -80,7 +80,18 @@ function checkHasAll(list, obj){
   return hasAll
 }
 
-function CommentsList({commentIds, comments, postId, makeComment, fetchComments, navigation, auth}){
+function getCount(list, obj){
+  // const keys = Object.keys(obj);
+  // const hasAll = list.every(id => keys.includes(`${id}`))
+  const count = list.reduce((accum, curr) => {
+    if(obj[curr]){
+      accum += 1
+    }
+  }, 0)
+  return count
+}
+
+function CommentsList({commentIds, comments, commentsLoading, commentsError, postId, makeComment, fetchComments, navigation, auth}){
 
   const handleSubmitComment = (input) => {
     console.log("Commented", input)
@@ -89,15 +100,22 @@ function CommentsList({commentIds, comments, postId, makeComment, fetchComments,
     makeComment(postId, "comment text here")
   }
 
-  React.useEffect(() => {
-    const hasAll = checkHasAll(commentIds, comments)
-    if(!hasAll) {
-      fetchComments(postId, auth)
+  const loadComments = () => {
+    const count = getCount(commentIds, comments)
+    // const hasAll = checkHasAll(commentIds, comments)
+    if(count !== commentIds.length) {
+      const page = Math.floor(count / COMMENTS_COUNT_PER_PAGE) + 1;
+      fetchComments(postId, auth, page)
     }
+  }
+
+  React.useEffect(() => {
+    loadComments()
   }, [])
 
-  const hasAll = checkHasAll(commentIds, comments)
-  const commentList = hasAll ? commentIds.map(commentId => comments[commentId]) : [];
+  //const hasAll = checkHasAll(commentIds, comments)
+  //const commentList = hasAll ? commentIds.map(commentId => comments[commentId]) : [];
+  const commentList = commentIds.map(commentId => comments[commentId]).filter(item => !!item)
   console.log({commentIds, comments, commentList})
 
   return (
@@ -118,6 +136,19 @@ function CommentsList({commentIds, comments, postId, makeComment, fetchComments,
           placeholder={INPUT_PLACEHOLDER}
         />
       </View>
+      <Link onPress={loadComments} textLink={"Load More Comments..."} style={{alignSelf: 'center', margin: 16}}/>
+      {commentsLoading && <ActivityIndicator style={{marginTop: 16}} />}
+      {commentsError && (
+        <View style={{margin: 32}}>
+          <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading comments..."}</Text>
+          <Link
+            onPress={loadComments}
+            textLink={"Retry"}
+            style={{alignSelf: 'center', marginTop: 8}}
+          />
+        </View>
+      )}
+
     </View>
   )
 }
@@ -206,21 +237,23 @@ function RawPost({ id, title, body, user, commentIds, userVote, numUpvotes, numD
       <Button title='upvote' onPress={() => upvote(id, true, auth)}/> */}
       {commentsExpanded ? 
         (<>
-          <CommentsList commentIds={commentIds} comments={comments} postId={id} makeComment={makeComment} fetchComments={fetchComments} navigation={navigation} auth={auth} />
-            {commentsLoading && <ActivityIndicator style={{marginTop: 16}} />}
-            {commentsError && (<View style={{margin: 32}}>
-            <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading comments..."}</Text>
-            <Link
-              onPress={() => {
-                const hasAll = checkHasAll(commentIds, comments)
-                if(!hasAll) {
-                  fetchComments(id, auth)
-                }
-              }}
-              textLink={"Retry"}
-              style={{alignSelf: 'center', marginTop: 8}}
-            />
-          </View>)}
+          <CommentsList commentIds={commentIds} comments={comments} commentsLoading={commentsLoading} commentsError={commentsError} postId={id} makeComment={makeComment} fetchComments={fetchComments} navigation={navigation} auth={auth} />
+            {/* {commentsLoading && <ActivityIndicator style={{marginTop: 16}} />}
+            {commentsError && (
+              <View style={{margin: 32}}>
+                <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading comments..."}</Text>
+                <Link
+                  onPress={() => {
+                    const hasAll = checkHasAll(commentIds, comments)
+                    if(!hasAll) {
+                      fetchComments(id, auth)
+                    }
+                  }}
+                  textLink={"Retry"}
+                  style={{alignSelf: 'center', marginTop: 8}}
+                />
+              </View>
+            )} */}
         </>) : null
       }
     </View>
@@ -246,6 +279,14 @@ function RawDiscussHome(props){
 
   // console.log("PZ", feed, currentCategory, postsByCategory)
 
+  const loadPosts = () => {
+    const categoryId = categories.find(item => item.name === currentCategory)?.id || -1
+    const page = postsByCategory.length / POSTS_COUNT_PER_PAGE + 1;
+    //fetchPosts(1, 1)
+    console.log("PAGEW", page)
+    fetchPosts(categoryId, auth, page)
+  }
+
   React.useEffect(() => {
     // loading(currentCategory)
     // console.log("BZ", currentCategory)
@@ -259,9 +300,7 @@ function RawDiscussHome(props){
     // const rand = Math.random();
     // console.log("RANDZ", rand, data)
 
-    const categoryId = categories.find(item => item.name === currentCategory)?.id || -1
-    //fetchPosts(1, 1)
-    fetchPosts(categoryId, auth)
+    loadPosts()
 
     // setTimeout(() => {
     //   if(rand > 0.01){
@@ -298,10 +337,11 @@ function RawDiscussHome(props){
           ItemSeparatorComponent={() => <Separator />}
         />
       </View>
+      <Link onPress={loadPosts} textLink={"Load More Posts..."} style={{alignSelf: 'center', margin: 16}}/>
       {feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
       {feedError[currentCategory] && (<View style={{margin: 32}}>
         <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading data..."}</Text>
-        <Link onPress={() => {fetchPosts(categoryId, auth)}} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
+        <Link onPress={loadPosts} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
       </View>)}
     </Card>
   )

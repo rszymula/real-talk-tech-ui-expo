@@ -28,7 +28,7 @@ export function RTextInput({
 
   //console.log({showDropdown, zIndex})
 
-  const filteredSelections = selections.filter(item => item.name.startsWith(value))
+  const filteredSelections = selections.filter(item => item?.name?.startsWith(value))
 
   return (
     <View style={style}>

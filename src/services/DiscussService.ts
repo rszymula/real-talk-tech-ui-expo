@@ -1,6 +1,6 @@
 // import { CategoryNames } from "../constants";
 
-import { categories } from "../constants/constants";
+import { POSTS_COUNT_PER_PAGE, categories } from "../constants/constants";
 
 const mockCommentTag = [
   {
@@ -387,12 +387,12 @@ export function getPostsWithCommentIdsAndUpvotes(category: CategoryNames, page: 
 
 
 export function fetchPosts(dispatch){
-  return (categoryId, auth, page = 1) => {
+  return (categoryId, auth, page = 1, count = POSTS_COUNT_PER_PAGE) => {
     dispatch({type: "POSTS_LOADING"})
     const {userId, token} = auth;
     // const userId = 17
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/feed?categoryId=2&userId=${userId}`
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/feed?categoryId=2&userId=${userId}?page=${page}&count=${count}`
     const params = {
       method: "GET",
       headers: {
