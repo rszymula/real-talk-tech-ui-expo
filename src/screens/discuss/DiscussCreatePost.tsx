@@ -63,6 +63,7 @@ export function RawDiscussCreatePost(props){
   const [vendor, setVendor] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [content, setContent] = React.useState('');
+  const [anonymous, setAnonymous] = React.useState(false);
 
   const [showVendorDropdown, setShowVendorDropdown] = React.useState(false);
   const [showCategoryDropdown, setShowCategoryDropdown] = React.useState(false);
@@ -76,6 +77,16 @@ export function RawDiscussCreatePost(props){
   // const vendors = getCompanies()
 
   console.log({categories, vendors})
+  const anonymousSelections = [
+    {
+      anonymous: false,
+      name: "No, post publicly",
+    },
+    {
+      anonymous: true,
+      name: "Yes, post anonymously",
+    },
+  ]
 
   React.useEffect(() => {
     // fetchVendors();
@@ -200,6 +211,16 @@ export function RawDiscussCreatePost(props){
         />
         {/* <SelectedCategories selectedCategories={selectedCategories}/> */}
         <SelectedItems itemStyle={{color: colors.border, backgroundColor: colors.input}} items={selectedVendors.map(item => item.name)} onDelete={handleDeleteVendor}/>
+        <RTextInput 
+          style={{marginTop: 8, position: 'relative', zIndex: 10}}
+          label="Post Anonymously"
+          onChangeText={() => {}}
+          value={anonymous ? "Yes, post anonymously" : "No, post publicly"}
+          freeze
+          placeholder="Enter Text"
+          selections={anonymousSelections}
+          onSelect={(item) => {setAnonymous(item.anonymous)}}
+        />
         <View style={[styles.buttonContainer, styles.item]}>
           <Button title="Cancel" onPress={handleExit} type={ButtonType.REVERSE} />
           <Button title="Create Post" onPress={handleCreatePost} />

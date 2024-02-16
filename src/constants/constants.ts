@@ -14,6 +14,7 @@ export enum RouteNames {
   PROFILE_LOGIN = "ProfileLogin",
   PROFILE_CREATE_HOME = "ProfileCreateHome",
   PROFILE_QUESTION = "ProfileQuestion",
+  PROFILE_CONTACT_US = "ProfileContactUs",
 };
 
 export const DEFAULT_TAB = "DiscussHome";
@@ -114,4 +115,24 @@ export const BUYERAI_PLACEHOLDER = 'Message Buyer AI...';
 
 export const POSTS_COUNT_PER_PAGE = 3;
 export const COMMENTS_COUNT_PER_PAGE = 2;
+
+export const tabs = [
+  {
+    routeName: RouteNames.DISCUSS_HOME,
+    title: "Discuss"
+  },
+  {
+    routeName: RouteNames.DISCOVER_HOME,
+    title: "Discover"
+  },
+  {
+    routeName: RouteNames.MARKETPLACE_HOME,
+    title: "Marketplace",
+  },
+  {
+    routeName: RouteNames.BUYER_AI_HOME,
+    title: "Buyer AI"
+  },
+]
+
 

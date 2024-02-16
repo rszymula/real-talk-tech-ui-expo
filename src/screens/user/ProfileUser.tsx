@@ -12,6 +12,7 @@ import { FullWindowOverlay } from 'react-native-screens';
 import { SelectedItems } from '../../components/common/SelectedItems';
 import { connect } from '../../state/reduxStore';
 import { RTextInput } from '../../components/core/RTextInput';
+import { Link } from '../../components/core/Link';
 
 
 export function RawProfileUser(props){
@@ -40,6 +41,10 @@ export function RawProfileUser(props){
   const handleSavePress = () => {
     // call
     setEditing(false);
+  }
+
+  const handleLogout = () => {
+    
   }
 
   return (
@@ -112,6 +117,7 @@ export function RawProfileUser(props){
           Your Tech Stack
         </Text>
         <SelectedItems items={user.techstack} style={{marginTop: 8}}/>
+        <Link textLink={"Log out from account"} onPress={handleLogout}/>
       </View>
 
     </View>

@@ -34,7 +34,7 @@ export function RTextInput({
     <View style={style}>
       {showDropdown && (
         <Dropdown
-          items={filteredSelections}
+          items={freeze ? selections : filteredSelections}
           onSelect={onSelect}
           onHoverOut={() => {
             setShowDropdown(false)
@@ -50,7 +50,11 @@ export function RTextInput({
           // console.log("QWER", selections, showDropdown)
           selections.length > 0 && setShowDropdown(true)}
         }> */}
-          {freeze ? <Text style={styles.textbox}>{value}</Text> : (<TextInput
+          {freeze ? 
+          <Text style={styles.textbox} onPress={() => filteredSelections.length > 0 && setShowDropdown(showDropdown => !showDropdown)}>
+            {value}
+          </Text> : (
+          <TextInput
             multiline={numberOfLines && numberOfLines > 1}
             numberOfLines={numberOfLines} 
             onChangeText={onChangeText}

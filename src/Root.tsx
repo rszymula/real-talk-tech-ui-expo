@@ -23,6 +23,9 @@ import { ProfileUserOther } from './screens/user/ProfileUserOther';
 import { ProfileWelcome } from './screens/user/ProfileWelcome';
 import { ProfileLogin } from './screens/user/ProfileLogin';
 import { MarketplaceHome } from './screens/marketplace/MarketplaceHome';
+import { Link } from './components/core/Link';
+import { HomeBottomBar } from './components/common/HomeBottomBar';
+import { ProfileContactUs } from './screens/user/ProfileContactUs';
 
 export const routes = [
   {
@@ -84,6 +87,10 @@ export const routes = [
   {
     name: RouteNames.PROFILE_QUESTION,
     component: ProfileQuestion,
+  },
+  {
+    name: RouteNames.PROFILE_CONTACT_US,
+    component: ProfileContactUs,
   },
 ]
 
@@ -164,6 +171,13 @@ function SideBar(props){
   )
 }
 
+function bottomBarProvider(Component){
+  return (props) => {
+    return (
+      <HomeBottomBar {...props} Component={Component}/>
+    )
+  }
+}
 
 function sideBarProvider(Component, hasCategories = false){
   return (props) => {
@@ -174,7 +188,8 @@ function sideBarProvider(Component, hasCategories = false){
 }
 
 function navBarProvider(Component, hasCategories = false, hasTabs = true){
-  const ComponentWithSideBar = sideBarProvider(Component, hasCategories)
+  const ComponentWithBottomBar = bottomBarProvider(Component)
+  const ComponentWithSideBar = sideBarProvider(ComponentWithBottomBar, hasCategories)
   return (props) => {
     return (
       <View style={styles.rootContainer}>

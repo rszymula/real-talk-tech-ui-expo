@@ -132,8 +132,10 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
       <View style={styles.inputContainer}>
         <InputBar
           onPress={handleSubmitComment}
-          title={"^"}
-          placeholder={INPUT_PLACEHOLDER}
+          // title={"^"}
+          image={UP}
+          imageSize={10}
+          placeholder={"Reply with a comment"}
         />
       </View>
       <Link onPress={loadComments} textLink={"Load More Comments..."} style={{alignSelf: 'center', margin: 16}}/>

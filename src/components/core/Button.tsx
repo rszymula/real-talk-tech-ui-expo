@@ -55,7 +55,7 @@ export const buttonTypetoStyle = {
   },
 }
 
-export function Button({onPress, title = null, image = null, type = ButtonType.LOUD, styles = {}}){
+export function Button({onPress, title = null, image = null, imageSize=16, type = ButtonType.LOUD, styles = {}}){
   const typeStyle = buttonTypetoStyle[type]
 
   return (
@@ -65,8 +65,9 @@ export function Button({onPress, title = null, image = null, type = ButtonType.L
           <View style={[typeStyle, styles]}>
             <Image source={image}  
               style={{
-                width: 16,
-                height: 16,
+                margin: 2,
+                width: imageSize,
+                height: imageSize,
                 // borderColor: 'red',
                 // borderWidth: 1,
               }} 

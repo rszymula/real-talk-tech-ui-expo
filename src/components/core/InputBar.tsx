@@ -3,7 +3,7 @@ import { Button, ButtonType } from "./Button";
 import React from "react";
 import { colors } from "../../context/themes";
 
-export function InputBar({onPress, placeholder, title = null, style = {}, numLines=3}){
+export function InputBar({onPress, placeholder, title = null, image = null, imageSize=16,  style = {}, numLines=3}){
 
   const [input, setInput] = React.useState('');
 
@@ -21,11 +21,13 @@ export function InputBar({onPress, placeholder, title = null, style = {}, numLin
           style={styles.input}
           numberOfLines={numLines}
         />
-        {!!title && <Button
+        {(!!title || !!image) && <Button
           title={title}
+          image={image}
+          imageSize={imageSize}
           onPress={() => onPress(input)}
           type={ButtonType.BASIC}
-          styles={{marginLeft: 8, color: colors.textHighlight}}
+          styles={{color: colors.textHighlight, borderWidth: 0, borderRadius: 0, borderTopRightRadius: 4, borderBottomRightRadius: 4}}
         />}
       </View>
     </View>
@@ -39,16 +41,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     // borderColor:'red',
     // borderWidth: 2,
-    paddingLeft: 16,
-    paddingRight: 16,
-    paddingTop: 8,
-    paddingBottom: 8,
+    // paddingLeft: 16,
+    // paddingRight: 16,
+    // paddingTop: 8,
+    // paddingBottom: 8,
     backgroundColor: colors.background,
     borderRadius: 4,
   },
   input: {
+    marginLeft: 8,
     color: colors.textRegular,
     fontSize: 12,
+    borderRightWidth: 1,
+    borderRightColor: colors.border,
     width: "100%",
   },
   card: {

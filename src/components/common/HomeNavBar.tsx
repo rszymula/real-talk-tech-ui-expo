@@ -3,28 +3,9 @@ import { Text, View, StyleSheet, Image, useWindowDimensions } from 'react-native
 import { colors } from '../../context/themes';
 import { Button, ButtonType } from '../core/Button';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png'; //'../../assets/titleWhite.png';
-import { DEFAULT_TAB, RouteNames } from '../../constants/constants';
+import { DEFAULT_TAB, RouteNames, tabs } from '../../constants/constants';
 import SETTINGS from '../../assets/settings.png';
 import NOTIFICATIONS from '../../assets/notifications.png';
-
-const tabs = [
-  {
-    routeName: RouteNames.DISCUSS_HOME,
-    title: "Discuss"
-  },
-  {
-    routeName: RouteNames.DISCOVER_HOME,
-    title: "Discover"
-  },
-  {
-    routeName: RouteNames.MARKETPLACE_HOME,
-    title: "Marketplace",
-  },
-  {
-    routeName: RouteNames.BUYER_AI_HOME,
-    title: "Buyer AI"
-  },
-]
 
 const navRouteNames = [...tabs.map(tab => tab.routeName), RouteNames.PROFILE_USER, RouteNames.PROFILE_CREATE_HOME];
 
@@ -74,7 +55,7 @@ export function HomeNavBar(props){
           }
         </View>)}
         {/* image={SETTINGS} */}
-      <View style={{flexDirection: 'row', borderColor: 'green', borderWidth: 1}}>
+      <View style={{flexDirection: 'row', borderColorX: 'green', borderWidth: 1}}>
       <Button image={NOTIFICATIONS} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
       <Button image={SETTINGS} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
       </View>
@@ -87,7 +68,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderColor: 'red',
-    borderWidth: 1
+    // borderWidth: 1
   },
   title: {
     width: 192,
