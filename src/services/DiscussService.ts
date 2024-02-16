@@ -413,8 +413,19 @@ export function fetchPosts(dispatch){
   }
 }
 
-export function upvote(dispatch){
-  return (postId, down, auth) => {
+export function upvotePost(dispatch, getState){
+  return (postId, isUpvote) => {
+    // console.log({st: getState()})
+    const state = getState();
+    const { posts, auth } = state
+    const post = posts[postId]
+    if(post.userVote > 0 && isUpvote || post.userVote < 0 && !isUpvote){
+      console.log("SHORTCIRC")
+      return 
+    }else{
+      console.log("SHOTNO")
+    }
+    console.log("HERE1")
     const {userId, token} = auth;
     // const userId = 17
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
@@ -426,7 +437,7 @@ export function upvote(dispatch){
         'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify({
-        isDownvote: down,
+        isDownvote: !isUpvote,
         postId,
       }),
     }
@@ -435,6 +446,11 @@ export function upvote(dispatch){
       return res.json()
     }).then(json => {
       console.log("GOOD-upvote", json)
+      console.log(state)
+      dispatch({type: "POST_UPVOTE_SUCCESS", payload: {
+        isUpvote,
+        postId,
+      }})
       //dispatch({type: "POSTS_SUCCESS", payload: {category: categories.find(cat => cat.id === categoryId)?.name, data: json.posts}})
     }).catch((err) => {
       console.log("ERR-upvote", err)

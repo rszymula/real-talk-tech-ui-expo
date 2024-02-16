@@ -132,7 +132,8 @@ export function reducer(state = initialState, action){
         posts: {
           ...state.posts,
           ...action.payload.data.reduce((accum, cur) => {
-            accum[cur.id] = cur
+            const userVote = cur.userVote === true ? 1 : cur.userVote === false ? -1 : 0
+            accum[cur.id] = {...cur, userVote }
             return accum;
           }, {}),
         },
@@ -266,6 +267,24 @@ export function reducer(state = initialState, action){
         userLoading: false,
         userError: true,
       }
+    case 'POST_UPVOTE_SUCCESS':
+      const post = state.posts[action.payload.postId];
+      const up = action.payload.isUpvote ? post.numUpvotes + 1: post.numUpvotes;
+      const down = action.payload.isUpvote ? post.numDownvotes : post.numDownvotes + 1;
+      const userVote = action.payload.isUpvote ? post.userVote + 1 : post.userVote - 1;
+      console.log("UV", post.userVote, userVote)
+      return {
+        ...state,
+        posts: {
+          ...state.posts,
+          [action.payload.postId]:
+            {...state.posts[action.payload.postId],
+              numUpvotes: up,
+              numDownvotes: down,
+              userVote,
+            }
+        }
+      }
     default:
       return state
   }
@@ -296,7 +315,7 @@ export function connect(mapStateToProps, mapDispatchToProps){
       return (<Component
         {...props}
         {...mapStateToProps(store.getState())}
-        {...mapDispatchToProps(store.dispatch)}
+        {...mapDispatchToProps(store.dispatch, store.getState)}
       />)
     };
   }

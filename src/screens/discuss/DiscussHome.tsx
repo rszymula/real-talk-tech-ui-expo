@@ -11,7 +11,7 @@ import { store } from '../../state/basicStore';
 import { connect } from '../../state/reduxStore';
 import { mockFeedResponse } from '../../data/discussMocks';
 import { Link } from '../../components/core/Link';
-import { fetchComments, fetchPosts, makeComment, upvote } from '../../services/DiscussService';
+import { fetchComments, fetchPosts, makeComment, upvotePost } from '../../services/DiscussService';
 import { createUser } from '../../services/UserServices';
 import { Button } from '../../components/core/Button';
 import UP from '../../assets/up.png';
@@ -20,9 +20,22 @@ import UPVOTE_DEFAULT from '../../assets/upvote_default.png';
 import UPVOTE_ACTIVE from '../../assets/upvote_active.png';
 import DOWNVOTE_DEFAULT from '../../assets/downvote_default.png';
 import DOWNVOTE_ACTIVE from '../../assets/downvote_active.png';
+import moment from 'moment';
 
 const POST_PAGE_OFFSET = 10;
 const COMMENT_OFFSET = 10;
+
+function getDateText(createdTimestamp){
+  // const MS_IN_MIN = 60000
+  const res = moment(new Date(createdTimestamp)).fromNow()
+  // const stamp = moment(new Date(createdTimestamp))
+  // const now = moment(new Date());
+  // const res = now.diff(stamp);
+  // if(res)
+  console.log("RESSSS", res)
+  return res
+}
+
 
 function Username(){
 
@@ -111,7 +124,7 @@ function CommentsList({commentIds, comments, postId, makeComment, fetchComments,
 
 
 
-function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentCategory, navigation, fetchComments, makeComment, comments, commentsLoading, commentsError, upvote, auth}){
+function RawPost({ id, title, body, user, commentIds, userVote, numUpvotes, numDownvotes, createdTimestamp, currentCategory, navigation, fetchComments, makeComment, comments, commentsLoading, commentsError, upvotePost, auth}){
 
   const {id: userId, username} = user;
 
@@ -126,11 +139,11 @@ function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentC
   }
 
   const handleUpvotePress = () => {
-
+    upvotePost(id, true)
   }
 
   const handleDownvotePress = () => {
-    
+    upvotePost(id, false)
   }
 
   // React.useEffect(() => {
@@ -170,11 +183,12 @@ function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentC
           {/* <View style={{backgroundColor: 'white'}}> */}
             {/* <Text>kjhsdkf</Text>
             <Image source={UP} style={{height: 16, width: 16}}/> */}
+            <Text style={{marginLeft: 8, fontSize: 12, color: colors.textLowlight}}>{`${numUpvotes - numDownvotes} Upvotes`}</Text>
             <TouchableOpacity onPress={handleUpvotePress} style={{marginLeft: 8}}>
-              <Image source={UPVOTE_DEFAULT} style={{height: 16, width: 16}} />
+              <Image source={userVote > 0 ? UPVOTE_ACTIVE : UPVOTE_DEFAULT} style={{height: 16, width: 16}} />
             </TouchableOpacity>
             <TouchableOpacity onPress={handleDownvotePress} style={{marginLeft: 8}}>
-              <Image source={DOWNVOTE_DEFAULT} style={{height: 16, width: 16}}  />
+              <Image source={userVote < 0 ? DOWNVOTE_ACTIVE : DOWNVOTE_DEFAULT} style={{height: 16, width: 16}}  />
             </TouchableOpacity>
           {/* </View> */}
         </View>
@@ -184,7 +198,7 @@ function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentC
             {username ? (<TouchableOpacity onPress={handleUsernamePress}>
               <Text style={styles.userCaption}>{`${username} `}</Text>
             </TouchableOpacity>) : <Text style={styles.captionText}>{"Anonymous "}</Text>} 
-            <Text style={styles.captionText}>{`| ${createdTimestamp}`}</Text>
+            <Text style={styles.captionText}>{`| ${getDateText(createdTimestamp)}`}</Text>
           {/* </View> */}
         </View>
       </View>
@@ -193,8 +207,8 @@ function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentC
       {commentsExpanded ? 
         (<>
           <CommentsList commentIds={commentIds} comments={comments} postId={id} makeComment={makeComment} fetchComments={fetchComments} navigation={navigation} auth={auth} />
-          {commentsLoading && <ActivityIndicator style={{marginTop: 16}} />}
-          {commentsError && (<View style={{margin: 32}}>
+            {commentsLoading && <ActivityIndicator style={{marginTop: 16}} />}
+            {commentsError && (<View style={{margin: 32}}>
             <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading comments..."}</Text>
             <Link onPress={() => {fetchComments(id)}} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
           </View>)}
@@ -205,10 +219,10 @@ function RawPost({ id, title, body, user, commentIds, createdTimestamp, currentC
 }
 
 const stpPost = (state) => ({comments: state.comments, commentsLoading: state.commentsLoading, commentsError: state.commentsError, auth: state.auth});
-const dtpPost  = (dispatch) => ({
+const dtpPost  = (dispatch, getState) => ({
   fetchComments: fetchComments(dispatch),
   makeComment: makeComment(dispatch),
-  upvote: upvote(dispatch),
+  upvotePost: upvotePost(dispatch, getState),
 })
 export const Post = connect(stpPost , dtpPost )(RawPost);
 
