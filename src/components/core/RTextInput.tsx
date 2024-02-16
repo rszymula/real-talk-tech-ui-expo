@@ -17,6 +17,7 @@ export function RTextInput({
   label=null,
   selections = [],
   onSelect = (selection) => {},
+  freeze = false,
   style={},
   dropdownStyle=DEFAULT_STYLE
 }){
@@ -49,7 +50,7 @@ export function RTextInput({
           // console.log("QWER", selections, showDropdown)
           selections.length > 0 && setShowDropdown(true)}
         }> */}
-          <TextInput
+          {freeze ? <Text style={styles.textbox}>{value}</Text> : (<TextInput
             multiline={numberOfLines && numberOfLines > 1}
             numberOfLines={numberOfLines} 
             onChangeText={onChangeText}
@@ -64,6 +65,7 @@ export function RTextInput({
             //   }
             // }
           />
+          )}
         {/* </TouchableOpacity> */}
       </View>
     </View>
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     // paddingLeft: 8,
     // paddingRight: 8,
-    fontSize: 12,
+    fontSize: 10,
     padding: 8,
     borderRightWidth: 1,
     borderRightColor: colors.border,

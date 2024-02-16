@@ -11,51 +11,106 @@ import { ListItem } from '../../components/common/ListItem';
 import { FullWindowOverlay } from 'react-native-screens';
 import { SelectedItems } from '../../components/common/SelectedItems';
 import { connect } from '../../state/reduxStore';
+import { RTextInput } from '../../components/core/RTextInput';
 
 
 export function RawProfileUser(props){
 
   const { navigation, route, user } = props;
 
-  // const { getUser } = store;
-  // const user = getUser();
+  console.log("USD", user)
 
-  // const techStack = [
-  //   "Java", "Typescript", "Python", "C++"
-  // ];
+  const [editing, setEditing] = React.useState(false)
+
+  const [name, setName] = React.useState(user.fullname)
+  const [username, setUsername] = React.useState(user.username)
+  const [password, setPassword] = React.useState("")
+  const [bio, setBio] = React.useState(user.bio)
+  const [company, setCompany] = React.useState(user.currentCompany)
+  const [linkedIn, setLinkedin] = React.useState(user.linkedinUrl)
+
+  const handleEditPress = () => {
+    setEditing(true);
+  }
+
+  const handleCancelPress = () => {
+    setEditing(false);
+  }
+
+  const handleSavePress = () => {
+    // call
+    setEditing(false);
+  }
 
   return (
     <View style={styles.container}>
       {/* <View style={{width: 512, alignItems: 'center'}}> */}
       <View style={{width: 512}}>
-        <Text style={styles.h2}>
-          Your Profile
-        </Text>
-        <Button title="Edit Profile" onPress={() => {}} type={ButtonType.BASIC} styles={{alignSelf: 'flex-start', marginTop: 8, color: colors.textRegular, backgroundColor: colors.foreground}}/>
-        <Text style={styles.title}>
-          {`@${user.username}`}
-        </Text>
-        <Text style={{color: colors.textLowlight, margin: 8,}}>
-          {`${user.firstName} ${user?.lastName || ''}`}
-        </Text>
-        <Card styles={{backgroundColor: colors.input, flexDirection: 'row', justifyContent: 'space-between'}}>
-          <View style={{flexDirection: 'column'}}>
-            <Text style={styles.captionText}>{"Bio"}</Text>
-            {/* <Text style={{maxWidth: 384, alignSelf: 'center', color: colors.textRegular, marginTop: 8 }}>{user.bio}</Text> */}
-            <Text style={{maxWidth: 512, color: colors.textRegular, marginTop: 8 }}>{user.bio}</Text>
-          </View>
-          {/* <Button title="Edit" onPress={() => {}} type={ButtonType.BASIC} styles={{color: colors.textRegular, backgroundColor: colors.foreground, alignItems: 'center' }}/> */}
-        </Card>
-        <Text style={styles.h2}>
+        <Text style={styles.title}>Settings</Text>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text style={styles.h2}>
+            Your Profile
+          </Text>
+          {editing ? (
+            <View style={{flexDirection: 'row'}}>
+              <Button title={"Cancel"} onPress={handleCancelPress} type={ButtonType.BASIC}/>
+              <Button title={"Save Changes"} onPress={handleSavePress} styles={{marginLeft: 8, paddingTop: 4, paddingBottom: 4, paddingLeft: 8, paddingRight: 8}} />
+            </View>
+          ) : 
+            <Button title="Edit Profile" onPress={handleEditPress} type={ButtonType.BASIC} styles={{alignSelf: 'flex-start', marginTop: 8, color: colors.textRegular, backgroundColor: colors.foreground}}/>
+          }
+        </View>
+        <RTextInput 
+          label={"Name"}
+          value={name}
+          onChangeText={(text) => setName(text)}
+          placeholder={""}
+          freeze={!editing}
+          style={{marginTop: 16}}
+        />
+        <RTextInput 
+          label={"Username"}
+          value={username}
+          onChangeText={(text) => setUsername(text)}
+          placeholder={""}
+          freeze={!editing}
+          style={{marginTop: 8}}
+        />
+        <RTextInput 
+          label={"Password"}
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+          placeholder={""}
+          freeze={!editing}
+          style={{marginTop: 8}}
+        />
+        <RTextInput 
+          label={"Bio"}
+          value={bio}
+          onChangeText={(text) => setBio(text)}
+          placeholder={""}
+          freeze={!editing}
+          style={{marginTop: 8}}
+        />
+        <RTextInput 
+          label={"Company"}
+          value={company}
+          onChangeText={(text) => setCompany(text)}
+          placeholder={""}
+          freeze={!editing}
+          style={{marginTop: 8}}
+        />
+        <RTextInput 
+          label={"LinkedIn"}
+          value={linkedIn}
+          onChangeText={(text) => setLinkedin(text)}
+          placeholder={""}
+          freeze={!editing}
+          style={{marginTop: 8}}
+        />
+        <Text style={styles.h3}>
           Your Tech Stack
         </Text>
-        {/* <View style={{flexDirection: 'row', marginTop: 8}}>
-          {techStack.map(item => {
-            return (
-              <Text style={styles.techItem}>{item}</Text>
-            )
-          })}
-        </View> */}
         <SelectedItems items={user.techstack} style={{marginTop: 8}}/>
       </View>
 
@@ -76,12 +131,18 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 8,
     color: colors.textHighlight,
-    fontSize: 18,
+    fontSize: 20,
+    alignSelf: 'center',
   },
   h2: {
     marginTop: 8,
     color: colors.textHighlight,
     fontSize: 16,
+  },
+  h3: {
+    marginTop: 8,
+    color: colors.textHighlight,
+    fontSize: 14,
   },
   captionText: {
     color: colors.textLowlight,

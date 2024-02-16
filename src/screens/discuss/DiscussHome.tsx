@@ -210,7 +210,16 @@ function RawPost({ id, title, body, user, commentIds, userVote, numUpvotes, numD
             {commentsLoading && <ActivityIndicator style={{marginTop: 16}} />}
             {commentsError && (<View style={{margin: 32}}>
             <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading comments..."}</Text>
-            <Link onPress={() => {fetchComments(id)}} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
+            <Link
+              onPress={() => {
+                const hasAll = checkHasAll(commentIds, comments)
+                if(!hasAll) {
+                  fetchComments(id, auth)
+                }
+              }}
+              textLink={"Retry"}
+              style={{alignSelf: 'center', marginTop: 8}}
+            />
           </View>)}
         </>) : null
       }
@@ -292,7 +301,7 @@ function RawDiscussHome(props){
       {feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
       {feedError[currentCategory] && (<View style={{margin: 32}}>
         <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading data..."}</Text>
-        <Link onPress={() => {fetchPosts(categoryId, 1)}} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
+        <Link onPress={() => {fetchPosts(categoryId, auth)}} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
       </View>)}
     </Card>
   )

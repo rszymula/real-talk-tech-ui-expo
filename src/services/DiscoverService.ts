@@ -93,13 +93,15 @@ export function fetchVendors(dispatch){
         'Authorization': `Bearer ${token}`,
       },
     }
-    fetch(`${url}/1`, params).then(res => {
+    fetch(`${url}`, params).then(res => {
       console.log("FVW3")
       return res.json()
     }).then(json => {
       // console.log("FVW5", json)
       // console.log("FVW4", json)
+      console.log("JJJ", json)
       // const groups = json.categories
+
       const groups = [1, 2, 3, 4, 5]
       Promise.all(groups.map(group => fetch(`${url}/${group}`, params)))
         .then(responses =>
