@@ -15,9 +15,12 @@ import { makeComment, makePost } from '../../services/DiscussService';
 
 export function RawDiscussCreatePost(props){
 
+  const { navigation, route, makePost, vendors, fetchVendors, auth } = props;
+  const { input } = route?.params;
+
   const [category, setCategory] = React.useState('');
   const [vendor, setVendor] = React.useState('');
-  const [title, setTitle] = React.useState('');
+  const [title, setTitle] = React.useState(input);
   const [content, setContent] = React.useState('');
   const [anonymous, setAnonymous] = React.useState(false);
 
@@ -25,9 +28,6 @@ export function RawDiscussCreatePost(props){
   const [showCategoryDropdown, setShowCategoryDropdown] = React.useState(false);
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const [selectedVendors, setSelectedVendors] = React.useState([]);
-
-  const { navigation, route, makePost, vendors, fetchVendors, auth } = props;
-
 
   console.log({categories, vendors})
   const anonymousSelections = [

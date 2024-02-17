@@ -9,7 +9,7 @@ export function HomeBottomBar(props){
   const {navigation, Component} = props;
 
   return (
-    <View style={{flexDirection: 'column', borderColor: 'green', borderWidthX: 1, backgroundColor: colors.background}}>
+    <View style={{flexDirection: 'column', borderColor: 'green', borderWidthX: 1, backgroundColor: colors.background, marginBottom: 32}}>
       <Component {...props} />
       <View style={styles.container}>
         <View style={styles.links}>
