@@ -142,12 +142,12 @@ export const tabs = [
     icon: MARKETPLACE,
     iconActive: MARKETPLACE_ACTIVE,
   },
-  {
-    routeName: RouteNames.BUYER_AI_HOME,
-    title: "Buyer AI",
-    icon: DISCUSS,
-    iconActive: DISCUSS_ACTIVE,
-  },
+  // {
+  //   routeName: RouteNames.BUYER_AI_HOME,
+  //   title: "Buyer AI",
+  //   icon: DISCUSS,
+  //   iconActive: DISCUSS_ACTIVE,
+  // },
 ]
 
 
