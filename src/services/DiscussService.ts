@@ -392,7 +392,8 @@ export function fetchPosts(dispatch){
     const {userId, token} = auth;
     // const userId = 17
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/feed?categoryId=2&userId=${userId}?page=${page}&count=${count}`
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/feed?categoryId=2&userId=${userId}&page=${page}&count=${count}`
+    console.log("URLW", url)
     const params = {
       method: "GET",
       headers: {

@@ -101,16 +101,17 @@ export function fetchVendors(dispatch){
       // console.log("FVW4", json)
       console.log("JJJ", json)
       // const groups = json.categories
+      dispatch({type: "VENDOR_GROUPS_SUCCESS", payload: json})
 
-      const groups = [1, 2, 3, 4, 5]
-      Promise.all(groups.map(group => fetch(`${url}/${group}`, params)))
+      // const groups = [1, 2, 3, 4, 5]
+      Promise.all(json.map(group => fetch(`${url}/${group.id}`, params)))
         .then(responses =>
           Promise.all(responses.map(res => res.json()))
         ).then(jsons => {
           // return jsons
           const res = {
             vendors: jsons,
-            vendorGroups: groups,
+            vendorGroups: json,
           }
           console.log("VENDORS", res)
           dispatch({type: "VENDORS_SUCCESS", payload: res})

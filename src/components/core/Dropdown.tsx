@@ -158,6 +158,7 @@ const stylesBase = StyleSheet.create({
     position: 'absolute',
     zIndex: 10,
     padding: 4,
+    maxHeight: 256,
   },
   item: {
     color: colors.textRegular

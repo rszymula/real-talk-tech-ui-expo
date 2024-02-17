@@ -62,6 +62,35 @@ export function login(dispatch){
   }
 }
 
+export function fetchOnboarding(dispatch) {
+  return () => {
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/onboard`
+    const params = {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Authorization': `Bearer ${TEMP_TOKEN}`,
+      },
+      // body: JSON.stringify({
+      //   postId,
+      //   userId,
+      //   taggedUsernames: taggedUsernames,
+      //   commentText: text,
+      // })
+    }
+    fetch(url, params).then(res => {
+      return res.json()
+      // return res.text()
+    }).then(json => {
+      console.log("GOOD-fetchOnboarding", json)
+      dispatch({type: "ONBOARDING_SUCCESS", payload: json})
+      // dispatch({type: "ONBOARDING_SUCCESS", payload: json})
+    }).catch((err) => {
+      console.log("ERR-fetchOnboarding", err)
+    })
+  }
+}
+
 export function fetchUser(dispatch){
   return (username, auth) => {
     dispatch({type: "USER_LOADING"})

@@ -6,8 +6,10 @@ import REALTALKTECH_WHITE from '../../assets/titleWhite.png'; // '../../assets/t
 import { RouteNames } from '../../constants/constants';
 import { Link } from '../../components/core/Link';
 import { RTextInput } from '../../components/core/RTextInput';
+import { fetchOnboarding } from '../../services/UserServices';
+import { connect } from '../../state/reduxStore';
 
-export function ProfileWelcome({navigation}) {
+export function RawProfileWelcome({navigation, fetchOnboarding}) {
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -20,6 +22,10 @@ export function ProfileWelcome({navigation}) {
   const handleLoginPress = () => {
     navigation.navigate(RouteNames.PROFILE_LOGIN)
   }
+
+  React.useEffect(() => {
+    fetchOnboarding()
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -49,6 +55,12 @@ export function ProfileWelcome({navigation}) {
     </View>
   )
 }
+const stp = (state) => ({
+});
+const dtp = (dispatch) => ({
+  fetchOnboarding: fetchOnboarding(dispatch),
+});
+export const ProfileWelcome = connect(stp, dtp)(RawProfileWelcome)
 
 const styles = StyleSheet.create({
   input: {

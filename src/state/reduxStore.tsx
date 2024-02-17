@@ -76,7 +76,7 @@ const initialState = {
   industry: INDUSTRY_DEFAULT, // What industry are you in?
   categories: CATEGORIES_DEFAULT, // What do you do?
   interests: INTERESTS_DEFAULT, // What software / tech interests you?
-  vendorGroups: [],
+  vendors: [{id: 1, name: "Asana"}, {id: 2, name: "Square"}],
   auth: {
     userId: -1,
     token: "",
@@ -101,9 +101,9 @@ const initialState = {
   // followups: [],
   // usersLoading: false,
   // usersError: null,
-  vendors: [{id: 1, name: "Asana"}, {id: 2, name: "Square"}],
-  vendorsLoading: false,
-  vendorsError: null,
+  vendorGroups: [],
+  vendorGroupsLoading: false,
+  vendorGrouspError: null,
 }
 
 export function reducer(state = initialState, action){
@@ -205,24 +205,24 @@ export function reducer(state = initialState, action){
         commentsLoading: false,
         commentsError: true,
       }
-    case 'VENDORS_SUCCESS':
+    case 'VENDORS_GROUPS_SUCCESS':
       return {
         ...state,
-        vendors: [...state.vendors, ...action.payload],
-        vendorsLoading: false,
-        vendorsError: false,
+        vendorGroups: [...state.vendorGroups, ...action.payload],
+        vendorGroupsLoading: false,
+        vendorGrouspError: false,
       }
-    case 'VENDORS_LOADING':
+    case 'VENDORS_GROUPS_LOADING':
       return {
         ...state,
-        vendorsLoading: true,
-        vendorsError: false,
+        vendorGroupsLoading: true,
+        vendorGrouspError: false,
       }
-    case 'VENDORS_ERROR':
+    case 'VENDORS_GROUPS_ERROR':
       return {
         ...state,
-        vendorsLoading: false,
-        vendorsError: true,
+        vendorGroupsLoading: false,
+        vendorGrouspError: true,
       }
     // case 'GET_QUESTIONS':
     //   return {...state, questions: [...state.questions, action.payload]}
@@ -284,6 +284,28 @@ export function reducer(state = initialState, action){
               userVote,
             }
         }
+      }
+    case 'ONBOARDING_SUCCESS':
+      return {
+        ...state,
+        industry: action.payload.industries.map(item => ({...item, name: item.industry_name})),
+        categories: action.payload.subscriptionAreas.map(item => ({...item, name: item.category_name})),
+        interests: action.payload.interestAreas.map(item => ({...item, name: item.interest_area_name})),
+        // vendors: action.payload.vendors,
+        onboardingLoading: false,
+        onboardingError: false,
+      }
+    case 'ONBOARDING_LOADING':
+      return {
+        ...state,
+        onboardingLoading: true,
+        onboardingError: false,
+      }
+    case 'ONBOARDING_ERROR':
+      return {
+        ...state,
+        onboardingLoading: false,
+        onboardingError: true,
       }
     default:
       return state

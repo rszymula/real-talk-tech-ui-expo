@@ -66,7 +66,7 @@ function Comment({commentText, username, upvotes, creationTime, navigation}) {
               </TouchableOpacity>
             ) : (
               <Text style={styles.captionText}>{"Anonymous "}</Text>)} 
-          <Text style={styles.captionText}>{`| ${creationTime}`}</Text>
+          <Text style={styles.captionText}>{`| ${getDateText(creationTime)}`}</Text>
         </View>
         <Text style={[styles.bodyText, styles.description]}>{commentText}</Text>
       </View>
@@ -283,7 +283,9 @@ function RawDiscussHome(props){
 
   const loadPosts = () => {
     const categoryId = categories.find(item => item.name === currentCategory)?.id || -1
+    const postsByCategory = feed[currentCategory].map(item => posts[item])
     const page = postsByCategory.length / POSTS_COUNT_PER_PAGE + 1;
+    console.log("PAGEW", page, postsByCategory)
     //fetchPosts(1, 1)
     console.log("PAGEW", page)
     fetchPosts(categoryId, auth, page)

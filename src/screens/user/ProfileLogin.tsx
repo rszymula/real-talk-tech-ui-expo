@@ -8,6 +8,7 @@ import { Link } from '../../components/core/Link';
 import { RTextInput } from '../../components/core/RTextInput';
 import { connect } from '../../state/reduxStore';
 import { login } from '../../services/UserServices';
+import { fetchOnboarding } from '../../services/UserServices';
 
 function RawProfileLogin({navigation, login}) {
 
@@ -59,6 +60,7 @@ const stp = (state) => ({
 })
 const dtp = (dispatch) => ({
   login: login(dispatch),
+  // fetchOnboarding: fetchOnboarding(dispatch),
 })
 export const ProfileLogin = connect(stp, dtp)(RawProfileLogin)
 
