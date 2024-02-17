@@ -62,7 +62,7 @@ export function RawDiscussCreatePost(props){
     // make API call
     // if API call successful, call passed in function that updates state
     // TODO use id, createdTimestamp, and updatedTimestamp from api call return
-    makePost(title, content, selectedCategories, vendors, false, auth)
+    makePost(title, content, selectedCategories, vendors, anonymous, auth)
     handleExit();
   }
 
