@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
+import { Text, View, StyleSheet, Image, FlatList, SafeAreaView } from 'react-native';
 import { ButtonType, Button } from '../../components/core/Button';
 import { Card } from '../../components/core/Card';
 import { Separator } from '../../components/core/Separator';
@@ -8,24 +8,35 @@ import { colors } from '../../context/themes';
 // import { getCompanies } from '../services/DiscoverService';
 import { store } from '../../state/basicStore';
 import { GridView } from '../../components/common/GridView';
-import { fetchVendors } from '../../services/DiscoverService';
+import { fetchVendorGroups } from '../../services/DiscoverService';
 import { connect } from '../../state/reduxStore';
+import SPLASH from '../../assets/splash.png';
 
 
 export function RawDiscoverGrid(props){
 
-  const { navigation, fetchVendors, auth } = props;
+  const { navigation, vendorGroups, fetchVendorGroups, auth } = props;
 
-  const { getCompanies } = store;
-  const companies = getCompanies(0, 15);
+  // const { getCompanies } = store;
+  // const companies = getCompanies(0, 15);
+
+  // const vendorGroupsForGrid = Object.keys(vendorGroups)
+  //   ?.map(item => ({vendorGroupId: vendorGroups[item].id, name: vendorGroups[item].categoryName})) || {}
+
+  const vendorGroupsForGrid = Object.keys(vendorGroups)
+    ?.map(item => vendorGroups[item]) || {}
+
+  console.log("VGGSSW", vendorGroups, vendorGroupsForGrid)
 
   const handleOnPress = (item) => {
-    navigation.navigate(RouteNames.DISCOVER_LIST, {type: item.type});
+    // navigation.navigate(RouteNames.DISCOVER_LIST, {type: item.type});
+    console.log("PRESSINGW", item)
+    navigation.navigate(RouteNames.DISCOVER_LIST, {vendorGroupId: item.id});
   }
 
   React.useEffect(() => {
     console.log("FVW")
-    fetchVendors(auth)
+    fetchVendorGroups(auth)
   }, [])
 
   return (
@@ -39,7 +50,11 @@ export function RawDiscoverGrid(props){
           Explore software solutions
         </Text>
         <View style={{marginBottom: 32, width: 512}}>
-          <GridView data={companies} onPress={(item) => handleOnPress(item)} navigation={navigation} />
+          <GridView
+            data={vendorGroupsForGrid}
+            onPress={(item) => handleOnPress(item)}
+            navigation={navigation}
+          />
         </View>
       </View>
     </View>
@@ -47,10 +62,11 @@ export function RawDiscoverGrid(props){
 }
 
 const stp = (state) => ({
-  auth: state.auth
+  auth: state.auth,
+  vendorGroups: state.vendorGroups,
 })
 const dtp = (dispatch) => ({
-  fetchVendors: fetchVendors(dispatch),
+  fetchVendorGroups: fetchVendorGroups(dispatch),
 })
 export const DiscoverGrid = connect(stp, dtp)(RawDiscoverGrid);
 

@@ -70,7 +70,7 @@ const initialState = {
     userId: -1,
     token: "",
   },
-  users: [],
+  users: {},
   userLoading: false,
   userError: null,
   feed: Object.values(CategoryNames).filter(item => isNaN(Number(item))).reduce((acc, item) => (acc[item] = [], acc), {}),
@@ -90,7 +90,7 @@ const initialState = {
   // followups: [],
   // usersLoading: false,
   // usersError: null,
-  vendorGroups: [],
+  vendorGroups: {},
   vendorGroupsLoading: false,
   vendorGrouspError: null,
 }
@@ -188,24 +188,51 @@ export function reducer(state = initialState, action){
         commentsLoading: false,
         commentsError: true,
       }
-    case 'VENDORS_GROUPS_SUCCESS':
+    case 'VENDOR_GROUPS_SUCCESS':
+      const vendorGroupModified = action.payload.map(item => ({id: item.id, name: item.categoryName, vendorIds: []}))
+      const vendorGroupMap = vendorGroupModified.reduce((accum, cur) => {
+        accum[cur.id] = cur
+        return accum
+      }, {});
+      // const vendorGroupMapWithVendorIds = {...vendorGroupMap, vendorIds: []}
       return {
         ...state,
-        vendorGroups: [...state.vendorGroups, ...action.payload],
+        // vendorGroups: [...state.vendorGroups, ...action.payload],
+        vendorGroups: {...state.vendorGroups, ...vendorGroupMap},
         vendorGroupsLoading: false,
         vendorGrouspError: false,
       }
-    case 'VENDORS_GROUPS_LOADING':
+    case 'VENDOR_GROUPS_LOADING':
       return {
         ...state,
         vendorGroupsLoading: true,
         vendorGrouspError: false,
       }
-    case 'VENDORS_GROUPS_ERROR':
+    case 'VENDOR_GROUPS_ERROR':
       return {
         ...state,
         vendorGroupsLoading: false,
         vendorGrouspError: true,
+      }
+    case 'VENDORS_BY_GROUP_SUCCESS':
+      const vendorGroups = {
+        ...state.vendorGroups,
+        [action.payload.vendorGroupId]: {
+          ...state.vendorGroups[action.payload.vendorGroupId],
+          vendorIds: action.payload.vendors.map(item => item.id)
+        }
+      };
+      const vendorMap = action.payload.vendors.reduce((accum, cur) => {
+        accum[cur.id] = cur
+        return accum
+      }, {});
+      console.log("THISW", vendorGroups, action.payload)
+      return {
+        ...state,
+        vendorGroups,
+        vendors: {...state.vendors, ...vendorMap},
+        vendorGroupsLoading: false,
+        vendorGrouspError: false,
       }
     // case 'GET_QUESTIONS':
     //   return {...state, questions: [...state.questions, action.payload]}

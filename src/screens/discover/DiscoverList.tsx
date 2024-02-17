@@ -9,6 +9,8 @@ import { colors } from '../../context/themes';
 import { store } from '../../state/basicStore';
 import { ListItem } from '../../components/common/ListItem';
 import { Link } from '../../components/core/Link';
+import { fetchVendorsByGroup } from '../../services/DiscoverService';
+import { connect } from '../../state/reduxStore';
 
 function Company(props){
   const { id, name, type, description, navigation} = props;
@@ -42,9 +44,12 @@ function ListView({companies, navigation}){
   )
 }
 
-export function DiscoverList(props){
+function RawDiscoverList(props){
 
-  const { navigation } = props;
+  const { route, navigation, fetchVendorsByGroup, vendorGroups, vendors, auth } = props;
+  const { vendorGroupId } = route?.params;
+
+  console.log("PPW", props)
 
   const { getCompanies } = store;
   const companies = getCompanies(0, 15);
@@ -52,6 +57,16 @@ export function DiscoverList(props){
   const handleCreateServiceProfilePress = () => {
     navigation.navigate(RouteNames.PROFILE_CONTACT_US)
   }
+
+  React.useEffect(() => {
+    fetchVendorsByGroup(vendorGroupId, auth)
+  }, [])
+
+  console.log("VENDW", vendorGroups, vendorGroupId)
+  const vendorGroup = vendorGroups[vendorGroupId];
+  const vendorList = vendorGroup.vendorIds.map(vendorId => vendors[vendorId])
+
+  console.log("VENDORSW", vendorGroup)
 
   return (
     <View style={styles.container}>
@@ -61,12 +76,22 @@ export function DiscoverList(props){
         </Text>
         <Link style={{margin: 8}} textLeft="Don't see your company?" textLink="Create a service profile" onPress={handleCreateServiceProfilePress} />
         <Card styles={{marginBottom: 32, width: 512}}>
-          <ListView companies={companies} navigation={navigation} />
+          <ListView companies={vendorList} navigation={navigation} />
         </Card>
       </View>
     </View>
   )
 }
+
+const stp = (state) => ({
+  auth: state.auth,
+  vendorGroups: state.vendorGroups,
+  vendors: state.vendors,
+})
+const dtp = (dispatch) => ({
+  fetchVendorsByGroup: fetchVendorsByGroup(dispatch),
+})
+export const DiscoverList = connect(stp, dtp)(RawDiscoverList);
 
 const styles = StyleSheet.create({
   container: {

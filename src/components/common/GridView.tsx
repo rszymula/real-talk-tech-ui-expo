@@ -4,8 +4,19 @@ import { Card } from "../core/Card";
 import { colors } from "../../context/themes";
 import { RouteNames } from "../../constants/constants";
 
+// const renderFunc = (item) => {
+//   return (
+//     <>
+//       <Image source={SPLASH} width={32} height={32} style={{borderColor: 'red', borderWidthX: 2}}/>
+//       <Text style={{flexDirection: 'row', width: 128, padding: 4, color: colors.textLowlight}}>
+//         {item.name}
+//       </Text>
+//     </>
+//   )
+// } 
+
 export function GridView(props){
-  const { columnsCount = 3, data, onPress, navigation } = props;
+  const { columnsCount = 3, data, onPress, renderFunc, navigation } = props;
 
   const renderItem = ({item}) => {
     return (
