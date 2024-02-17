@@ -1,5 +1,3 @@
-// import { CategoryNames } from "../constants";
-
 import { POSTS_COUNT_PER_PAGE, categories } from "../constants/constants";
 
 const mockCommentTag = [
@@ -416,7 +414,6 @@ export function fetchPosts(dispatch){
 
 export function upvotePost(dispatch, getState){
   return (postId, isUpvote) => {
-    // console.log({st: getState()})
     const state = getState();
     const { posts, auth } = state
     const post = posts[postId]

@@ -44,7 +44,6 @@ export function login(dispatch){
       console.log("BEFOREDECODE-login", json)
       const decodedToken = jwtDecode(json.token)
       console.log("GOOD-login", json, decodedToken)
-      // dispatch({type: "POSTS_SUCCESS", payload: json})
       dispatch({
         type: "LOGIN_SUCCESS",
         payload: {
@@ -69,22 +68,13 @@ export function fetchOnboarding(dispatch) {
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ${TEMP_TOKEN}`,
       },
-      // body: JSON.stringify({
-      //   postId,
-      //   userId,
-      //   taggedUsernames: taggedUsernames,
-      //   commentText: text,
-      // })
     }
     fetch(url, params).then(res => {
       return res.json()
-      // return res.text()
     }).then(json => {
       console.log("GOOD-fetchOnboarding", json)
       dispatch({type: "ONBOARDING_SUCCESS", payload: json})
-      // dispatch({type: "ONBOARDING_SUCCESS", payload: json})
     }).catch((err) => {
       console.log("ERR-fetchOnboarding", err)
     })
@@ -128,10 +118,8 @@ export function endorseUser(dispatch){
     }
     fetch(url, params).then(res => {
       return res.json()
-      // return res.text()
     }).then(json => {
       console.log("GOOD-endorseUser", json)
-      // dispatch({type: "POSTS_SUCCESS", payload: json})
     }).catch((err) => {
       console.log("ERR-endorseUser", err)
     })

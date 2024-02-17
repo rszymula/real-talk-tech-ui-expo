@@ -13,21 +13,11 @@ export function GridView(props){
         <View style={{flexDirection: 'row', flexShrink: 1, paddingTop: 16, paddingBottom: 16}}>
           <Image source={SPLASH} width={32} height={32} style={{borderColor: 'red', borderWidthX: 2}}/>
           <Text style={{flexDirection: 'row', width: 128, padding: 4, color: colors.textLowlight}}>
-            {/* <Image source={SPLASH} width={32} height={32} style={{borderColor: 'red', borderWidthX: 2}}/> */}
-            {/* {"sdfsdfkjskfjksljflskjflskfjl"} */}
             {item.name}
           </Text>
         </View>
         <Text onPress={() => onPress(item)} style={{borderLeftColor: colors.border, borderLeftWidth: 1, padding: 4, paddingTop: 16, color: colors.textHighlight, backgroundColor: colors.foreground, borderTopRightRadius: 4, borderBottomRightRadius: 4}}>{">"}</Text>
       </Card>
-
-      // <View style={{width: 128}}>
-      //   <Card styles={{flexDirection: 'row', flexShrink: 1}}>
-      //     <Text>a</Text>
-      //     <Text style={{maxWidth: 64, flexShrink: 1}}>bfksjdhfksjdhfksdjhfksdjfhksjhdfkdsjhfks</Text>
-      //     <Text>c</Text>
-      //   </Card>
-      // </View>
     )
   }
 
@@ -37,7 +27,6 @@ export function GridView(props){
       renderItem={renderItem}
       data={data}
       keyExtractor={(item) => item.id}
-      // ItemSeparatorComponent={() => <View style={{width: 16}}>XXXXX</View>}
     />
   )
 }

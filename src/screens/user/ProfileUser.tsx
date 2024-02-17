@@ -39,17 +39,15 @@ export function RawProfileUser(props){
   }
 
   const handleSavePress = () => {
-    // call
     setEditing(false);
   }
 
   const handleLogout = () => {
-    
+
   }
 
   return (
     <View style={styles.container}>
-      {/* <View style={{width: 512, alignItems: 'center'}}> */}
       <View style={{width: 512}}>
         <Text style={styles.title}>Settings</Text>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>

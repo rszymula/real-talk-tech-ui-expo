@@ -97,10 +97,6 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
       signup(body)
       navigation.navigate(DEFAULT_TAB)
     }else{
-      // const answers = {
-      //   ...route.params.answers,
-      //   [step]: 
-      // }
       console.log("ITEMS SEND", items)
       const stepItems = [...items]
       setItems([])
@@ -159,10 +155,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     zIndex: 100,
   },
-  // container: {
-  //   backgroundColor: colors.background,
-  //   // height: "100%",
-  // },
   title: {
     color: colors.textHighlight,
     marginTop: 32,

@@ -17,16 +17,8 @@ export function RawProfileUser(props){
 
   const { navigation, route, user } = props;
 
-  // const { getUser } = store;
-  // const user = getUser();
-
-  // const techStack = [
-  //   "Java", "Typescript", "Python", "C++"
-  // ];
-
   return (
     <View style={styles.container}>
-      {/* <View style={{width: 512, alignItems: 'center'}}> */}
       <View style={{width: 512}}>
         <Text style={styles.h2}>
           Your Profile
@@ -41,21 +33,12 @@ export function RawProfileUser(props){
         <Card styles={{backgroundColor: colors.input, flexDirection: 'row', justifyContent: 'space-between'}}>
           <View style={{flexDirection: 'column'}}>
             <Text style={styles.captionText}>{"Bio"}</Text>
-            {/* <Text style={{maxWidth: 384, alignSelf: 'center', color: colors.textRegular, marginTop: 8 }}>{user.bio}</Text> */}
             <Text style={{maxWidth: 512, color: colors.textRegular, marginTop: 8 }}>{user.bio}</Text>
           </View>
-          {/* <Button title="Edit" onPress={() => {}} type={ButtonType.BASIC} styles={{color: colors.textRegular, backgroundColor: colors.foreground, alignItems: 'center' }}/> */}
         </Card>
         <Text style={styles.h2}>
           Your Tech Stack
         </Text>
-        {/* <View style={{flexDirection: 'row', marginTop: 8}}>
-          {techStack.map(item => {
-            return (
-              <Text style={styles.techItem}>{item}</Text>
-            )
-          })}
-        </View> */}
         <SelectedItems items={user.techstack} style={{marginTop: 8}}/>
       </View>
 

@@ -65,18 +65,6 @@ export const routes = [
     name: "TestDiscover",
     component: navBarProvider(TestDiscover),
   },
-  // {
-  //   name: "DiscussCreatePost",
-  //   component: DiscussCreatePost,
-  // },
-  // {
-  //   name: "BuyerAIMessenger",
-  //   component: BuyerAIMessenger,
-  // },
-  // {
-  //   name: "BuyerAIFollowup",
-  //   component: BuyerAIFollowup,
-  // }
 ]
 
 export function TestRoot(){
@@ -93,11 +81,6 @@ export function TestRoot(){
 
   return (
     <>
-      {/* <View style={{flexDirection: 'row'}}>
-        <Text>Title</Text>
-        <Button title="Discuss" onPress={handlePressDiscuss} />
-        <Button title="Discover" onPress={handlePressDiscover} />
-      </View> */}
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
           {

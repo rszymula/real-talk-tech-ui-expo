@@ -13,51 +13,7 @@ import { RLabeledTextInput } from '../../components/core/RLabeledTextInput';
 import { connect } from '../../state/reduxStore';
 import { makeComment, makePost } from '../../services/DiscussService';
 
-
-// const TEXT_PLACEHOLDER = 'Enter Text';
-// const POST_PLACEHOLDER = 'Enter your post';
-
-// function SelectedCategories(props){
-//   return (
-//     <View style={{flexDirection: 'column', justifyContent: 'space-around'}}>
-//       {props.selectedCategories.map(item => (<Text>{item.name}</Text>))}
-//     </View>
-//   )
-// }
-
-// function DropdownModal(props) {
-//   const [visible, setVisible] = React.useState(true);
-//   const handlePress = () => {
-//     console.log("PRESSZ")
-//     setVisible(!visible)
-//   }
-//   return (
-//     <View>
-//       <Modal
-//         animationType='slide'
-//         transparent={false}
-//         onRequestClose={() => {
-//           setVisible(!visible)
-//         }}
-//         visible={visible}
-//       >
-//         <View>
-//           <Text>Dropdown Modal</Text>
-//           <Pressable 
-//             onPress={handlePress}
-//           >
-//             <Text>Press Me to Close</Text>
-//           </Pressable>
-//         </View>
-//       </Modal>
-//     </View>
-//   )
-// }
-
-
 export function RawDiscussCreatePost(props){
-
-  // const { createPost, getPostsWithCommentIdsAndUpvotes, makePost } = store;
 
   const [category, setCategory] = React.useState('');
   const [vendor, setVendor] = React.useState('');
@@ -70,11 +26,8 @@ export function RawDiscussCreatePost(props){
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const [selectedVendors, setSelectedVendors] = React.useState([]);
 
-  // const showDropdown = category.length > 0
-
   const { navigation, route, makePost, vendors, fetchVendors, auth } = props;
 
-  // const vendors = getCompanies()
 
   console.log({categories, vendors})
   const anonymousSelections = [
@@ -88,10 +41,6 @@ export function RawDiscussCreatePost(props){
     },
   ]
 
-  React.useEffect(() => {
-    // fetchVendors();
-  }, [])
-
   const handleTypeCategory = (text) => {
     setCategory(text)
   }
@@ -103,11 +52,6 @@ export function RawDiscussCreatePost(props){
   // document.cookie = "userId: 123";
 
   const handleCreatePost = () => {
-    // const postData  = {
-    //   category,
-    //   title,
-    //   content,
-    // };
     console.log({
       title,
       content,
@@ -119,9 +63,6 @@ export function RawDiscussCreatePost(props){
     // if API call successful, call passed in function that updates state
     // TODO use id, createdTimestamp, and updatedTimestamp from api call return
     makePost(title, content, selectedCategories, vendors, false, auth)
-    // createPost({id: 999, title, description: content, category})
-    // const posts = getPostsWithCommentIdsAndUpvotes(category, 0, 100)
-    // console.log(posts)
     handleExit();
   }
 
@@ -152,18 +93,6 @@ export function RawDiscussCreatePost(props){
   return (
     <Card styles={{width: 512}}>
       <View style={styles.container}>
-        {/* <View style={[styles.labeledInput, {zIndex: 100}]}>
-          {showCategoryDropdown && (<Dropdown items={categories} onSelect={onSelectCategory} style={styles.dropdown}/>)}
-          <Text style={styles.label}>Category</Text>
-          <TextInput 
-            style={[styles.inputText]}
-            onChangeText={handleTypeCategory}
-            value={category}
-            placeholder={TEXT_PLACEHOLDER}
-            onFocus={() => setShowCategoryDropdown(true)}
-            onBlur={() => setTimeout(() => setShowCategoryDropdown(false), 100)}
-          />
-        </View> */}
         <RTextInput 
           style={{marginTop: 8, position: 'relative', zIndex: 100}}
           label="Category"
@@ -188,18 +117,6 @@ export function RawDiscussCreatePost(props){
           placeholder="Enter your post"
           numberOfLines={12}
         />
-        {/* <View style={[styles.labeledInput, {zIndex: 100, marginTop: 8}]}>
-          {showVendorDropdown && (<Dropdown items={vendors} onSelect={onSelectVendor} style={styles.dropdown}/>)}
-          <Text style={styles.label}>Tag Software</Text>
-          <TextInput 
-            style={[styles.inputText]}
-            onChangeText={handleTypeVendor}
-            value={vendor}
-            placeholder={TEXT_PLACEHOLDER}
-            onFocus={() => setShowVendorDropdown(true)}
-            onBlur={() => setTimeout(() => setShowVendorDropdown(false), 100)}
-          />
-        </View> */}
         <RTextInput 
           style={{marginTop: 8, position: 'relative', zIndex: 100}}
           label="Tag Software"
@@ -209,7 +126,6 @@ export function RawDiscussCreatePost(props){
           selections={vendors}
           onSelect={onSelectVendor}
         />
-        {/* <SelectedCategories selectedCategories={selectedCategories}/> */}
         <SelectedItems itemStyle={{color: colors.border, backgroundColor: colors.input}} items={selectedVendors.map(item => item.name)} onDelete={handleDeleteVendor}/>
         <RTextInput 
           style={{marginTop: 8, position: 'relative', zIndex: 10}}

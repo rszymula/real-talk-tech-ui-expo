@@ -122,25 +122,6 @@ function SideBar(props){
     setCurrentCategory(categoryInput);
   }
 
-  // if(hasCategories){
-  //   return (
-  //     <View style={{backgroundColor: colors.background, flexDirection: 'row'}}>
-  //       <View style={{flexDirection: 'column', width: 256}}>
-  //         <Text style={styles.title}>CATEGORIES</Text>
-  //         <Categories currentCategory={currentCategory} handleCategoryPress={handleCategoryPress} />
-  //       </View>
-  //       <Component navigation={navigation} currentCategory={currentCategory} />
-  //     </View>
-  //   )
-  // }else{
-  //   return (
-  //     <View style={{backgroundColor: colors.background}}>
-  //       <View style={styles.sidebar}>
-  //         <Component navigation={navigation} />
-  //       </View>
-  //     </View>
-  //   )
-  // }
   return (
     <View style={{
       marginTop: 16,
@@ -223,63 +204,13 @@ export function Root(){
   );
 }
 
-// export function B(props){
-//   return (
-//     <>
-//       <Text>B1</Text>
-//       <Text>{props.thing}</Text>
-//       <Button onPress={() => props.inc()} title="inc" />
-//       <Text>B2</Text>
-//     </>
-//   )
-// }
-// const mapStateToProps = function(state){
-//   return ({
-//     thing: state.count,
-//   })
-// }
-// const mapDispatchToProps = function(dispatch){
-//   return ({
-//     inc: () => dispatch({type: "INCREMENT"})
-//   })
-// }
-// const BR = connect(mapStateToProps, mapDispatchToProps)(B)
-
-// export function A(props){
-//   return (
-//     <>
-//       <Text>A1</Text>
-//       <BR/>
-//       <Text>A2</Text>
-//     </>
-//   )
-// }
-
-// export function Root2(){
-//   const store = createStore(reducer);
-//   return (
-//     <>
-//       <ReduxContext.Provider value={store}>
-//         <A/>
-//       </ReduxContext.Provider>
-//     </>
-//   );
-// }
-
 const styles = StyleSheet.create({
   rootContainer: {
     backgroundColor: colors.background,
     padding: 32,
-    // height: "100%",
-    // borderWidth: 1,
     borderColor: 'purple',
   },
   container: {
-    // backgroundColor: colors.background,
-    // display: 'flex',
-    // flexDirection: 'row',
-    // justifyContent: 'space-around',
-    // margin: 32,
   },
   sidebar: {
     marginLeft: 256,

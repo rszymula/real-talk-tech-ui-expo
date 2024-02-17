@@ -13,7 +13,6 @@ export function SelectedItems(props){
           <View style={[styles.item, itemStyle]}>
             <Text style={{color: colors.textRegular, fontSize: 10}}>{item}</Text>
             {!!onDelete && (<TouchableOpacity onPress={() => onDelete(item)}>
-              {/* <Text style={{color: colors.textHighlight, marginLeft: 4}}>{"X"}</Text> */}
               <View style={{marginLeft: 4, marginTop: 2}}>
                 <Image source={X} style={{width: 8, height: 8}}/>
               </View>

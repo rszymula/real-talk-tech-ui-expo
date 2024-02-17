@@ -63,7 +63,6 @@ export function MarketplaceList(props){
 
   return (
     <View style={styles.container}>
-    {/* <View style={{justifyContent: 'flex-end'}}> */}
       <View style={{width: 512, alignItems: 'center'}}>
         <Text style={styles.title}>
           Marketplace

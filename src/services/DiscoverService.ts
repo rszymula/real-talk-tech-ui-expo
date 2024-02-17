@@ -67,18 +67,6 @@ export function getCompany(id){
   return companies.find(item => item.id === id);
 }
 
-// export function fetchVendors(dispatch){
-//   return (page = 1) => {
-//     const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/getCommentsForPost?postId=45`
-//     fetch(url).then(res => {
-//       return res.json()
-//     }).then(json => {
-//       console.log("VENDORS", json)
-//       dispatch({type: "VENDORS_SUCCESS", payload: json.posts})
-//     })
-//   }
-// }
-
 export function fetchVendors(dispatch){
   return (auth, page = 1) => {
     console.log("FVW2")
@@ -97,13 +85,8 @@ export function fetchVendors(dispatch){
       console.log("FVW3")
       return res.json()
     }).then(json => {
-      // console.log("FVW5", json)
-      // console.log("FVW4", json)
       console.log("JJJ", json)
-      // const groups = json.categories
       dispatch({type: "VENDOR_GROUPS_SUCCESS", payload: json})
-
-      // const groups = [1, 2, 3, 4, 5]
       Promise.all(json.map(group => fetch(`${url}/${group.id}`, params)))
         .then(responses =>
           Promise.all(responses.map(res => res.json()))

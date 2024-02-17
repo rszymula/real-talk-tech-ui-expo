@@ -14,7 +14,6 @@ function RawProfileLogin({navigation, login}) {
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  // const [bio, setBio] = React.useState('');
 
   const handleResetPasswordPress = () => {
     navigation.navigate(RouteNames.PROFILE_CREATE_HOME, {email, password})
@@ -60,20 +59,12 @@ const stp = (state) => ({
 })
 const dtp = (dispatch) => ({
   login: login(dispatch),
-  // fetchOnboarding: fetchOnboarding(dispatch),
 })
 export const ProfileLogin = connect(stp, dtp)(RawProfileLogin)
 
 const styles = StyleSheet.create({
   input: {
-    // borderColor: colors.border,
-    // borderWidth: 1,
-    // borderRadius: 4,
-    // padding: 8,
     marginTop: 8,
-    // color: colors.textRegular,
-    // fontSize: 12,
-    // width: 256,
   },
   container: {
     backgroundColor: colors.background,

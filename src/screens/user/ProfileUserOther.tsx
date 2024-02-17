@@ -21,16 +21,9 @@ export function RawProfileUserOther(props){
 
   const {id, username} = route?.params
 
-  // const { getUser } = store;
-  // const user = getUser(id);
-
   React.useEffect(() => {
     fetchUser(username, auth);
   }, [])
-
-  // const techStack = [
-  //   "Java", "Typescript", "Python", "C++"
-  // ];
 
   const user = users[username]
 
@@ -51,7 +44,6 @@ export function RawProfileUserOther(props){
         <Card styles={{backgroundColor: colors.input, flexDirection: 'row', justifyContent: 'space-between'}}>
         <View style={{flexDirection: 'column'}}>
             <Text style={styles.captionText}>{"Bio"}</Text>
-            {/* <Text style={{maxWidth: 384, alignSelf: 'center', color: colors.textRegular, marginTop: 8 }}>{user.bio}</Text> */}
             <Text style={{maxWidth: 512, color: colors.textRegular, marginTop: 8 }}>{user?.bio}</Text>
           </View>
         </Card>

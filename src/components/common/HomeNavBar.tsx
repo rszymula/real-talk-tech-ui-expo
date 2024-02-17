@@ -54,7 +54,6 @@ export function HomeNavBar(props){
             })
           }
         </View>)}
-        {/* image={SETTINGS} */}
       <View style={{flexDirection: 'row', borderColorX: 'green', borderWidth: 1}}>
       <Button image={NOTIFICATIONS} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
       <Button image={SETTINGS} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />

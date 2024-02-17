@@ -81,8 +81,6 @@ function checkHasAll(list, obj){
 }
 
 function getCount(list, obj){
-  // const keys = Object.keys(obj);
-  // const hasAll = list.every(id => keys.includes(`${id}`))
   const count = list.reduce((accum, curr) => {
     if(obj[curr]){
       accum += 1
@@ -112,9 +110,7 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
   React.useEffect(() => {
     loadComments()
   }, [])
-
-  //const hasAll = checkHasAll(commentIds, comments)
-  //const commentList = hasAll ? commentIds.map(commentId => comments[commentId]) : [];
+  
   const commentList = commentIds.map(commentId => comments[commentId]).filter(item => !!item)
   console.log({commentIds, comments, commentList})
 
@@ -179,20 +175,6 @@ function RawPost({ id, title, body, user, commentIds, userVote, numUpvotes, numD
     upvotePost(id, false)
   }
 
-  // React.useEffect(() => {
-  //   // if(commentsExpanded && comments.length === 0){
-  //   //   const mockComments = getComments(id, page, COMMENT_OFFSET);
-  //   //   setComments([...mockComments]);
-  //   // }
-  //   if(commentsExpanded){
-  //     fetchComments(id, auth)
-  //   }
-  //   //fetchComments(id)
-  // }, [commentsExpanded])
-  
-  // console.log("render", comments, commentsExpanded)
-
-  // const commentText = commentCount === 1 ? `${commentCount} Comment` : `${commentCount} Comments`;
   const commentCount = commentIds.length;
   const commentText = commentCount === 1 ? `${commentCount} Comment` : `${commentCount} Comments`;
 
@@ -206,16 +188,6 @@ function RawPost({ id, title, body, user, commentIds, userVote, numUpvotes, numD
           <TouchableOpacity onPress={handleCommentsPress}>
             <Text style={[styles.linkText]}>{commentText}</Text>
           </TouchableOpacity>
-          {/* <TouchableOpacity onPress={handleCommentsPress}>
-            <Text style={[styles.linkText, styles.actionMember]}>^</Text>
-          </TouchableOpacity> */}
-          {/* <Button image={SETTINGS} onPress={handleUpvotePress} styles={{}} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
-          <Button title={"+"} onPress={handleDownvotePress} styles={{}} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} /> */}
-          {/* <Button image={UPVOTE_DEFAULT} onPress={handleUpvotePress} styles={styles.voteButton} />
-          <Button image={DOWNVOTE_DEFAULT} onPress={handleUpvotePress} styles={styles.voteButton} /> */}
-          {/* <View style={{backgroundColor: 'white'}}> */}
-            {/* <Text>kjhsdkf</Text>
-            <Image source={UP} style={{height: 16, width: 16}}/> */}
             <Text style={{marginLeft: 8, fontSize: 12, color: colors.textLowlight}}>{`${numUpvotes - numDownvotes} Upvotes`}</Text>
             <TouchableOpacity onPress={handleUpvotePress} style={{marginLeft: 8}}>
               <Image source={userVote > 0 ? UPVOTE_ACTIVE : UPVOTE_DEFAULT} style={{height: 16, width: 16}} />
@@ -223,39 +195,18 @@ function RawPost({ id, title, body, user, commentIds, userVote, numUpvotes, numD
             <TouchableOpacity onPress={handleDownvotePress} style={{marginLeft: 8}}>
               <Image source={userVote < 0 ? DOWNVOTE_ACTIVE : DOWNVOTE_DEFAULT} style={{height: 16, width: 16}}  />
             </TouchableOpacity>
-          {/* </View> */}
         </View>
         <View style={{flexDirection: 'row'}}>
-          {/* <View style={{flexDirection: 'row'}}> */}
-            <Text style={styles.captionText}>{`Posted by `}</Text>
-            {username ? (<TouchableOpacity onPress={handleUsernamePress}>
-              <Text style={styles.userCaption}>{`${username} `}</Text>
-            </TouchableOpacity>) : <Text style={styles.captionText}>{"Anonymous "}</Text>} 
-            <Text style={styles.captionText}>{`| ${getDateText(createdTimestamp)}`}</Text>
-          {/* </View> */}
+          <Text style={styles.captionText}>{`Posted by `}</Text>
+          {username ? (<TouchableOpacity onPress={handleUsernamePress}>
+            <Text style={styles.userCaption}>{`${username} `}</Text>
+          </TouchableOpacity>) : <Text style={styles.captionText}>{"Anonymous "}</Text>} 
+          <Text style={styles.captionText}>{`| ${getDateText(createdTimestamp)}`}</Text>
         </View>
       </View>
-      {/* <Button title='upvote' onPress={() => upvote(id, false, auth)}/>
-      <Button title='upvote' onPress={() => upvote(id, true, auth)}/> */}
       {commentsExpanded ? 
         (<>
           <CommentsList commentIds={commentIds} comments={comments} commentsLoading={commentsLoading} commentsError={commentsError} postId={id} makeComment={makeComment} fetchComments={fetchComments} navigation={navigation} auth={auth} />
-            {/* {commentsLoading && <ActivityIndicator style={{marginTop: 16}} />}
-            {commentsError && (
-              <View style={{margin: 32}}>
-                <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading comments..."}</Text>
-                <Link
-                  onPress={() => {
-                    const hasAll = checkHasAll(commentIds, comments)
-                    if(!hasAll) {
-                      fetchComments(id, auth)
-                    }
-                  }}
-                  textLink={"Retry"}
-                  style={{alignSelf: 'center', marginTop: 8}}
-                />
-              </View>
-            )} */}
         </>) : null
       }
     </View>
@@ -279,8 +230,6 @@ function RawDiscussHome(props){
   const postsByCategory = feed[currentCategory].map(item => posts[item])
   const categoryId = categories.find(item => item.name === currentCategory) || 0
 
-  // console.log("PZ", feed, currentCategory, postsByCategory)
-
   const loadPosts = () => {
     const categoryId = categories.find(item => item.name === currentCategory)?.id || -1
     const postsByCategory = feed[currentCategory].map(item => posts[item])
@@ -292,33 +241,8 @@ function RawDiscussHome(props){
   }
 
   React.useEffect(() => {
-    // loading(currentCategory)
-    // console.log("BZ", currentCategory)
-    // const filtered = currentCategory === CategoryNames.HOME ? 
-    //   mockFeedResponse :
-    //   mockFeedResponse.filter(item => item.categories.includes(currentCategory))
-    // const data = {
-    //   category: currentCategory,
-    //   data: filtered,
-    // }
-    // const rand = Math.random();
-    // console.log("RANDZ", rand, data)
-
     loadPosts()
-
-    // setTimeout(() => {
-    //   if(rand > 0.01){
-    //     get(data);
-    //   }else{
-    //     error(currentCategory)
-    //   }
-    // }, 1000)
-
   }, [currentCategory])
-
-  // const { getPostsWithCommentIdsAndUpvotes } = store;
-  // const [currentPage, setCurrentPage] = React.useState(0);
-  // const posts = getPostsWithCommentIdsAndUpvotes(currentCategory, 0, POST_PAGE_OFFSET);
 
   console.log("PZZZ", postsByCategory)
   console.log("E2", feedError)
@@ -360,9 +284,6 @@ const stpDiscussHome = (state) => ({
 });
 const dtpDiscussHome  = (dispatch) => ({
   fetchPosts: fetchPosts(dispatch), 
-  // get: (data) => dispatch({type: "POSTS_SUCCESS", payload: data}),
-  // loading: (category) => dispatch({type: "POSTS_LOADING", payload: category}),
-  // error: (category) => dispatch({type: "POSTS_ERROR", payload: category}),
 })
 
 export const DiscussHome = connect(stpDiscussHome , dtpDiscussHome )(RawDiscussHome);

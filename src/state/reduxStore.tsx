@@ -25,17 +25,6 @@ export function createStore(reducer){
   }
 }
 
-// export function reducerCount(state = {count: 0}, action){
-//   switch(action.type){
-//     case 'INCREMENT':
-//       return {count: state.count + 1}
-//     case 'DECREMENT':
-//       return {count: state.count - 1}
-//     default:
-//       return {}
-//   }
-// }
-
 const INDUSTRY_DEFAULT = [
   {
     id: 1,
@@ -149,7 +138,6 @@ export function reducer(state = initialState, action){
     console.log("123123", res)
     return res
     case 'POSTS_LOADING':
-      // console.log("FZZZ", action.payload)
       return {
         ...state,
         feedLoading: {
@@ -176,7 +164,6 @@ export function reducer(state = initialState, action){
     case 'COMMENTS_SUCCESS':
       const res2 = {
         ...state,
-        // comments: {...state.comments, ...action.payload},
         comments: {
           ...state.comments,
           ...action.payload.reduce((accum, cur) => {
@@ -184,10 +171,6 @@ export function reducer(state = initialState, action){
             return accum
           }, {}),
         },
-        // posts: {
-        //   ...state.posts,
-        //   [postId]: {...state.posts[postId], commentIds: [action.payload.map(item => item.id)]}
-        // },
         commentsLoading: false,
         commentsError: false,
       }
@@ -317,9 +300,6 @@ export function connect(mapStateToProps, mapDispatchToProps){
   const func = (Component) => {
     return (props) => {
       const store = useContext(ReduxContext);
-
-      // console.log("A1", store, store.getState())
-
       const [forcedUpdates, setForcedUpdates] = React.useState(0)
       const [, forceUpdate] = React.useReducer(s => s + 1, 0)
 

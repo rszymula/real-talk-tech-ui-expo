@@ -12,8 +12,6 @@ import { connect } from '../../state/reduxStore';
 
 export function ProfileCreateHome({route, navigation, signup}) {
 
-  // const [firstName, setFirstName] = React.useState('');
-  // const [lastName, setLastName] = React.useState('');
   const [fullname, setFullname] = React.useState('');
   const [username, setUsername] = React.useState('');
   const [company, setCompany] = React.useState('');
@@ -25,8 +23,6 @@ export function ProfileCreateHome({route, navigation, signup}) {
 
   const [showVendorDropdown, setShowVendorDropdown] = React.useState(false);
   const [selectedVendors, setSelectedVendors] = React.useState([]);
-
-  // const showDropdown = category.length > 0
 
   const vendors = getCompanies()
 
@@ -45,8 +41,6 @@ export function ProfileCreateHome({route, navigation, signup}) {
   }
 
   const handleNextPress = () => {
-    // const answers = {email, password, firstName, lastName, username, bio}
-    // navigation.navigate(RouteNames.PROFILE_QUESTION, {answers, step: "Industry"})
     const techStack = selectedVendors.map(selected => selected.id)
     navigation.navigate(RouteNames.PROFILE_QUESTION, {email, password, fullname, username, bio, company, techStack, step: "Industry"})
   }
@@ -68,18 +62,6 @@ export function ProfileCreateHome({route, navigation, signup}) {
               placeholder={"Enter your full name"}
               style={styles.inputText}
             />
-            {/* <RTextInput 
-              onChangeText={setFirstName}
-              value={firstName}
-              placeholder={"Enter your first name"}
-              style={styles.inputText}
-            />
-            <RTextInput 
-              onChangeText={setLastName}
-              value={lastName}
-              placeholder={"Enter your last name (optional)"}
-              style={styles.inputText}
-            /> */}
             <RTextInput 
               onChangeText={setUsername}
               value={username}
@@ -99,18 +81,6 @@ export function ProfileCreateHome({route, navigation, signup}) {
               numberOfLines={12}
               style={styles.inputText}
             />
-            {/* <View style={[styles.labeledInput, {zIndex: 100, marginTop: 8}]}>
-            {showVendorDropdown && (<Dropdown items={vendors} onSelect={onSelectVendor} style={styles.dropdown}/>)}
-            <Text style={styles.label}>Tag Software</Text>
-            <TextInput 
-              style={[styles.inputText]}
-              onChangeText={handleTypeVendor}
-              value={vendor}
-              placeholder={"Enter Text"}
-              onFocus={() => setShowVendorDropdown(true)}
-              onBlur={() => setTimeout(() => setShowVendorDropdown(false), 100)}
-            />
-          </View> */}
           <RTextInput 
             style={{marginTop: 8, position: 'relative', zIndex: 100}}
             label="Tag Software"
@@ -120,7 +90,6 @@ export function ProfileCreateHome({route, navigation, signup}) {
             selections={vendors}
             onSelect={onSelectVendor}
           />
-          {/* <SelectedCategories selectedCategories={selectedCategories}/> */}
           <SelectedItems
             itemStyle={{color: colors.border, backgroundColor: colors.input}}
             items={selectedVendors.map(item => item.name)}
@@ -133,14 +102,6 @@ export function ProfileCreateHome({route, navigation, signup}) {
     </View>
   )
 }
-
-// const stp = (state) => ({
-
-// })
-// const dtp = (dispatch) => ({
-//   signup: signup(dispatch),
-// })
-// export const CreateProfile = connect(stp, dtp)(RawProfileCreateHome)
 
 const styles = StyleSheet.create({
   input: {
@@ -186,62 +147,3 @@ const styles = StyleSheet.create({
     left: 96,
   },
 })
-
-// const styles = StyleSheet.create({
-//   container: {
-//     justifyContent: 'space-between',
-//   },
-//   item: {
-//     marginTop: 8,
-//   },
-//   exit: {
-//     color: colors.textRegular,
-//     alignSelf: 'flex-end',
-//     paddingRight: 8,
-//   },
-//   labeledInput: {
-//     flexDirection: 'row',
-//     backgroundColor: colors.input,
-//     borderRadius: 4,
-//     borderWidth: 1,
-//     borderColor: colors.border,
-//   },
-//   label: {
-//     padding: 16,
-//     borderRightWidth: 1,
-//     borderRightColor: colors.border,
-//     color: colors.textHighlight,
-//   },
-//   input: {
-//     width: "100%",
-//     paddingLeft: 8,
-//     color: colors.textLowlight,
-//   },
-//   textbox: {
-//     color: colors.textLowlight,
-//     backgroundColor: colors.input,
-//     padding: 8,
-//     borderRadius: 4,
-//     borderWidth: 1,
-//     borderColor: colors.border,
-//   },
-//   buttonContainer: {
-//     flexDirection: 'row',
-//     justifyContent: 'space-between',
-//   },
-//   button: {
-//     backgroundColor: colors.link,
-//     paddingTop: 8,
-//     paddingBottom: 8,
-//     paddingLeft: 32,
-//     paddingRight: 32,
-//     borderWidth: 1,
-//     borderColor: colors.link,
-//     borderRadius: 4,
-//     fontSize: 12,
-//   },
-//   dropdown: {
-//     top: 48,
-//     left: 96,
-//   },
-// })
