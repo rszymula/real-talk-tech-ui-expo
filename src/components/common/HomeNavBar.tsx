@@ -2,10 +2,19 @@ import React from 'react';
 import { Text, View, StyleSheet, Image, useWindowDimensions } from 'react-native';
 import { colors } from '../../context/themes';
 import { Button, ButtonType } from '../core/Button';
-import REALTALKTECH_WHITE from '../../assets/titleWhite.png'; //'../../assets/titleWhite.png';
+import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
 import { DEFAULT_TAB, RouteNames, tabs } from '../../constants/constants';
 import SETTINGS from '../../assets/settings.png';
+import SETTINGS_ACTIVE from '../../assets/settings_active.png';
 import NOTIFICATIONS from '../../assets/notifications.png';
+import NOTIFICATIONS_ACTIVE from '../../assets/notifications_active.png';
+import DISCUSS from '../../assets/discuss.png';
+import DISOVER from '../../assets/discover.png';
+import MARKETPLACE from '../../assets/marketplace.png';
+import DISCUSS_ACTIVE from '../../assets/discuss_active.png';
+import DISOVER_ACTIVE from '../../assets/discover_active.png';
+import MARKETPLACE_ACTIVE from '../../assets/marketplace_active.png';
+// import BUYERAI from '../../assets/buyerai.png';
 
 const navRouteNames = [...tabs.map(tab => tab.routeName), RouteNames.PROFILE_USER, RouteNames.PROFILE_CREATE_HOME];
 
@@ -49,14 +58,14 @@ export function HomeNavBar(props){
           {
             tabs.map(tab => {
               return (
-                <Button title={tab.title} onPress={() => handleTabPress(tab)} styles={styles.tabButton} type={tab.routeName === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC}/>
+                <Button image={tab.routeName === currentRouteName ? tab.iconActive : tab.icon} title={tab.title} onPress={() => handleTabPress(tab)} styles={styles.tabButton} imageSize={12} imageWidthRatio={1.1} type={tab.routeName === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC}/>
               );
             })
           }
         </View>)}
       <View style={{flexDirection: 'row', borderColorX: 'green', borderWidth: 1}}>
-      <Button image={NOTIFICATIONS} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
-      <Button image={SETTINGS} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
+      <Button image={RouteNames.PROFILE_WELCOME === currentRouteName ? NOTIFICATIONS_ACTIVE : NOTIFICATIONS} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
+      <Button image={RouteNames.PROFILE_USER === currentRouteName ? SETTINGS_ACTIVE : SETTINGS} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
       </View>
     </View>
   )

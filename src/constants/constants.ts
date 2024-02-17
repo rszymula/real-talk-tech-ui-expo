@@ -1,3 +1,10 @@
+import DISCUSS from  '../assets/discuss.png';
+import DISCOVER from '../assets/discover.png';
+import MARKETPLACE from '../assets/marketplace.png';
+import DISCUSS_ACTIVE from  '../assets/discuss_active.png';
+import DISCOVER_ACTIVE from '../assets/discover_active.png';
+import MARKETPLACE_ACTIVE from '../assets/marketplace_active.png';
+
 export enum RouteNames {
   DISCUSS_HOME = "DiscussHome",
   DISCUSS_CREATE_POST = "DiscussCreatePost",
@@ -119,19 +126,27 @@ export const COMMENTS_COUNT_PER_PAGE = 2;
 export const tabs = [
   {
     routeName: RouteNames.DISCUSS_HOME,
-    title: "Discuss"
+    title: "Discuss",
+    icon: DISCUSS,
+    iconActive: DISCUSS_ACTIVE,
   },
   {
     routeName: RouteNames.DISCOVER_HOME,
-    title: "Discover"
+    title: "Discover",
+    icon: DISCOVER,
+    iconActive: DISCOVER_ACTIVE,
   },
   {
     routeName: RouteNames.MARKETPLACE_HOME,
     title: "Marketplace",
+    icon: MARKETPLACE,
+    iconActive: MARKETPLACE_ACTIVE,
   },
   {
     routeName: RouteNames.BUYER_AI_HOME,
-    title: "Buyer AI"
+    title: "Buyer AI",
+    icon: DISCUSS,
+    iconActive: DISCUSS_ACTIVE,
   },
 ]
 

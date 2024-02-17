@@ -13,6 +13,7 @@ const base = {
   borderRadius: 4,
   fontSize: 12,
   alignSelf: 'center',
+  flexDirection: 'row',
 };
 
 export const buttonTypetoStyle = {
@@ -55,18 +56,18 @@ export const buttonTypetoStyle = {
   },
 }
 
-export function Button({onPress, title = null, image = null, imageSize=16, type = ButtonType.LOUD, styles = {}}){
+export function Button({onPress, title = null, image = null, imageSize=16, imageWidthRatio=1, type = ButtonType.LOUD, styles = {}}){
   const typeStyle = buttonTypetoStyle[type]
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <>
+      <View style={[typeStyle, styles]}>
         {image && 
-          <View style={[typeStyle, styles]}>
+          <View>
             <Image source={image}  
               style={{
                 margin: 2,
-                width: imageSize,
+                width: imageSize * imageWidthRatio,
                 height: imageSize,
                 // borderColor: 'red',
                 // borderWidth: 1,
@@ -74,8 +75,8 @@ export function Button({onPress, title = null, image = null, imageSize=16, type 
             />
           </View>
         }
-        {title && <Text style={[typeStyle, styles]}>{title}</Text>}
-      </>
+        {title && <Text style={{marginLeft: 2, color: typeStyle.color, fontSize: typeStyle.fontSize}}>{title}</Text>}
+      </View>
     </TouchableOpacity>
   );
 }
