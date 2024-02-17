@@ -7,7 +7,7 @@ import { store } from '../../state/basicStore';
 import { Dropdown } from '../../components/core/Dropdown';
 import { CategoryNames, categories } from '../../constants/constants';
 import { SelectedItems } from '../../components/common/SelectedItems';
-import { fetchVendors, getCompanies } from '../../services/DiscoverService';
+import { getCompanies } from '../../services/DiscoverService';
 import { RTextInput } from '../../components/core/RTextInput';
 import { RLabeledTextInput } from '../../components/core/RLabeledTextInput';
 import { connect } from '../../state/reduxStore';
@@ -15,7 +15,7 @@ import { makeComment, makePost } from '../../services/DiscussService';
 
 export function RawDiscussCreatePost(props){
 
-  const { navigation, route, makePost, vendors, fetchVendors, auth } = props;
+  const { navigation, route, makePost, vendors, auth } = props;
   const { input } = route?.params;
 
   const [category, setCategory] = React.useState('');
@@ -152,7 +152,6 @@ const stp = (state) => ({
 })
 const dtp = (dispatch) => ({
   makePost: makePost(dispatch),
-  fetchVendors: fetchVendors(dispatch),
 });
 export const DiscussCreatePost = connect(stp, dtp)(RawDiscussCreatePost);
 

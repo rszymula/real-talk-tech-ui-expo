@@ -1,14 +1,16 @@
 import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TextInput } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { ButtonType, Button } from '../../components/core/Button';
 import { colors } from '../../context/themes';
-import REALTALKTECH_WHITE from '../../assets/titleWhite.png'// '../../assets/titleWhite.png';
+import REALTALKTECH_WHITE from '../../assets/titleWhite.png'
 import { RouteNames } from '../../constants/constants';
 import { SelectedItems } from '../../components/common/SelectedItems';
 import { Dropdown } from '../../components/core/Dropdown';
 import { getCompanies } from '../../services/DiscoverService';
 import { RTextInput } from '../../components/core/RTextInput';
 import { connect } from '../../state/reduxStore';
+import BACK from '../../assets/back.png';
+import { AlternateNavBar } from '../../components/common/AlternateNavBar';
 
 export function ProfileCreateHome({route, navigation, signup}) {
 
@@ -47,40 +49,40 @@ export function ProfileCreateHome({route, navigation, signup}) {
 
   return (
     <View style={styles.container}>
+      {/* <AlternateNavBar navigation={navigation} /> */}
       <View style={{alignItems: 'center', margin: 32}}>
-      <Image source={REALTALKTECH_WHITE} style={{width: 256, height: 32}}/>
         <Text style={styles.title}>
-            Setup your profile
-          </Text>
-          <Text style={{color: colors.textLowlight, margin: 8}}>
-            Choose to join anonymously or as yourself
-          </Text>
-          <View>
-            <RTextInput 
-              onChangeText={setFullname}
-              value={fullname}
-              placeholder={"Enter your full name"}
-              style={styles.inputText}
-            />
-            <RTextInput 
-              onChangeText={setUsername}
-              value={username}
-              placeholder={"Create your username"}
-              style={styles.inputText}
-            />
-            <RTextInput 
-              onChangeText={setCompany}
-              value={company}
-              placeholder={"Enter your current company"}
-              style={styles.inputText}
-            />
-            <RTextInput
-              onChangeText={setBio}
-              value={bio}
-              placeholder={"Enter bio description"}
-              numberOfLines={12}
-              style={styles.inputText}
-            />
+          Setup your profile
+        </Text>
+        <Text style={{color: colors.textLowlight, margin: 8}}>
+          Choose to join anonymously or as yourself
+        </Text>
+        <View>
+          <RTextInput 
+            onChangeText={setFullname}
+            value={fullname}
+            placeholder={"Enter your full name"}
+            style={styles.inputText}
+          />
+          <RTextInput 
+            onChangeText={setUsername}
+            value={username}
+            placeholder={"Create your username"}
+            style={styles.inputText}
+          />
+          <RTextInput 
+            onChangeText={setCompany}
+            value={company}
+            placeholder={"Enter your current company"}
+            style={styles.inputText}
+          />
+          <RTextInput
+            onChangeText={setBio}
+            value={bio}
+            placeholder={"Enter bio description"}
+            numberOfLines={12}
+            style={styles.inputText}
+          />
           <RTextInput 
             style={{marginTop: 8, position: 'relative', zIndex: 100}}
             label="Tag Software"

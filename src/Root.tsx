@@ -1,4 +1,4 @@
-import { Text, View, Image, StyleSheet } from 'react-native';
+import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -26,6 +26,7 @@ import { MarketplaceHome } from './screens/marketplace/MarketplaceHome';
 import { Link } from './components/core/Link';
 import { HomeBottomBar } from './components/common/HomeBottomBar';
 import { ProfileContactUs } from './screens/user/ProfileContactUs';
+import { AlternateNavBar } from './components/common/AlternateNavBar';
 
 export const routes = [
   {
@@ -82,11 +83,11 @@ export const routes = [
   },
   {
     name: RouteNames.PROFILE_CREATE_HOME,
-    component: ProfileCreateHome,
+    component: alternateNavBarProvider(ProfileCreateHome),
   },
   {
     name: RouteNames.PROFILE_QUESTION,
-    component: ProfileQuestion,
+    component: alternateNavBarProvider(ProfileQuestion),
   },
   {
     name: RouteNames.PROFILE_CONTACT_US,
@@ -102,12 +103,24 @@ function Categories({currentCategory, handleCategoryPress}){
       <Text style={styles.title}>CATEGORIES</Text>
       <View>
         {categories.map(category => {
-          return <Button
-            title={category.name}
-            onPress={() => handleCategoryPress(category.name)}
-            type={ButtonType.BARE}
-            styles={category.name === currentCategory ? {color: colors.textHighlight} : {}}
-          />
+          // return <Button
+          //   title={category.name}
+          //   onPress={() => handleCategoryPress(category.name)}
+          //   type={ButtonType.BARE}
+          //   styles={category.name === currentCategory ? {color: colors.textHighlight} : {}}
+          // />
+          const activeStyle = category.name === currentCategory ? {color: colors.textHighlight} : {color: colors.textRegular}
+          return (
+            <TouchableOpacity
+              onPress={() => handleCategoryPress(category.name)}
+            >
+              <Text
+                style={[{fontSize: 12, paddingTop: 4}, activeStyle]}
+              >
+                {category.name}
+              </Text>
+            </TouchableOpacity>
+          )
         })}
       </View>
     </View>
@@ -177,6 +190,19 @@ function navBarProvider(Component, hasCategories = false, hasTabs = true){
         <HomeNavBar {...props} hasTabs={hasTabs} />
         <View style={styles.container}>
           <ComponentWithSideBar {...props} />
+        </View>
+      </View>
+    )
+  }
+}
+
+function alternateNavBarProvider(Component){
+  return (props) => {
+    return (
+      <View style={styles.rootContainer}>
+        <AlternateNavBar {...props} />
+        <View style={styles.container}>
+          <Component {...props} />
         </View>
       </View>
     )

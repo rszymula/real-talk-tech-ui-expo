@@ -117,23 +117,22 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
   return (
     <View style={styles.container}>
       <View style={{alignItems: 'center', margin: 32}}>
-      <Image source={REALTALKTECH_WHITE} style={{width: 256, height: 32}}/>
         <Text style={styles.title}>
-            {description}
-          </Text>
-          <Text style={{color: colors.textLowlight, margin: 8,}}>
-            Choose all that apply
-          </Text>
-          <RTextInput 
-            onChangeText={setText}
-            value={text}
-            placeholder={placeholder}
-            selections={selections}
-            onSelect={handleOnSelect}
-            style={styles.input}
-          />
-          <SelectedItems style={{marginTop: 4}} items={items.map(item => item.name)} onDelete={handleRemoveItem}/>
-          <Button title={!!next ? "Next Step" : "Finish"} onPress={handleNextPress} styles={{marginTop: 8}}/>
+          {description}
+        </Text>
+        <Text style={{color: colors.textLowlight, margin: 8,}}>
+          Choose all that apply
+        </Text>
+        <RTextInput 
+          onChangeText={setText}
+          value={text}
+          placeholder={placeholder}
+          selections={selections}
+          onSelect={handleOnSelect}
+          style={styles.input}
+        />
+        <SelectedItems style={{marginTop: 4}} items={items.map(item => item.name)} onDelete={handleRemoveItem}/>
+        <Button title={!!next ? "Next Step" : "Finish"} onPress={handleNextPress} styles={{marginTop: 8}}/>
       </View>
     </View>
   )

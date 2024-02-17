@@ -17,8 +17,8 @@ export function RawDiscoverGrid(props){
 
   const { navigation, vendorGroups, fetchVendorGroups, auth } = props;
 
-  // const { getCompanies } = store;
-  // const companies = getCompanies(0, 15);
+  const { getCompanies } = store;
+  const companies = getCompanies(0, 15);
 
   // const vendorGroupsForGrid = Object.keys(vendorGroups)
   //   ?.map(item => ({vendorGroupId: vendorGroups[item].id, name: vendorGroups[item].categoryName})) || {}
@@ -51,6 +51,7 @@ export function RawDiscoverGrid(props){
         </Text>
         <View style={{marginBottom: 32, width: 512}}>
           <GridView
+            // data={companies}
             data={vendorGroupsForGrid}
             onPress={(item) => handleOnPress(item)}
             navigation={navigation}
