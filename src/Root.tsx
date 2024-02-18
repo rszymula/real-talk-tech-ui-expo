@@ -155,7 +155,7 @@ function SideBar(props){
           ) : <></>
         }
       </View>
-      <View style={{paddingLeft: 32, paddingRight: 32, flex: 1}}>
+      <View style={{paddingLeft: 32, paddingRight: 32, flex: 1, maxWidth: 768}}>
         <props.Component {...props} currentCategory={currentCategory} />
       </View>
       <View style={{
