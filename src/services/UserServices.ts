@@ -126,6 +126,30 @@ export function endorseUser(dispatch){
   }
 }
 
+export function editUser(dispatch, getState){
+  return (body) => {
+    const state = getState()
+    console.log("STW", state)
+    const {userId, token} = state.auth;
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/editProfile`
+    const params = {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify(body)
+    }
+    fetch(url, params).then(res => {
+      return res.json()
+    }).then(json => {
+      console.log("GOOD-editUser", json)
+    }).catch((err) => {
+      console.log("ERR-editUser", err)
+    })
+  }
+}
+
 
 
 

@@ -13,11 +13,12 @@ import { SelectedItems } from '../../components/common/SelectedItems';
 import { connect } from '../../state/reduxStore';
 import { RTextInput } from '../../components/core/RTextInput';
 import { Link } from '../../components/core/Link';
+import { editUser } from '../../services/UserServices';
 
 
 export function RawProfileUser(props){
 
-  const { navigation, route, user } = props;
+  const { navigation, route, user, editUser} = props;
 
   console.log("USD", user)
 
@@ -29,6 +30,7 @@ export function RawProfileUser(props){
   const [bio, setBio] = React.useState(user.bio)
   const [company, setCompany] = React.useState(user.currentCompany)
   const [linkedIn, setLinkedin] = React.useState(user.linkedinUrl)
+  const [techStack, setTechStack] = React.useState(user.techstack);
 
   const handleEditPress = () => {
     setEditing(true);
@@ -39,7 +41,17 @@ export function RawProfileUser(props){
   }
 
   const handleSavePress = () => {
+    const body = {
+      fullName: name,
+      email: user.email,
+      techstack: techStack,
+    }
+    editUser(body);
     setEditing(false);
+  }
+
+  const handleDeleteTechStack = (deleteItem) => {
+    setTechStack(techStack => techStack.filter(item => item !== deleteItem))
   }
 
   const handleLogout = () => {
@@ -113,7 +125,7 @@ export function RawProfileUser(props){
       <Text style={styles.h3}>
         Your Tech Stack
       </Text>
-      <SelectedItems items={user.techstack} style={{marginTop: 8}}/>
+      <SelectedItems items={techStack} style={{marginTop: 8}} onDelete={(item) => handleDeleteTechStack(item)}/>
       <Link style={{marginTop: 16}} textLink={"Log out from account"} onPress={handleLogout}/>
     </View>
   )
@@ -122,7 +134,8 @@ export function RawProfileUser(props){
 const stp = (state) => ({
   user: state.users[state.auth.userId],
 });
-const dtp = (dispatch) => ({
+const dtp = (dispatch, getState) => ({
+  editUser: editUser(dispatch, getState),
 });
 export const ProfileUser = connect(stp, dtp)(RawProfileUser);
 
