@@ -1,4 +1,4 @@
-import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -138,7 +138,7 @@ function SideBar(props){
   return (
     <View style={{
       marginTop: 16,
-      // borderWidth: 1,
+      borderWidth: 1,
       borderColor: 'red',
       backgroundColor: colors.background,
       flexDirection: 'row',
@@ -146,8 +146,8 @@ function SideBar(props){
     }}>
       <View style={{
         flexDirection: 'column',
-        width: 192,
-        // borderWidth: 1, 
+        width: 256,
+        borderWidth: 1, 
         borderColor: 'yellow'
       }}>
         {props.hasCategories ? (
@@ -157,8 +157,8 @@ function SideBar(props){
       </View>
       <props.Component {...props} currentCategory={currentCategory} />
       <View style={{
-        width: 32,
-        // borderWidth: 1,
+        width: 256,
+        borderWidth: 1,
         borderColor: 'yellow'
       }}></View>
     </View>
@@ -182,15 +182,19 @@ function sideBarProvider(Component, hasCategories = false){
 }
 
 function navBarProvider(Component, hasCategories = false, hasTabs = true){
-  const ComponentWithBottomBar = bottomBarProvider(Component)
-  const ComponentWithSideBar = sideBarProvider(ComponentWithBottomBar, hasCategories)
+  // const ComponentWithBottomBar = bottomBarProvider(Component)
+  const ComponentWithSideBar = sideBarProvider(Component, hasCategories)
   return (props) => {
     return (
       <View style={styles.rootContainer}>
         <HomeNavBar {...props} hasTabs={hasTabs} />
+        {/* <ScrollView style={styles.container}>
+          <ComponentWithSideBar {...props} />
+        </ScrollView> */}
         <View style={styles.container}>
           <ComponentWithSideBar {...props} />
         </View>
+        <HomeBottomBar {...props} />
       </View>
     )
   }
@@ -235,7 +239,7 @@ const styles = StyleSheet.create({
   rootContainer: {
     backgroundColor: colors.background,
     padding: 32,
-    // height: "100%",
+    // height: 1024,
     borderColor: 'purple',
     borderWidthX: 1,
   },

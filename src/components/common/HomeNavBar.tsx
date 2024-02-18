@@ -53,7 +53,9 @@ export function HomeNavBar(props){
 
   return (
     <View style={styles.container}>
-      <Image source={REALTALKTECH_WHITE} style={styles.title}/>
+      <View style={{paddingTop: 8, paddingBottom: 8, borderColor: 'green', borderWidth: 1}}>
+        <Image source={REALTALKTECH_WHITE} style={styles.title}/>
+      </View>
         {hasTabs && (<View style={styles.topBar}>
           {
             tabs.map(tab => {
@@ -63,9 +65,9 @@ export function HomeNavBar(props){
             })
           }
         </View>)}
-      <View style={{flexDirection: 'row', borderColor: 'green', borderWidthX: 1}}>
-      <Button image={RouteNames.PROFILE_WELCOME === currentRouteName ? NOTIFICATIONS_ACTIVE : NOTIFICATIONS} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
-      <Button image={RouteNames.PROFILE_USER === currentRouteName ? SETTINGS_ACTIVE : SETTINGS} imageWidthRatio={1.2} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
+      <View style={{flexDirection: 'row', width: 256, justifyContent: 'flex-end', borderColor: 'green', borderWidth: 1}}>
+        <Button image={RouteNames.PROFILE_WELCOME === currentRouteName ? NOTIFICATIONS_ACTIVE : NOTIFICATIONS} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
+        <Button image={RouteNames.PROFILE_USER === currentRouteName ? SETTINGS_ACTIVE : SETTINGS} imageWidthRatio={1.2} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
       </View>
     </View>
   )
@@ -75,25 +77,26 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     borderColor: 'red',
-    // borderWidth: 1
+    borderWidth: 1
   },
   title: {
-    width: 192,
+    width: 256,
     height: 24,
     borderColor: 'yellow',
-    // borderWidth: 1
+    borderWidth: 1
   },
   body: {
     marginLeft: 32,
     borderWidth: 1,
-    // borderColor: 'red'
+    borderColor: 'red'
   },
   topBar: {
-    width: 256,
+    // width: 256,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    // borderWidth: 1,
+    borderWidth: 1,
     borderColor: 'yellow'
   },
   tabButton: {
@@ -104,20 +107,20 @@ const styles = StyleSheet.create({
     margin: 4,
     borderRadius: 2,
     fontSize: 12,
-    // borderColor: 'red',
-    // borderWidth: 1,
+    borderColor: 'red',
+    borderWidth: 1,
   },
   content: {
-    // borderWidth: 1,
+    borderWidth: 1,
     borderColor: 'lightGray'
   },
   sideBar: {
-    // borderWidth: 1,
+    borderWidth: 1,
     borderColor: 'blue'
   },
   categories: {
     marginTop: 32,
-    // borderWidth: 1,
+    borderWidth: 1,
     borderColor: 'yellow'
   },
 });
