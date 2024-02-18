@@ -57,49 +57,47 @@ export function ProfileCreateHome({route, navigation, signup}) {
         <Text style={{color: colors.textLowlight, margin: 8}}>
           Choose to join anonymously or as yourself
         </Text>
-        <View>
-          <RTextInput 
-            onChangeText={setFullname}
-            value={fullname}
-            placeholder={"Enter your full name"}
-            style={styles.inputText}
-          />
-          <RTextInput 
-            onChangeText={setUsername}
-            value={username}
-            placeholder={"Create your username"}
-            style={styles.inputText}
-          />
-          <RTextInput 
-            onChangeText={setCompany}
-            value={company}
-            placeholder={"Enter your current company"}
-            style={styles.inputText}
-          />
-          <RTextInput
-            onChangeText={setBio}
-            value={bio}
-            placeholder={"Enter bio description"}
-            numberOfLines={12}
-            style={styles.inputText}
-          />
-          <RTextInput 
-            style={{marginTop: 8, position: 'relative', zIndex: 100}}
-            label="Tag Software"
-            onChangeText={handleTypeVendor}
-            value={vendor}
-            placeholder="Enter Text"
-            selections={vendors}
-            onSelect={onSelectVendor}
-          />
-          <SelectedItems
-            itemStyle={{color: colors.border, backgroundColor: colors.input}}
-            items={selectedVendors.map(item => item.name)}
-            onDelete={handleDeleteVendor}
-          />
-        
-          <Button title="Next Step" onPress={handleNextPress} styles={{marginTop: 8, flex: 1, position: 'relative'}}/>
-        </View>
+        <RTextInput 
+          onChangeText={setFullname}
+          value={fullname}
+          placeholder={"Enter your full name"}
+          style={styles.inputText}
+        />
+        <RTextInput 
+          onChangeText={setUsername}
+          value={username}
+          placeholder={"Create your username"}
+          style={styles.inputText}
+        />
+        <RTextInput 
+          onChangeText={setCompany}
+          value={company}
+          placeholder={"Enter your current company"}
+          style={styles.inputText}
+        />
+        <RTextInput
+          onChangeText={setBio}
+          value={bio}
+          placeholder={"Enter bio description"}
+          numberOfLines={12}
+          style={styles.inputText}
+        />
+        <RTextInput 
+          style={[styles.inputText, {position: 'relative', zIndex: 100}]}
+          label="Tag Software"
+          onChangeText={handleTypeVendor}
+          value={vendor}
+          placeholder="Enter Text"
+          selections={vendors}
+          onSelect={onSelectVendor}
+        />
+        <SelectedItems
+          itemStyle={{color: colors.border, backgroundColor: colors.input}}
+          items={selectedVendors.map(item => item.name)}
+          onDelete={handleDeleteVendor}
+        />
+        <Button title="Next Step" onPress={handleNextPress} styles={{marginTop: 8, flex: 1, width: 512, justifyContent: "space-around", position: 'relative'}}/>
+        <Text style={{marginTop: 32, color: colors.textLowlight}}>{"Next, let's curate your feed with three quick questions"}</Text>
       </View>
     </View>
   )
@@ -141,6 +139,7 @@ const styles = StyleSheet.create({
   inputText: {
     // width: "100%",
     // paddingLeft: 8,
+    width: 512,
     marginTop: 8,
     //color: colors.textLowlight,
   },

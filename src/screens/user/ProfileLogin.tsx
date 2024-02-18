@@ -47,7 +47,7 @@ function RawProfileLogin({navigation, login}) {
               placeholder={"Enter your password"}
               style={styles.input}
             />
-          <Button title="Login" onPress={handleLoginPress} styles={{marginTop: 8}}/>
+          <Button title="Login" onPress={handleLoginPress} styles={{marginTop: 8, width: 512, justifyContent: 'space-around'}}/>
           <Link style={{margin: 16}} textLeft="Forgot your password?" textLink="Reset Password" onPress={handleResetPasswordPress} />
       </View>
     </View>
@@ -64,6 +64,7 @@ export const ProfileLogin = connect(stp, dtp)(RawProfileLogin)
 
 const styles = StyleSheet.create({
   input: {
+    width: 512,
     marginTop: 8,
   },
   container: {

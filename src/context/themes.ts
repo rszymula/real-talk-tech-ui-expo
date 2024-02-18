@@ -7,5 +7,7 @@ export const colors = {
   textHighlight: "#c9c9c9",
   textRegular: "#878787",
   textLowlight: "#46465a",
+  gradientBlue: "#1e284a",
+  gradientPurple: "#322841",
 };
 

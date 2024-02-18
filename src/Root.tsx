@@ -91,7 +91,7 @@ export const routes = [
   },
   {
     name: RouteNames.PROFILE_CONTACT_US,
-    component: ProfileContactUs,
+    component: navBarProvider(ProfileContactUs),
   },
 ]
 
@@ -226,6 +226,7 @@ export function Root(){
           </Stack.Navigator>
         </NavigationContainer>
       </ReduxContext.Provider>
+      {/* <Text style={{position: 'absolute', bottom: 20, right: 0, color: colors.textRegular}}>{"LKSDJF"}</Text> */}
     </View>
   );
 }
@@ -234,7 +235,9 @@ const styles = StyleSheet.create({
   rootContainer: {
     backgroundColor: colors.background,
     padding: 32,
+    // height: "100%",
     borderColor: 'purple',
+    borderWidthX: 1,
   },
   container: {
   },

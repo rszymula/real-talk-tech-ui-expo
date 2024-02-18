@@ -29,27 +29,29 @@ export function RawProfileWelcome({navigation, fetchOnboarding}) {
   return (
     <View style={styles.container}>
       <View style={{alignItems: 'center', margin: 32}}>
-      <Image source={REALTALKTECH_WHITE} style={{width: 256, height: 32}}/>
-        <Text style={styles.title}>
+        {/* <View style={{alignItems: 'center', width: 512}}> */}
+          <Image source={REALTALKTECH_WHITE} style={{width: 256, height: 32}}/>
+          <Text style={styles.title}>
             Welcome!
           </Text>
           <Text style={{color: colors.textLowlight, margin: 8}}>
             Let's Customize Your Experience
           </Text>
-            <RTextInput 
-              onChangeText={setEmail}
-              value={email}
-              placeholder={"Enter your email"}
-              style={styles.input}
-            />
-            <RTextInput 
-              onChangeText={setPassword}
-              value={password}
-              placeholder={"Enter your password"}
-              style={styles.input}
-            />
-          <Button title="Create Account" onPress={handleNextPress} styles={{marginTop: 8}}/>
+          <RTextInput 
+            onChangeText={setEmail}
+            value={email}
+            placeholder={"Enter your email"}
+            style={styles.input}
+          />
+          <RTextInput 
+            onChangeText={setPassword}
+            value={password}
+            placeholder={"Enter your password"}
+            style={styles.input}
+          />
+          <Button title="Create Account" onPress={handleNextPress} styles={{marginTop: 8, width: 512, justifyContent: 'space-around'}}/>
           <Link style={{margin: 16}} textLeft="Already have an account?" textLink="Sign in" onPress={handleLoginPress} />
+        {/* </View> */}
       </View>
     </View>
   )
@@ -63,11 +65,13 @@ export const ProfileWelcome = connect(stp, dtp)(RawProfileWelcome)
 
 const styles = StyleSheet.create({
   input: {
+    width: 512,
     marginTop: 8,
   },
   container: {
     backgroundColor: colors.background,
-    height: "100%",
+    // width: 512,
+    // height: "100%",
   },
   title: {
     color: colors.textHighlight,

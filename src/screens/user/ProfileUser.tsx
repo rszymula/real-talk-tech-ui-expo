@@ -48,76 +48,73 @@ export function RawProfileUser(props){
 
   return (
     <View style={styles.container}>
-      <View style={{width: 512}}>
-        <Text style={styles.title}>Settings</Text>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={styles.h2}>
-            Your Profile
-          </Text>
-          {editing ? (
-            <View style={{flexDirection: 'row'}}>
-              <Button title={"Cancel"} onPress={handleCancelPress} type={ButtonType.BASIC}/>
-              <Button title={"Save Changes"} onPress={handleSavePress} styles={{marginLeft: 8, paddingTop: 4, paddingBottom: 4, paddingLeft: 8, paddingRight: 8}} />
-            </View>
-          ) : 
-            <Button title="Edit Profile" onPress={handleEditPress} type={ButtonType.BASIC} styles={{alignSelf: 'flex-start', marginTop: 8, color: colors.textRegular, backgroundColor: colors.foreground}}/>
-          }
-        </View>
-        <RTextInput 
-          label={"Name"}
-          value={name}
-          onChangeText={(text) => setName(text)}
-          placeholder={""}
-          freeze={!editing}
-          style={{marginTop: 16}}
-        />
-        <RTextInput 
-          label={"Username"}
-          value={username}
-          onChangeText={(text) => setUsername(text)}
-          placeholder={""}
-          freeze={!editing}
-          style={{marginTop: 8}}
-        />
-        <RTextInput 
-          label={"Password"}
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          placeholder={""}
-          freeze={!editing}
-          style={{marginTop: 8}}
-        />
-        <RTextInput 
-          label={"Bio"}
-          value={bio}
-          onChangeText={(text) => setBio(text)}
-          placeholder={""}
-          freeze={!editing}
-          style={{marginTop: 8}}
-        />
-        <RTextInput 
-          label={"Company"}
-          value={company}
-          onChangeText={(text) => setCompany(text)}
-          placeholder={""}
-          freeze={!editing}
-          style={{marginTop: 8}}
-        />
-        <RTextInput 
-          label={"LinkedIn"}
-          value={linkedIn}
-          onChangeText={(text) => setLinkedin(text)}
-          placeholder={""}
-          freeze={!editing}
-          style={{marginTop: 8}}
-        />
-        <Text style={styles.h3}>
-          Your Tech Stack
+      <Text style={styles.title}>Settings</Text>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Text style={styles.h2}>
+          Your Profile
         </Text>
-        <SelectedItems items={user.techstack} style={{marginTop: 8}}/>
-        <Link textLink={"Log out from account"} onPress={handleLogout}/>
+        {editing ? (
+          <View style={{flexDirection: 'row'}}>
+            <Button title={"Cancel"} onPress={handleCancelPress} type={ButtonType.BASIC}/>
+            <Button title={"Save Changes"} onPress={handleSavePress} styles={{marginLeft: 8, paddingTop: 4, paddingBottom: 4, paddingLeft: 8, paddingRight: 8}} />
+          </View>
+        ) : 
+          <Button title="Edit Profile" onPress={handleEditPress} type={ButtonType.BASIC} styles={{alignSelf: 'flex-start', marginTop: 8, color: colors.textRegular, backgroundColor: colors.foreground}}/>
+        }
       </View>
-
+      <RTextInput 
+        label={"Name"}
+        value={name}
+        onChangeText={(text) => setName(text)}
+        placeholder={""}
+        freeze={!editing}
+        style={{marginTop: 16}}
+      />
+      <RTextInput 
+        label={"Username"}
+        value={username}
+        onChangeText={(text) => setUsername(text)}
+        placeholder={""}
+        freeze={!editing}
+        style={{marginTop: 8}}
+      />
+      <RTextInput 
+        label={"Password"}
+        value={password}
+        onChangeText={(text) => setPassword(text)}
+        placeholder={""}
+        freeze={!editing}
+        style={{marginTop: 8}}
+      />
+      <RTextInput 
+        label={"Bio"}
+        value={bio}
+        onChangeText={(text) => setBio(text)}
+        placeholder={""}
+        freeze={!editing}
+        style={{marginTop: 8}}
+      />
+      <RTextInput 
+        label={"Company"}
+        value={company}
+        onChangeText={(text) => setCompany(text)}
+        placeholder={""}
+        freeze={!editing}
+        style={{marginTop: 8}}
+      />
+      <RTextInput 
+        label={"LinkedIn"}
+        value={linkedIn}
+        onChangeText={(text) => setLinkedin(text)}
+        placeholder={""}
+        freeze={!editing}
+        style={{marginTop: 8}}
+      />
+      <Text style={styles.h3}>
+        Your Tech Stack
+      </Text>
+      <SelectedItems items={user.techstack} style={{marginTop: 8}}/>
+      <Link textLink={"Log out from account"} onPress={handleLogout}/>
     </View>
   )
 }
@@ -131,6 +128,8 @@ export const ProfileUser = connect(stp, dtp)(RawProfileUser);
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    width: 512,
   },
   title: {
     marginTop: 8,

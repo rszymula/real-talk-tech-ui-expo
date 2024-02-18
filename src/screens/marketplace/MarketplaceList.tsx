@@ -70,7 +70,7 @@ export function MarketplaceList(props){
         <Text style={{color: colors.textLowlight, margin: 8}}>
           Premium listings and deals for the community
         </Text>
-        <Card styles={{marginBottom: 32, width: 512}}>
+        <Card styles={{marginTop: 16, marginBottom: 32, width: 512}}>
           <ListView companies={companies} navigation={navigation} />
         </Card>
       </View>

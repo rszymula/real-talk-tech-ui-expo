@@ -25,6 +25,7 @@ function getStepDetailsFunc(industry, categories, interests){
           placeholder: "Select industry",
           selections: industry,
           // field: "industry",
+          stepNumber: 1,
         };
       case ProfileStep.DO:
         return {
@@ -33,6 +34,7 @@ function getStepDetailsFunc(industry, categories, interests){
           placeholder: "Select role",
           selections: categories,
           // field: "categories",
+          stepNumber: 2,
         };
       case ProfileStep.SOFTWARE:
         return {
@@ -41,6 +43,7 @@ function getStepDetailsFunc(industry, categories, interests){
           placeholder: "Select your interests",
           selections: interests,
           // field: "interests",
+          stepNumber: 3,
         };
       default:
         return categories;
@@ -74,7 +77,7 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
   // const { email, password, firstName, lastName, username, bio, selectedIndustry, selectedCategories, selectedInterests } = answers
   const { step } = route.params
   const stepDetails = getStepDetailsFunc(industry, categories, interests)(step)
-  const {next, description, selections, placeholder} = stepDetails
+  const {next, description, selections, placeholder, stepNumber} = stepDetails
 
   const handleNextPress = () => {
     console.log(next)
@@ -120,7 +123,7 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
         <Text style={styles.title}>
           {description}
         </Text>
-        <Text style={{color: colors.textLowlight, margin: 8,}}>
+        <Text style={{color: colors.textLowlight, margin: 8}}>
           Choose all that apply
         </Text>
         <RTextInput 
@@ -132,7 +135,8 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
           style={styles.input}
         />
         <SelectedItems style={{marginTop: 4}} items={items.map(item => item.name)} onDelete={handleRemoveItem}/>
-        <Button title={!!next ? "Next Step" : "Finish"} onPress={handleNextPress} styles={{marginTop: 8}}/>
+        <Button title={!!next ? "Next Step" : "Finish"} onPress={handleNextPress} styles={{marginTop: 8, width: 512, justifyContent: 'space-around'}}/>
+        <Text style={{marginTop: 256, color: colors.textLowlight}}>{`Question ${stepNumber} of ${Object.keys(ProfileStep).length}`}</Text>
       </View>
     </View>
   )
@@ -151,6 +155,7 @@ export const ProfileQuestion = connect(stp, dtp)(RawProfileQuestion);
 const styles = StyleSheet.create({
   input: {
     marginTop: 8,
+    width: 512,
     position: 'relative',
     zIndex: 100,
   },
