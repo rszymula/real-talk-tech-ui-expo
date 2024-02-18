@@ -1,4 +1,4 @@
-import { POSTS_COUNT_PER_PAGE, categories } from "../constants/constants";
+import { COMMENTS_COUNT_PER_PAGE, POSTS_COUNT_PER_PAGE, categories } from "../constants/constants";
 
 const mockCommentTag = [
   {
@@ -457,12 +457,12 @@ export function upvotePost(dispatch, getState){
 }
 
 export function fetchComments(dispatch){
-  return (postId, auth, page = 1) => {
+  return (postId, auth, page = 1, count = COMMENTS_COUNT_PER_PAGE) => {
     dispatch({type: "COMMENTS_LOADING"})
     console.log("C1")
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
     const {userId, token} = auth;
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/getCommentsForPost?postId=${postId}`
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/getCommentsForPost?postId=${postId}&page=${page}&count=${count}`
     const params = {
       method: "GET",
       headers: {

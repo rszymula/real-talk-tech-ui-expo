@@ -81,11 +81,14 @@ function checkHasAll(list, obj){
 }
 
 function getCount(list, obj){
+  console.log("FUZZW", list, obj)
   const count = list.reduce((accum, curr) => {
     if(obj[curr]){
       accum += 1
     }
+    return accum;
   }, 0)
+  console.log("COUNTW", count)
   return count
 }
 
@@ -99,11 +102,15 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
   }
 
   const loadComments = () => {
+    console.log("SOMELOGW")
     const count = getCount(commentIds, comments)
     // const hasAll = checkHasAll(commentIds, comments)
     if(count !== commentIds.length) {
       const page = Math.floor(count / COMMENTS_COUNT_PER_PAGE) + 1;
+      console.log("PAGEW", page)
       fetchComments(postId, auth, page)
+    }else{
+      console.log("NOTTHERE")
     }
   }
 
@@ -111,7 +118,10 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
     loadComments()
   }, [])
   
-  const commentList = commentIds.map(commentId => comments[commentId]).filter(item => !!item)
+  const commentList = commentIds
+    .map(commentId => comments[commentId])
+    .filter(item => !!item)
+    .toSorted((a, b) => b.id - a.id)
   console.log({commentIds, comments, commentList})
 
   return (
