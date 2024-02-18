@@ -49,7 +49,7 @@ export function RawDiscussCreatePost(props){
   }
 
   const handleTypeSkill = (text) => {
-    setVendor(text)
+    setSkill(text)
   }
 
   // document.cookie = "userId: 123";
@@ -70,8 +70,10 @@ export function RawDiscussCreatePost(props){
   }
 
   const onSelectCategory = (item) => {
-    console.log("SELZ", item)
-    setSelectedCategories(selectedCategories => [...selectedCategories, item])
+    // really should use a Set
+    if(!selectedCategories.includes(item)){
+      setSelectedCategories(selectedCategories => [...selectedCategories, item])
+    }
   }
 
   const handleDeleteCategory = (item) => {
@@ -80,8 +82,10 @@ export function RawDiscussCreatePost(props){
   }
   
   const onSelectSkill= (item) => {
-    console.log("SELZ", item)
-    setSelectedVendors(selectedVendors => [...selectedVendors, item])
+    // really should use a Set
+    if(!selectedVendors.includes(item)){
+      setSelectedVendors(selectedVendors => [...selectedVendors, item])
+    }
   }
 
   const handleDeleteVendor = (item) => {
