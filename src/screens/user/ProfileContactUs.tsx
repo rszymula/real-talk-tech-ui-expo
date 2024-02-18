@@ -57,10 +57,11 @@ export function ProfileContactUs(props){
       </Text>
       <GridView 
         elements={callouts}
-        renderElement={(element, navigation) => {
+        renderElement={(element, idx, navigation) => {
+          const background = idx % 2 === 0 ? colors.gradientBlue : colors.gradientPurple;
           return (
             <View style={{flexDirection: 'row', alignItems: 'center', width: 240, marginTop: 8}}>
-              <View style={{justifyContent: 'space-around', alignItems: 'center', borderRadius: 28, width: 28, height: 28, backgroundColor: colors.gradientPurple}}>
+              <View style={{justifyContent: 'space-around', alignItems: 'center', borderRadius: 28, width: 28, height: 28, backgroundColor: background}}>
                 <Image source={element.icon} style={{width: 14, height: 12}}/>
               </View>
               <Text style={{color: colors.textHighlight, fontSize: 12, marginLeft: 8}}>{element.text}</Text>

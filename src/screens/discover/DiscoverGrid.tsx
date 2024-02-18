@@ -12,7 +12,7 @@ import { fetchVendorGroups } from '../../services/DiscoverService';
 import { connect } from '../../state/reduxStore';
 import FORWARD_THIN from '../../assets/forward_thin.png';
 
-const renderElement = (item, navigation) => {
+const renderElement = (item, idx, navigation) => {
   const handleOnPress = (item) => {
     console.log("NAVW", item)
     navigation.navigate(RouteNames.DISCOVER_LIST, {vendorGroupId: item.id});

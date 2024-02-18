@@ -74,7 +74,7 @@ export function GridView(props){
   const { navigation, renderElement, elements } = props;
   return (
     <View style={{flexDirection: 'row', justifyContent: 'space-between', flexWrap: 'wrap'}}>
-      {elements.map(element => renderElement(element, navigation))}
+      {elements.map((element, idx) => renderElement(element, idx, navigation))}
     </View>
   )
 }
