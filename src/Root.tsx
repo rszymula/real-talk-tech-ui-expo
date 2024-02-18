@@ -253,5 +253,6 @@ const styles = StyleSheet.create({
   title: {
     ...buttonTypetoStyle[ButtonType.BARE],
     fontSize: 12,
+    paddingTop: 0,
   }
 })
