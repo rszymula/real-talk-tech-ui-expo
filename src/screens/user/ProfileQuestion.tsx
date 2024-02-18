@@ -153,9 +153,9 @@ export const ProfileQuestion = connect(stp, dtp)(RawProfileQuestion);
 const styles = StyleSheet.create({
   container: {
     margin: 32,
-    marginLeft: 256,
-    marginRight: 256,
-    maxWidth: 512,
+    marginLeft: 192,
+    marginRight: 192,
+    maxWidth: 768,
   },
   input: {
     marginTop: 8,
@@ -168,5 +168,6 @@ const styles = StyleSheet.create({
     marginTop: 32,
     fontSize: 18,
     alignSelf: 'center',
+    flexWrap: 'wrap',
   },
 })
