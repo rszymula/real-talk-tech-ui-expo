@@ -138,7 +138,7 @@ function SideBar(props){
   return (
     <View style={{
       marginTop: 16,
-      borderWidth: 1,
+      borderWidthX: 1,
       borderColor: 'red',
       backgroundColor: colors.background,
       flexDirection: 'row',
@@ -147,7 +147,7 @@ function SideBar(props){
       <View style={{
         flexDirection: 'column',
         width: 192,
-        borderWidth: 1, 
+        borderWidthX: 1, 
         borderColor: 'yellow'
       }}>
         {props.hasCategories ? (
@@ -160,7 +160,7 @@ function SideBar(props){
       </View>
       <View style={{
         width: 192,
-        borderWidth: 1,
+        borderWidthX: 1,
         borderColor: 'yellow'
       }}></View>
     </View>

@@ -53,7 +53,7 @@ export function HomeNavBar(props){
 
   return (
     <View style={styles.container}>
-      <View style={{paddingTop: 10, paddingBottom: 10, borderColor: 'green', borderWidth: 1}}>
+      <View style={{paddingTop: 10, paddingBottom: 10, borderColor: 'green', borderWidthX: 1}}>
         <Image source={REALTALKTECH_WHITE} style={styles.title}/>
       </View>
         {hasTabs && (<View style={styles.topBar}>
@@ -65,7 +65,7 @@ export function HomeNavBar(props){
             })
           }
         </View>)}
-      <View style={{flexDirection: 'row', width: 192, justifyContent: 'flex-end', borderColor: 'green', borderWidth: 1}}>
+      <View style={{flexDirection: 'row', width: 192, justifyContent: 'flex-end', borderColor: 'green', borderWidthX: 1}}>
         <Button image={RouteNames.PROFILE_WELCOME === currentRouteName ? NOTIFICATIONS_ACTIVE : NOTIFICATIONS} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
         <Button image={RouteNames.PROFILE_USER === currentRouteName ? SETTINGS_ACTIVE : SETTINGS} imageWidthRatio={1.2} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
       </View>
@@ -79,24 +79,24 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderColor: 'red',
-    borderWidth: 1
+    borderWidthX: 1
   },
   title: {
     width: 192,
     height: 18,
     borderColor: 'yellow',
-    borderWidth: 1
+    borderWidthX: 1
   },
   body: {
     marginLeft: 32,
-    borderWidth: 1,
+    borderWidthX: 1,
     borderColor: 'red'
   },
   topBar: {
     // width: 256,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    borderWidth: 1,
+    borderWidthX: 1,
     borderColor: 'yellow'
   },
   tabButton: {
@@ -107,20 +107,20 @@ const styles = StyleSheet.create({
     margin: 4,
     borderRadius: 2,
     fontSize: 12,
-    borderColor: 'red',
-    borderWidth: 1,
+    borderColorX: 'red',
+    borderWidthX: 1,
   },
   content: {
-    borderWidth: 1,
+    borderWidthX: 1,
     borderColor: 'lightGray'
   },
   sideBar: {
-    borderWidth: 1,
+    borderWidthX: 1,
     borderColor: 'blue'
   },
   categories: {
     marginTop: 32,
-    borderWidth: 1,
+    borderWidthX: 1,
     borderColor: 'yellow'
   },
 });
