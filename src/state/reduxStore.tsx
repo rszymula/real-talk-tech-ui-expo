@@ -61,11 +61,22 @@ const INTERESTS_DEFAULT = [
   }
 ];
 
+const SKILLS_DEFAULT = [
+  {
+    id: 1,
+    name: "Snowflake",
+  },
+  {
+    id: 2,
+    name: "Databricks",
+  }
+]
+
 const initialState = {
   industry: INDUSTRY_DEFAULT, // What industry are you in?
   categories: CATEGORIES_DEFAULT, // What do you do?
   interests: INTERESTS_DEFAULT, // What software / tech interests you?
-  vendors: [{id: 1, name: "Asana"}, {id: 2, name: "Square"}],
+  skills: SKILLS_DEFAULT,
   auth: {
     userId: -1,
     token: "",
@@ -93,6 +104,7 @@ const initialState = {
   vendorGroups: {},
   vendorGroupsLoading: false,
   vendorGrouspError: null,
+  vendors: {},
 }
 
 export function reducer(state = initialState, action){

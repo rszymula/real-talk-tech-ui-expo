@@ -7,7 +7,7 @@ import { Button, ButtonType } from "../core/Button";
 export function SelectedItems(props){
   const {items, onDelete, style, itemStyle = {}} = props
   return (
-    <View style={[{flexDirection: 'row', justifyContent: 'flex-start'}, style]}>
+    <View style={[{flexDirection: 'row', justifyContent: 'flex-start', flexWrap: 'wrap'}, style]}>
       {items.map(item => {
         return (
           <View style={[styles.item, itemStyle]}>

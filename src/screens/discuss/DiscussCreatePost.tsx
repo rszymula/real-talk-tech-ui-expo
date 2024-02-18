@@ -15,11 +15,11 @@ import { makeComment, makePost } from '../../services/DiscussService';
 
 export function RawDiscussCreatePost(props){
 
-  const { navigation, route, makePost, vendors, auth } = props;
+  const { navigation, route, makePost, skills, auth } = props;
   const { input } = route?.params;
 
   const [category, setCategory] = React.useState('');
-  const [vendor, setVendor] = React.useState('');
+  const [skill, setSkill] = React.useState('');
   const [title, setTitle] = React.useState(input);
   const [content, setContent] = React.useState('');
   const [anonymous, setAnonymous] = React.useState(false);
@@ -29,9 +29,9 @@ export function RawDiscussCreatePost(props){
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const [selectedVendors, setSelectedVendors] = React.useState([]);
 
-  console.log({categories, vendors})
+  console.log({categories, skills})
 
-  const vendorList = Object.keys(vendors).map(id => ({id, name: vendors[id].vendorName}))
+  // const vendorList = Object.keys(vendors).map(id => ({id, name: vendors[id].vendorName}))
 
   const anonymousSelections = [
     {
@@ -48,7 +48,7 @@ export function RawDiscussCreatePost(props){
     setCategory(text)
   }
 
-  const handleTypeVendor = (text) => {
+  const handleTypeSkill = (text) => {
     setVendor(text)
   }
 
@@ -59,13 +59,13 @@ export function RawDiscussCreatePost(props){
       title,
       content,
       selectedCategories,
-      vendorList,
+      skills,
       auth
     })
     // make API call
     // if API call successful, call passed in function that updates state
     // TODO use id, createdTimestamp, and updatedTimestamp from api call return
-    makePost(title, content, selectedCategories, vendorList, anonymous, auth)
+    makePost(title, content, selectedCategories, skills, anonymous, auth)
     handleExit();
   }
 
@@ -79,7 +79,7 @@ export function RawDiscussCreatePost(props){
     setSelectedCategories(selectedCategories => selectedCategories.filter(category => category.name !== item))
   }
   
-  const onSelectVendor= (item) => {
+  const onSelectSkill= (item) => {
     console.log("SELZ", item)
     setSelectedVendors(selectedVendors => [...selectedVendors, item])
   }
@@ -123,11 +123,11 @@ export function RawDiscussCreatePost(props){
         <RTextInput 
           style={{marginTop: 8, position: 'relative', zIndex: 100}}
           label="Tag Software"
-          onChangeText={handleTypeVendor}
-          value={vendor}
+          onChangeText={handleTypeSkill}
+          value={skill}
           placeholder="Enter Text"
-          selections={vendorList}
-          onSelect={onSelectVendor}
+          selections={skills}
+          onSelect={onSelectSkill}
         />
         <SelectedItems itemStyle={{color: colors.border, backgroundColor: colors.input}} items={selectedVendors.map(item => item.name)} onDelete={handleDeleteVendor}/>
         <RTextInput 
@@ -150,7 +150,7 @@ export function RawDiscussCreatePost(props){
 }
 
 const stp = (state) => ({
-  vendors: state.vendors,
+  skills: state.skills,
   auth: state.auth,
 })
 const dtp = (dispatch) => ({
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     color: colors.textHighlight,
   },
   inputText: {
-    width: "100%",
+    // width: "100%",
     paddingLeft: 8,
     color: colors.textLowlight,
   },
