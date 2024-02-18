@@ -12,7 +12,7 @@ import { connect } from '../../state/reduxStore';
 import BACK from '../../assets/back.png';
 import { AlternateNavBar } from '../../components/common/AlternateNavBar';
 
-export function ProfileCreateHome({route, navigation, signup}) {
+export function RawProfileCreateHome({route, navigation, skills}) {
 
   const [fullname, setFullname] = React.useState('');
   const [username, setUsername] = React.useState('');
@@ -21,29 +21,29 @@ export function ProfileCreateHome({route, navigation, signup}) {
 
   const { email, password } = route?.params;
 
-  const [vendor, setVendor] = React.useState('');
+  const [skill, setSkill] = React.useState('');
 
-  const [showVendorDropdown, setShowVendorDropdown] = React.useState(false);
-  const [selectedVendors, setSelectedVendors] = React.useState([]);
+  // const [showVendorDropdown, setShowVendorDropdown] = React.useState(false);
+  const [selectedSkills, setSelectedSkills] = React.useState([]);
 
-  const vendors = getCompanies()
+  // const vendors = getCompanies()
 
-  const handleTypeVendor = (text) => {
-    setVendor(text)
+  const handleTypeSkill = (text) => {
+    setSkill(text)
   }
   
-  const onSelectVendor= (item) => {
+  const onSelectSkill= (item) => {
     console.log("SELZ", item)
-    setSelectedVendors(selectedVendors => [...selectedVendors, item])
+    setSelectedSkills(selectedSkills => [...selectedSkills, item])
   }
 
-  const handleDeleteVendor = (item) => {
-    console.log({selectedVendors, item})
-    setSelectedVendors(selectedVendors => selectedVendors.filter(vendors => vendors.name !== item))
+  const handleDeleteSkill = (item) => {
+    console.log({selectedSkills, item})
+    setSelectedSkills(selectedSkills => selectedSkills.filter(skills => skills.name !== item))
   }
 
   const handleNextPress = () => {
-    const techStack = selectedVendors.map(selected => selected.id)
+    const techStack = selectedSkills.map(selected => selected.id)
     navigation.navigate(RouteNames.PROFILE_QUESTION, {email, password, fullname, username, bio, company, techStack, step: "Industry"})
   }
 
@@ -85,16 +85,16 @@ export function ProfileCreateHome({route, navigation, signup}) {
       <RTextInput 
         style={[styles.inputText, {position: 'relative', zIndex: 100}]}
         label="Tag Software"
-        onChangeText={handleTypeVendor}
-        value={vendor}
+        onChangeText={handleTypeSkill}
+        value={skill}
         placeholder="Enter Text"
-        selections={vendors}
-        onSelect={onSelectVendor}
+        selections={skills}
+        onSelect={onSelectSkill}
       />
       <SelectedItems
         itemStyle={{color: colors.border, backgroundColor: colors.input}}
-        items={selectedVendors.map(item => item.name)}
-        onDelete={handleDeleteVendor}
+        items={selectedSkills.map(item => item.name)}
+        onDelete={handleDeleteSkill}
       />
       <Button title="Next Step" onPress={handleNextPress} styles={{marginTop: 8, flex: 1, widthX: 512, justifyContent: "space-around", position: 'relative'}}/>
       <Text style={{marginTop: 32, color: colors.textLowlight, alignSelf: 'center'}}>{"Next, let's curate your feed with three quick questions"}</Text>
@@ -102,6 +102,12 @@ export function ProfileCreateHome({route, navigation, signup}) {
     </View>
   )
 }
+const stp = (state) => ({
+  skills: state.skills,
+})
+const dtp = (dispatch) => ({
+});
+export const ProfileCreateHome = connect(stp, dtp)(RawProfileCreateHome)
 
 const styles = StyleSheet.create({
   input: {
