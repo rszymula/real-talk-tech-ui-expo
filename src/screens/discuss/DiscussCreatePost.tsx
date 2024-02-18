@@ -30,6 +30,9 @@ export function RawDiscussCreatePost(props){
   const [selectedVendors, setSelectedVendors] = React.useState([]);
 
   console.log({categories, vendors})
+
+  const vendorList = Object.keys(vendors).map(id => ({id, name: vendors[id].vendorName}))
+
   const anonymousSelections = [
     {
       anonymous: false,
@@ -56,13 +59,13 @@ export function RawDiscussCreatePost(props){
       title,
       content,
       selectedCategories,
-      vendors,
+      vendorList,
       auth
     })
     // make API call
     // if API call successful, call passed in function that updates state
     // TODO use id, createdTimestamp, and updatedTimestamp from api call return
-    makePost(title, content, selectedCategories, vendors, anonymous, auth)
+    makePost(title, content, selectedCategories, vendorList, anonymous, auth)
     handleExit();
   }
 
@@ -123,7 +126,7 @@ export function RawDiscussCreatePost(props){
           onChangeText={handleTypeVendor}
           value={vendor}
           placeholder="Enter Text"
-          selections={vendors}
+          selections={vendorList}
           onSelect={onSelectVendor}
         />
         <SelectedItems itemStyle={{color: colors.border, backgroundColor: colors.input}} items={selectedVendors.map(item => item.name)} onDelete={handleDeleteVendor}/>
