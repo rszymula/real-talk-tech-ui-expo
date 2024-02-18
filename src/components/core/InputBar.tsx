@@ -3,9 +3,10 @@ import { Button, ButtonType } from "./Button";
 import React from "react";
 import { colors } from "../../context/themes";
 
-export function InputBar({onPress, placeholder, title = null, image = null, imageSize=16,  style = {}, numLines=3}){
+export function InputBar({onPress, placeholder, title = null, image = null, imageSize=16,  style = {}, numLines = 1}){
 
   const [input, setInput] = React.useState('');
+  const [active, setActive] = React.useState(false)
 
   const handleSetInput = (newInput) => {
     setInput(newInput);
@@ -19,7 +20,10 @@ export function InputBar({onPress, placeholder, title = null, image = null, imag
           value={input}
           placeholder={placeholder}
           style={styles.input}
+          multiline={active && numLines > 1}
           numberOfLines={numLines}
+          onFocus={() => setActive(true)}
+          onBlur={() => setActive(false)}
         />
         {(!!title || !!image) && <Button
           title={title}

@@ -124,6 +124,8 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
     .toSorted((a, b) => b.id - a.id)
   console.log({commentIds, comments, commentList})
 
+  const showLoadMore = commentIds.length !== commentList.length;
+
   return (
     <View>
       <FlatList
@@ -135,16 +137,17 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <Separator style={styles.separator}/>}
       />
-      <View style={styles.inputContainer}>
+      {showLoadMore && (<Link onPress={loadComments} textLink={"Load More Comments..."} style={{alignSelf: 'center'}}/>)}
+      <View style={{marginLeft: 32, marginRight: 32, marginTop: 16}}>
         <InputBar
           onPress={handleSubmitComment}
           // title={"^"}
           image={UP}
           imageSize={10}
           placeholder={"Reply with a comment"}
+          numLines={6}
         />
       </View>
-      <Link onPress={loadComments} textLink={"Load More Comments..."} style={{alignSelf: 'center', margin: 16}}/>
       {commentsLoading && <ActivityIndicator style={{marginTop: 16}} />}
       {commentsError && (
         <View style={{margin: 32}}>
