@@ -17,8 +17,6 @@ import { fetchUser } from '../../services/UserServices';
 export function RawProfileUserOther(props){
 
   const { navigation, route, fetchUser, users, userLoading, userError, auth } = props;
-  console.error("RENDERING", props)
-
   const {id, username} = route?.params
 
   React.useEffect(() => {
@@ -34,25 +32,22 @@ export function RawProfileUserOther(props){
 
   return (
     <View style={styles.container}>
-      <View style={{width: 512, alignItems: 'center'}}>
-        <Text style={styles.title}>
-          {`@${user?.username}`}
-        </Text>
-        <Text style={{color: colors.textLowlight, margin: 8}}>
-          {`${user?.fullname}`}
-        </Text>
-        <Card styles={{backgroundColor: colors.input, flexDirection: 'row', justifyContent: 'space-between'}}>
-        <View style={{flexDirection: 'column'}}>
-            <Text style={styles.captionText}>{"Bio"}</Text>
-            <Text style={{maxWidth: 512, color: colors.textRegular, marginTop: 8 }}>{user?.bio}</Text>
-          </View>
-        </Card>
-        <Text style={styles.h2}>
-          Endore Tech Stack
-        </Text>
-        <SelectedItems items={user?.techstack || []} style={{marginTop: 8}}/>
+      <Text style={styles.title}>
+        {`@${user?.username}`}
+      </Text>
+      <Text style={{color: colors.textLowlight, margin: 8}}>
+        {`${user?.fullname}`}
+      </Text>
+      <Card styles={{backgroundColor: colors.input, flexDirection: 'row', justifyContent: 'space-between'}}>
+      <View style={{flexDirection: 'column'}}>
+        <Text style={styles.captionText}>{"Bio"}</Text>
+        <Text style={{maxWidthX: 512, color: colors.textHighlight, fontSize: 12, marginTop: 8 }}>{user?.bio}</Text>
       </View>
-
+      </Card>
+      <Text style={styles.h2}>
+        Endore Tech Stack
+      </Text>
+      <SelectedItems items={user?.techstack || []} style={{marginTop: 8}}/>
     </View>
   )
 }
@@ -79,7 +74,7 @@ const styles = StyleSheet.create({
   h2: {
     marginTop: 8,
     color: colors.textHighlight,
-    fontSize: 16,
+    fontSize: 14,
   },
   captionText: {
     color: colors.textLowlight,

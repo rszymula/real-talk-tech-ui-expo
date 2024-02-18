@@ -16,28 +16,25 @@ export function ProfileSettings(props){
 
   return (
     <View style={styles.container}>
-      <View style={{width: 512}}>
-        <Text style={styles.h2}>
-          Your Profile
-        </Text>
-        <Button title="Edit Profile" onPress={() => {}} type={ButtonType.BASIC} styles={{alignSelf: 'flex-start', marginTop: 8, color: colors.textRegular, backgroundColor: colors.foreground}}/>
-        <Text style={styles.title}>
-          {`@${user.username}`}
-        </Text>
-        <Text style={{color: colors.textLowlight, margin: 8,}}>
-          {`${user.firstName} ${user?.lastName || ''}`}
-        </Text>
-        <Card styles={{backgroundColor: colors.input, flexDirection: 'row', justifyContent: 'space-between'}}>
-          <View style={{flexDirection: 'column'}}>
-            <Text style={styles.captionText}>{"Bio"}</Text>
-            <Text style={{maxWidth: 512, color: colors.textRegular, marginTop: 8 }}>{user.bio}</Text>
-          </View>
-        </Card>
-        <Text style={styles.h2}>
-          Your Tech Stack
-        </Text>
-      </View>
-
+      <Text style={styles.h2}>
+        Your Profile
+      </Text>
+      <Button title="Edit Profile" onPress={() => {}} type={ButtonType.BASIC} styles={{alignSelf: 'flex-start', marginTop: 8, color: colors.textRegular, backgroundColor: colors.foreground}}/>
+      <Text style={styles.title}>
+        {`@${user.username}`}
+      </Text>
+      <Text style={{color: colors.textLowlight, margin: 8,}}>
+        {`${user.firstName} ${user?.lastName || ''}`}
+      </Text>
+      <Card styles={{backgroundColor: colors.input, flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{flexDirection: 'column'}}>
+          <Text style={styles.captionText}>{"Bio"}</Text>
+          <Text style={{maxWidthX: 512, color: colors.textRegular, marginTop: 8 }}>{user.bio}</Text>
+        </View>
+      </Card>
+      <Text style={styles.h2}>
+        Your Tech Stack
+      </Text>
     </View>
   )
 }

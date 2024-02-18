@@ -63,17 +63,15 @@ export function MarketplaceList(props){
 
   return (
     <View style={styles.container}>
-      <View style={{width: 512, alignItems: 'center'}}>
-        <Text style={styles.title}>
-          Marketplace
-        </Text>
-        <Text style={{color: colors.textLowlight, margin: 8}}>
-          Premium listings and deals for the community
-        </Text>
-        <Card styles={{marginTop: 16, marginBottom: 32, width: 512}}>
-          <ListView companies={companies} navigation={navigation} />
-        </Card>
-      </View>
+      <Text style={styles.title}>
+        Marketplace
+      </Text>
+      <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
+        Premium listings and deals for the community
+      </Text>
+      <Card styles={{marginTop: 16, marginBottom: 32}}>
+        <ListView companies={companies} navigation={navigation} />
+      </Card>
     </View>
 )
 }
@@ -84,5 +82,6 @@ const styles = StyleSheet.create({
   title: {
     color: colors.textHighlight,
     fontSize: 18,
+    alignSelf: 'center',
   }
 });

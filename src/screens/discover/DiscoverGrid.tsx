@@ -10,8 +10,6 @@ import { store } from '../../state/basicStore';
 import { GridView } from '../../components/common/GridView';
 import { fetchVendorGroups } from '../../services/DiscoverService';
 import { connect } from '../../state/reduxStore';
-import SPLASH from '../../assets/splash.png';
-
 
 export function RawDiscoverGrid(props){
 
@@ -20,43 +18,34 @@ export function RawDiscoverGrid(props){
   const { getCompanies } = store;
   const companies = getCompanies(0, 15);
 
-  // const vendorGroupsForGrid = Object.keys(vendorGroups)
-  //   ?.map(item => ({vendorGroupId: vendorGroups[item].id, name: vendorGroups[item].categoryName})) || {}
-
   const vendorGroupsForGrid = Object.keys(vendorGroups)
     ?.map(item => vendorGroups[item]) || {}
 
   console.log("VGGSSW", vendorGroups, vendorGroupsForGrid)
 
   const handleOnPress = (item) => {
-    // navigation.navigate(RouteNames.DISCOVER_LIST, {type: item.type});
-    console.log("PRESSINGW", item)
     navigation.navigate(RouteNames.DISCOVER_LIST, {vendorGroupId: item.id});
   }
 
   React.useEffect(() => {
-    console.log("FVW")
     fetchVendorGroups(auth)
   }, [])
 
   return (
     <View style={styles.container}>
-    {/* <View style={{justifyContent: 'flex-end'}}> */}
-      <View style={{width: 512, alignItems: 'center'}}>
-        <Text style={styles.title}>
-          Discover
-        </Text>
-        <Text style={{color: colors.textLowlight, margin: 8}}>
-          Explore software solutions
-        </Text>
-        <View style={{marginBottom: 32, width: 512}}>
-          <GridView
-            // data={companies}
-            data={vendorGroupsForGrid}
-            onPress={(item) => handleOnPress(item)}
-            navigation={navigation}
-          />
-        </View>
+      <Text style={styles.title}>
+        Discover
+      </Text>
+      <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
+        Explore software solutions
+      </Text>
+      <View style={{marginBottom: 32}}>
+        <GridView
+          // data={companies}
+          data={vendorGroupsForGrid}
+          onPress={(item) => handleOnPress(item)}
+          navigation={navigation}
+        />
       </View>
     </View>
   )
@@ -77,5 +66,6 @@ const styles = StyleSheet.create({
   title: {
     color: colors.textHighlight,
     fontSize: 18,
+    alignSelf: 'center',
   }
 });

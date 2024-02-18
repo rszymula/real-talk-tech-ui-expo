@@ -114,7 +114,7 @@ export function RawProfileUser(props){
         Your Tech Stack
       </Text>
       <SelectedItems items={user.techstack} style={{marginTop: 8}}/>
-      <Link textLink={"Log out from account"} onPress={handleLogout}/>
+      <Link style={{marginTop: 16}} textLink={"Log out from account"} onPress={handleLogout}/>
     </View>
   )
 }
@@ -128,8 +128,8 @@ export const ProfileUser = connect(stp, dtp)(RawProfileUser);
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    width: 512,
+    // flex: 1,
+    // width: 512,
   },
   title: {
     marginTop: 8,

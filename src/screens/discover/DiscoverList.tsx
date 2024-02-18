@@ -70,15 +70,13 @@ function RawDiscoverList(props){
 
   return (
     <View style={styles.container}>
-      <View style={{width: 512, alignItems: 'center'}}>
-        <Text style={styles.title}>
-          Top Sales Tools
-        </Text>
-        <Link style={{margin: 8}} textLeft="Don't see your company?" textLink="Create a service profile" onPress={handleCreateServiceProfilePress} />
-        <Card styles={{marginBottom: 32, width: 512}}>
-          <ListView companies={vendorList} navigation={navigation} />
-        </Card>
-      </View>
+      <Text style={styles.title}>
+        Top Sales Tools
+      </Text>
+      <Link style={{margin: 8, alignSelf: 'center'}} textLeft="Don't see your company?" textLink="Create a service profile" onPress={handleCreateServiceProfilePress} />
+      <Card styles={{marginBottom: 32}}>
+        <ListView companies={vendorList} navigation={navigation} />
+      </Card>
     </View>
   )
 }
@@ -99,5 +97,6 @@ const styles = StyleSheet.create({
   title: {
     color: colors.textHighlight,
     fontSize: 18,
+    alignSelf: 'center',
   }
 });
