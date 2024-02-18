@@ -14,6 +14,7 @@ import FORWARD_THIN from '../../assets/forward_thin.png';
 
 const renderElement = (item, navigation) => {
   const handleOnPress = (item) => {
+    console.log("NAVW", item)
     navigation.navigate(RouteNames.DISCOVER_LIST, {vendorGroupId: item.id});
   }
   return (
