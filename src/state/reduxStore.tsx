@@ -238,6 +238,16 @@ export function reducer(state = initialState, action){
     //   return {...state, questions: [...state.questions, action.payload]}
     // case 'GET_FOLLOWUPS':
     //   return {...state, followups: [...state.followups, action.payload]}
+    case 'VENDOR_DETAILS_SUCCESS':
+      const vendors = {
+        ...state.vendors,
+        [action.payload.vendorId]: {...state.vendors[action.payload.vendorId], ...action.payload.vendor},
+      };
+      console.log("THISW", vendorGroups, action.payload)
+      return {
+        ...state,
+        vendors,
+      }
     case 'LOGIN_SUCCESS':
       return {
         ...state,

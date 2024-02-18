@@ -12,17 +12,20 @@ import { Link } from '../../components/core/Link';
 import { fetchVendorsByGroup } from '../../services/DiscoverService';
 import { connect } from '../../state/reduxStore';
 
-function Company(props){
-  const { id, name, type, description, navigation} = props;
+function Vendor(props){
+  const { id, vendorName, vendorType, description, vendorHomepageUrl, vendorLogoUrl, navigation} = props;
+
+  console.log("NN22")
 
   const handleOnPress = () => {
-    navigation.navigate(RouteNames.DISCOVER_COMPANY_PROFILE, {companyId: id})
+    console.log("NVVINGW", id)
+    navigation.navigate(RouteNames.DISCOVER_VENDOR_DETAILS, {vendorId: id})
   }
 
   return (
     <ListItem
-      heading={name}
-      subheading={type}
+      heading={vendorName}
+      subheading={vendorType}
       body={description}
       buttonLabel="View Profile"
       onPress={handleOnPress}
@@ -30,14 +33,15 @@ function Company(props){
   );
 }
 
-function ListView({companies, navigation}){
+function ListView({vendorList, navigation}){
+  console.log("VENDORSLISTW", vendorList)
   return(
     <SafeAreaView>
       <FlatList
         style={{backgroundColor: colors.foreground}}
-        data={companies}
+        data={vendorList}
         keyExtractor={(item) => item.id}
-        renderItem={({item}) => <Company {...item} navigation={navigation} />}
+        renderItem={({item}) => <Vendor {...item} navigation={navigation} />}
         ItemSeparatorComponent={() => <Separator style={{marginTop: 16, marginBottom: 16}} />}
       />
     </SafeAreaView>
@@ -75,7 +79,7 @@ function RawDiscoverList(props){
       </Text>
       <Link style={{margin: 8, alignSelf: 'center'}} textLeft="Don't see your company?" textLink="Create a service profile" onPress={handleCreateServiceProfilePress} />
       <Card styles={{marginBottom: 32}}>
-        <ListView companies={vendorList} navigation={navigation} />
+        <ListView vendorList={vendorList} navigation={navigation} />
       </Card>
     </View>
   )

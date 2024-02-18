@@ -10,7 +10,7 @@ export enum RouteNames {
   DISCUSS_CREATE_POST = "DiscussCreatePost",
   DISCOVER_HOME = "DiscoverHome",
   DISCOVER_LIST = "DiscoverList",
-  DISCOVER_COMPANY_PROFILE = "DiscoverCompanyProfile",
+  DISCOVER_VENDOR_DETAILS = "DiscoverVendorDetails",
   MARKETPLACE_HOME = "MarketplaceHome",
   BUYER_AI_HOME = "BuyerAIHome",
   BUYER_AI_FOLLOWUP = "BuyerAIFollowup",

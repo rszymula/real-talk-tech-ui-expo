@@ -15,7 +15,7 @@ import { CategoryNames, RouteNames, categories } from './constants/constants';
 import { ButtonType, buttonTypetoStyle, Button } from './components/core/Button';
 import { ProfileCreateHome } from './screens/user/ProfileCreateHome';
 import { ProfileQuestion } from './screens/user/ProfileQuestion';
-import { DiscoverCompanyProfile } from './screens/discover/DiscoverCompanyProfile';
+import { DiscoverVendorDetails } from './screens/discover/DiscoverVendorDetails';
 import { ReduxContext, connect, createStore, reducer } from './state/reduxStore';
 import { DiscoverList } from './screens/discover/DiscoverList';
 import { ProfileUser } from './screens/user/ProfileUser';
@@ -46,8 +46,8 @@ export const routes = [
     component: navBarProvider(DiscoverList),
   },
   {
-    name: RouteNames.DISCOVER_COMPANY_PROFILE,
-    component: navBarProvider(DiscoverCompanyProfile),
+    name: RouteNames.DISCOVER_VENDOR_DETAILS,
+    component: navBarProvider(DiscoverVendorDetails),
   },
   {
     name: RouteNames.MARKETPLACE_HOME,

@@ -157,3 +157,29 @@ export function fetchVendorsByGroup(dispatch){
   }
 }
 
+export function fetchVendorDetails(dispatch, getState){
+  return (vendorId, page = 1) => {
+    const state = getState();
+    const {userId, token} = state.auth;
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/categories`;
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/items/${vendorId}`;
+    // const url3 = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/user/1`;
+    const params = {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    }
+    fetch(`${url}`, params).then(res => {
+      console.log("FVW3")
+      return res.json()
+    }).then(json => {
+      console.log("GOOD-vendorDetails", json)
+      dispatch({type: "VENDOR_DETAILS_SUCCESS", payload: {vendorId, vendor: json}})
+    }).catch(err => {
+      console.log("ERR-vendorDetails")
+    })
+  }
+}
+
