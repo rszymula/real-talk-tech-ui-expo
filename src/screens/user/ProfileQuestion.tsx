@@ -119,25 +119,23 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
 
   return (
     <View style={styles.container}>
-      <View style={{alignItems: 'center', margin: 32}}>
-        <Text style={styles.title}>
-          {description}
-        </Text>
-        <Text style={{color: colors.textLowlight, margin: 8}}>
-          Choose all that apply
-        </Text>
-        <RTextInput 
-          onChangeText={setText}
-          value={text}
-          placeholder={placeholder}
-          selections={selections}
-          onSelect={handleOnSelect}
-          style={styles.input}
-        />
-        <SelectedItems style={{marginTop: 4}} items={items.map(item => item.name)} onDelete={handleRemoveItem}/>
-        <Button title={!!next ? "Next Step" : "Finish"} onPress={handleNextPress} styles={{marginTop: 8, width: 512, justifyContent: 'space-around'}}/>
-        <Text style={{marginTop: 256, color: colors.textLowlight}}>{`Question ${stepNumber} of ${Object.keys(ProfileStep).length}`}</Text>
-      </View>
+      <Text style={styles.title}>
+        {description}
+      </Text>
+      <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
+        Choose all that apply
+      </Text>
+      <RTextInput 
+        onChangeText={setText}
+        value={text}
+        placeholder={placeholder}
+        selections={selections}
+        onSelect={handleOnSelect}
+        style={styles.input}
+      />
+      <SelectedItems style={{marginTop: 4}} items={items.map(item => item.name)} onDelete={handleRemoveItem}/>
+      <Button title={!!next ? "Next Step" : "Finish"} onPress={handleNextPress} styles={{marginTop: 8, widthX: 512, justifyContent: 'space-around'}}/>
+      <Text style={{marginTop: 256, color: colors.textLowlight, alignSelf: 'center'}}>{`Question ${stepNumber} of ${Object.keys(ProfileStep).length}`}</Text>
     </View>
   )
 }
@@ -153,9 +151,15 @@ const dtp = (dispatch) => ({
 export const ProfileQuestion = connect(stp, dtp)(RawProfileQuestion);
 
 const styles = StyleSheet.create({
+  container: {
+    margin: 32,
+    marginLeft: 192,
+    marginRight: 192,
+    maxWidth: 768,
+  },
   input: {
     marginTop: 8,
-    width: 512,
+    widthX: 512,
     position: 'relative',
     zIndex: 100,
   },
@@ -163,5 +167,6 @@ const styles = StyleSheet.create({
     color: colors.textHighlight,
     marginTop: 32,
     fontSize: 18,
+    alignSelf: 'center',
   },
 })

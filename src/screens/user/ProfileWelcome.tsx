@@ -28,31 +28,27 @@ export function RawProfileWelcome({navigation, fetchOnboarding}) {
 
   return (
     <View style={styles.container}>
-      <View style={{alignItems: 'center', margin: 32}}>
-        {/* <View style={{alignItems: 'center', width: 512}}> */}
-          <Image source={REALTALKTECH_WHITE} style={{width: 256, height: 32}}/>
-          <Text style={styles.title}>
-            Welcome!
-          </Text>
-          <Text style={{color: colors.textLowlight, margin: 8}}>
-            Let's Customize Your Experience
-          </Text>
-          <RTextInput 
-            onChangeText={setEmail}
-            value={email}
-            placeholder={"Enter your email"}
-            style={styles.input}
-          />
-          <RTextInput 
-            onChangeText={setPassword}
-            value={password}
-            placeholder={"Enter your password"}
-            style={styles.input}
-          />
-          <Button title="Create Account" onPress={handleNextPress} styles={{marginTop: 8, width: 512, justifyContent: 'space-around'}}/>
-          <Link style={{margin: 16}} textLeft="Already have an account?" textLink="Sign in" onPress={handleLoginPress} />
-        {/* </View> */}
-      </View>
+      <Image source={REALTALKTECH_WHITE} style={{width: 256, height: 32, alignSelf: 'center'}}/>
+      <Text style={styles.title}>
+        Welcome!
+      </Text>
+      <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
+        Let's Customize Your Experience
+      </Text>
+      <RTextInput 
+        onChangeText={setEmail}
+        value={email}
+        placeholder={"Enter your email"}
+        style={styles.input}
+      />
+      <RTextInput 
+        onChangeText={setPassword}
+        value={password}
+        placeholder={"Enter your password"}
+        style={styles.input}
+      />
+      <Button title="Create Account" onPress={handleNextPress} styles={{marginTop: 8, widthX: 512, justifyContent: 'space-around'}}/>
+      <Link style={{margin: 16, alignSelf: 'center'}} textLeft="Already have an account?" textLink="Sign in" onPress={handleLoginPress} />
     </View>
   )
 }
@@ -64,18 +60,20 @@ const dtp = (dispatch) => ({
 export const ProfileWelcome = connect(stp, dtp)(RawProfileWelcome)
 
 const styles = StyleSheet.create({
-  input: {
-    width: 512,
-    marginTop: 8,
-  },
   container: {
     backgroundColor: colors.background,
-    // width: 512,
-    // height: "100%",
+    margin: 32,
+    marginLeft: 192,
+    marginRight: 192,
+    maxWidth: 768,
+  },
+  input: {
+    marginTop: 8,
   },
   title: {
     color: colors.textHighlight,
     marginTop: 32,
     fontSize: 18,
+    alignSelf: 'center',
   },
 })
