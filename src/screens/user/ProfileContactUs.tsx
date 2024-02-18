@@ -11,6 +11,7 @@ import QUESTION_CHECK from '../../assets/question_check.png';
 import QUIP from '../../assets/quip.png';
 import { Separator } from '../../components/core/Separator';
 import LinearGradient from 'react-native-linear-gradient';
+import { GridView } from '../../components/common/GridView';
 
 export function ProfileContactUs(props){
 
@@ -29,78 +30,67 @@ export function ProfileContactUs(props){
     
   }
 
+  const callouts = [
+    {
+      text: "Reach out for help or assistance",
+      icon: QUOTE,
+    },
+    {
+      text: "Provide Product feedback",
+      icon: QUESTION,
+    },
+    {
+      text: "Submit a question",
+      icon: QUESTION_CHECK,
+    },
+    {
+      text: "Inquire about services",
+      icon: QUIP,
+    },
+  ];
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>RealTalk - Your Advantage in the Tech World</Text>
       <Text style={{color: colors.textLowlight, fontSize: 14, marginTop: 8, alignSelf: 'center'}}>
         Submit a message and get in touch with our team
       </Text>
-      {/* <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Text style={{color: colors.textLowlight, fontSize: 14, marginTop: 8}}>
-          Your Profile
-        </Text>
-      </View> */}
-      {/* <View style={{widthX: 512, marginTop: 16}}> */}
-        <View style={{marginTop: 16, flexDirection: 'row', justifyContent: 'space-between', widthX: 512, flexWrap: 'wrap'}}>
-          <View style={{flexDirection: 'row', alignItems: 'center', width: 240, marginRightX: 8, marginTop: 8}}>
-            {/* <View style={{borderTopStartRadius: 32, borderTopEndRadius: 32, borderBottomStartRadius: 32, borderBottomEndRadius: 32, width: 32, height: 24, backgroundColor: colors.link}}></View> */}
-            {/* <LinearGradient colors={[colors.gradientBlue, colors.gradientPurple]}> */}
-              <View style={{justifyContent: 'space-around', alignItems: 'center', transformX:[{scaleX: 1.25}], borderRadius: 28, width: 28, height: 28, backgroundColor: colors.gradientBlue}}>
-                <Image source={QUESTION} style={{width: 14, height: 12}}/>
+      <GridView 
+        elements={callouts}
+        renderElement={(element, navigation) => {
+          return (
+            <View style={{flexDirection: 'row', alignItems: 'center', width: 240, marginTop: 8}}>
+              <View style={{justifyContent: 'space-around', alignItems: 'center', borderRadius: 28, width: 28, height: 28, backgroundColor: colors.gradientPurple}}>
+                <Image source={element.icon} style={{width: 14, height: 12}}/>
               </View>
-            {/* </LinearGradient> */}
-            {/* <View style={{flex: 1}}></View> */}
-            <Text style={{color: colors.textHighlight, fontSize: 12, marginLeft: 8}}>Reach out for help or assistance</Text>
-          </View>
-          <View style={{flexDirection: 'row', alignItems: 'center', width: 240, marginRightX: 8, marginTop: 8}}>
-            <View style={{justifyContent: 'space-around', alignItems: 'center', borderRadius: 28, width: 28, height: 28, backgroundColor: colors.gradientPurple}}>
-              <Image source={QUOTE} style={{width: 14, height: 12}}/>
+              <Text style={{color: colors.textHighlight, fontSize: 12, marginLeft: 8}}>{element.text}</Text>
             </View>
-            <Image source={QUOTE} />
-            {/* <View style={{flex: 1}}></View> */}
-            <Text style={{color: colors.textHighlight, fontSize: 12, marginLeft: 8}}>Provide Product feedback</Text>
-          </View>
-          <View style={{flexDirection: 'row', alignItems: 'center', width: 240, marginRightX: 8, marginTop: 8}}>
-            <View style={{justifyContent: 'space-around', alignItems: 'center', borderRadius: 28, width: 28, height: 28, backgroundColor: colors.gradientBlue}}>
-              <Image source={QUESTION_CHECK} style={{width: 16, height: 12}}/>
-            </View>
-            {/* <View style={{flex: 1}}></View> */}
-            <Text style={{color: colors.textHighlight, fontSize: 12, marginLeft: 8}}>Submit a question</Text>
-          </View>
-          <View style={{flexDirection: 'row', alignItems: 'center', width: 240, marginRightX: 8, marginTop: 8}}>
-            <View style={{justifyContent: 'space-around', alignItems: 'center', borderRadius: 28, width: 28, height: 28, backgroundColor: colors.gradientPurple}}>
-              <Image source={QUIP} style={{width: 14, height: 12}}/>
-            </View>
-            {/* <View style={{flex: 1}}></View> */}
-            <Text style={{color: colors.textHighlight, fontSize: 12, marginLeft: 8}}>Inquire about services</Text>
-          </View>
-        </View>
-      {/* </View> */}
-      {/* <Separator style={{marginTop: 16}} /> */}
-      {/* <View style={{flex: 1}}> */}
-        <RTextInput 
-          // label={"Name"}
-          value={name}
-          onChangeText={(text) => setName(text)}
-          placeholder={"Enter name"}
-          style={{marginTop: 16, widthX: 512}}
-        />
-        <RTextInput 
-          // label={"Email"}
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          placeholder={"Enter email"}
-          style={{marginTop: 16, widthX: 512}}
-        />
-        <RTextInput 
-          // label={"Message"}
-          value={message}
-          onChangeText={(text) => setMessage(text)}
-          placeholder={"Enter message"}
-          numberOfLines={12}
-          style={{marginTop: 16, widthX: 512}}
-        />
-        <Button styles={{marginTop: 16, widthX: 512, justifyContent: 'center'}} title={"Submit your message"} onPress={handleSubmitPress}/>
+          )
+        }}
+      />
+      <RTextInput 
+        // label={"Name"}
+        value={name}
+        onChangeText={(text) => setName(text)}
+        placeholder={"Enter name"}
+        style={{marginTop: 16, widthX: 512}}
+      />
+      <RTextInput 
+        // label={"Email"}
+        value={email}
+        onChangeText={(text) => setEmail(text)}
+        placeholder={"Enter email"}
+        style={{marginTop: 16, widthX: 512}}
+      />
+      <RTextInput 
+        // label={"Message"}
+        value={message}
+        onChangeText={(text) => setMessage(text)}
+        placeholder={"Enter message"}
+        numberOfLines={12}
+        style={{marginTop: 16, widthX: 512}}
+      />
+      <Button styles={{marginTop: 16, widthX: 512, justifyContent: 'center'}} title={"Submit your message"} onPress={handleSubmitPress}/>
       {/* </View> */}
     </View>
   )
