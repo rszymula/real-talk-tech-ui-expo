@@ -91,7 +91,7 @@ export function RawDiscussCreatePost(props){
   }
 
   return (
-    <Card styles={{width: 512}}>
+    <Card styles={{minWidthX: 512, flexX: 1}}>
       <View style={styles.container}>
         <RTextInput 
           style={{marginTop: 8, position: 'relative', zIndex: 100}}

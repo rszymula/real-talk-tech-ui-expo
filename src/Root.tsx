@@ -146,7 +146,7 @@ function SideBar(props){
     }}>
       <View style={{
         flexDirection: 'column',
-        width: 256,
+        width: 192,
         borderWidth: 1, 
         borderColor: 'yellow'
       }}>
@@ -155,9 +155,11 @@ function SideBar(props){
           ) : <></>
         }
       </View>
-      <props.Component {...props} currentCategory={currentCategory} />
+      <View style={{paddingLeft: 32, paddingRight: 32, flex: 1}}>
+        <props.Component {...props} currentCategory={currentCategory} />
+      </View>
       <View style={{
-        width: 256,
+        width: 192,
         borderWidth: 1,
         borderColor: 'yellow'
       }}></View>
@@ -246,7 +248,7 @@ const styles = StyleSheet.create({
   container: {
   },
   sidebar: {
-    marginLeft: 256,
+    marginLeft: 192,
   },
   title: {
     ...buttonTypetoStyle[ButtonType.BARE],

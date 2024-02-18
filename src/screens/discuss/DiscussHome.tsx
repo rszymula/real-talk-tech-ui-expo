@@ -248,7 +248,7 @@ function RawDiscussHome(props){
   console.log("E2", feedError)
 
   return (
-    <Card styles={{width: 512}}>
+    <Card styles={{widthX: 512, flexX: 1}}>
       <InputBar 
         onPress={(input) => {
           navigation.navigate(RouteNames.DISCUSS_CREATE_POST, { input })

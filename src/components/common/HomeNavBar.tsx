@@ -53,7 +53,7 @@ export function HomeNavBar(props){
 
   return (
     <View style={styles.container}>
-      <View style={{paddingTop: 8, paddingBottom: 8, borderColor: 'green', borderWidth: 1}}>
+      <View style={{paddingTop: 10, paddingBottom: 10, borderColor: 'green', borderWidth: 1}}>
         <Image source={REALTALKTECH_WHITE} style={styles.title}/>
       </View>
         {hasTabs && (<View style={styles.topBar}>
@@ -65,7 +65,7 @@ export function HomeNavBar(props){
             })
           }
         </View>)}
-      <View style={{flexDirection: 'row', width: 256, justifyContent: 'flex-end', borderColor: 'green', borderWidth: 1}}>
+      <View style={{flexDirection: 'row', width: 192, justifyContent: 'flex-end', borderColor: 'green', borderWidth: 1}}>
         <Button image={RouteNames.PROFILE_WELCOME === currentRouteName ? NOTIFICATIONS_ACTIVE : NOTIFICATIONS} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
         <Button image={RouteNames.PROFILE_USER === currentRouteName ? SETTINGS_ACTIVE : SETTINGS} imageWidthRatio={1.2} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
       </View>
@@ -82,8 +82,8 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
   title: {
-    width: 256,
-    height: 24,
+    width: 192,
+    height: 18,
     borderColor: 'yellow',
     borderWidth: 1
   },
