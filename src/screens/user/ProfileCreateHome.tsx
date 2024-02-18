@@ -96,7 +96,7 @@ export function ProfileCreateHome({route, navigation, signup}) {
           items={selectedVendors.map(item => item.name)}
           onDelete={handleDeleteVendor}
         />
-        <Button title="Next Step" onPress={handleNextPress} styles={{marginTop: 8, flex: 1, width: 512, justifyContent: "space-around", position: 'relative'}}/>
+        <Button title="Next Step" onPress={handleNextPress} styles={{marginTop: 8, flex: 1, widthX: 512, justifyContent: "space-around", position: 'relative'}}/>
         <Text style={{marginTop: 32, color: colors.textLowlight}}>{"Next, let's curate your feed with three quick questions"}</Text>
       </View>
     </View>
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     margin: 8,
     color: colors.textRegular,
     fontSize: 12,
-    width: 256,
+    widthX: 256,
   },
   container: {
     backgroundColor: colors.background,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   inputText: {
     // width: "100%",
     // paddingLeft: 8,
-    width: 512,
+    // width: 512,
     marginTop: 8,
     //color: colors.textLowlight,
   },

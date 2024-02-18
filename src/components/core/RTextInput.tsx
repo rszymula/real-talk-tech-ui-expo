@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 4,
     flex: 1,
+    minWidth: 64,
   },
   dropdown: {
     position: 'absolute',
