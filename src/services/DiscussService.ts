@@ -484,11 +484,13 @@ export function fetchComments(dispatch){
   }
 }
 
-export function makeComment(dispatch){
+export function makeComment(dispatch, getState){
   return (postId, text, taggedUsernames = [], auth) => {
+    const state = getState();
     // const userId = 17
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
     const {userId, token} = auth;
+    const username = state.users[userId].username
     const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/makeComment`
     const params = {
       method: "POST",
@@ -508,7 +510,19 @@ export function makeComment(dispatch){
       // return res.text()
     }).then(json => {
       console.log("GOOD-makeComment", json)
-      // dispatch({type: "POSTS_SUCCESS", payload: json})
+      const id = json.comment_id
+      const comment = {
+        id,
+        username,
+        commentText: text,
+        taggedUsernames: [],
+        totalDownvotes: 0,
+        totalUpvotes: 0,
+        userVote: 0,
+        creationTime: new Date().toISOString(),
+        updateTime: new Date().toISOString(),
+      }
+      dispatch({type: "COMMENTS_CREATE_SUCCESS", payload: {postId, comment}});
     }).catch((err) => {
       console.log("ERR-makeComment", err)
     })

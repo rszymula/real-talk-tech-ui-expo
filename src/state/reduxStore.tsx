@@ -101,6 +101,8 @@ const initialState = {
   companies: [1, 2],
   companiesLoading: false,
   companiesError: null,
+  commentCreateLoading: false,
+  commentCreateError: false,
   // questions: [],
   // usersLoading: false,
   // usersError: null,
@@ -200,6 +202,26 @@ export function reducer(state = initialState, action){
           [action.payload]: true,
         },
       }
+    case 'COMMENTS_CREATE_SUCCESS':
+      const res4 = {
+        ...state,
+        comments: {
+          ...state.comments,
+          [action.payload.comment.id]: action.payload.comment,
+        },
+        posts: {
+          ...state.posts,
+          [action.payload.postId]: {
+            ...state.posts[action.payload.postId],
+            commentIds: [
+              action.payload.comment.id,
+              ...state.posts[action.payload.postId].commentIds,
+            ]
+          }
+        }
+      }
+      console.log("Mkaing comments", action.payload, res4)
+      return res4
     case 'COMMENTS_SUCCESS':
       const res2 = {
         ...state,

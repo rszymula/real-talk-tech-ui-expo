@@ -96,10 +96,10 @@ function getCount(list, obj){
 function CommentsList({commentIds, comments, commentsLoading, commentsError, postId, makeComment, fetchComments, navigation, auth}){
 
   const handleSubmitComment = (input) => {
-    console.log("Commented", input)
+    console.log("Commented", postId, input)
     // make API call
     // if succcessful call passed in function to store the new state
-    makeComment(postId, "comment text here")
+    makeComment(postId, input, [], auth)
   }
 
   const loadComments = () => {
@@ -237,7 +237,7 @@ function RawPost({ id, title, body, user, commentIds, userVote, numUpvotes, numD
 const stpPost = (state) => ({comments: state.comments, commentsLoading: state.commentsLoading, commentsError: state.commentsError, auth: state.auth});
 const dtpPost  = (dispatch, getState) => ({
   fetchComments: fetchComments(dispatch),
-  makeComment: makeComment(dispatch),
+  makeComment: makeComment(dispatch, getState),
   upvotePost: upvotePost(dispatch, getState),
 })
 export const Post = connect(stpPost , dtpPost )(RawPost);
