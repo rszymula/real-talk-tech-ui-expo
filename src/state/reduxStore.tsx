@@ -90,6 +90,8 @@ const initialState = {
   userError: null,
   feed: Object.values(CategoryNames).filter(item => isNaN(Number(item))).reduce((acc, item) => (acc[item] = [], acc), {}),
   posts: {},
+  postCreateLoading: false,
+  postCreateError: true,
   feedLoading: {},
   feedError: {},
   // comments: [],
@@ -117,7 +119,8 @@ export function reducer(state = initialState, action){
   switch(action.type){
     case 'POSTS_CREATE_SUCCESS':
       const temp = action.payload.categories.reduce((accum, curr) => {
-        accum[curr] = [...state.feed[curr], action.payload.id]
+        // accum[curr] = [...state.feed[curr], action.payload.id]
+        accum[curr] = [action.payload.id, ...state.feed[curr]]
         return accum
       }, {});
       const res3 = {
@@ -128,20 +131,10 @@ export function reducer(state = initialState, action){
         },
         posts: {
           ...state.posts,
-          ...action.payload.data.reduce((accum, cur) => {
-            const userVote = cur.userVote === true ? 1 : cur.userVote === false ? -1 : 0
-            accum[cur.id] = {...cur, userVote }
-            return accum;
-          }, {}),
+          [action.payload.id]: action.payload,
         },
-        feedLoading: {
-          ...state.feedLoading,
-          [action.payload.category]: false,
-        },
-        feedError: {
-          ...state.feedError,
-          [action.payload.category]: false,
-        },
+        postCreateLoading: false,
+        postCreateError: false,
       }
     console.log("123123", res3)
     return res3

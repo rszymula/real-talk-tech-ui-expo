@@ -9,6 +9,7 @@ import { BuyerAIMessenger } from './screens/buyerai/BuyerAIMessenger';
 import { DiscoverHome } from './screens/discover/DiscoverHome';
 import { DiscussCreatePost } from './screens/discuss/DiscussCreatePost';
 import { DiscussHome } from './screens/discuss/DiscussHome';
+// import { DiscussPost}
 import { BuyerAIHome } from './screens/buyerai/BuyerAIHome';
 import { colors } from './context/themes';
 import { CategoryNames, RouteNames, categories } from './constants/constants';
@@ -28,11 +29,16 @@ import { HomeBottomBar } from './components/common/HomeBottomBar';
 import { ProfileContactUs } from './screens/user/ProfileContactUs';
 import { AlternateNavBar } from './components/common/AlternateNavBar';
 import { spacing } from './constants/styles';
+import { DiscussPostDetail } from './screens/discuss/DiscussPostDetail';
 
 export const routes = [
   {
     name: RouteNames.DISCUSS_HOME,
     component: navBarProvider(DiscussHome, true),
+  },
+  {
+    name: RouteNames.DISCUSS_POST_DETAIL,
+    component: navBarProvider(DiscussPostDetail, true),
   },
   {
     name: RouteNames.DISCUSS_CREATE_POST,

@@ -18,7 +18,7 @@ function RawProfileLogin({navigation, login}) {
   const [password, setPassword] = React.useState('');
 
   const handleResetPasswordPress = () => {
-    navigation.navigate(RouteNames.PROFILE_CREATE_HOME, {username, password})
+    // navigation.navigate(RouteNames.PROFILE_CREATE_HOME, {username, password})
   }
 
   const handleLoginPress = () => {

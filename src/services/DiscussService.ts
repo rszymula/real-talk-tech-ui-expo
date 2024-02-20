@@ -515,8 +515,12 @@ export function makeComment(dispatch){
   }
 }
 
-export function makePost(dispatch){
+export function makePost(dispatch, getState){
   return (title, body, categories, vendors, isAnonymous, auth) => {
+  // return (post, auth) => {
+    const state = getState()
+    console.log("AW22", auth)
+    // const {title, body, categories, vendors, isAnonymous} = post
     const {userId, token} = auth;
     const rawBody = {
       userId,
@@ -536,12 +540,32 @@ export function makePost(dispatch){
       },
       body: JSON.stringify(rawBody)
     }
+    // makePost(title, content, selectedCategories, skills, anonymous, auth)
+    // id, title, body, user, commentIds, userVote, numUpvotes, numDownvotes, createdTimestamp,
     fetch(url, params).then(res => {
       return res.json()
       // return res.text()
     }).then(json => {
-      console.log("GOOD-makePost", json)
-      // dispatch({type: "POSTS_CREATE_SUCCESS", payload: {id: json.post_id, ...rawBody}})
+      const post = {
+        id: json.post_id,
+        title,
+        body,
+        user: {
+          id: userId,
+          username: state.users[userId].name,
+        },
+        categories,
+        vendors: [],
+        commentIds: [],
+        userVote: 0,
+        numComments: 0,
+        numUpvotes: 0,
+        numDownvotes: 0,
+        createdTimestamp: new Date().toISOString(),
+        updatedTimestamp: new Date().toISOString()
+      }
+      console.log("GOOD-makePost", json, post)
+      dispatch({type: "POSTS_CREATE_SUCCESS", payload: post})
     }).catch((err) => {
       console.log("ERR-makePost", err)
     })

@@ -166,12 +166,17 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
 }
 
 
-
+// makePost(title, content, selectedCategories, skills, anonymous, auth)
+// id, title, body, user, commentIds, userVote, numUpvotes, numDownvotes, createdTimestamp, 
 function RawPost({ id, title, body, user, commentIds, userVote, numUpvotes, numDownvotes, createdTimestamp, currentCategory, navigation, fetchComments, makeComment, comments, commentsLoading, commentsError, upvotePost, auth}){
 
   const {id: userId, username} = user;
 
   const [commentsExpanded, setCommentsExpanded] = React.useState(false);
+
+  const handlePostPress = () => {
+    //navigation.navigate(RouteNames.DISCUSS_POST_DETAIL, {postId: id})
+  }
 
   const handleCommentsPress = () => {
     setCommentsExpanded(!commentsExpanded)
@@ -194,9 +199,11 @@ function RawPost({ id, title, body, user, commentIds, userVote, numUpvotes, numD
 
   return (
     <View style={styles.container}>
-      <Text style={styles.captionText}>{currentCategory}</Text>
-      <Text style={[styles.headingText, styles.title]}>{title}</Text>
-      <Text style={[styles.bodyText, styles.description]}>{body}</Text>
+      <TouchableOpacity onPress={handlePostPress}>
+        <Text style={styles.captionText}>{currentCategory}</Text>
+        <Text style={[styles.headingText, styles.title]}>{title}</Text>
+        <Text style={[styles.bodyText, styles.description]}>{body}</Text>
+      </TouchableOpacity>
       <View style={styles.bottom}>
         <View style={styles.actionGroup}>
           <TouchableOpacity onPress={handleCommentsPress}>

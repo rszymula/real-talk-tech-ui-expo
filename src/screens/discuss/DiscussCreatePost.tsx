@@ -66,6 +66,7 @@ export function RawDiscussCreatePost(props){
     // make API call
     // if API call successful, call passed in function that updates state
     // TODO use id, createdTimestamp, and updatedTimestamp from api call return
+    console.log("AW", auth)
     makePost(title, content, selectedCategories, skills, anonymous, auth)
     handleExit();
   }
@@ -168,8 +169,8 @@ const stp = (state) => ({
   skills: state.skills,
   auth: state.auth,
 })
-const dtp = (dispatch) => ({
-  makePost: makePost(dispatch),
+const dtp = (dispatch, getState) => ({
+  makePost: makePost(dispatch, getState),
 });
 export const DiscussCreatePost = connect(stp, dtp)(RawDiscussCreatePost);
 

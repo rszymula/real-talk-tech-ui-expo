@@ -7,6 +7,7 @@ import MARKETPLACE_ACTIVE from '../assets/marketplace_active.png';
 
 export enum RouteNames {
   DISCUSS_HOME = "DiscussHome",
+  DISCUSS_POST_DETAIL = "DiscussPostDetail",
   DISCUSS_CREATE_POST = "DiscussCreatePost",
   DISCOVER_HOME = "DiscoverHome",
   DISCOVER_LIST = "DiscoverList",
