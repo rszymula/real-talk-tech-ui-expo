@@ -12,6 +12,7 @@ import QUIP from '../../assets/quip.png';
 import { Separator } from '../../components/core/Separator';
 import LinearGradient from 'react-native-linear-gradient';
 import { GridView } from '../../components/common/GridView';
+import { Heading } from '../../components/common/Heading';
 
 export function ProfileContactUs(props){
 
@@ -51,10 +52,14 @@ export function ProfileContactUs(props){
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>RealTalk - Your Advantage in the Tech World</Text>
-      <Text style={{color: colors.textLowlight, fontSize: 14, marginTop: 8, alignSelf: 'center'}}>
-        Submit a message and get in touch with our team
-      </Text>
+      <Heading navigation={navigation}>
+        <View>
+          <Text style={styles.title}>RealTalk - Your Advantage in the Tech World</Text>
+          <Text style={{color: colors.textLowlight, fontSize: 14, marginTop: 8, alignSelf: 'center'}}>
+            Submit a message and get in touch with our team
+          </Text>
+      </View>
+      </Heading>
       <GridView 
         elements={callouts}
         renderElement={(element, idx, navigation) => {

@@ -21,6 +21,7 @@ import UPVOTE_ACTIVE from '../../assets/upvote_active.png';
 import DOWNVOTE_DEFAULT from '../../assets/downvote_default.png';
 import DOWNVOTE_ACTIVE from '../../assets/downvote_active.png';
 import moment from 'moment';
+import { Heading } from '../../components/common/Heading';
 
 const POST_PAGE_OFFSET = 10;
 const COMMENT_OFFSET = 10;
@@ -65,7 +66,7 @@ function Comment({commentText, username, upvotes, creationTime, navigation}) {
                 </Text>
               </TouchableOpacity>
             ) : (
-              <Text style={styles.captionText}>{"Anonymous "}</Text>)} 
+              <Text style={styles.captionText}>{"@User "}</Text>)} 
           <Text style={styles.captionText}>{`| ${getDateText(creationTime)}`}</Text>
         </View>
         <Text style={[styles.bodyText, styles.description]}>{commentText}</Text>
@@ -213,7 +214,7 @@ function RawPost({ id, title, body, user, commentIds, userVote, numUpvotes, numD
           <Text style={styles.captionText}>{`Posted by `}</Text>
           {username ? (<TouchableOpacity onPress={handleUsernamePress}>
             <Text style={styles.userCaption}>{`${username} `}</Text>
-          </TouchableOpacity>) : <Text style={styles.captionText}>{"Anonymous "}</Text>} 
+          </TouchableOpacity>) : <Text style={styles.captionText}>{"@User "}</Text>} 
           <Text style={styles.captionText}>{`| ${getDateText(createdTimestamp)}`}</Text>
         </View>
       </View>
@@ -246,7 +247,8 @@ function RawDiscussHome(props){
   const loadPosts = () => {
     const categoryId = categories.find(item => item.name === currentCategory)?.id || -1
     const postsByCategory = feed[currentCategory].map(item => posts[item])
-    const page = postsByCategory.length / POSTS_COUNT_PER_PAGE + 1;
+    const page = Math.ceil(postsByCategory.length / POSTS_COUNT_PER_PAGE + 1);
+    // const page = 4;
     console.log("PAGEW", page, postsByCategory)
     //fetchPosts(1, 1)
     console.log("PAGEW", page)
@@ -261,30 +263,34 @@ function RawDiscussHome(props){
   console.log("E2", feedError)
 
   return (
-    <Card styles={{widthX: 512, flexX: 1}}>
-      <InputBar 
-        onPress={(input) => {
-          navigation.navigate(RouteNames.DISCUSS_CREATE_POST, { input })
-        }}
-        title={"Create Post"}
-        placeholder={INPUT_PLACEHOLDER}
-      />
-      <Separator style={{marginTop: 16}} />
-      <View>
-        <FlatList 
-          data={postsByCategory}
-          keyExtractor={(item) => `${item.id}`}
-          renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
-          ItemSeparatorComponent={() => <Separator />}
+    <>
+      {/* <Heading navigation={navigation}>
+      </Heading> */}
+      <Card styles={{widthX: 512, flexX: 1}}>
+        <InputBar 
+          onPress={(input) => {
+            navigation.navigate(RouteNames.DISCUSS_CREATE_POST, { input })
+          }}
+          title={"Create Post"}
+          placeholder={INPUT_PLACEHOLDER}
         />
-      </View>
-      <Link onPress={loadPosts} textLink={"Load More Posts..."} style={{alignSelf: 'center', margin: 16}}/>
-      {feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
-      {feedError[currentCategory] && (<View style={{margin: 32}}>
-        <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading data..."}</Text>
-        <Link onPress={loadPosts} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
-      </View>)}
-    </Card>
+        <Separator style={{marginTop: 16}} />
+        <View>
+          <FlatList 
+            data={postsByCategory}
+            keyExtractor={(item) => `${item.id}`}
+            renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
+            ItemSeparatorComponent={() => <Separator />}
+          />
+        </View>
+        <Link onPress={loadPosts} textLink={"Load More Posts..."} style={{alignSelf: 'center', margin: 16}}/>
+        {feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
+        {feedError[currentCategory] && (<View style={{margin: 32}}>
+          <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading data..."}</Text>
+          <Link onPress={loadPosts} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
+        </View>)}
+      </Card>
+    </>
   )
 }
 

@@ -10,12 +10,23 @@ import { store } from '../../state/basicStore';
 import { ListItem } from '../../components/common/ListItem';
 import { Link } from '../../components/core/Link';
 import { MarketplaceList } from './MarketplaceList';
+import { Heading } from '../../components/common/Heading';
 
 export function MarketplaceHome(props){
 
 
   return (
     <View style={styles.container}>
+      <Heading navigation={props.navigation}>
+        <View>
+          <Text style={styles.title}>
+            Marketplace
+          </Text>
+          <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
+            Premium listings and deals for the community
+          </Text>
+        </View>
+      </Heading>
       <MarketplaceList {...props} />
     </View>
   )
@@ -27,5 +38,6 @@ const styles = StyleSheet.create({
   title: {
     color: colors.textHighlight,
     fontSize: 18,
+    alignSelf: 'center',
   }
 });

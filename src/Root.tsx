@@ -27,6 +27,7 @@ import { Link } from './components/core/Link';
 import { HomeBottomBar } from './components/common/HomeBottomBar';
 import { ProfileContactUs } from './screens/user/ProfileContactUs';
 import { AlternateNavBar } from './components/common/AlternateNavBar';
+import { spacing } from './constants/styles';
 
 export const routes = [
   {
@@ -146,7 +147,9 @@ function SideBar(props){
     }}>
       <View style={{
         flexDirection: 'column',
-        width: 192,
+        // width: 192,
+        width: spacing.sideWidth,
+        // width: 128,
         borderWidthX: 1, 
         borderColor: 'yellow'
       }}>
@@ -159,7 +162,9 @@ function SideBar(props){
         <props.Component {...props} currentCategory={currentCategory} />
       </View>
       <View style={{
-        width: 192,
+        // width: 192,
+        width: spacing.sideWidth,
+        // width: 128,
         borderWidthX: 1,
         borderColor: 'yellow'
       }}></View>
@@ -248,7 +253,9 @@ const styles = StyleSheet.create({
   container: {
   },
   sidebar: {
-    marginLeft: 192,
+    // marginLeft: 192,
+    // marginLeft: 128,
+    marginLeft: spacing.sideWidth,
   },
   title: {
     ...buttonTypetoStyle[ButtonType.BARE],

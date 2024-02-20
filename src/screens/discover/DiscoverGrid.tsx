@@ -11,6 +11,8 @@ import { GridView } from '../../components/common/GridView';
 import { fetchVendorGroups } from '../../services/DiscoverService';
 import { connect } from '../../state/reduxStore';
 import FORWARD_THIN from '../../assets/forward_thin.png';
+import BACK from '../../assets/back.png';
+import { Heading } from '../../components/common/Heading';
 
 const renderElement = (item, idx, navigation) => {
   const handleOnPress = (item) => {
@@ -75,14 +77,44 @@ export function RawDiscoverGrid(props){
     fetchVendorGroups(auth)
   }, [])
 
+  const handleBackPress = () => {
+    navigation.goBack();
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        Discover
-      </Text>
-      <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
-        Explore software solutions
-      </Text>
+      <Heading navigation={navigation}>
+        <View>
+          <Text style={styles.title}>
+            Discover
+          </Text>
+          <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
+            Explore software solutions
+          </Text>
+        </View>
+      </Heading>
+      {/* <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <TouchableOpacity onPress={handleBackPress} style={{
+          padding: 8,
+          borderColor: colors.border,
+          borderWidth: 1,
+          backgroundColor: colors.input,
+          borderRadius: 4,
+          alignSelf: 'center'
+        }}
+        >
+          <Image source={BACK} style={{width: 12, height: 12}} />
+        </TouchableOpacity>
+        <View>
+          <Text style={styles.title}>
+            Discover
+          </Text>
+          <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
+            Explore software solutions
+          </Text>
+        </View>
+        <View style={{width: 20, height: 20}}></View>
+      </View> */}
       <View style={{marginBottom: 32}}>
         {/* <GridView
           // data={companies}

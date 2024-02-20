@@ -16,7 +16,7 @@ export function HomeBottomBarHOC(props){
           {tabs.map(tab => <Link textLink={tab.title} onPress={() => {navigation.navigate(tab.routeName)}} style={styles.link} />)}
           <Link textLink={"Contact Us"} onPress={() => {navigation.navigate(RouteNames.PROFILE_CONTACT_US)}} style={styles.link} />
         </View>
-        <Text style={{fontSize: 12, color: colors.textRegular, alignSelf: 'center'}}>{`@RealTalk ${new Date().getFullYear()}`}</Text>
+        <Text style={{fontSize: 12, color: colors.textRegular, alignSelf: 'center'}}>{`@Realtalk ${new Date().getFullYear()}`}</Text>
       </View>
     </View>
   )
@@ -33,7 +33,7 @@ export function HomeBottomBar(props){
           {tabs.map(tab => <Link textLink={tab.title} onPress={() => {navigation.navigate(tab.routeName)}} style={styles.link} />)}
           <Link textLink={"Contact Us"} onPress={() => {navigation.navigate(RouteNames.PROFILE_CONTACT_US)}} style={styles.link} />
         </View>
-        <Text style={{fontSize: 12, color: colors.textRegular, alignSelf: 'center'}}>{`@RealTalk ${new Date().getFullYear()}`}</Text>
+        <Text style={{fontSize: 12, color: colors.textRegular, alignSelf: 'center'}}>{`@Realtalk ${new Date().getFullYear()}`}</Text>
       </View>
     </View>
   )

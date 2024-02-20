@@ -63,12 +63,6 @@ export function MarketplaceList(props){
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        Marketplace
-      </Text>
-      <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
-        Premium listings and deals for the community
-      </Text>
       <Card styles={{marginTop: 16, marginBottom: 32}}>
         <ListView companies={companies} navigation={navigation} />
       </Card>

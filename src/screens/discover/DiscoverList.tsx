@@ -11,6 +11,7 @@ import { ListItem } from '../../components/common/ListItem';
 import { Link } from '../../components/core/Link';
 import { fetchVendorsByGroup } from '../../services/DiscoverService';
 import { connect } from '../../state/reduxStore';
+import { Heading } from '../../components/common/Heading';
 
 function Vendor(props){
   const { id, vendorName, vendorType, description, vendorHomepageUrl, vendorLogoUrl, navigation} = props;
@@ -74,10 +75,19 @@ function RawDiscoverList(props){
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        Top Sales Tools
-      </Text>
-      <Link style={{margin: 8, alignSelf: 'center'}} textLeft="Don't see your company?" textLink="Create a service profile" onPress={handleCreateServiceProfilePress} />
+      <Heading navigation={navigation}>
+        <View>
+          <Text style={styles.title}>
+            Top Sales Tools
+          </Text>
+          <Link
+            style={{margin: 8, alignSelf: 'center'}}
+            textLeft="Don't see your company?"
+            textLink="Create a service profile"
+            onPress={handleCreateServiceProfilePress}
+          />
+        </View>
+      </Heading>
       <Card styles={{marginBottom: 32}}>
         <ListView vendorList={vendorList} navigation={navigation} />
       </Card>

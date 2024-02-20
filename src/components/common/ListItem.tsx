@@ -22,7 +22,7 @@ export function ListItem(props){
             styles={{color: colors.textLowlight, marginTop: 8}}
           />)}
         </View>
-        <View style={{flexDirection: 'column', marginLeft: 16}}>
+        <View style={{flexDirection: 'column', marginLeft: 16, flex: 1}}>
           <Text style={{color: colors.textHighlight}}>{heading}</Text>
           <Text style={{color: colors.textRegular, marginTop: 4}}>{subheading}</Text>
           <Text style={{color: colors.textLowlight, fontSize: 12, marginTop: 4}}>{body}</Text>

@@ -61,9 +61,14 @@ export function Dropdown({
 
   }
 
+  const handleOnPress = (item) => {
+    onSelect(item)
+    onHoverOut()
+  }
+
   const renderItem = ({item}) => (
     <Pressable
-      onPress={() => onSelect(item)}
+      onPress={() => handleOnPress(item)}
       onHoverIn={() => handleHoverIn(item.name)}
       onHoverOut={() => handleHoverOut(item.name)}
     >
@@ -94,10 +99,11 @@ const stylesBase = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
     backgroundColor: colors.foreground,
-    position: 'absolute',
-    zIndex: 10,
+    // position: 'absolute',
+    // zIndex: 10,
     padding: 4,
-    maxHeight: 256,
+    // maxHeight: 256,
+    maxHeight: 220,
   },
   item: {
     color: colors.textRegular

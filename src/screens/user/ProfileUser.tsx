@@ -14,6 +14,7 @@ import { connect } from '../../state/reduxStore';
 import { RTextInput } from '../../components/core/RTextInput';
 import { Link } from '../../components/core/Link';
 import { editUser } from '../../services/UserServices';
+import { Heading } from '../../components/common/Heading';
 
 
 export function RawProfileUser(props){
@@ -60,8 +61,17 @@ export function RawProfileUser(props){
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Settings</Text>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+      <Heading navigation={navigation}>
+        <Text style={styles.title}>Settings</Text>
+      </Heading>
+      <View style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderColor: 'red',
+        borderWidthX: 1,
+      }}
+      >
         <Text style={styles.h2}>
           Your Profile
         </Text>
@@ -71,7 +81,7 @@ export function RawProfileUser(props){
             <Button title={"Save Changes"} onPress={handleSavePress} styles={{marginLeft: 8, paddingTop: 4, paddingBottom: 4, paddingLeft: 8, paddingRight: 8}} />
           </View>
         ) : 
-          <Button title="Edit Profile" onPress={handleEditPress} type={ButtonType.BASIC} styles={{alignSelf: 'flex-start', marginTop: 8, color: colors.textRegular, backgroundColor: colors.foreground}}/>
+          <Button title="Edit Profile" onPress={handleEditPress} type={ButtonType.BASIC} styles={{color: colors.textRegular, backgroundColor: colors.foreground}}/>
         }
       </View>
       <RTextInput 
@@ -145,7 +155,7 @@ const styles = StyleSheet.create({
     // width: 512,
   },
   title: {
-    marginTop: 8,
+    // marginTop: 8,
     color: colors.textHighlight,
     fontSize: 20,
     alignSelf: 'center',
@@ -154,6 +164,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     color: colors.textHighlight,
     fontSize: 16,
+    alignSelf: 'center',
   },
   h3: {
     marginTop: 8,

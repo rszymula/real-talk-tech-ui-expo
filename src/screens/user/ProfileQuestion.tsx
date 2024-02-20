@@ -21,7 +21,7 @@ function getStepDetailsFunc(industry, categories, interests){
       case ProfileStep.INDUSTRY:
         return {
           next: ProfileStep.DO,
-          description: "What industry are you in?",
+          description: "Select your industry",
           placeholder: "Select industry",
           selections: industry,
           // field: "industry",
@@ -30,7 +30,7 @@ function getStepDetailsFunc(industry, categories, interests){
       case ProfileStep.DO:
         return {
           next: ProfileStep.SOFTWARE,
-          description: "What do you do?",
+          description: "Select your role",
           placeholder: "Select role",
           selections: categories,
           // field: "categories",
@@ -39,7 +39,7 @@ function getStepDetailsFunc(industry, categories, interests){
       case ProfileStep.SOFTWARE:
         return {
           next: null,
-          description: "What type of software do you want to learn about and/or discuss?",
+          description: "Select your interests",
           placeholder: "Select your interests",
           selections: interests,
           // field: "interests",
@@ -89,12 +89,12 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
         password: route.params.password,
         techStack: route.params.techStack,
         currentCompany: route.params.company,
-        industryInvolvement: route.params[ProfileStep.INDUSTRY],//.map(item => item.name),
-        workCategories: route.params[ProfileStep.DO],//.map(item => item.name),
-        linkedinUrl: route.params.linkedinUrl,
+        industryInvolvement: route.params[ProfileStep.INDUSTRY].map(item => item.industry_name),
+        workCategories: route.params[ProfileStep.DO].map(item => item.category_name),
+        linkedinUrl: route.params.linkedIn,
         bio: route.params.bio,
         // interestAreas: route.params[ProfileStep.SOFTWARE],
-        interestAreas: items,//.map(item => item.name),
+        interestAreas: items.map(item => item.interest_area_name),
       }
       console.log("SIGNUPW", body)
       signup(body)

@@ -12,6 +12,7 @@ import { FullWindowOverlay } from 'react-native-screens';
 import { SelectedItems } from '../../components/common/SelectedItems';
 import { connect } from '../../state/reduxStore';
 import { fetchUser } from '../../services/UserServices';
+import { Heading } from '../../components/common/Heading';
 
 
 export function RawProfileUserOther(props){
@@ -32,6 +33,8 @@ export function RawProfileUserOther(props){
 
   return (
     <View style={styles.container}>
+      <Heading navigation={navigation}>
+      </Heading>
       <Text style={styles.title}>
         {`@${user?.username}`}
       </Text>
@@ -45,7 +48,7 @@ export function RawProfileUserOther(props){
       </View>
       </Card>
       <Text style={styles.h2}>
-        Endore Tech Stack
+        Endorse Tech Stack
       </Text>
       <SelectedItems items={user?.techstack || []} style={{marginTop: 8}}/>
     </View>

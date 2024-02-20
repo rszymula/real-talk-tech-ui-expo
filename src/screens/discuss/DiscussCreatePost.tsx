@@ -12,6 +12,7 @@ import { RTextInput } from '../../components/core/RTextInput';
 import { RLabeledTextInput } from '../../components/core/RLabeledTextInput';
 import { connect } from '../../state/reduxStore';
 import { makeComment, makePost } from '../../services/DiscussService';
+import { Heading } from '../../components/common/Heading';
 
 export function RawDiscussCreatePost(props){
 
@@ -36,11 +37,11 @@ export function RawDiscussCreatePost(props){
   const anonymousSelections = [
     {
       anonymous: false,
-      name: "No, post publicly",
+      name: "No",
     },
     {
       anonymous: true,
-      name: "Yes, post anonymously",
+      name: "Yes",
     },
   ]
 
@@ -98,58 +99,68 @@ export function RawDiscussCreatePost(props){
   }
 
   return (
-    <Card styles={{minWidthX: 512, flexX: 1}}>
-      <View style={styles.container}>
-        <RTextInput 
-          style={{marginTop: 8, position: 'relative', zIndex: 100}}
-          label="Category"
-          onChangeText={handleTypeCategory}
-          value={category}
-          placeholder="Enter Text"
-          selections={categories}
-          onSelect={onSelectCategory}
-        />
-        <SelectedItems itemStyle={{color: colors.border, backgroundColor: colors.input}} items={selectedCategories.map(item => item.name)} onDelete={handleDeleteCategory}/>
-        <RTextInput 
-          style={{marginTop: 8}}
-          label="Title"
-          onChangeText={setTitle}
-          value={title}
-          placeholder="Enter post title"
-        />
-        <RTextInput 
-          style={{marginTop: 8}}
-          onChangeText={setContent}
-          value={content}
-          placeholder="Enter your post"
-          numberOfLines={12}
-        />
-        <RTextInput 
-          style={{marginTop: 8, position: 'relative', zIndex: 100}}
-          label="Tag Software"
-          onChangeText={handleTypeSkill}
-          value={skill}
-          placeholder="Enter Text"
-          selections={skills}
-          onSelect={onSelectSkill}
-        />
-        <SelectedItems itemStyle={{color: colors.border, backgroundColor: colors.input}} items={selectedVendors.map(item => item.name)} onDelete={handleDeleteVendor}/>
-        <RTextInput 
-          style={{marginTop: 8, position: 'relative', zIndex: 10}}
-          label="Post Anonymously"
-          onChangeText={() => {}}
-          value={anonymous ? "Yes, post anonymously" : "No, post publicly"}
-          freeze
-          placeholder="Enter Text"
-          selections={anonymousSelections}
-          onSelect={(item) => {setAnonymous(item.anonymous)}}
-        />
-        <View style={[styles.buttonContainer, styles.item]}>
-          <Button title="Cancel" onPress={handleExit} type={ButtonType.REVERSE} />
-          <Button title="Create Post" onPress={handleCreatePost} />
+    <View>
+      <Heading navigation={navigation}>
+      </Heading>
+      <Card styles={{minWidthX: 512, flexX: 1}}>
+        <View style={styles.container}>
+          <RTextInput 
+            style={{marginTop: 8, position: 'relative', zIndex: 100}}
+            label="Category"
+            onChangeText={handleTypeCategory}
+            value={category}
+            placeholder="Enter Text"
+            selections={categories}
+            onSelect={onSelectCategory}
+          />
+          <SelectedItems itemStyle={{color: colors.border, backgroundColor: colors.input}} items={selectedCategories.map(item => item.name)} onDelete={handleDeleteCategory}/>
+          <RTextInput 
+            style={{marginTop: 8}}
+            label="Title"
+            onChangeText={setTitle}
+            value={title}
+            placeholder="Enter post title"
+          />
+          <RTextInput 
+            style={{marginTop: 8}}
+            onChangeText={setContent}
+            value={content}
+            placeholder="Enter your post"
+            numberOfLines={12}
+          />
+          <RTextInput 
+            style={{marginTop: 8, position: 'relative', zIndex: 100}}
+            label="Tag Software"
+            onChangeText={handleTypeSkill}
+            value={skill}
+            placeholder="Enter Text"
+            selections={skills}
+            onSelect={onSelectSkill}
+            dropUp
+            // dropdownStyle={{
+            //   top: -256,
+            //   width: 256,
+            // }}
+          />
+          <SelectedItems itemStyle={{color: colors.border, backgroundColor: colors.input}} items={selectedVendors.map(item => item.name)} onDelete={handleDeleteVendor}/>
+          <RTextInput 
+            style={{marginTop: 8, position: 'relative', zIndex: 100}}
+            label="Hide Username"
+            onChangeText={() => {}}
+            value={anonymous ? "Yes" : "No"}
+            freeze
+            placeholder="Enter Text"
+            selections={anonymousSelections}
+            onSelect={(item) => {setAnonymous(item.anonymous)}}
+            dropUp
+          />
+          <View style={[styles.buttonContainer, styles.item]}>
+            <Button title="Cancel" onPress={handleExit} type={ButtonType.REVERSE} />
+            <Button title="Create Post" onPress={handleCreatePost} />
+          </View>
         </View>
-      </View>
-    </Card>
+      </Card>
+    </View>
   )
 }
 

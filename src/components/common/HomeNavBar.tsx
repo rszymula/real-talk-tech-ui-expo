@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, useWindowDimensions } from 'react-native';
+import { Text, View, StyleSheet, Image, useWindowDimensions, TouchableOpacity } from 'react-native';
 import { colors } from '../../context/themes';
 import { Button, ButtonType } from '../core/Button';
 import REALTALKTECH_WHITE from '../../assets/titleWhite.png';
@@ -14,6 +14,8 @@ import MARKETPLACE from '../../assets/marketplace.png';
 import DISCUSS_ACTIVE from '../../assets/discuss_active.png';
 import DISOVER_ACTIVE from '../../assets/discover_active.png';
 import MARKETPLACE_ACTIVE from '../../assets/marketplace_active.png';
+import LOGO_V2 from '../../assets/logo_v2.png';
+import { spacing } from '../../constants/styles';
 // import BUYERAI from '../../assets/buyerai.png';
 
 const navRouteNames = [...tabs.map(tab => tab.routeName), RouteNames.PROFILE_USER, RouteNames.PROFILE_CREATE_HOME];
@@ -51,11 +53,16 @@ export function HomeNavBar(props){
     navigation.navigate(RouteNames.PROFILE_WELCOME)
   }
 
+  const handleNavigateHomePress = () => {
+    navigation.navigate(RouteNames.DISCUSS_HOME)
+  }
+
   return (
     <View style={styles.container}>
-      <View style={{paddingTop: 10, paddingBottom: 10, borderColor: 'green', borderWidthX: 1}}>
-        <Image source={REALTALKTECH_WHITE} style={styles.title}/>
-      </View>
+      <TouchableOpacity onPress={handleNavigateHomePress} style={{paddingTop: 10, paddingBottom: 10, borderColor: 'green', borderWidthX: 1}}>
+        <Image source={LOGO_V2} style={styles.title}/>
+        {/* <Image source={REALTALKTECH_WHITE} style={styles.title}/> */}
+      </TouchableOpacity>
         {hasTabs && (<View style={styles.topBar}>
           {
             tabs.map(tab => {
@@ -65,7 +72,7 @@ export function HomeNavBar(props){
             })
           }
         </View>)}
-      <View style={{flexDirection: 'row', width: 192, justifyContent: 'flex-end', borderColor: 'green', borderWidthX: 1}}>
+      <View style={styles.rightButtons}>
         <Button image={RouteNames.PROFILE_WELCOME === currentRouteName ? NOTIFICATIONS_ACTIVE : NOTIFICATIONS} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
         <Button image={RouteNames.PROFILE_USER === currentRouteName ? SETTINGS_ACTIVE : SETTINGS} imageWidthRatio={1.2} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
       </View>
@@ -82,9 +89,24 @@ const styles = StyleSheet.create({
     borderWidthX: 1
   },
   title: {
-    width: 192,
-    height: 18,
+    width: spacing.sideWidth,
+    height: spacing.navHeight,
+    // width: 192,
+    // height: 18,
+    // width: 192,
+    // height: 42,
+    // width: 128,
+    // height: 28,
     borderColor: 'yellow',
+    borderWidthX: 1
+  },
+  rightButtons: {
+    flexDirection: 'row',
+    width: spacing.sideWidth,
+    // width: 192,
+    // width: 128,
+    justifyContent: 'flex-end',
+    borderColor: 'green',
     borderWidthX: 1
   },
   body: {

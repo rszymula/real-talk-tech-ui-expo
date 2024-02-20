@@ -69,6 +69,10 @@ const SKILLS_DEFAULT = [
   {
     id: 2,
     name: "Databricks",
+  },
+  {
+    id: 2,
+    name: "HERE",
   }
 ]
 
@@ -111,6 +115,36 @@ export function reducer(state = initialState, action){
 
   console.log("STOREW", state, action)
   switch(action.type){
+    case 'POSTS_CREATE_SUCCESS':
+      const temp = action.payload.categories.reduce((accum, curr) => {
+        accum[curr] = [...state.feed[curr], action.payload.id]
+        return accum
+      }, {});
+      const res3 = {
+        ...state,
+        feed: {
+          ...state.feed,
+          ...temp,
+        },
+        posts: {
+          ...state.posts,
+          ...action.payload.data.reduce((accum, cur) => {
+            const userVote = cur.userVote === true ? 1 : cur.userVote === false ? -1 : 0
+            accum[cur.id] = {...cur, userVote }
+            return accum;
+          }, {}),
+        },
+        feedLoading: {
+          ...state.feedLoading,
+          [action.payload.category]: false,
+        },
+        feedError: {
+          ...state.feedError,
+          [action.payload.category]: false,
+        },
+      }
+    console.log("123123", res3)
+    return res3
     case 'POSTS_SUCCESS':
       console.log("ESZ", action)
 
@@ -324,6 +358,7 @@ export function reducer(state = initialState, action){
         categories: action.payload.subscriptionAreas.map(item => ({...item, name: item.category_name})),
         interests: action.payload.interestAreas.map(item => ({...item, name: item.interest_area_name})),
         // vendors: action.payload.vendors,
+        skills: action.payload.techstack.map(item => ({...item, name: item.vendor_name})),
         onboardingLoading: false,
         onboardingError: false,
       }

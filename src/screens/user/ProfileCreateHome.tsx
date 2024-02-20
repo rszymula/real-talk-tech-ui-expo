@@ -17,6 +17,7 @@ export function RawProfileCreateHome({route, navigation, skills}) {
   const [fullname, setFullname] = React.useState('');
   const [username, setUsername] = React.useState('');
   const [company, setCompany] = React.useState('');
+  const [linkedIn, setLinkedIn] = React.useState('');
   const [bio, setBio] = React.useState('');
 
   const { email, password } = route?.params;
@@ -44,7 +45,7 @@ export function RawProfileCreateHome({route, navigation, skills}) {
 
   const handleNextPress = () => {
     const techStack = selectedSkills.map(selected => selected.id)
-    navigation.navigate(RouteNames.PROFILE_QUESTION, {email, password, fullname, username, bio, company, techStack, step: "Industry"})
+    navigation.navigate(RouteNames.PROFILE_QUESTION, {email, password, fullname, username, linkedIn, bio, company, techStack, step: "Industry"})
   }
 
   return (
@@ -60,19 +61,25 @@ export function RawProfileCreateHome({route, navigation, skills}) {
       <RTextInput 
         onChangeText={setFullname}
         value={fullname}
-        placeholder={"Enter your full name"}
+        placeholder={"Enter your name"}
         style={styles.inputText}
       />
       <RTextInput 
         onChangeText={setUsername}
         value={username}
-        placeholder={"Create your username"}
+        placeholder={"Enter a username"}
         style={styles.inputText}
       />
       <RTextInput 
         onChangeText={setCompany}
         value={company}
         placeholder={"Enter your current company"}
+        style={styles.inputText}
+      />
+      <RTextInput 
+        onChangeText={setLinkedIn}
+        value={linkedIn}
+        placeholder={"Enter your LinkedIn URL"}
         style={styles.inputText}
       />
       <RTextInput
@@ -90,6 +97,11 @@ export function RawProfileCreateHome({route, navigation, skills}) {
         placeholder="Enter Text"
         selections={skills}
         onSelect={onSelectSkill}
+        // dropdownStyle={{
+        //   top: -256,
+        //   width: 256,
+        // }}
+        dropUp
       />
       <SelectedItems
         itemStyle={{color: colors.border, backgroundColor: colors.input}}

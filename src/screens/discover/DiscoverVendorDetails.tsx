@@ -10,6 +10,7 @@ import { store } from '../../state/basicStore';
 import { ListItem } from '../../components/common/ListItem';
 import { fetchVendorDetails } from '../../services/DiscoverService';
 import { connect } from '../../state/reduxStore';
+import { Heading } from '../../components/common/Heading';
 
 
 function VendorDetail(props){
@@ -40,13 +41,13 @@ function SingleView({selected, navigation}){
       <Text style={{color: colors.textRegular, fontSize: 12, marginTop: 8}}>{`Total Offices: ${totalOffices}`}</Text>
       <Text style={{color: colors.textLowlight, fontSize: 10, marginTop: 4}}>{`Local Employees : ${localEmployees}`}</Text>
       <Text style={{color: colors.textLowlight, fontSize: 10}}>{`Total Employees: ${totalEmployees}`}</Text>
-      <Separator style={{marginTop: 16, marginBottom: 8}} />
-      <Button
+      {/* <Separator style={{marginTop: 16, marginBottom: 8}} /> */}
+      {/* <Button
         title={"Back"}
         onPress={handleBackPress}
         type={ButtonType.BASIC}
         styles={{color: colors.textLowlight, marginTop: 8 }}
-      />
+      /> */}
     </View>
   )
 }
@@ -69,12 +70,16 @@ function RawDiscoverVendorDetails(props){
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        Explore the market
-      </Text>
-      <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
-        A long description
-      </Text>
+       <Heading navigation={navigation}>
+        <View>
+          <Text style={styles.title}>
+            Explore the market
+          </Text>
+          <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
+            A long description
+          </Text>
+        </View>
+      </Heading>
       <Card styles={{marginBottom: 32}}>
         <SingleView selected={vendor} navigation={navigation} />
       </Card>
