@@ -75,9 +75,9 @@ function RawDiscoverVendorDetails(props){
           <Text style={styles.title}>
             Explore the market
           </Text>
-          <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
+          {/* <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
             A long description
-          </Text>
+          </Text> */}
         </View>
       </Heading>
       <Card styles={{marginBottom: 32}}>

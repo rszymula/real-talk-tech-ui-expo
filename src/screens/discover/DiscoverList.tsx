@@ -83,7 +83,7 @@ function RawDiscoverList(props){
           <Link
             style={{margin: 8, alignSelf: 'center'}}
             textLeft="Don't see your company?"
-            textLink="Create a service profile"
+            textLink="Get in touch to create a profile"
             onPress={handleCreateServiceProfilePress}
           />
         </View>

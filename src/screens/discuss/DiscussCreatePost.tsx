@@ -148,7 +148,7 @@ export function RawDiscussCreatePost(props){
             style={{marginTop: 8, position: 'relative', zIndex: 100}}
             label="Hide Username"
             onChangeText={() => {}}
-            value={anonymous ? "Yes" : "No"}
+            value={anonymous ? "Yes, post anonymously" : "No, share to community"}
             freeze
             placeholder="Enter Text"
             selections={anonymousSelections}

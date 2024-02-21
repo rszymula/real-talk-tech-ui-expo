@@ -55,9 +55,9 @@ export function RawProfileCreateHome({route, navigation, skills}) {
       <Text style={styles.title}>
         Setup your profile
       </Text>
-      <Text style={{color: colors.textLowlight, marginTop: 8, alignSelf: 'center'}}>
+      {/* <Text style={{color: colors.textLowlight, marginTop: 8, alignSelf: 'center'}}>
         Choose to join anonymously or as yourself
-      </Text>
+      </Text> */}
       <RTextInput 
         onChangeText={setFullname}
         value={fullname}
@@ -91,10 +91,10 @@ export function RawProfileCreateHome({route, navigation, skills}) {
       />
       <RTextInput 
         style={[styles.inputText, {position: 'relative', zIndex: 100}]}
-        label="Tag Software"
+        label="Tech Stack"
         onChangeText={handleTypeSkill}
         value={skill}
-        placeholder="Enter Text"
+        placeholder="What software do you user?"
         selections={skills}
         onSelect={onSelectSkill}
         // dropdownStyle={{
@@ -108,7 +108,7 @@ export function RawProfileCreateHome({route, navigation, skills}) {
         items={selectedSkills.map(item => item.name)}
         onDelete={handleDeleteSkill}
       />
-      <Button title="Next Step" onPress={handleNextPress} styles={{marginTop: 8, flex: 1, widthX: 512, justifyContent: "space-around", position: 'relative'}}/>
+      <Button title="Continue to next step" onPress={handleNextPress} styles={{marginTop: 8, flex: 1, widthX: 512, justifyContent: "space-around", position: 'relative'}}/>
       <Text style={{marginTop: 32, color: colors.textLowlight, alignSelf: 'center'}}>{"Next, let's curate your feed with three quick questions"}</Text>
       {/* </View> */}
     </View>

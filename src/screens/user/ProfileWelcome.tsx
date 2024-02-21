@@ -40,7 +40,7 @@ export function RawProfileWelcome({navigation, fetchOnboarding}) {
       <RTextInput 
         onChangeText={setEmail}
         value={email}
-        placeholder={"Enter your email"}
+        placeholder={"Enter your work email"}
         style={styles.input}
       />
       <RTextInput 
