@@ -16,6 +16,7 @@ import DISOVER_ACTIVE from '../../assets/discover_active.png';
 import MARKETPLACE_ACTIVE from '../../assets/marketplace_active.png';
 import LOGO_V2 from '../../assets/logo_v2.png';
 import { spacing } from '../../constants/styles';
+import { connect } from '../../state/reduxStore';
 // import BUYERAI from '../../assets/buyerai.png';
 
 const navRouteNames = [...tabs.map(tab => tab.routeName), RouteNames.PROFILE_USER, RouteNames.PROFILE_CREATE_HOME];
@@ -30,11 +31,12 @@ function getMostRecentNavRoute(routes: Array<any>){
   return ''
 }
 
-export function HomeNavBar(props){
+function RawHomeNavBar(props){
 
   const layout = useWindowDimensions();
 
-  const {navigation, hasTabs = true} = props;
+  const {navigation, hasTabs = true, apiCallResult} = props;
+  console.log("APIW", props)
 
   const navState = navigation.getState()
   const currentRouteName = getMostRecentNavRoute(navState.routes);
@@ -58,27 +60,40 @@ export function HomeNavBar(props){
   }
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={handleNavigateHomePress} style={{paddingTop: 10, paddingBottom: 10, borderColor: 'green', borderWidthX: 1}}>
-        <Image source={LOGO_V2} style={styles.title}/>
-        {/* <Image source={REALTALKTECH_WHITE} style={styles.title}/> */}
-      </TouchableOpacity>
-        {hasTabs && (<View style={styles.topBar}>
-          {
-            tabs.map(tab => {
-              return (
-                <Button image={tab.routeName === currentRouteName ? tab.iconActive : tab.icon} title={tab.title} onPress={() => handleTabPress(tab)} styles={styles.tabButton} imageSize={12} imageWidthRatio={1.1} type={tab.routeName === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC}/>
-              );
-            })
-          }
-        </View>)}
-      <View style={styles.rightButtons}>
-        <Button image={RouteNames.PROFILE_WELCOME === currentRouteName ? NOTIFICATIONS_ACTIVE : NOTIFICATIONS} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
-        <Button image={RouteNames.PROFILE_USER === currentRouteName ? SETTINGS_ACTIVE : SETTINGS} imageWidthRatio={1.2} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
+    <View>
+      {/* {!apiCallResult?.active && (
+        <View style={{backgroundColor: colors.link}}>
+          <Text style={{alignSelf: 'center', backgroundColor: colors.link, color: colors.textLowlight}}>{"apiCallResult.message"}</Text>
+        </View>
+      )} */}
+      <View style={styles.container}>
+        <TouchableOpacity onPress={handleNavigateHomePress} style={{paddingTop: 10, paddingBottom: 10, borderColor: 'green', borderWidthX: 1}}>
+          <Image source={LOGO_V2} style={styles.title}/>
+          {/* <Image source={REALTALKTECH_WHITE} style={styles.title}/> */}
+        </TouchableOpacity>
+          {hasTabs && (<View style={styles.topBar}>
+            {
+              tabs.map(tab => {
+                return (
+                  <Button image={tab.routeName === currentRouteName ? tab.iconActive : tab.icon} title={tab.title} onPress={() => handleTabPress(tab)} styles={styles.tabButton} imageSize={12} imageWidthRatio={1.1} type={tab.routeName === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC}/>
+                );
+              })
+            }
+          </View>)}
+        <View style={styles.rightButtons}>
+          <Button image={RouteNames.PROFILE_WELCOME === currentRouteName ? NOTIFICATIONS_ACTIVE : NOTIFICATIONS} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
+          <Button image={RouteNames.PROFILE_USER === currentRouteName ? SETTINGS_ACTIVE : SETTINGS} imageWidthRatio={1.2} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
+        </View>
       </View>
     </View>
   )
 }
+const stp = (state) => ({
+  apiCallResult: state.apiCallResult
+})
+const dtp = (dispatch) => ({
+});
+export const HomeNavBar = connect(stp, dtp)(RawHomeNavBar);
 
 const styles = StyleSheet.create({
   container: {

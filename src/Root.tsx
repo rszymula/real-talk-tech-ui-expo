@@ -194,24 +194,31 @@ function sideBarProvider(Component, hasCategories = false){
   }
 }
 
-function navBarProvider(Component, hasCategories = false, hasTabs = true){
-  // const ComponentWithBottomBar = bottomBarProvider(Component)
-  const ComponentWithSideBar = sideBarProvider(Component, hasCategories)
-  return (props) => {
-    return (
-      <View style={styles.rootContainer}>
-        <HomeNavBar {...props} hasTabs={hasTabs} />
-        {/* <ScrollView style={styles.container}>
-          <ComponentWithSideBar {...props} />
-        </ScrollView> */}
-        <View style={styles.container}>
-          <ComponentWithSideBar {...props} />
-        </View>
-        <HomeBottomBar {...props} />
-      </View>
-    )
-  }
-}
+// function navBarProvider(Component, hasCategories = false, hasTabs = true){
+//   // const ComponentWithBottomBar = bottomBarProvider(Component)
+//   const stp = (state) => ({
+//     apiCallResult: state.apiCallResult
+//   })
+//   const dtp = (dispatch) => ({
+//   })
+//   const ComponentWithSideBar = sideBarProvider(Component, hasCategories)
+//   return (props) => {
+//     const Raw = ({apiCallResult}) => {
+//       <View style={styles.rootContainer}>
+//         {apiCallResult.active && <Text>{apiCallResult.message}</Text>}
+//         <HomeNavBar {...props} hasTabs={hasTabs} />
+//         {/* <ScrollView style={styles.container}>
+//           <ComponentWithSideBar {...props} />
+//         </ScrollView> */}
+//         <View style={styles.container}>
+//           <ComponentWithSideBar {...props} />
+//         </View>
+//         <HomeBottomBar {...props} />
+//       </View>
+//     }
+//     return connect(stp, dtp)(Raw)
+//   }
+// }
 
 function alternateNavBarProvider(Component){
   return (props) => {
@@ -246,6 +253,44 @@ export function Root(){
       {/* <Text style={{position: 'absolute', bottom: 20, right: 0, color: colors.textRegular}}>{"LKSDJF"}</Text> */}
     </View>
   );
+}
+
+
+function navBarProvider(Component, hasCategories = false, hasTabs = true){
+  // const ComponentWithBottomBar = bottomBarProvider(Component)
+  const ComponentWithSideBar = sideBarProvider(Component, hasCategories)
+  const stp = (state) => ({
+    apiCallResult: state.apiCallResult
+  })
+  const dtp = (dispatch) => ({
+    dispatch: dispatch
+  })
+  return connect(stp, dtp)((props) => {
+    if(props.apiCallResult?.active){
+      setTimeout(() => {
+        props.dispatch({type: "API_CALL_RESULT", payload: {...props.apiCallResult, active: !props.apiCallResult.active}})
+      }, 2000)
+    }
+    return (
+      <>
+        {props.apiCallResult?.active && (
+        <View style={{backgroundColor: colors.link}}>
+          <Text style={{margin: 8, alignSelf: 'center', backgroundColor: colors.link, fontSize: 12, color: colors.textLowlight}}>{props.apiCallResult.message}</Text>
+        </View>
+      )}
+      <View style={styles.rootContainer}>
+        <HomeNavBar {...props} hasTabs={hasTabs} />
+        {/* <ScrollView style={styles.container}>
+          <ComponentWithSideBar {...props} />
+        </ScrollView> */}
+        <View style={styles.container}>
+          <ComponentWithSideBar {...props} />
+        </View>
+        <HomeBottomBar {...props} />
+      </View>
+      </>
+    )
+  })
 }
 
 const styles = StyleSheet.create({

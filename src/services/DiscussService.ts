@@ -523,6 +523,7 @@ export function makeComment(dispatch, getState){
         updateTime: new Date().toISOString(),
       }
       dispatch({type: "COMMENTS_CREATE_SUCCESS", payload: {postId, comment}});
+      dispatch({type: "API_CALL_RESULT", payload: {message: "Comment has been successfully created", active: true, error: false}})
     }).catch((err) => {
       console.log("ERR-makeComment", err)
     })
@@ -566,7 +567,7 @@ export function makePost(dispatch, getState){
         body,
         user: {
           id: userId,
-          username: state.users[userId].name,
+          username: state.users[userId].username,
         },
         categories,
         vendors: [],
@@ -580,6 +581,8 @@ export function makePost(dispatch, getState){
       }
       console.log("GOOD-makePost", json, post)
       dispatch({type: "POSTS_CREATE_SUCCESS", payload: post})
+      console.log("INBETWEEN")
+      dispatch({type: "API_CALL_RESULT", payload: {message: "Post has been successfully created", active: true, error: false}})
     }).catch((err) => {
       console.log("ERR-makePost", err)
     })

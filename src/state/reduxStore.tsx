@@ -113,6 +113,11 @@ const initialState = {
   vendorGroupsLoading: false,
   vendorGrouspError: null,
   vendors: {},
+  apiCallResult: {
+    message: "",
+    active: false,
+    error: false,
+  }
 }
 
 export function reducer(state = initialState, action){
@@ -120,11 +125,15 @@ export function reducer(state = initialState, action){
   console.log("STOREW", state, action)
   switch(action.type){
     case 'POSTS_CREATE_SUCCESS':
+      console.log("STEP0W", action.payload.categories)
       const temp = action.payload.categories.reduce((accum, curr) => {
         // accum[curr] = [...state.feed[curr], action.payload.id]
-        accum[curr] = [action.payload.id, ...state.feed[curr]]
+        console.log(curr.name, action.payload.id, state.feed[curr.name])
+        accum[curr.name] = [action.payload.id, ...state.feed[curr.name]]
+        console.log({accum})
         return accum
       }, {});
+      console.log("STEP1W", temp)
       const res3 = {
         ...state,
         feed: {
@@ -138,6 +147,7 @@ export function reducer(state = initialState, action){
         postCreateLoading: false,
         postCreateError: false,
       }
+    console.log("STEP2W")
     console.log("123123", res3)
     return res3
     case 'POSTS_SUCCESS':
@@ -389,6 +399,16 @@ export function reducer(state = initialState, action){
         onboardingLoading: false,
         onboardingError: true,
       }
+    case 'API_CALL_RESULT':
+      console.log("CALLEDW")
+      return {
+        ...state,
+        apiCallResult: {
+          message: action.payload.message,
+          active: action.payload.active,
+          error: action.payload.message,
+        }
+      }
     default:
       return state
   }
@@ -396,6 +416,7 @@ export function reducer(state = initialState, action){
 
 
 export function connect(mapStateToProps, mapDispatchToProps){
+  console.log("S2W", mapStateToProps)
   const func = (Component) => {
     return (props) => {
       const store = useContext(ReduxContext);
