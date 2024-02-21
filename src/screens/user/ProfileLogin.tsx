@@ -11,7 +11,7 @@ import { connect } from '../../state/reduxStore';
 import { login } from '../../services/UserServices';
 import { fetchOnboarding } from '../../services/UserServices';
 
-function RawProfileLogin({navigation, login}) {
+function RawProfileLogin({navigation, login, loginLoading, loginError, auth}) {
 
   // const [email, setEmail] = React.useState('');
   const [username, setUsername] = React.useState('');
@@ -24,8 +24,17 @@ function RawProfileLogin({navigation, login}) {
   const handleLoginPress = () => {
     // TODO do a bunch of user account validation authentication authorization stuff
     login(username, password)
-    navigation.navigate(RouteNames.DISCUSS_HOME)
+    // navigation.navigate(RouteNames.DISCUSS_HOME)
   }
+
+  React.useEffect(() => {
+    console.log({loginLoading, loginError, auth})
+    if(!loginLoading){
+      if(!loginError && !!auth.token){
+        navigation.navigate(RouteNames.DISCUSS_HOME)
+      }
+    }
+  }, [loginLoading, auth])
 
   return (
     <View style={styles.container}>
@@ -62,7 +71,9 @@ function RawProfileLogin({navigation, login}) {
 }
 
 const stp = (state) => ({
-
+  auth: state.auth,
+  loginLoading: state.loginLoading,
+  loginError: state.loginError,
 })
 const dtp = (dispatch) => ({
   login: login(dispatch),

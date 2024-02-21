@@ -33,6 +33,10 @@ import { DiscussPostDetail } from './screens/discuss/DiscussPostDetail';
 
 export const routes = [
   {
+    name: RouteNames.PROFILE_WELCOME,
+    component: ProfileWelcome,
+  },
+  {
     name: RouteNames.DISCUSS_HOME,
     component: navBarProvider(DiscussHome, true),
   },
@@ -79,10 +83,6 @@ export const routes = [
   {
     name: RouteNames.PROFILE_USER_OTHER,
     component: navBarProvider(ProfileUserOther),
-  },
-  {
-    name: RouteNames.PROFILE_WELCOME,
-    component: ProfileWelcome,
   },
   {
     name: RouteNames.PROFILE_LOGIN,

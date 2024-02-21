@@ -26,6 +26,7 @@ export function signup(dispatch){
 
 export function login(dispatch){
   return (username, password) => {
+    dispatch({type: "LOGIN_LOADING"})
     const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/login`
     console.log("LOGINX", {username, password})
     const params = {
@@ -57,6 +58,7 @@ export function login(dispatch){
       })
     }).catch((err) => {
       console.log("ERR-login", err)
+      dispatch({type: "LOGIN_ERROR"})
     })
   }
 }
