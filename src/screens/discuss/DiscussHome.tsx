@@ -27,9 +27,9 @@ const POST_PAGE_OFFSET = 10;
 const COMMENT_OFFSET = 10;
 
 function getDateText(createdTimestamp){
-  console.log(createdTimestamp)
-  console.log(new Date())
-  console.log(moment.utc(new Date()))
+  // console.log(createdTimestamp)
+  // console.log(new Date())
+  // console.log(moment.utc(new Date()))
 
   // const MS_IN_MIN = 60000
   const res = moment.utc(new Date(createdTimestamp)).fromNow()
@@ -37,7 +37,7 @@ function getDateText(createdTimestamp){
   // const now = moment(new Date());
   // const res = now.diff(stamp);
   // if(res)
-  console.log("RESSSS", res)
+  // console.log("RESSSS", res)
   return res
 }
 
