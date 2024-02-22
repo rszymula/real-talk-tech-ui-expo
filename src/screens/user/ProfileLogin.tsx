@@ -55,7 +55,7 @@ function RawProfileLogin({navigation, login, loginLoading, loginError, auth}) {
         <RTextInput 
           onChangeText={setUsername}
           value={username}
-          placeholder={"Create your username"}
+          placeholder={"Enter your username or password"}
           style={styles.input}
         />
         <RTextInput 

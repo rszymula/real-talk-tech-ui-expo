@@ -72,6 +72,7 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
   const [items, setItems] = React.useState([])
   console.log("ITEMS SATART", items)
   console.log({industry, categories, interests})
+  console.log("ROUTEPARAM", route.params)
 
   // const {step, answers} = route.params;
   // const { email, password, firstName, lastName, username, bio, selectedIndustry, selectedCategories, selectedInterests } = answers

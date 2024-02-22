@@ -31,7 +31,7 @@ export function RawProfileUser(props){
   const [bio, setBio] = React.useState(user.bio)
   const [company, setCompany] = React.useState(user.currentCompany)
   const [linkedIn, setLinkedin] = React.useState(user.linkedinUrl)
-  const [techStack, setTechStack] = React.useState(user.techstack);
+  const [techStack, setTechStack] = React.useState(user.techstack.map(item => item.name));
 
   const handleEditPress = () => {
     setEditing(true);
@@ -56,7 +56,7 @@ export function RawProfileUser(props){
   }
 
   const handleLogout = () => {
-
+    navigation.navigate(RouteNames.PROFILE_WELCOME)
   }
 
   return (
@@ -135,7 +135,7 @@ export function RawProfileUser(props){
       <Text style={styles.h3}>
         Your Tech Stack
       </Text>
-      <SelectedItems items={techStack} style={{marginTop: 8}} onDelete={(item) => handleDeleteTechStack(item)}/>
+      <SelectedItems items={techStack} style={{marginTop: 8}} onDelete={editing ? (item) => handleDeleteTechStack(item) : null}/>
       <Link style={{marginTop: 16}} textLink={"Log out from account"} onPress={handleLogout}/>
     </View>
   )

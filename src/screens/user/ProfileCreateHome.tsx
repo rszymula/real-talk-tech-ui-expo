@@ -44,7 +44,7 @@ export function RawProfileCreateHome({route, navigation, skills}) {
   }
 
   const handleNextPress = () => {
-    const techStack = selectedSkills.map(selected => selected.id)
+    const techStack = selectedSkills.map(selected => selected.name)
     navigation.navigate(RouteNames.PROFILE_QUESTION, {email, password, fullname, username, linkedIn, bio, company, techStack, step: "Industry"})
   }
 
@@ -94,7 +94,7 @@ export function RawProfileCreateHome({route, navigation, skills}) {
         label="Tech Stack"
         onChangeText={handleTypeSkill}
         value={skill}
-        placeholder="What software do you user?"
+        placeholder="What software do you use?"
         selections={skills}
         onSelect={onSelectSkill}
         // dropdownStyle={{

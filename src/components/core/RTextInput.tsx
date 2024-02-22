@@ -34,8 +34,8 @@ export function RTextInput({
 
   const filteredSelections = selections.filter(item => item?.name?.startsWith(value))
 
-  const len = selections.length > 10 ? 10 : selections.length
-  const top = dropUp ? -(len * 20) : dropdownStyle.top;
+  const len = filteredSelections.length > 10 ? 10 : filteredSelections.length
+  const top = dropUp ? -(len * 22) : dropdownStyle.top;
   // const top = -22
 
   console.log("NUMMW", top)
