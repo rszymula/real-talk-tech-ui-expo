@@ -78,6 +78,7 @@ function RawProfileLogin({navigation, login, loginLoading, loginError, auth}) {
           onChangeText={setPassword}
           value={password}
           placeholder={"Enter your password"}
+          secureTextEntry
           style={styles.input}
         />
         {!isValidPassword() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter your password"}</Text>}
