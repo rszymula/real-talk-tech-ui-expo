@@ -131,10 +131,10 @@ export function RawDiscussCreatePost(props){
           />
           <RTextInput 
             style={{marginTop: 8, position: 'relative', zIndex: 100}}
-            label="Tag Software"
+            label="Tech Stack"
             onChangeText={handleTypeSkill}
             value={skill}
-            placeholder="Enter Text"
+            placeholder="Add Technology"
             selections={skills}
             onSelect={onSelectSkill}
             dropUp
@@ -148,7 +148,7 @@ export function RawDiscussCreatePost(props){
             style={{marginTop: 8, position: 'relative', zIndex: 100}}
             label="Hide Username"
             onChangeText={() => {}}
-            value={anonymous ? "Yes, post anonymously" : "No, share to community"}
+            value={anonymous ? "Yes, post anonymously" : "No, share to discussion"}
             freeze
             placeholder="Enter Text"
             selections={anonymousSelections}

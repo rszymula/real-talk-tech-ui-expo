@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
+import { Text, View, StyleSheet, FlatList, SafeAreaView, Image } from 'react-native';
 import { ButtonType, Button } from '../../components/core/Button';
 import { Card } from '../../components/core/Card';
 import { Separator } from '../../components/core/Separator';
@@ -25,12 +25,12 @@ export function RawProfileUser(props){
 
   const [editing, setEditing] = React.useState(false)
 
-  const [name, setName] = React.useState(user.fullname)
+  const [name, setName] = React.useState(user.fullName)
   const [username, setUsername] = React.useState(user.username)
   const [password, setPassword] = React.useState("")
   const [bio, setBio] = React.useState(user.bio)
   const [company, setCompany] = React.useState(user.currentCompany)
-  const [linkedIn, setLinkedin] = React.useState(user.linkedinUrl)
+  const [linkedIn, setLinkedin] = React.useState(user.linkedin_url)
   const [techStack, setTechStack] = React.useState(user.techstack.map(item => item.name));
 
   const handleEditPress = () => {
@@ -46,6 +46,9 @@ export function RawProfileUser(props){
       fullName: name,
       email: user.email,
       techstack: techStack,
+      bio,
+      company,
+      linkedIn,
     }
     editUser(body);
     setEditing(false);
@@ -92,6 +95,7 @@ export function RawProfileUser(props){
         freeze={!editing}
         style={{marginTop: 16}}
       />
+      <Image source={{uri: "https://vendor-logos-bucket.s3.amazonaws.com/vendor_logos_prod/sales-tools/talkdesk.png"}} style={{width: 32, height: 32}}/>
       <RTextInput 
         label={"Username"}
         value={username}

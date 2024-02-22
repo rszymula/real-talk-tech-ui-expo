@@ -15,7 +15,7 @@ function Company(props){
   const { id, name, type, description, previous, current, units, navigation} = props;
 
   const handleOnPress = () => {
-    navigation.navigate(RouteNames.DISCOVER_VENDOR_DETAILS, {companyId: id})
+    navigation.navigate(RouteNames.DISCOVER_VENDOR_DETAILS, {vendorId: id})
   }
 
   const percentage = (previous - current) / previous

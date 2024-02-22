@@ -128,8 +128,8 @@ export function reducer(state = initialState, action){
       console.log("STEP0W", action.payload.categories)
       const temp = action.payload.categories.reduce((accum, curr) => {
         // accum[curr] = [...state.feed[curr], action.payload.id]
-        console.log(curr.name, action.payload.id, state.feed[curr.name])
-        accum[curr.name] = [action.payload.id, ...state.feed[curr.name]]
+        console.log(curr, action.payload.id, state.feed[curr])
+        accum[curr] = [action.payload.id, ...state.feed[curr]]
         console.log({accum})
         return accum
       }, {});

@@ -14,17 +14,32 @@ import { fetchOnboarding } from '../../services/UserServices';
 function RawProfileLogin({navigation, login, loginLoading, loginError, auth}) {
 
   // const [email, setEmail] = React.useState('');
-  const [username, setUsername] = React.useState('');
+  const [usernameOrEmail, setUsernameOrEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+
+  const [isValidated, setIsValidated] = React.useState(false);
+
+  const isValidUsernameOrEmail = () => {
+    return !!usernameOrEmail
+  }
+
+  const isValidPassword = () => {
+    return !!password;
+  }
+
+  const validators = [isValidUsernameOrEmail, isValidPassword];
 
   const handleResetPasswordPress = () => {
     // navigation.navigate(RouteNames.PROFILE_CREATE_HOME, {username, password})
   }
 
   const handleLoginPress = () => {
-    // TODO do a bunch of user account validation authentication authorization stuff
-    login(username, password)
-    // navigation.navigate(RouteNames.DISCUSS_HOME)
+    const isValid = validators.map(validator => validator()).every(item => !!item);
+    if(isValid){
+      login(usernameOrEmail, password)
+    }else{
+      setIsValidated(true)
+    }
   }
 
   React.useEffect(() => {
@@ -53,17 +68,19 @@ function RawProfileLogin({navigation, login, loginLoading, loginError, auth}) {
           style={styles.input}
         /> */}
         <RTextInput 
-          onChangeText={setUsername}
-          value={username}
+          onChangeText={setUsernameOrEmail}
+          value={usernameOrEmail}
           placeholder={"Enter your username or email"}
           style={styles.input}
         />
+        {!isValidUsernameOrEmail() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter your username or email"}</Text>}
         <RTextInput 
           onChangeText={setPassword}
           value={password}
           placeholder={"Enter your password"}
           style={styles.input}
         />
+        {!isValidPassword() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter your password"}</Text>}
       <Button title="Login" onPress={handleLoginPress} styles={{marginTop: 8, widthX: 512, justifyContent: 'space-around'}}/>
       <Link style={{margin: 16, alignSelf: 'center'}} textLeft="Forgot your password?" textLink="Reset Password" onPress={handleResetPasswordPress} />
     </View>

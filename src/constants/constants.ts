@@ -56,8 +56,12 @@ export enum ToolTypes {
 
 export const categories = [
   {
-    id: 1,
+    id: 0,
     name: CategoryNames.HOME,
+  },
+  {
+    id: 1,
+    name: CategoryNames.AI,
   },
   {
     id: 2,

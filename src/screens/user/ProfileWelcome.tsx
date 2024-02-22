@@ -10,13 +10,43 @@ import { RTextInput } from '../../components/core/RTextInput';
 import { fetchOnboarding } from '../../services/UserServices';
 import { connect } from '../../state/reduxStore';
 
+const PASSWORD_MIN_LENGTH = 6;
+
 export function RawProfileWelcome({navigation, fetchOnboarding}) {
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
+  const [isValidated, setIsValidated] = React.useState(false)
+
+  const isValidEmail = () => {
+    return !!email
+      && String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  }
+
+  const isValidPassword = () => {
+    return !!password
+      && password.length >= PASSWORD_MIN_LENGTH
+      && password.match(/\d+/g)
+      && password.match(/[A-Z]/)
+      && password.match(/[a-z]/)
+      && password.match(/[0-9]/)
+      // /\p{Lu}/u matches if the string contains any uppercase letter and will also support other languages than englis
+  }
+
+  const validators = [isValidEmail, isValidPassword];
+
   const handleNextPress = () => {
-    navigation.navigate(RouteNames.PROFILE_CREATE_HOME, {email, password})
+    const isValid = validators.map(validator => validator()).every(item => !!item);
+    if(isValid){
+      navigation.navigate(RouteNames.PROFILE_CREATE_HOME, {email, password})
+    }else{
+      setIsValidated(true)
+    }
   }
 
   const handleLoginPress = () => {
@@ -43,12 +73,14 @@ export function RawProfileWelcome({navigation, fetchOnboarding}) {
         placeholder={"Enter your work email"}
         style={styles.input}
       />
+      {!isValidEmail() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter a valid email"}</Text>}
       <RTextInput 
         onChangeText={setPassword}
         value={password}
         placeholder={"Create a password"}
         style={styles.input}
       />
+      {!isValidPassword() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{`Please enter a password which is at least ${PASSWORD_MIN_LENGTH} characters long, has at least one uppercase and one lowercase letter each, and at least one number`}</Text>}
       <Button title="Create Account" onPress={handleNextPress} styles={{marginTop: 8, widthX: 512, justifyContent: 'space-around'}}/>
       <Link style={{margin: 16, alignSelf: 'center'}} textLeft="Already have an account?" textLink="Sign in" onPress={handleLoginPress} />
     </View>

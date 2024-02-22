@@ -172,7 +172,7 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
 
 // makePost(title, content, selectedCategories, skills, anonymous, auth)
 // id, title, body, user, commentIds, userVote, numUpvotes, numDownvotes, createdTimestamp, 
-function RawPost({ id, title, body, user, commentIds, userVote, numUpvotes, numDownvotes, createdTimestamp, currentCategory, navigation, fetchComments, makeComment, comments, commentsLoading, commentsError, upvotePost, auth}){
+function RawPost({ id, categories, title, body, user, commentIds, userVote, numUpvotes, numDownvotes, createdTimestamp, currentCategory, navigation, fetchComments, makeComment, comments, commentsLoading, commentsError, upvotePost, auth}){
 
   const {id: userId, username} = user;
 
@@ -204,7 +204,9 @@ function RawPost({ id, title, body, user, commentIds, userVote, numUpvotes, numD
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={handlePostPress}>
-        <Text style={styles.captionText}>{currentCategory}</Text>
+        <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+          {categories.map((category, idx) => (<Text style={styles.captionText}>{idx === 0 ? `${category}` : `, ${category}`}</Text>))}
+        </View>
         <Text style={[styles.headingText, styles.title]}>{title}</Text>
         <Text style={[styles.bodyText, styles.description]}>{body}</Text>
       </TouchableOpacity>
@@ -267,7 +269,10 @@ function RawDiscussHome(props){
   }
 
   React.useEffect(() => {
-    loadPosts()
+    const postsByCategory = feed[currentCategory].map(item => posts[item])
+    if(postsByCategory.length === 0){
+      loadPosts()
+    }
   }, [currentCategory])
 
   console.log("PZZZ", postsByCategory)

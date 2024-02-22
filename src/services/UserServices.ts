@@ -15,16 +15,28 @@ export function signup(dispatch){
       return res.json()
     }).then(json => {
       console.log("BEFOREDECODE-signup", json)
-      const decodedToken = jwtDecode(json.token)
-      console.log("GOOD-signup", json, decodedToken)
-      dispatch({type: "LOGIN_SUCCESS", payload: {
-        auth: {
-          token: json.token,
-          username: body.username,
-          userId: decodedToken.sub
-        },
-      }})
-      dispatch({type: "API_CALL_RESULT", payload: {message: "Account has been successfully created", active: true, error: false}})
+      if(json.error){
+        dispatch({type: "LOGIN_ERROR"})
+      }else{
+        const decodedToken = jwtDecode(json.token)
+        console.log("GOOD-signup", json, decodedToken)
+        dispatch({type: "LOGIN_SUCCESS", payload: {
+          auth: {
+            token: json.token,
+            username: body.username,
+            userId: decodedToken.sub
+          },
+          user: {
+            id: decodedToken.sub,
+            
+          }
+        }})
+        dispatch({
+          type: "API_CALL_RESULT",
+          payload: {message: "Account has been successfully created", active: true, error: false}
+        })
+      }
+      
     }).catch((err) => {
       console.log("ERR-signup", err)
     })
@@ -138,7 +150,7 @@ export function endorseUser(dispatch){
 export function editUser(dispatch, getState){
   return (body) => {
     const state = getState()
-    console.log("STW", state)
+    console.log("STW", state, body)
     const {userId, token} = state.auth;
     const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/editProfile`
     const params = {

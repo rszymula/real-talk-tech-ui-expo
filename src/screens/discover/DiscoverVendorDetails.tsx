@@ -38,8 +38,8 @@ function SingleView({selected, navigation}){
       <VendorDetail {...selected} style={{margin: 16}} />
       <Separator />,
       <Text style={{color: colors.textHighlight, fontSize: 12, marginTop: 4}}>{`HQ: ${vendorHq}`}</Text>
-      <Text style={{color: colors.textRegular, fontSize: 12, marginTop: 8}}>{`Total Offices: ${totalOffices}`}</Text>
-      <Text style={{color: colors.textLowlight, fontSize: 10, marginTop: 4}}>{`Local Employees : ${localEmployees}`}</Text>
+      {/* <Text style={{color: colors.textRegular, fontSize: 12, marginTop: 8}}>{`Total Offices: ${totalOffices}`}</Text> */}
+      {/* <Text style={{color: colors.textLowlight, fontSize: 10, marginTop: 4}}>{`Local Employees : ${localEmployees}`}</Text> */}
       <Text style={{color: colors.textLowlight, fontSize: 10}}>{`Total Employees: ${totalEmployees}`}</Text>
       {/* <Separator style={{marginTop: 16, marginBottom: 8}} /> */}
       {/* <Button
@@ -59,7 +59,7 @@ function RawDiscoverVendorDetails(props){
 
   const vendor = vendors[vendorId];
 
-  console.log("VINDORSINGLEW", vendor)
+  console.log("VINDORSINGLEW", vendor, vendors, vendorId)
 
   // const { getCompany } = store;
   // const company = getCompany(companyId);

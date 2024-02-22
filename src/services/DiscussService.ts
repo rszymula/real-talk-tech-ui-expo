@@ -386,7 +386,7 @@ export function getPostsWithCommentIdsAndUpvotes(category: CategoryNames, page: 
 
 export function fetchPosts(dispatch){
   return (categoryId, auth, page = 1, count = POSTS_COUNT_PER_PAGE) => {
-    const categoryIdSend = categoryId === 1 ? null : categoryId;
+    const categoryIdSend = categoryId === 0 ? null : categoryId;
     dispatch({type: "POSTS_LOADING"})
     const {userId, token} = auth;
     // const userId = 17
@@ -570,7 +570,7 @@ export function makePost(dispatch, getState){
           id: userId,
           username: state.users[userId].username,
         },
-        categories,
+        categories: categories.map(item => item.name),
         vendors: [],
         commentIds: [],
         userVote: 0,

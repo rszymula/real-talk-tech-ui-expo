@@ -20,12 +20,32 @@ export function RawProfileCreateHome({route, navigation, skills}) {
   const [linkedIn, setLinkedIn] = React.useState('');
   const [bio, setBio] = React.useState('');
 
+  const [isValidated, setIsValidated] = React.useState(false);
+
   const { email, password } = route?.params;
 
   const [skill, setSkill] = React.useState('');
 
   // const [showVendorDropdown, setShowVendorDropdown] = React.useState(false);
   const [selectedSkills, setSelectedSkills] = React.useState([]);
+
+  const isValidName = () => {
+    return !!fullname
+  }
+
+  const isValidUsername = () => {
+    return !!username
+  }
+
+  const isValidCompany = () => {
+    return !!company
+  }
+
+  const isValidLinkedin = () => {
+    return !!linkedIn
+  }
+
+  const validators = [isValidName, isValidUsername, isValidCompany, isValidLinkedin];
 
   // const vendors = getCompanies()
 
@@ -45,8 +65,18 @@ export function RawProfileCreateHome({route, navigation, skills}) {
 
   const handleNextPress = () => {
     const techStack = selectedSkills.map(selected => selected.name)
-    navigation.navigate(RouteNames.PROFILE_QUESTION, {email, password, fullname, username, linkedIn, bio, company, techStack, step: "Industry"})
+    const isValid = validators.map(validator => validator()).every(item => !!item)
+    if(isValid){
+      navigation.navigate(RouteNames.PROFILE_QUESTION, {email, password, fullname, username, linkedIn, bio, company, techStack, step: "Industry"})
+    }else{
+      setIsValidated(true)
+    }
+    
   }
+
+  // const isValidBio = () => {
+  //   return !!bio
+  // }
 
   return (
     <View style={styles.container}>
@@ -55,37 +85,41 @@ export function RawProfileCreateHome({route, navigation, skills}) {
       <Text style={styles.title}>
         Setup your profile
       </Text>
-      {/* <Text style={{color: colors.textLowlight, marginTop: 8, alignSelf: 'center'}}>
-        Choose to join anonymously or as yourself
-      </Text> */}
+      <Text style={{color: colors.textLowlight, marginTop: 8, alignSelf: 'center'}}>
+        Get verified!
+      </Text>
       <RTextInput 
         onChangeText={setFullname}
         value={fullname}
         placeholder={"Enter your name"}
         style={styles.inputText}
       />
+      {!isValidName() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter a name"}</Text>}
       <RTextInput 
         onChangeText={setUsername}
         value={username}
-        placeholder={"Enter a username"}
+        placeholder={"Create your username"}
         style={styles.inputText}
       />
+      {!isValidUsername() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter a username"}</Text>}
       <RTextInput 
         onChangeText={setCompany}
         value={company}
         placeholder={"Enter your current company"}
         style={styles.inputText}
       />
+      {!isValidCompany() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter a company name"}</Text>}
       <RTextInput 
         onChangeText={setLinkedIn}
         value={linkedIn}
         placeholder={"Enter your LinkedIn URL"}
         style={styles.inputText}
       />
+      {!isValidLinkedin() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter a valid linkedin url"}</Text>}
       <RTextInput
         onChangeText={setBio}
         value={bio}
-        placeholder={"Enter bio description"}
+        placeholder={"Enter bio (optional)"}
         numberOfLines={12}
         style={styles.inputText}
       />
@@ -103,13 +137,14 @@ export function RawProfileCreateHome({route, navigation, skills}) {
         // }}
         dropUp
       />
+      {/* {!isValidName && <Text style={{color: 'red'}}>{"Please enter a valid name"}</Text>} */}
       <SelectedItems
         itemStyle={{color: colors.border, backgroundColor: colors.input}}
         items={selectedSkills.map(item => item.name)}
         onDelete={handleDeleteSkill}
       />
       <Button title="Continue to next step" onPress={handleNextPress} styles={{marginTop: 8, flex: 1, widthX: 512, justifyContent: "space-around", position: 'relative'}}/>
-      <Text style={{marginTop: 32, color: colors.textLowlight, alignSelf: 'center'}}>{"Next, let's curate your feed with three quick questions"}</Text>
+      <Text style={{marginTop: 32, color: colors.textLowlight, alignSelf: 'center'}}>{"Next, let's curate your feed with three quick questions"}</Text>{isValidName() && !isValidUsername() && isValidated && <Text style={{alignSelf: 'center', marginTop: 128, color: '#888888', fontSize: 8}}>{"App developed by RadekTech www.radektech.io"}</Text>}
       {/* </View> */}
     </View>
   )
