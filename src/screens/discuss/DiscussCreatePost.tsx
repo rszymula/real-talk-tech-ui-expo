@@ -37,11 +37,11 @@ export function RawDiscussCreatePost(props){
   const anonymousSelections = [
     {
       anonymous: false,
-      name: "No",
+      name: "No, share to discussion",
     },
     {
       anonymous: true,
-      name: "Yes",
+      name: "Yes, post anonymously",
     },
   ]
 
@@ -147,7 +147,7 @@ export function RawDiscussCreatePost(props){
           <RTextInput 
             style={{marginTop: 8, position: 'relative', zIndex: 100}}
             label="Hide Username"
-            onChangeText={() => {}}
+            onChangeText={null}
             value={anonymous ? "Yes, post anonymously" : "No, share to discussion"}
             freeze
             placeholder="Enter Text"

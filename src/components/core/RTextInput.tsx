@@ -33,7 +33,7 @@ export function RTextInput({
 
   //console.log({showDropdown, zIndex})
 
-  const filteredSelections = selections.filter(item => item?.name?.startsWith(value))
+  const filteredSelections = onChangeText === null ? selections : selections.filter(item => item?.name?.startsWith(value))
 
   const len = filteredSelections.length > 10 ? 10 : filteredSelections.length
   const top = dropUp ? -(len * 22) : dropdownStyle.top;
