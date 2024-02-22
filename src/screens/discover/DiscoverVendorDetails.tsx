@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
+import { Text, View, StyleSheet, FlatList, SafeAreaView, ActivityIndicator } from 'react-native';
 import { ButtonType, Button } from '../../components/core/Button';
 import { Card } from '../../components/core/Card';
 import { Separator } from '../../components/core/Separator';
@@ -54,7 +54,7 @@ function SingleView({selected, navigation}){
 
 function RawDiscoverVendorDetails(props){
 
-  const { vendors, fetchVendorDetails, navigation, route } = props;
+  const { vendors, vendorsLoading, vendorsError, fetchVendorDetails, navigation, route } = props;
   const { vendorId } = route?.params;
 
   const vendor = vendors[vendorId];
@@ -68,8 +68,13 @@ function RawDiscoverVendorDetails(props){
     fetchVendorDetails(vendorId);
   }, [])
 
+  if(vendorsLoading){
+    return (<ActivityIndicator />)
+  }
+
   return (
-    <View style={styles.container}>
+    <>
+    {!vendor || vendorsError ? <Text style={{color: colors.link}}>{"Failed Loading, Click to Retry"}</Text> : (<View style={styles.container}>
        <Heading navigation={navigation}>
         <View>
           <Text style={styles.title}>
@@ -83,11 +88,14 @@ function RawDiscoverVendorDetails(props){
       <Card styles={{marginBottom: 32}}>
         <SingleView selected={vendor} navigation={navigation} />
       </Card>
-    </View>
+    </View>)}
+    </>
   )
 }
 const stp = (state) => ({
   vendors: state.vendors,
+  vendorsLoading: state.vendorsLoading,
+  vendorsError: state.vendorsError,
 })
 const dtp = (dispatch, getState) => ({
   fetchVendorDetails: fetchVendorDetails(dispatch, getState),

@@ -113,6 +113,8 @@ const initialState = {
   vendorGroupsLoading: false,
   vendorGrouspError: null,
   vendors: {},
+  vendorsLoading: false,
+  vendorsError: false,
   apiCallResult: {
     message: "",
     active: false,
@@ -318,6 +320,18 @@ export function reducer(state = initialState, action){
       return {
         ...state,
         vendors,
+      }
+    case 'VENDORS_LOADING':
+      return {
+        ...state,
+        vendorsLoading: true,
+        vendorsError: false,
+      }
+    case 'VENDORS_ERROR':
+      return {
+        ...state,
+        vendorsLoading: false,
+        vendorsError: true,
       }
     case 'LOGIN_SUCCESS':
       return {
