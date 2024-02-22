@@ -65,7 +65,7 @@ export function RawProfileWelcome({navigation, fetchOnboarding}) {
         Welcome!
       </Text>
       <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
-        Let's Customize Your Experience
+        Discover. Discuss. Decide.
       </Text>
       <RTextInput 
         onChangeText={setEmail}
@@ -78,6 +78,7 @@ export function RawProfileWelcome({navigation, fetchOnboarding}) {
         onChangeText={setPassword}
         value={password}
         placeholder={"Create a password"}
+        secureTextEntry
         style={styles.input}
       />
       {!isValidPassword() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{`Please enter a password which is at least ${PASSWORD_MIN_LENGTH} characters long, has at least one uppercase and one lowercase letter each, and at least one number`}</Text>}

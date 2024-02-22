@@ -16,6 +16,7 @@ export function RTextInput({
   value,
   onChangeText,
   placeholder,
+  secureTextEntry = false,
   numberOfLines = null,
   label=null,
   selections = [],
@@ -71,6 +72,7 @@ export function RTextInput({
           value={value}
           style={styles.textbox}
           placeholder={placeholder}
+          secureTextEntry={secureTextEntry}
           //blurOnSubmit
           onFocus={() => filteredSelections.length > 0 && setShowDropdown(true)}
           // onBlur={(e) => {
