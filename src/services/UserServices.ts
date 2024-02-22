@@ -17,7 +17,13 @@ export function signup(dispatch){
       console.log("BEFOREDECODE-signup", json)
       const decodedToken = jwtDecode(json.token)
       console.log("GOOD-signup", json, decodedToken)
-      dispatch({type: "LOGIN_SUCCESS", payload: {token: json.token, user: { id: decodedToken.sub}}})
+      dispatch({type: "LOGIN_SUCCESS", payload: {
+        auth: {
+          token: json.token,
+          username: body.username,
+          userId: decodedToken.sub
+        },
+      }})
       dispatch({type: "API_CALL_RESULT", payload: {message: "Account has been successfully created", active: true, error: false}})
     }).catch((err) => {
       console.log("ERR-signup", err)
