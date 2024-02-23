@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, FlatList, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 import { ButtonType, Button } from '../../components/core/Button';
 import { Card } from '../../components/core/Card';
 import { Separator } from '../../components/core/Separator';
@@ -15,7 +15,7 @@ import BACK from '../../assets/back.png';
 import { Heading } from '../../components/common/Heading';
 import Svg, {
   Use,
-  Image,
+  Image as SvgImage,
 } from 'react-native-svg';
 
 const renderElement = (item, idx, navigation) => {

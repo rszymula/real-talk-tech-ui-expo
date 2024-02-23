@@ -269,7 +269,7 @@ function navBarProvider(Component, hasCategories = false, hasTabs = true){
     if(props.apiCallResult?.active){
       setTimeout(() => {
         props.dispatch({type: "API_CALL_RESULT", payload: {...props.apiCallResult, active: !props.apiCallResult.active}})
-      }, 2000)
+      }, 4000)
     }
     return (
       <>
@@ -302,6 +302,7 @@ const styles = StyleSheet.create({
     borderWidthX: 1,
   },
   container: {
+    minHeight: 512,
   },
   sidebar: {
     // marginLeft: 192,

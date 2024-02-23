@@ -380,6 +380,11 @@ export function reducer(state = initialState, action){
         userLoading: false,
         userError: true,
       }
+    case 'USER_EDIT_SUCCESS':
+      return {
+        ...state,
+        users: {...state.users, [action.payload.id]: action.payload},
+      }
     case 'POST_UPVOTE_SUCCESS':
       const post = state.posts[action.payload.postId];
       const up = action.payload.isUpvote ? post.numUpvotes + 1: post.numUpvotes;
