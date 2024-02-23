@@ -262,7 +262,7 @@ export function reducer(state = initialState, action){
         commentsError: true,
       }
     case 'VENDOR_GROUPS_SUCCESS':
-      const vendorGroupModified = action.payload.map(item => ({id: item.id, name: item.categoryName, vendorIds: []}))
+      const vendorGroupModified = action.payload.map(item => ({id: item.id, name: item.categoryName, icon: item.icon, vendorIds: []}))
       const vendorGroupMap = vendorGroupModified.reduce((accum, cur) => {
         accum[cur.id] = cur
         return accum
@@ -353,6 +353,14 @@ export function reducer(state = initialState, action){
         authLoading: false,
         authError: true,
       }
+    case 'LOGOUT':
+      return {
+        ...state,
+        auth: {
+          userId: -1,
+          token: "",
+        },
+      }
     case 'USER_SUCCESS':
       return {
         ...state,
@@ -393,11 +401,11 @@ export function reducer(state = initialState, action){
     case 'ONBOARDING_SUCCESS':
       return {
         ...state,
-        industry: action.payload.industries.map(item => ({...item, name: item.industry_name})),
-        categories: action.payload.subscriptionAreas.map(item => ({...item, name: item.category_name})),
-        interests: action.payload.interestAreas.map(item => ({...item, name: item.interest_area_name})),
+        industry: action.payload.industries.map(item => ({id: item.id, name: item.industry_name})),
+        categories: action.payload.subscriptionAreas.map(item => ({id: item.id, name: item.category_name})),
+        interests: action.payload.interestAreas.map(item => ({id: item.id, name: item.interest_area_name})),
         // vendors: action.payload.vendors,
-        skills: action.payload.techstack.map(item => ({...item, name: item.vendor_name})),
+        skills: action.payload.techstack.map(item => ({id: item.id, name: item.vendor_name})),
         onboardingLoading: false,
         onboardingError: false,
       }
@@ -430,7 +438,7 @@ export function reducer(state = initialState, action){
 
 
 export function connect(mapStateToProps, mapDispatchToProps){
-  console.log("S2W", mapStateToProps)
+  // console.log("S2W", mapStateToProps)
   const func = (Component) => {
     return (props) => {
       const store = useContext(ReduxContext);

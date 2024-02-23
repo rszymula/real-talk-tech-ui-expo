@@ -31,6 +31,8 @@ export function RawProfileUserOther(props){
     return <ActivityIndicator />
   }
 
+  console.log("USRW", user)
+
   return (
     <View style={styles.container}>
       <Heading navigation={navigation}>

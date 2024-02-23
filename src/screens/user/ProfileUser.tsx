@@ -13,42 +13,47 @@ import { SelectedItems } from '../../components/common/SelectedItems';
 import { connect } from '../../state/reduxStore';
 import { RTextInput } from '../../components/core/RTextInput';
 import { Link } from '../../components/core/Link';
-import { editUser } from '../../services/UserServices';
+import { editUser, logout } from '../../services/UserServices';
 import { Heading } from '../../components/common/Heading';
 
 
 export function RawProfileUser(props){
 
-  const { navigation, route, user, editUser} = props;
+  const { navigation, route, user, editUser, logout} = props;
 
   console.log("USD", user)
 
   const [editing, setEditing] = React.useState(false)
 
-  const [name, setName] = React.useState(user.fullName)
+  const [fullname, setName] = React.useState(user.fullname)
   const [username, setUsername] = React.useState(user.username)
-  const [password, setPassword] = React.useState("")
+  // const [password, setPassword] = React.useState("")
   const [bio, setBio] = React.useState(user.bio)
-  const [company, setCompany] = React.useState(user.currentCompany)
-  const [linkedIn, setLinkedin] = React.useState(user.linkedin_url)
-  const [techStack, setTechStack] = React.useState(user.techstack.map(item => item.name));
+  const [currentCompany, setCompany] = React.useState(user.currentCompany)
+  const [linkedinUrl, setLinkedin] = React.useState(user.linkedinUrl)
+  const [techStack, setTechStack] = React.useState(user.techStack.map(item => item.name));
 
   const handleEditPress = () => {
     setEditing(true);
   }
 
   const handleCancelPress = () => {
+    setName(user.fullname)
+    setUsername(user.username)
+    setBio(user.bio)
+    setCompany(user.currentCompany)
+    setTechStack(user.techStack)
     setEditing(false);
   }
 
   const handleSavePress = () => {
     const body = {
-      fullName: name,
+      fullname,
       email: user.email,
-      techstack: techStack,
+      techStack,
       bio,
-      company,
-      linkedIn,
+      currentCompany,
+      linkedinUrl,
     }
     editUser(body);
     setEditing(false);
@@ -59,6 +64,7 @@ export function RawProfileUser(props){
   }
 
   const handleLogout = () => {
+    logout();
     navigation.navigate(RouteNames.PROFILE_WELCOME)
   }
 
@@ -89,13 +95,16 @@ export function RawProfileUser(props){
       </View>
       <RTextInput 
         label={"Name"}
-        value={name}
+        value={fullname}
         onChangeText={(text) => setName(text)}
         placeholder={""}
         freeze={!editing}
         style={{marginTop: 16}}
       />
-      <Image source={{uri: "https://vendor-logos-bucket.s3.amazonaws.com/vendor_logos_prod/sales-tools/talkdesk.png"}} style={{width: 32, height: 32}}/>
+      {/* <Image
+        source={{uri: "https://vendor-logos-bucket.s3.amazonaws.com/vendor_logos_prod/sales-tools/talkdesk.png"}}
+        style={{width: 32, height: 32}}
+      /> */}
       <RTextInput 
         label={"Username"}
         value={username}
@@ -104,25 +113,26 @@ export function RawProfileUser(props){
         freeze={!editing}
         style={{marginTop: 8}}
       />
-      <RTextInput 
+      {/* <RTextInput 
         label={"Password"}
         value={password}
         onChangeText={(text) => setPassword(text)}
         placeholder={""}
         freeze={!editing}
         style={{marginTop: 8}}
-      />
+      /> */}
       <RTextInput 
         label={"Bio"}
         value={bio}
         onChangeText={(text) => setBio(text)}
         placeholder={""}
         freeze={!editing}
+        numberOfLines={!editing ? null : 12}
         style={{marginTop: 8}}
       />
       <RTextInput 
         label={"Company"}
-        value={company}
+        value={currentCompany}
         onChangeText={(text) => setCompany(text)}
         placeholder={""}
         freeze={!editing}
@@ -130,7 +140,7 @@ export function RawProfileUser(props){
       />
       <RTextInput 
         label={"LinkedIn"}
-        value={linkedIn}
+        value={linkedinUrl}
         onChangeText={(text) => setLinkedin(text)}
         placeholder={""}
         freeze={!editing}
@@ -150,6 +160,7 @@ const stp = (state) => ({
 });
 const dtp = (dispatch, getState) => ({
   editUser: editUser(dispatch, getState),
+  logout: logout(dispatch, getState)
 });
 export const ProfileUser = connect(stp, dtp)(RawProfileUser);
 

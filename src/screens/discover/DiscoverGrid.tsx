@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
 import { ButtonType, Button } from '../../components/core/Button';
 import { Card } from '../../components/core/Card';
 import { Separator } from '../../components/core/Separator';
@@ -13,15 +13,24 @@ import { connect } from '../../state/reduxStore';
 import FORWARD_THIN from '../../assets/forward_thin.png';
 import BACK from '../../assets/back.png';
 import { Heading } from '../../components/common/Heading';
+import Svg, {
+  Use,
+  Image,
+} from 'react-native-svg';
 
 const renderElement = (item, idx, navigation) => {
   const handleOnPress = (item) => {
     console.log("NAVW", item)
     navigation.navigate(RouteNames.DISCOVER_LIST, {vendorGroupId: item.id});
   }
+
+  console.log("SVGW", item.icon)
   return (
     <Card styles={{flexDirection: 'row', justifyContent: 'space-between', width: 128, marginRight: 16, marginBottom: 16 ,padding: 0, backgroundColor: colors.input}}>
       <View style={{flexDirection: 'row', flexShrink: 1, padding: 16, alignItems: 'center'}}>
+      {/* <Svg width="80" height="80" style={{width: 80, height: 80}}>
+        <Image href={item.icon} />
+      </Svg> */}
         <Text style={{flexDirection: 'row', width: 128, color: colors.textRegular, fontSize: 12}}>
           {item.name}
         </Text>

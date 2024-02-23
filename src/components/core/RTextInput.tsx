@@ -56,13 +56,15 @@ export function RTextInput({
         />)
       }
       <View style={styles.labeledInput}>
-        {label && 
+        {label && !numberOfLines && 
           <View style={{alignSelf: 'center', justifyContent: 'space-around',}}>
             <Text style={styles.label}>{label}</Text>
           </View>
         }
         {freeze ? 
-        <Text style={styles.textbox} onPress={() => filteredSelections.length > 0 && setShowDropdown(showDropdown => !showDropdown)}>
+        <Text style={styles.textbox}
+          onPress={() => filteredSelections.length > 0 && setShowDropdown(showDropdown => !showDropdown)}
+        >
           {value}
         </Text> : (
         <TextInput
