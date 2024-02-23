@@ -4,7 +4,7 @@ import { colors } from "../../context/themes";
 export function Link({textLink, onPress, onLongPress = null, textLeft = '', textRight = '', style={}}){
   return (
     <View style={{...style, flexDirection: 'row'}}>
-      <Text style={{color: colors.textLowlight, fontSize: 12}}>
+      <Text style={{color: colors.textRegular, fontSize: 12}}>
         {/* Don't see your service? */}
         {textLeft}
       </Text>
@@ -12,7 +12,7 @@ export function Link({textLink, onPress, onLongPress = null, textLeft = '', text
         {/* Create a service profile */}
         {textLink}
       </Text>
-      <Text style={{color: colors.textLowlight, fontSize: 12}}>
+      <Text style={{color: colors.textRegular, fontSize: 12}}>
         {/* Don't see your service? */}
         {textRight}
       </Text>

@@ -62,7 +62,7 @@ export function RTextInput({
           </View>
         }
         {freeze ? 
-        <Text style={styles.textbox}
+        <Text style={[styles.textbox, label ? styles.verticalSeparator : {}]}
           onPress={() => filteredSelections.length > 0 && setShowDropdown(showDropdown => !showDropdown)}
         >
           {value}
@@ -72,7 +72,7 @@ export function RTextInput({
           numberOfLines={numberOfLines} 
           onChangeText={onChangeText}
           value={value}
-          style={styles.textbox}
+          style={[styles.textbox, label ? styles.verticalSeparator : {}]}
           placeholder={placeholder}
           secureTextEntry={secureTextEntry}
           //blurOnSubmit
@@ -91,6 +91,7 @@ export function RTextInput({
 
 const styles = StyleSheet.create({
   labeledInput: {
+    padding: 2,
     flexDirection: 'row',
     backgroundColor: colors.input,
     borderRadius: 4,
@@ -104,18 +105,22 @@ const styles = StyleSheet.create({
     // justifyContent: 'space-around',
     fontSize: 10,
     padding: 8,
-    borderRightWidth: 1,
-    borderRightColor: colors.border,
+    // borderRightWidth: 1,
+    // borderRightColor: colors.border,
     borderColor: 'red',
     borderWidthX: 1,
     color: colors.textHighlight,
+  },
+  verticalSeparator: {
+    borderLeftWidth: 1,
+    borderLeftColor: colors.border,
   },
   textbox: {
     color: colors.textRegular,
     fontSize: 12,
     backgroundColor: colors.input,
     padding: 8,
-    borderRadius: 4,
+    // borderRadius: 4,
     flex: 1,
     minWidth: 64,
   },

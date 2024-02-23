@@ -290,7 +290,6 @@ function RawDiscussHome(props){
           title={"Create Post"}
           placeholder={INPUT_PLACEHOLDER}
         />
-        <Separator style={{marginTop: 16}} />
         <View>
           <FlatList 
             data={postsByCategory}
