@@ -9,7 +9,7 @@ import { Link } from '../../components/core/Link';
 import { RTextInput } from '../../components/core/RTextInput';
 import { fetchOnboarding } from '../../services/UserServices';
 import { connect } from '../../state/reduxStore';
-import { testAwsS3 } from '../../utils/aws';
+import { testAwsS3, testAwsS3V2 } from '../../utils/aws';
 import Svg, {
   Use,
   Image as SvgImage,
@@ -48,7 +48,7 @@ export function RawProfileWelcome({navigation, fetchOnboarding}) {
 
   const validators = [isValidEmail, isValidPassword];
 
-  testAwsS3();
+  testAwsS3V2();
 
   const handleNextPress = () => {
     const isValid = validators.map(validator => validator()).every(item => !!item);
