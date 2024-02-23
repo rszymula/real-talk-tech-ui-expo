@@ -381,10 +381,12 @@ export function reducer(state = initialState, action){
         userError: true,
       }
     case 'USER_EDIT_SUCCESS':
-      return {
+      const res5 = {
         ...state,
-        users: {...state.users, [action.payload.id]: action.payload},
+        users: {...state.users, [action.payload.id]: {...state.users[action.payload.id], ...action.payload}},
       }
+      console.log("RES5W", res5)
+      return res5
     case 'POST_UPVOTE_SUCCESS':
       const post = state.posts[action.payload.postId];
       const up = action.payload.isUpvote ? post.numUpvotes + 1: post.numUpvotes;

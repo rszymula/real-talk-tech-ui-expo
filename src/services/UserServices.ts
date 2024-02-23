@@ -1,4 +1,5 @@
 import { jwtDecode } from "jwt-decode";
+import { FAIL_MESSAGE } from "../constants/constants";
 
 export function logout(dispatch, getState){
   return () => {
@@ -54,6 +55,10 @@ export function signup(dispatch){
       
     }).catch((err) => {
       console.log("ERR-signup", err)
+      dispatch({
+        type: "API_CALL_RESULT",
+        payload: {message: `Signup ${FAIL_MESSAGE}`, active: true, error: true}
+      })
     })
   }
 }
@@ -149,10 +154,15 @@ export function fetchUser(dispatch){
   }
 }
 
-export function endorseUser(dispatch){
-  return (body, auth) => {
-    const {userId, token} = auth;
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/endorseUser`
+export function endorseUser(dispatch, getState){
+  return (user, item) => {
+    const store = getState();
+    const {userId, token} = store.auth;
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/endorse`;
+    const body = {
+      endorseeUsername: user.username,
+      vendorId: item.id
+    }
     const params = {
       method: "PUT",
       headers: {
@@ -165,8 +175,17 @@ export function endorseUser(dispatch){
       return res.json()
     }).then(json => {
       console.log("GOOD-endorseUser", json)
+      dispatch({type: "USER_ENDORSE_SUCCESS", payload: {user, item}})
+      dispatch({
+        type: "API_CALL_RESULT",
+        payload: {message: "Endorsement has been successful", active: true, error: false}
+      })
     }).catch((err) => {
       console.log("ERR-endorseUser", err)
+      dispatch({
+        type: "API_CALL_RESULT",
+        payload: {message: `Endorsement ${FAIL_MESSAGE}`, active: true, error: true}
+      })
     })
   }
 }
@@ -197,10 +216,14 @@ export function editUser(dispatch, getState){
     fetch(url, params).then(res => {
       return res.json()
     }).then(json => {
-      dispatch({type: "PROFILE_EDIT_SUCCESS", payload: formattedBody})
+      dispatch({type: "USER_EDIT_SUCCESS", payload: formattedBody})
       dispatch({type: "API_CALL_RESULT", payload: {message: "Profile has been successfully updated", active: true, error: false}})
       console.log("GOOD-editUser", json)
     }).catch((err) => {
+      dispatch({
+        type: "API_CALL_RESULT",
+        payload: {message: `Editing profile ${FAIL_MESSAGE}`, active: true, error: true}
+      })
       console.log("ERR-editUser", err)
     })
   }

@@ -302,7 +302,7 @@ const styles = StyleSheet.create({
     borderWidthX: 1,
   },
   container: {
-    minHeight: 512,
+    // minHeight: 512,
   },
   sidebar: {
     // marginLeft: 192,

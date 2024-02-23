@@ -23,7 +23,9 @@ export function RawProfileUser(props){
 
   console.log("USD", user)
 
-  const [editing, setEditing] = React.useState(false)
+  const editOpen = route?.params?.editOpen;
+
+  const [editing, setEditing] = React.useState(editOpen || false)
 
   const [fullname, setName] = React.useState(user.fullname)
   const [username, setUsername] = React.useState(user.username)
@@ -122,7 +124,7 @@ export function RawProfileUser(props){
         style={{marginTop: 8}}
       /> */}
       <RTextInput 
-        label={"Bio"}
+        label={!editing ? "Bio" : null}
         value={bio}
         onChangeText={(text) => setBio(text)}
         placeholder={""}

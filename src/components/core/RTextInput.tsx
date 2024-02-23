@@ -56,7 +56,7 @@ export function RTextInput({
         />)
       }
       <View style={styles.labeledInput}>
-        {label && !numberOfLines && 
+        {label && 
           <View style={{alignSelf: 'center', justifyContent: 'space-around',}}>
             <Text style={styles.label}>{label}</Text>
           </View>

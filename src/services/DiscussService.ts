@@ -1,4 +1,4 @@
-import { COMMENTS_COUNT_PER_PAGE, POSTS_COUNT_PER_PAGE, categories } from "../constants/constants";
+import { COMMENTS_COUNT_PER_PAGE, FAIL_MESSAGE, POSTS_COUNT_PER_PAGE, categories } from "../constants/constants";
 
 const mockCommentTag = [
   {
@@ -453,6 +453,10 @@ export function upvotePost(dispatch, getState){
       //dispatch({type: "POSTS_SUCCESS", payload: {category: categories.find(cat => cat.id === categoryId)?.name, data: json.posts}})
     }).catch((err) => {
       console.log("ERR-upvote", err)
+      dispatch({
+        type: "API_CALL_RESULT",
+        payload: {message: `Upvote ${FAIL_MESSAGE}`, active: true, error: true}
+      })
     })
   }
 }
@@ -527,6 +531,10 @@ export function makeComment(dispatch, getState){
       dispatch({type: "API_CALL_RESULT", payload: {message: "Comment has been successfully created", active: true, error: false}})
     }).catch((err) => {
       console.log("ERR-makeComment", err)
+      dispatch({
+        type: "API_CALL_RESULT",
+        payload: {message: `Comment creation ${FAIL_MESSAGE}`, active: true, error: true}
+      })
     })
   }
 }
@@ -586,6 +594,10 @@ export function makePost(dispatch, getState){
       dispatch({type: "API_CALL_RESULT", payload: {message: "Post has been successfully created", active: true, error: false}})
     }).catch((err) => {
       console.log("ERR-makePost", err)
+      dispatch({
+        type: "API_CALL_RESULT",
+        payload: {message: `Post creation ${FAIL_MESSAGE}`, active: true, error: true}
+      })
     })
   }
 }
