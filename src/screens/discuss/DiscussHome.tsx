@@ -156,7 +156,7 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
       {commentsLoading && <ActivityIndicator style={{marginTop: 16}} />}
       {commentsError && (
         <View style={{margin: 32}}>
-          <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading comments..."}</Text>
+          <Text style={{alignSelf: 'center', color: colors.textRegular}}>{"Failed loading comments..."}</Text>
           <Link
             onPress={loadComments}
             textLink={"Retry"}
@@ -215,7 +215,7 @@ function RawPost({ id, categories, title, body, user, commentIds, userVote, numU
           <TouchableOpacity onPress={handleCommentsPress}>
             <Text style={[styles.linkText]}>{commentText}</Text>
           </TouchableOpacity>
-            <Text style={{marginLeft: 8, fontSize: 12, color: colors.textLowlight}}>{`${numUpvotes - numDownvotes} Upvotes`}</Text>
+            <Text style={{marginLeft: 8, fontSize: 12, color: colors.textRegular}}>{`${numUpvotes - numDownvotes} Upvotes`}</Text>
             <TouchableOpacity onPress={handleUpvotePress} style={{marginLeft: 8}}>
               <Image source={userVote > 0 ? UPVOTE_ACTIVE : UPVOTE_DEFAULT} style={{height: 16, width: 16}} />
             </TouchableOpacity>
@@ -302,7 +302,7 @@ function RawDiscussHome(props){
         <Link onPress={loadPosts} textLink={"Load More Posts..."} style={{alignSelf: 'center', margin: 16}}/>
         {feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
         {feedError[currentCategory] && (<View style={{margin: 32}}>
-          <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading data..."}</Text>
+          <Text style={{alignSelf: 'center', color: colors.textRegular}}>{"Failed loading data..."}</Text>
           <Link onPress={loadPosts} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
         </View>)}
       </Card>
@@ -334,7 +334,7 @@ const styles = StyleSheet.create({
     marginTop: 32,
   },
   captionText: {
-    color: colors.textLowlight,
+    color: colors.textRegular,
     fontSize: 12,
   },
   userCaption: {

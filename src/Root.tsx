@@ -275,7 +275,7 @@ function navBarProvider(Component, hasCategories = false, hasTabs = true){
       <>
         {props.apiCallResult?.active && (
         <View style={{backgroundColor: colors.link}}>
-          <Text style={{margin: 8, alignSelf: 'center', backgroundColor: colors.link, fontSize: 12, color: colors.textLowlight}}>{props.apiCallResult.message}</Text>
+          <Text style={{margin: 8, alignSelf: 'center', backgroundColor: colors.link, fontSize: 12, color: colors.textRegular}}>{props.apiCallResult.message}</Text>
         </View>
       )}
       <View style={styles.rootContainer}>

@@ -34,7 +34,7 @@ function Company(props){
       <View style={{alignItems: 'flex-end'}}>
         <Text style={{color: colors.link}}>{off}</Text>
         <Text style={{color: colors.textRegular, marginTop: 4}}>{cur}</Text>
-        <Text style={{color: colors.textLowlight, fontSize: 12, marginTop: 4}}>{prev}</Text>
+        <Text style={{color: colors.textRegular, fontSize: 12, marginTop: 4}}>{prev}</Text>
       </View>
     </ListItem>
   );

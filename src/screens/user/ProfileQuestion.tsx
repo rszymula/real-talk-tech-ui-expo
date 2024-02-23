@@ -123,7 +123,7 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
       <Text style={styles.title}>
         {description}
       </Text>
-      <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
+      <Text style={{color: colors.textRegular, margin: 8, alignSelf: 'center'}}>
         Choose all that apply
       </Text>
       <RTextInput 
@@ -136,7 +136,7 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
       />
       <SelectedItems style={{marginTop: 4}} items={items.map(item => item.name)} onDelete={handleRemoveItem}/>
       <Button title={!!next ? "Next Step" : "Finish"} onPress={handleNextPress} styles={{marginTop: 8, widthX: 512, justifyContent: 'space-around'}}/>
-      <Text style={{marginTop: 256, color: colors.textLowlight, alignSelf: 'center'}}>{`Question ${stepNumber} of ${Object.keys(ProfileStep).length}`}</Text>
+      <Text style={{marginTop: 256, color: colors.textRegular, alignSelf: 'center'}}>{`Question ${stepNumber} of ${Object.keys(ProfileStep).length}`}</Text>
     </View>
   )
 }

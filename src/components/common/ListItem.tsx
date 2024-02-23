@@ -19,13 +19,13 @@ export function ListItem(props){
             title={buttonLabel}
             onPress={onPress}
             type={ButtonType.BASIC}
-            styles={{color: colors.textLowlight, marginTop: 8}}
+            styles={{color: colors.textRegular, marginTop: 8}}
           />)}
         </View>
         <View style={{flexDirection: 'column', marginLeft: 16, flex: 1}}>
           <Text style={{color: colors.textHighlight}}>{heading}</Text>
           <Text style={{color: colors.textRegular, marginTop: 4}}>{subheading}</Text>
-          <Text style={{color: colors.textLowlight, fontSize: 12, marginTop: 4}}>{body}</Text>
+          <Text style={{color: colors.textRegular, fontSize: 12, marginTop: 4}}>{body}</Text>
         </View>
       </View>
       <View style={{borderColorX: 'red', borderWidthX: 1}}>

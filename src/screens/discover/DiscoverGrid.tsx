@@ -97,40 +97,12 @@ export function RawDiscoverGrid(props){
           <Text style={styles.title}>
             Discover
           </Text>
-          <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
+          <Text style={{color: colors.textRegular, margin: 8, alignSelf: 'center'}}>
             Explore software solutions
           </Text>
         </View>
       </Heading>
-      {/* <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <TouchableOpacity onPress={handleBackPress} style={{
-          padding: 8,
-          borderColor: colors.border,
-          borderWidth: 1,
-          backgroundColor: colors.input,
-          borderRadius: 4,
-          alignSelf: 'center'
-        }}
-        >
-          <Image source={BACK} style={{width: 12, height: 12}} />
-        </TouchableOpacity>
-        <View>
-          <Text style={styles.title}>
-            Discover
-          </Text>
-          <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
-            Explore software solutions
-          </Text>
-        </View>
-        <View style={{width: 20, height: 20}}></View>
-      </View> */}
       <View style={{marginBottom: 32}}>
-        {/* <GridView
-          // data={companies}
-          data={vendorGroupsForGrid}
-          onPress={(item) => handleOnPress(item)}
-          navigation={navigation}
-        /> */}
          <GridView
           // data={companies}
           elements={vendorGroupsForGrid}

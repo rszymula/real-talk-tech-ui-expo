@@ -22,7 +22,7 @@ export function MarketplaceHome(props){
           <Text style={styles.title}>
             Marketplace
           </Text>
-          <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
+          <Text style={{color: colors.textRegular, margin: 8, alignSelf: 'center'}}>
             Premium listings and deals for the community
           </Text>
         </View>

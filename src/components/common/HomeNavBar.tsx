@@ -61,11 +61,6 @@ function RawHomeNavBar(props){
 
   return (
     <View>
-      {/* {!apiCallResult?.active && (
-        <View style={{backgroundColor: colors.link}}>
-          <Text style={{alignSelf: 'center', backgroundColor: colors.link, color: colors.textLowlight}}>{"apiCallResult.message"}</Text>
-        </View>
-      )} */}
       <View style={styles.container}>
         <TouchableOpacity onPress={handleNavigateHomePress} style={{paddingTop: 10, paddingBottom: 10, borderColor: 'green', borderWidthX: 1}}>
           <Image source={LOGO_V2} style={styles.title}/>

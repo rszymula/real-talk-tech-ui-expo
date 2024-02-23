@@ -203,10 +203,10 @@ const styles = StyleSheet.create({
   inputText: {
     // width: "100%",
     paddingLeft: 8,
-    color: colors.textLowlight,
+    color: colors.textRegular,
   },
   textbox: {
-    color: colors.textLowlight,
+    color: colors.textRegular,
     backgroundColor: colors.input,
     padding: 8,
     borderRadius: 4,

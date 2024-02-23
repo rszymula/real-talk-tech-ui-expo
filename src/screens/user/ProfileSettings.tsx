@@ -23,7 +23,7 @@ export function ProfileSettings(props){
       <Text style={styles.title}>
         {`@${user.username}`}
       </Text>
-      <Text style={{color: colors.textLowlight, margin: 8,}}>
+      <Text style={{color: colors.textRegular, margin: 8,}}>
         {`${user.firstName} ${user?.lastName || ''}`}
       </Text>
       <Card styles={{backgroundColor: colors.input, flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -53,14 +53,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   captionText: {
-    color: colors.textLowlight,
+    color: colors.textRegular,
     fontSize: 12,
   },
   techItem: {
     // borderWidth: 1,
     borderRadius: 4,
     backgroundColor: colors.foreground,
-    color: colors.textLowlight,
+    color: colors.textRegular,
     margin: 4,
     padding: 4,
   }

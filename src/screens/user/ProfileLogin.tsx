@@ -58,7 +58,7 @@ function RawProfileLogin({navigation, login, loginLoading, loginError, auth}) {
       <Text style={styles.title}>
         Welcome!
       </Text>
-      <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
+      <Text style={{color: colors.textRegular, margin: 8, alignSelf: 'center'}}>
         Login to join the conversation!
       </Text>
         {/* <RTextInput 

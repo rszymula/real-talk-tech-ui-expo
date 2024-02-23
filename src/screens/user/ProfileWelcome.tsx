@@ -77,7 +77,7 @@ export function RawProfileWelcome({navigation, fetchOnboarding}) {
       {/* <Svg width="80" height="80">
         <SvgXml xml={""}/>
       </Svg> */}
-      <Text style={{color: colors.textLowlight, margin: 8, alignSelf: 'center'}}>
+      <Text style={{color: colors.textRegular, margin: 8, alignSelf: 'center'}}>
         Discover. Discuss. Decide.
       </Text>
       <RTextInput 

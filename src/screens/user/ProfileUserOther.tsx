@@ -54,7 +54,7 @@ export function RawProfileUserOther(props){
 
   if(!user || userError){
     return (<View style={{margin: 32}}>
-      <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading data..."}</Text>
+      <Text style={{alignSelf: 'center', color: colors.textRegular}}>{"Failed loading data..."}</Text>
       <Link onPress={loadData()} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
     </View>);
   }
@@ -187,101 +187,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   captionText: {
-    color: colors.textLowlight,
+    color: colors.textRegular,
     fontSize: 12,
   },
   techItem: {
     // borderWidth: 1,
     borderRadius: 4,
     backgroundColor: colors.foreground,
-    color: colors.textLowlight,
+    color: colors.textRegular,
     margin: 4,
     padding: 4,
   }
 });
-
-
-
-
-
-// export function RawProfileUserOther(props){
-
-//   const { navigation, route, fetchUser, users, userLoading, userError, auth } = props;
-//   const {id, username} = route?.params
-
-//   React.useEffect(() => {
-//     fetchUser(username, auth);
-//   }, [])
-
-//   const user = users[username]
-
-//   console.log("LDDD", userLoading)
-//   if(userLoading){
-//     return <ActivityIndicator />
-//   }
-
-//   console.log("USRW", user)
-
-//   return (
-//     <View style={styles.container}>
-//       <Heading navigation={navigation}>
-//       </Heading>
-//       <Text style={styles.title}>
-//         {`@${user?.username}`}
-//       </Text>
-//       <Text style={{color: colors.textLowlight, margin: 8}}>
-//         {`${user?.fullname}`}
-//       </Text>
-//       <Card styles={{backgroundColor: colors.input, flexDirection: 'row', justifyContent: 'space-between'}}>
-//       <View style={{flexDirection: 'column'}}>
-//         <Text style={styles.captionText}>{"Bio"}</Text>
-//         <Text style={{maxWidthX: 512, color: colors.textHighlight, fontSize: 12, marginTop: 8 }}>{user?.bio}</Text>
-//       </View>
-//       </Card>
-//       <Text style={styles.h2}>
-//         Endorse Tech Stack
-//       </Text>
-//       <SelectedItems items={user?.techstack || []} style={{marginTop: 8}}/>
-//     </View>
-//   )
-// }
-
-// const stp = (state) => ({
-//   users: state.users,
-//   userLoading: state.userLoading,
-//   userError: state.userError,
-//   auth: state.auth,
-// });
-// const dtp = (dispatch) => ({
-//   fetchUser: fetchUser(dispatch)
-// });
-// export const ProfileUserOther = connect(stp, dtp)(RawProfileUserOther);
-
-// const styles = StyleSheet.create({
-//   container: {
-//   },
-//   title: {
-//     marginTop: 8,
-//     color: colors.textHighlight,
-//     fontSize: 18,
-//   },
-//   h2: {
-//     marginTop: 8,
-//     color: colors.textHighlight,
-//     fontSize: 14,
-//   },
-//   captionText: {
-//     color: colors.textLowlight,
-//     fontSize: 12,
-//   },
-//   techItem: {
-//     // borderWidth: 1,
-//     borderRadius: 4,
-//     backgroundColor: colors.foreground,
-//     color: colors.textLowlight,
-//     margin: 4,
-//     padding: 4,
-//   }
-// });
-
-

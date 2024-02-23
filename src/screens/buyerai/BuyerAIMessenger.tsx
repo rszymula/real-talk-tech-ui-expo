@@ -48,7 +48,7 @@ export function BuyerAIMessenger(props) {
       <Text style={styles.title}>
         Buyer AI
       </Text>
-      <Text style={{color: colors.textLowlight, margin: 8,}}>
+      <Text style={{color: colors.textRegular, margin: 8,}}>
         Simplyfying Software Selection with Smarter Solutions
       </Text>
       <Card styles={{marginBottom: 32, padding: 16, marginTop: 8}}>

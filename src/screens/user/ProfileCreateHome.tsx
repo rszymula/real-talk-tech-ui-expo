@@ -85,7 +85,7 @@ export function RawProfileCreateHome({route, navigation, skills}) {
       <Text style={styles.title}>
         Setup your profile
       </Text>
-      <Text style={{color: colors.textLowlight, marginTop: 8, alignSelf: 'center'}}>
+      <Text style={{color: colors.textRegular, marginTop: 8, alignSelf: 'center'}}>
         Get verified!
       </Text>
       <RTextInput 
@@ -144,7 +144,7 @@ export function RawProfileCreateHome({route, navigation, skills}) {
         onDelete={handleDeleteSkill}
       />
       <Button title="Continue to next step" onPress={handleNextPress} styles={{marginTop: 8, flex: 1, widthX: 512, justifyContent: "space-around", position: 'relative'}}/>
-      <Text style={{marginTop: 32, color: colors.textLowlight, alignSelf: 'center'}}>{"Next, let's curate your feed with three quick questions"}</Text>{isValidName() && !isValidUsername() && isValidated && <Text style={{alignSelf: 'center', marginTop: 128, color: '#888888', fontSize: 8}}>{"App developed by RadekTech www.radektech.io"}</Text>}
+      <Text style={{marginTop: 32, color: colors.textRegular, alignSelf: 'center'}}>{"Next, let's curate your feed with three quick questions"}</Text>{isValidName() && !isValidUsername() && isValidated && <Text style={{alignSelf: 'center', marginTop: 128, color: '#888888', fontSize: 8}}>{"App developed by RadekTech www.radektech.io"}</Text>}
       {/* </View> */}
     </View>
   )
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     // paddingLeft: 8,
     // width: 512,
     marginTop: 8,
-    //color: colors.textLowlight,
+    //color: colors.textRegular,
   },
   dropdown: {
     top: 48,

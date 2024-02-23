@@ -73,7 +73,7 @@
 //       {commentsLoading && <ActivityIndicator style={{marginTop: 16}} />}
 //       {commentsError && (
 //         <View style={{margin: 32}}>
-//           <Text style={{alignSelf: 'center', color: colors.textLowlight}}>{"Failed loading comments..."}</Text>
+//           <Text style={{alignSelf: 'center', color: colors.textRegular}}>{"Failed loading comments..."}</Text>
 //           <Link
 //             onPress={loadComments}
 //             textLink={"Retry"}
@@ -128,7 +128,7 @@
 //           <TouchableOpacity onPress={handleCommentsPress}>
 //             <Text style={[styles.linkText]}>{commentText}</Text>
 //           </TouchableOpacity>
-//             <Text style={{marginLeft: 8, fontSize: 12, color: colors.textLowlight}}>{`${numUpvotes - numDownvotes} Upvotes`}</Text>
+//             <Text style={{marginLeft: 8, fontSize: 12, color: colors.textRegular}}>{`${numUpvotes - numDownvotes} Upvotes`}</Text>
 //             <TouchableOpacity onPress={handleUpvotePress} style={{marginLeft: 8}}>
 //               <Image source={userVote > 0 ? UPVOTE_ACTIVE : UPVOTE_DEFAULT} style={{height: 16, width: 16}} />
 //             </TouchableOpacity>
@@ -183,7 +183,7 @@
 //     marginTop: 32,
 //   },
 //   captionText: {
-//     color: colors.textLowlight,
+//     color: colors.textRegular,
 //     fontSize: 12,
 //   },
 //   userCaption: {

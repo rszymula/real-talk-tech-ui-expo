@@ -189,14 +189,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   captionText: {
-    color: colors.textLowlight,
+    color: colors.textRegular,
     fontSize: 12,
   },
   techItem: {
     // borderWidth: 1,
     borderRadius: 4,
     backgroundColor: colors.foreground,
-    color: colors.textLowlight,
+    color: colors.textRegular,
     margin: 4,
     padding: 4,
   }

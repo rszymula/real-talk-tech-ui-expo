@@ -55,7 +55,7 @@ export function ProfileContactUs(props){
       <Heading navigation={navigation}>
         <View>
           <Text style={styles.title}>RealTalk - Your Advantage in the Tech World</Text>
-          <Text style={{color: colors.textLowlight, fontSize: 14, marginTop: 8, alignSelf: 'center'}}>
+          <Text style={{color: colors.textRegular, fontSize: 14, marginTop: 8, alignSelf: 'center'}}>
             Submit a message and get in touch with our team
           </Text>
       </View>
@@ -126,14 +126,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   captionText: {
-    color: colors.textLowlight,
+    color: colors.textRegular,
     fontSize: 12,
   },
   techItem: {
     // borderWidth: 1,
     borderRadius: 4,
     backgroundColor: colors.foreground,
-    color: colors.textLowlight,
+    color: colors.textRegular,
     margin: 4,
     padding: 4,
   }
