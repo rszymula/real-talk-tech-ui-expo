@@ -10,6 +10,7 @@ import { RTextInput } from '../../components/core/RTextInput';
 import { connect } from '../../state/reduxStore';
 import { login } from '../../services/UserServices';
 import { fetchOnboarding } from '../../services/UserServices';
+import { Heading } from '../../components/common/Heading';
 
 function RawProfileLogin({navigation, login, loginLoading, loginError, auth}) {
 
@@ -55,12 +56,16 @@ function RawProfileLogin({navigation, login, loginLoading, loginError, auth}) {
     <View style={styles.container}>
       {/* <Image source={REALTALKTECH_WHITE} style={{width: 256, height: 32, alignSelf: 'center'}}/> */}
       <Image source={LOGO_V2} style={{width: 192, height: 42, alignSelf: 'center'}}/>
-      <Text style={styles.title}>
-        Welcome!
-      </Text>
-      <Text style={{color: colors.textRegular, margin: 8, alignSelf: 'center'}}>
-        Login to join the conversation!
-      </Text>
+      <Heading navigation={navigation}>
+        <View>
+          <Text style={styles.title}>
+            Welcome!
+          </Text>
+          <Text style={{color: colors.textRegular, margin: 8, alignSelf: 'center'}}>
+            Login to join the conversation!
+          </Text>
+        </View>
+      </Heading>
         {/* <RTextInput 
           onChangeText={setEmail}
           value={email}
