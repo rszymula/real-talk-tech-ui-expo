@@ -150,7 +150,7 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
           onPress={handleSubmitComment}
           // title={"^"}
           image={UP}
-          imageSize={10}
+          imageRatio={0.8}
           placeholder={"Reply with a comment"}
           numLines={6}
         />
