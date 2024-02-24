@@ -21,6 +21,7 @@ export function RTextInput({
   label=null,
   selections = [],
   onSelect = (selection) => {},
+  onSubmit = (submit) => {},
   freeze = false,
   style={},
   dropdownStyle=DEFAULT_STYLE,
@@ -68,6 +69,8 @@ export function RTextInput({
           {value}
         </Text> : (
         <TextInput
+          // onSubmitEditing={() => console.log("SUBMITW")}
+          onSubmitEditing={() => onSubmit(value)}
           multiline={numberOfLines && numberOfLines > 1}
           numberOfLines={numberOfLines} 
           onChangeText={onChangeText}

@@ -53,7 +53,7 @@ export function RawProfileCreateHome({route, navigation, skills}) {
     setSkill(text)
   }
   
-  const onSelectSkill= (item) => {
+  const handleSelectSkill = (item) => {
     console.log("SELZ", item)
     setSelectedSkills(selectedSkills => [...selectedSkills, item])
   }
@@ -130,7 +130,7 @@ export function RawProfileCreateHome({route, navigation, skills}) {
         value={skill}
         placeholder="What software do you use?"
         selections={skills}
-        onSelect={onSelectSkill}
+        onSelect={handleSelectSkill}
         // dropdownStyle={{
         //   top: -256,
         //   width: 256,

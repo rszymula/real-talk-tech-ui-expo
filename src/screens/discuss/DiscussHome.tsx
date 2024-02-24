@@ -61,7 +61,7 @@ function Comment({commentText, username, upvotes, creationTime, navigation}) {
         </Text> */}
         <View style={{flexDirection: 'row'}}>
           <Text style={styles.captionText}>
-            {`Commented by `}
+            {`Reply by `}
           </Text>
           {username ? (
               <TouchableOpacity onPress={handleUsernamePress}>
@@ -103,7 +103,9 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
     console.log("Commented", postId, input)
     // make API call
     // if succcessful call passed in function to store the new state
-    makeComment(postId, input, [], auth)
+    if(input.length > 0){
+      makeComment(postId, input, [], auth)
+    }
   }
 
   const loadComments = () => {
@@ -346,7 +348,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   bodyText: {
-    color: colors.textRegular,
+    color: colors.textHighlight,
     fontSize: 12,
   },
   linkText: {

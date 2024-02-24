@@ -28,7 +28,8 @@ export function RawDiscussCreatePost(props){
   const [showVendorDropdown, setShowVendorDropdown] = React.useState(false);
   const [showCategoryDropdown, setShowCategoryDropdown] = React.useState(false);
   const [selectedCategories, setSelectedCategories] = React.useState([]);
-  const [selectedVendors, setSelectedVendors] = React.useState([]);
+  const [selectedSkills, setSelectedSkills] = React.useState([]);
+  const [customSkills, setCustomSkills] = React.useState([]);
 
   console.log({categories, skills})
 
@@ -71,7 +72,7 @@ export function RawDiscussCreatePost(props){
     handleExit();
   }
 
-  const onSelectCategory = (item) => {
+  const handleSelectCategory = (item) => {
     // really should use a Set
     if(!selectedCategories.includes(item)){
       setSelectedCategories(selectedCategories => [...selectedCategories, item])
@@ -83,16 +84,22 @@ export function RawDiscussCreatePost(props){
     setSelectedCategories(selectedCategories => selectedCategories.filter(category => category.name !== item))
   }
   
-  const onSelectSkill= (item) => {
+  const handleSelectSkill= (item) => {
     // really should use a Set
-    if(!selectedVendors.includes(item)){
-      setSelectedVendors(selectedVendors => [...selectedVendors, item])
+    if(!selectedSkills.includes(item)){
+      setSelectedSkills(selectedSkills => [...selectedSkills, item])
     }
   }
 
-  const handleDeleteVendor = (item) => {
-    console.log({selectedVendors, item})
-    setSelectedVendors(selectedVendors => selectedVendors.filter(vendors => vendors.name !== item))
+  const handleSubmitCustomSkill = (item) => {
+    console.log("CUSTOW", item)
+    setCustomSkills(customSkills => [...customSkills, item])
+  }
+
+  const handleDeleteSkill = (item) => {
+    console.log({selectedSkills, customSkills, item})
+    setSelectedSkills(selectedSkills => selectedSkills.filter(skill => skill.name !== item))
+    setCustomSkills(customSkills => customSkills.filter(skill => skill !== item));
   }
 
   const handleExit = () => {
@@ -112,7 +119,7 @@ export function RawDiscussCreatePost(props){
             value={category}
             placeholder="Enter Text"
             selections={categories}
-            onSelect={onSelectCategory}
+            onSelect={handleSelectCategory}
           />
           <SelectedItems itemStyle={{color: colors.border, backgroundColor: colors.input}} items={selectedCategories.map(item => item.name)} onDelete={handleDeleteCategory}/>
           <RTextInput 
@@ -136,14 +143,15 @@ export function RawDiscussCreatePost(props){
             value={skill}
             placeholder="Add Technology"
             selections={skills}
-            onSelect={onSelectSkill}
+            onSelect={handleSelectSkill}
+            onSubmit={handleSubmitCustomSkill}
             dropUp
             // dropdownStyle={{
             //   top: -256,
             //   width: 256,
             // }}
           />
-          <SelectedItems itemStyle={{color: colors.border, backgroundColor: colors.input}} items={selectedVendors.map(item => item.name)} onDelete={handleDeleteVendor}/>
+          <SelectedItems itemStyle={{color: colors.border, backgroundColor: colors.input}} items={[...selectedSkills.map(item => item.name), ...customSkills]} onDelete={handleDeleteSkill}/>
           <RTextInput 
             style={{marginTop: 8, position: 'relative', zIndex: 100}}
             label="Hide Username"

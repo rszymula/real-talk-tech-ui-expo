@@ -56,7 +56,7 @@ export const buttonTypetoStyle = {
   },
 }
 
-export function Button({onPress, title = null, image = null, imageSize=16, imageWidthRatio=1, type = ButtonType.LOUD, styles = {}}){
+export function Button({onPress, title = null, image = null, imageSize=16, imageWidthRatio=1, type = ButtonType.LOUD, textStyle = {}, styles = {}}){
   const typeStyle = buttonTypetoStyle[type]
 
   return (
@@ -75,7 +75,7 @@ export function Button({onPress, title = null, image = null, imageSize=16, image
             />
           </View>
         }
-        {title && <Text style={{marginLeft: 2, color: typeStyle.color, fontSize: typeStyle.fontSize}}>{title}</Text>}
+        {title && <Text style={[{marginLeft: 2, color: typeStyle.color, fontSize: typeStyle.fontSize}, textStyle]}>{title}</Text>}
       </View>
     </TouchableOpacity>
   );
