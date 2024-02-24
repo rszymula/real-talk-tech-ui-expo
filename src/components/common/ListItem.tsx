@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import { colors } from "../../context/themes";
 import { Button, ButtonType } from "../core/Button";
 
@@ -9,12 +9,16 @@ export function ListItem(props){
     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
       <View style={{flexDirection: 'row', flex: 1, borderWidthX: 1, borderColorX: 'green'}}>
         <View style={{flexDirection: 'column'}}>
-          <Button
+          {/* <Button
             title={""}
             onPress={() => {}}
             type={ButtonType.BASIC}
             styles={{height: 50, width: 100, border: 'none'}}
-          />
+          /> */}
+          <View>
+            {/* <Image source={{uri: "https://vendor-logos-bucket.s3.amazonaws.com/vendor_logos_prod/sales-tools/outreach.png"}} style={{width: 32, height: 32}}/> */}
+            <Image source={{uri: image}} style={{width: 128, height: 32}}/>
+          </View>
           {buttonLabel && onPress && (<Button
             title={buttonLabel}
             onPress={onPress}
