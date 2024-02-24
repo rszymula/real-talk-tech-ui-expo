@@ -66,7 +66,7 @@ function Comment({commentText, username, upvotes, creationTime, navigation}) {
           {username ? (
               <TouchableOpacity onPress={handleUsernamePress}>
                 <Text style={styles.userCaption}>
-                  {`${username} `}
+                  {`@${username} `}
                 </Text>
               </TouchableOpacity>
             ) : (
@@ -233,7 +233,7 @@ function RawPost({ id, categories, title, body, user, commentIds, userVote, numU
         <View style={{flexDirection: 'row'}}>
           <Text style={styles.captionText}>{`Posted by `}</Text>
           {username ? (<TouchableOpacity onPress={handleUsernamePress}>
-            <Text style={styles.userCaption}>{`${username} `}</Text>
+            <Text style={styles.userCaption}>{`@${username} `}</Text>
           </TouchableOpacity>) : <Text style={styles.captionText}>{"@User "}</Text>} 
           <Text style={styles.captionText}>{`| ${getDateText(createdTimestamp)}`}</Text>
         </View>
