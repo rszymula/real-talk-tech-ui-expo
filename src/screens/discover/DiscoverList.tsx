@@ -29,6 +29,7 @@ function Vendor(props){
       subheading={vendorType}
       body={description}
       image={vendorLogoUrl}
+      link={vendorHomepageUrl}
       buttonLabel="View Profile"
       onPress={handleOnPress}
     />

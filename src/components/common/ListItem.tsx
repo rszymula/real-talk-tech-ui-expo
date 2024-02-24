@@ -1,10 +1,11 @@
 import { View, Text, Image } from "react-native";
 import { colors } from "../../context/themes";
 import { Button, ButtonType } from "../core/Button";
+import { A } from '@expo/html-elements';
 
 
 export function ListItem(props){
-  const {heading, subheading, body, buttonLabel, onPress, image, children} = props
+  const {heading, subheading, body, buttonLabel, onPress, image, link, children} = props
   return (
     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
       <View style={{flexDirection: 'row', flex: 1, borderWidthX: 1, borderColorX: 'green'}}>
@@ -30,6 +31,7 @@ export function ListItem(props){
           <Text style={{color: colors.textHighlight}}>{heading}</Text>
           <Text style={{color: colors.textMid, marginTop: 4}}>{subheading}</Text>
           <Text style={{color: colors.textRegular, fontSize: 12, marginTop: 4}}>{body}</Text>
+          <A href={link} style={{marginTop: 4, color: colors.link, fontSize: 12}}>{link}</A>
         </View>
       </View>
       <View style={{borderColorX: 'red', borderWidthX: 1}}>
