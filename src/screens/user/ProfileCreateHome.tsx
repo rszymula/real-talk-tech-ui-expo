@@ -28,6 +28,7 @@ export function RawProfileCreateHome({route, navigation, skills}) {
 
   // const [showVendorDropdown, setShowVendorDropdown] = React.useState(false);
   const [selectedSkills, setSelectedSkills] = React.useState([]);
+  const [customSkills, setCustomSkills] = React.useState([]);
 
   const isValidName = () => {
     return !!fullname
@@ -58,13 +59,20 @@ export function RawProfileCreateHome({route, navigation, skills}) {
     setSelectedSkills(selectedSkills => [...selectedSkills, item])
   }
 
+  const handleSubmitCustomSkill = (item) => {
+    console.log("CUSTOW", item)
+    setCustomSkills(customSkills => [...customSkills, item])
+  }
+
   const handleDeleteSkill = (item) => {
-    console.log({selectedSkills, item})
-    setSelectedSkills(selectedSkills => selectedSkills.filter(skills => skills.name !== item))
+    console.log({selectedSkills, customSkills, item})
+    setSelectedSkills(selectedSkills => selectedSkills.filter(skill => skill.name !== item))
+    setCustomSkills(customSkills => customSkills.filter(skill => skill !== item));
   }
 
   const handleNextPress = () => {
-    const techStack = selectedSkills// .map(selected => selected.name)
+    // const techStack = selectedSkills// .map(selected => selected.name)
+    const techStack = [...selectedSkills.map(item => item.name), ...customSkills];
     const isValid = validators.map(validator => validator()).every(item => !!item)
     if(isValid){
       navigation.navigate(RouteNames.PROFILE_QUESTION, {email, password, fullname, username, linkedIn, bio, company, techStack, step: "Industry"})
@@ -131,6 +139,7 @@ export function RawProfileCreateHome({route, navigation, skills}) {
         placeholder="What software do you use?"
         selections={skills}
         onSelect={handleSelectSkill}
+        onSubmit={handleSubmitCustomSkill}
         // dropdownStyle={{
         //   top: -256,
         //   width: 256,
@@ -140,7 +149,7 @@ export function RawProfileCreateHome({route, navigation, skills}) {
       {/* {!isValidName && <Text style={{color: 'red'}}>{"Please enter a valid name"}</Text>} */}
       <SelectedItems
         itemStyle={{color: colors.border, backgroundColor: colors.input}}
-        items={selectedSkills.map(item => item.name)}
+        items={[...selectedSkills.map(item => item.name), ...customSkills]}
         onDelete={handleDeleteSkill}
       />
       <Button title="Continue to next step" onPress={handleNextPress} styles={{marginTop: 8, flex: 1, widthX: 512, justifyContent: "space-around", position: 'relative'}}/>
