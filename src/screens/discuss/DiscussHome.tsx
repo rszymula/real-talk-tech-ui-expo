@@ -135,8 +135,12 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
 
   return (
     <View>
+      {/* <View
+        style={{borderLeftWidth: 0.5, borderColor: colors.border, paddingLeft: 24}} 
+      > */}
       <FlatList
         style={{borderLeftWidth: 0.5, borderColor: colors.border, paddingLeft: 24, marginTop: 12}}
+        // style={{marginTop: 12}}
         data={commentList}
         renderItem={({item}) => {
           return <Comment {...item} navigation={navigation}/>
@@ -152,9 +156,10 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
           image={UP}
           imageRatio={0.8}
           placeholder={"Reply with a comment"}
-          numLines={6}
+          numLines={4}
         />
       </View>
+      {/* </View> */}
       {commentsLoading && <ActivityIndicator style={{marginTop: 16}} />}
       {commentsError && (
         <View style={{margin: 32}}>
