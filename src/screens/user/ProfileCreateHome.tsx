@@ -61,7 +61,9 @@ export function RawProfileCreateHome({route, navigation, skills}) {
 
   const handleSubmitCustomSkill = (item) => {
     console.log("CUSTOW", item)
-    setCustomSkills(customSkills => [...customSkills, item])
+    if (!customSkills.includes(item)) {
+      setCustomSkills(customSkills => [...customSkills, item])
+    }
   }
 
   const handleDeleteSkill = (item) => {

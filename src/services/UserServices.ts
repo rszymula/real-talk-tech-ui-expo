@@ -16,7 +16,8 @@ export function signup(dispatch){
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({...body, techStack: body.techStack.map(item => item.name)})
+      // body: JSON.stringify({...body, techStack: body.techStack.map(item => item.name)})
+      body: JSON.stringify(body)
     }
     fetch(url, params).then(res => {
       return res.json()
