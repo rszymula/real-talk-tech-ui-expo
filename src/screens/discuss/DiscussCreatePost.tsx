@@ -139,7 +139,7 @@ export function RawDiscussCreatePost(props){
           />
           <RTextInput 
             style={{marginTop: 8, position: 'relative', zIndex: 100}}
-            label="Tech Stack"
+            label="Tag Software"
             onChangeText={handleTypeSkill}
             value={skill}
             placeholder="Add Technology"

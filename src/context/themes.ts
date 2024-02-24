@@ -8,6 +8,7 @@ export const colors = {
   // border: "#363947",
   border: "#3b4353",
   textHighlight: "#e9e9e9",
+  textMid: "#c4c4c4",
   textRegular: "#7B879D",
   // textRegular: "#878787",
   // textRegular: "#0e111c",
