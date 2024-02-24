@@ -7,7 +7,7 @@ import BACK from '../../assets/back.png';
 export function AlternateNavBar({navigation}){
 
   const handleBackPress = () => {
-    navigation.goBack();
+    navigation.pop(1) // .goBack();
   }
 
   return (

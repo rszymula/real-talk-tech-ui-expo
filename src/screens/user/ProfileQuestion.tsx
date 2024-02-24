@@ -104,7 +104,7 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
       console.log("ITEMS SEND", items)
       const stepItems = [...items]
       setItems([])
-      navigation.navigate(RouteNames.PROFILE_QUESTION, {...route.params, step: next, [step]: stepItems})
+      navigation.push(RouteNames.PROFILE_QUESTION, {...route.params, step: next, [step]: stepItems})
     }
   }
 
