@@ -579,7 +579,7 @@ export function makePost(dispatch, getState){
           username: state.users[userId].username,
         },
         categories: categories.map(item => item.name),
-        vendors: [],
+        vendors: vendors.map(item => item.id),
         commentIds: [],
         userVote: 0,
         numComments: 0,
