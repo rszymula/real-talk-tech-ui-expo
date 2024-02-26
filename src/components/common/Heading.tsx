@@ -5,7 +5,7 @@ import BACK from '../../assets/back.png';
 export function Heading({navigation, children}){
 
   const handleBackPress = () => {
-    navigation.goBack();
+    navigation.pop(1);
   }
 
   return (

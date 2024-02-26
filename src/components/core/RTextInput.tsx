@@ -58,12 +58,14 @@ export function RTextInput({
       }
       <View style={styles.labeledInput}>
         {label && 
-          <View style={{alignSelf: 'center', justifyContent: 'space-around',}}>
+          <View style={[{alignSelf: 'center', borderColorX: 'red', borderWidthX: 1}, styles.verticalSeparator]}>
             <Text style={styles.label}>{label}</Text>
           </View>
+          // <Text style={[styles.label, styles.verticalSeparator, {alignSelf: 'center'}]}>{label}</Text>
         }
         {freeze ? 
-        <Text style={[styles.textbox, label ? styles.verticalSeparator : {}]}
+        <Text 
+          style={[styles.textbox, label ? styles.verticalSeparatorX : {}]}
           onPress={() => filteredSelections.length > 0 && setShowDropdown(showDropdown => !showDropdown)}
         >
           {value}
@@ -75,7 +77,7 @@ export function RTextInput({
           numberOfLines={numberOfLines} 
           onChangeText={onChangeText}
           value={value}
-          style={[styles.textbox, label ? styles.verticalSeparator : {}]}
+          style={[styles.textbox, label ? styles.verticalSeparatorX : {}]}
           placeholder={placeholder}
           secureTextEntry={secureTextEntry}
           //blurOnSubmit
@@ -94,7 +96,7 @@ export function RTextInput({
 
 const styles = StyleSheet.create({
   labeledInput: {
-    // padding: 2,
+    // padding: 1,
     flexDirection: 'row',
     backgroundColor: colors.input,
     borderRadius: 4,
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'space-around',
     fontSize: 10,
-    padding: 8,
+    padding: 10,
     // borderRightWidth: 1,
     // borderRightColor: colors.border,
     borderColor: 'red',
@@ -115,15 +117,17 @@ const styles = StyleSheet.create({
     color: colors.textHighlight,
   },
   verticalSeparator: {
-    borderLeftWidth: 1,
-    borderLeftColor: colors.border,
+    // borderLeftWidth: 1,
+    // borderLeftColor: colors.border,
+    borderRightWidth: 1,
+    borderRightColor: colors.border,
   },
   textbox: {
     color: colors.textRegular,
     fontSize: 12,
     backgroundColor: colors.input,
     padding: 8,
-    // borderRadius: 4,
+    borderRadius: 4,
     flex: 1,
     minWidth: 64,
   },
