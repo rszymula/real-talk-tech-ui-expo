@@ -13,7 +13,7 @@ import { InputBar } from "../../../components/core/InputBar";
 import { Separator } from "../../../components/core/Separator";
 import { getCount } from "../../../utils/general";
 import { Link } from "../../../components/core/Link";
-import { fetchComments, makeComment, upvotePost } from "../../../services/DiscussService";
+import { fetchComments, makeComment, upvoteComment, upvotePost } from "../../../services/DiscussService";
 
 function RawComment({commentId, navigation, comments, upvoteComment}) {
 
@@ -120,7 +120,7 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
         // style={{marginTop: 12}}
         data={commentList}
         renderItem={({item}) => {
-          return <Comment {...item} navigation={navigation}/>
+          return <Comment commentId={item.id} navigation={navigation}/>
         }}
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <Separator style={styles.separator}/>}
