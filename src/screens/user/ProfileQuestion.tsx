@@ -168,8 +168,8 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
         style={styles.input}
       />
       <SelectedItems style={{marginTop: 4}} items={items.map(item => item.name)} onDelete={handleRemoveItem}/>
-      <RButton onPress={handleNextPress} style={{marginTop: 8}}>
-        <RButtonText text={!!next ? "Next Step" : "Finish"}/>
+      <RButton active onPress={handleNextPress} style={{marginTop: 8}}>
+        <RButtonText active text={!!next ? "Next Step" : "Finish"}/>
       </RButton>
       <Text style={{marginTop: 256, color: colors.textRegular, alignSelf: 'center'}}>{`Question ${stepNumber} of ${Object.keys(ProfileStep).length}`}</Text>
     </View>
@@ -192,9 +192,11 @@ export const ProfileQuestion = connect(stp, dtp)(RawProfileQuestion);
 const styles = StyleSheet.create({
   container: {
     margin: 32,
-    marginLeft: 192,
-    marginRight: 192,
-    maxWidth: 768,
+    // marginLeft: 192,
+    // marginRight: 192,
+    // maxWidth: 768,
+    width: 512,
+    alignSelf: 'center',
   },
   input: {
     marginTop: 8,

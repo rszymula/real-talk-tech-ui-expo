@@ -115,9 +115,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.background,
     margin: 32,
-    marginLeft: 256,
-    marginRight: 256,
-    maxWidth: 512,
+    //marginLeft: 256,
+    //marginRight: 256,
+    width: 512,
+    alignSelf: 'center',
   },
   input: {
     marginTop: 8,

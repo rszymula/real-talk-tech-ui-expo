@@ -185,9 +185,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.background,
     marginTop: 32,
-    marginLeft: 256,
-    marginRight: 256,
-    maxWidth: 512,
+    // marginLeft: 256,
+    // marginRight: 256,
+    // maxWidth: 512,
+    width: 512,
+    alignSelf: 'center',
   },
   title: {
     color: colors.textHighlight,
