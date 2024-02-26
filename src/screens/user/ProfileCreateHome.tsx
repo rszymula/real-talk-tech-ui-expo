@@ -11,6 +11,7 @@ import { RTextInput } from '../../components/core/RTextInput';
 import { connect } from '../../state/reduxStore';
 import BACK from '../../assets/back.png';
 import { AlternateNavBar } from '../../components/common/AlternateNavBar';
+import { RButton, RButtonText } from '../../components/core/RButton';
 
 export function RawProfileCreateHome({route, navigation, skills}) {
 
@@ -155,7 +156,9 @@ export function RawProfileCreateHome({route, navigation, skills}) {
         items={[...selectedSkills.map(item => item.name), ...customSkills]}
         onDelete={handleDeleteSkill}
       />
-      <Button title="Continue to next step" onPress={handleNextPress} styles={{marginTop: 8, flex: 1, widthX: 512, justifyContent: "space-around", position: 'relative'}}/>
+      <RButton active onPress={handleNextPress} style={{marginTop: 8}}>
+        <RButtonText active text={"Continue to next step"}/>
+      </RButton>
       <Text style={{marginTop: 32, color: colors.textRegular, alignSelf: 'center'}}>{"Next, let's curate your feed with three quick questions"}</Text>{isValidName() && !isValidUsername() && isValidated && <Text style={{alignSelf: 'center', marginTop: 128, color: '#888888', fontSize: 8}}>{"App developed by RadekTech www.radektech.io"}</Text>}
       {/* </View> */}
     </View>

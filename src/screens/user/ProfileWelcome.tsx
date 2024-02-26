@@ -97,8 +97,8 @@ export function RawProfileWelcome({navigation, fetchOnboarding}) {
       />
       {!isValidPassword() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{`Please enter a password which is at least ${PASSWORD_MIN_LENGTH} characters long, has at least one uppercase and one lowercase letter each, and at least one number`}</Text>}
       {/* <Button title="Create Account" onPress={handleNextPress} styles={{marginTop: 8, widthX: 512, justifyContent: 'space-around'}}/> */}
-      <RButton onPress={handleNextPress} style={{marginTop: 8}}>
-        <RButtonText text={"Create Account"}/>
+      <RButton active onPress={handleNextPress} style={{marginTop: 8}}>
+        <RButtonText active text={"Create Account"}/>
       </RButton>
       <Link style={{margin: 16, alignSelf: 'center'}} textLeft="Already have an account?" textLink="Sign in" onPress={handleLoginPress} />
     </View>

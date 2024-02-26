@@ -97,8 +97,8 @@ function RawProfileLogin({navigation, login, authLoading, authError, auth, apiCa
             style={styles.input}
           />
           {!isValidPassword() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter your password"}</Text>}
-        <RButton onPress={handleLoginPress} style={{marginTop: 8}}>
-          <RButtonText text={"Login"}/>
+        <RButton active onPress={handleLoginPress} style={{marginTop: 8}}>
+          <RButtonText active text={"Login"}/>
         </RButton>
         <Link style={{margin: 16, alignSelf: 'center'}} textLeft="Forgot your password?" textLink="Reset Password" onPress={handleResetPasswordPress} />
       </View>

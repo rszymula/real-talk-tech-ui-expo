@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     borderColor: colors.link,
   },
   inactive: {
-    backgroundColor: colors.link,
+    backgroundColor: colors.foreground,
     // color: colors.background,
     borderColor: colors.border,
   },
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     color: colors.background,
   },
   textInactive: {
-    color: colors.background,
+    color: colors.textRegular,
   },
   imageBase: {
     width: 12,

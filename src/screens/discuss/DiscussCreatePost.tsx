@@ -13,6 +13,7 @@ import { RLabeledTextInput } from '../../components/core/RLabeledTextInput';
 import { connect } from '../../state/reduxStore';
 import { makeComment, makePost } from '../../services/DiscussService';
 import { Heading } from '../../components/common/Heading';
+import { RButton, RButtonText } from '../../components/core/RButton';
 
 export function RawDiscussCreatePost(props){
 
@@ -137,6 +138,8 @@ export function RawDiscussCreatePost(props){
     navigation.goBack();
   }
 
+  const isValid = validators.map(validator => validator()).every(item => !!item)
+
   return (
     <View>
       <Heading navigation={navigation}>
@@ -197,10 +200,9 @@ export function RawDiscussCreatePost(props){
             onSelect={(item) => {setAnonymous(item.anonymous)}}
             dropUp
           />
-          <View style={[styles.buttonContainer, styles.item]}>
-            <Button title="Cancel" onPress={handleExit} type={ButtonType.REVERSE} />
-            <Button title="Create Post" onPress={handleCreatePost} />
-          </View>
+          <RButton onPress={handleCreatePost} active={isValid} style={{marginTop: 8}}>
+            <RButtonText text={"Create Post"} active={isValid}/>
+          </RButton>
         </View>
       </Card>
     </View>
