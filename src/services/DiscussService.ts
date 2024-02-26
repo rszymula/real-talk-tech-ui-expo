@@ -608,3 +608,50 @@ export function makePost(dispatch, getState){
     })
   }
 }
+
+export function upvoteComment(dispatch, getState){
+  return (commentId, isUpvote) => {
+    const state = getState();
+    const { comments, auth } = state
+    const comment = comments[commentId]
+    if(comments.userVote > 0 && isUpvote || comment.userVote < 0 && !isUpvote){
+      console.log("SHORTCIRC")
+      return 
+    }else{
+      console.log("SHOTNO")
+    }
+    console.log("HERE1")
+    const {userId, token} = auth;
+    // const userId = 17
+    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
+    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/upvoteComment`
+    const params = {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        isDownvote: !isUpvote,
+        commentId,
+      }),
+    }
+    console.log("COMMENTSZ", url, params)
+    fetch(url, params).then(res => {
+      return res.json()
+    }).then(json => {
+      console.log("GOOD-upvoteComment", json)
+      console.log(state)
+      dispatch({type: "COMMENT_UPVOTE_SUCCESS", payload: {
+        isUpvote,
+        commentId,
+      }})
+    }).catch((err) => {
+      console.log("ERR-upvoteComment", err)
+      dispatch({
+        type: "API_CALL_RESULT",
+        payload: {message: `Upvote ${FAIL_MESSAGE}`, active: true, error: true}
+      })
+    })
+  }
+}

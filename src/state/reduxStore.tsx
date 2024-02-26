@@ -240,7 +240,8 @@ export function reducer(state = initialState, action){
         comments: {
           ...state.comments,
           ...action.payload.reduce((accum, cur) => {
-            accum[cur.id] = cur
+            const userVote = cur.userVote === true ? 1 : cur.userVote === false ? -1 : 0
+            accum[cur.id] = {...cur, userVote}
             return accum
           }, {}),
         },
