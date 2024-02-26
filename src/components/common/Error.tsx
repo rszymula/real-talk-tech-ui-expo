@@ -7,10 +7,10 @@ export function Error({handleRetryPress = null, handleRestartPress = null}){
     <View style={{alignItems: 'center'}}>
       <Text style={{color: colors.error, fontSize: 14}}>{"Oops, we experienced an error on our end"}</Text>
       {handleRetryPress && <RButton onPress={handleRetryPress} active style={{marginTop: 16}}>
-        <RButtonText text={"Click here to Retry"}/>
+        <RButtonText active text={"Click here to Retry"}/>
       </RButton>}
       {handleRestartPress && <RButton onPress={handleRestartPress} active style={{marginTop: 16}}>
-        <RButtonText text={"Click here to start over again"}/>
+        <RButtonText active text={"Click here to start over again"}/>
       </RButton>}
     </View>
   )

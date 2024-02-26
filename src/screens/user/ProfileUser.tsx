@@ -44,7 +44,7 @@ export function RawProfileUser(props){
     setUsername(user.username)
     setBio(user.bio)
     setCompany(user.currentCompany)
-    setTechStack(user.techStack)
+    setTechStack(user.techStack.map(item => item.name))
     setEditing(false);
   }
 
