@@ -155,4 +155,4 @@ export const tabs = [
   // },
 ]
 
-export const FAIL_MESSAGE = "failed due to an issue on our end. Please try again. If the error continues, come back later time";
+export const FAIL_MESSAGE = "failed due to an issue on our end. Please try again. If the error continues, come back at a later time";

@@ -84,28 +84,35 @@ export function login(dispatch){
       return res.json()
     }).then(json => {
       console.log("BEFOREDECODE-login", json)
-      const decodedToken = jwtDecode(json.token)
-      console.log("GOOD-login", json, decodedToken)
-      dispatch({
-        type: "LOGIN_SUCCESS",
-        payload: {
-          auth: {
-            token: json.token,
-            username,
-            userId: decodedToken.sub
-          },
-          user: {
-            id: json.userDetails.id,
-            username: json.userDetails.username,
-            fullname: json.userDetails.fullName,
-            email: json.userDetails.email,
-            bio: json.userDetails.bio,
-            currentCompany: json.userDetails.currentCompany,
-            linkedinUrl: json.userDetails.linkedin_url,
-            techStack: json.userDetails.techstack // .map(item => item.name),
+      if(json.error && json.error === "Invalid username or password"){
+        dispatch({
+          type: "API_CALL_RESULT",
+          payload: {message: `Login failed due to an invalid username or email and/or an invalid password`, active: true, error: true}
+        })
+      }else{
+        const decodedToken = jwtDecode(json.token)
+        console.log("GOOD-login", json, decodedToken)
+        dispatch({
+          type: "LOGIN_SUCCESS",
+          payload: {
+            auth: {
+              token: json.token,
+              username,
+              userId: decodedToken.sub
+            },
+            user: {
+              id: json.userDetails.id,
+              username: json.userDetails.username,
+              fullname: json.userDetails.fullName,
+              email: json.userDetails.email,
+              bio: json.userDetails.bio,
+              currentCompany: json.userDetails.currentCompany,
+              linkedinUrl: json.userDetails.linkedin_url,
+              techStack: json.userDetails.techstack // .map(item => item.name),
+            }
           }
-        }
-      })
+        })
+      }
     }).catch((err) => {
       console.log("ERR-login", err)
       dispatch({
