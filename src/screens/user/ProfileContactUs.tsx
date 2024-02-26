@@ -13,6 +13,26 @@ import { Separator } from '../../components/core/Separator';
 import LinearGradient from 'react-native-linear-gradient';
 import { GridView } from '../../components/common/GridView';
 import { Heading } from '../../components/common/Heading';
+import { RButton, RButtonText } from '../../components/core/RButton';
+
+const callouts = [
+  {
+    text: "Reach out for help or assistance",
+    icon: QUOTE,
+  },
+  {
+    text: "Provide Product feedback",
+    icon: QUESTION,
+  },
+  {
+    text: "Submit a question",
+    icon: QUESTION_CHECK,
+  },
+  {
+    text: "Inquire about services",
+    icon: QUIP,
+  },
+];
 
 export function ProfileContactUs(props){
 
@@ -27,28 +47,37 @@ export function ProfileContactUs(props){
   const [email, setEmail] = React.useState("")
   const [message, setMessage] = React.useState("")
 
-  const handleSubmitPress = () => {
-    
+  const [isValidated, setIsValidated] = React.useState(false);
+
+  const isValidName = () => {
+    return !!name
   }
 
-  const callouts = [
-    {
-      text: "Reach out for help or assistance",
-      icon: QUOTE,
-    },
-    {
-      text: "Provide Product feedback",
-      icon: QUESTION,
-    },
-    {
-      text: "Submit a question",
-      icon: QUESTION_CHECK,
-    },
-    {
-      text: "Inquire about services",
-      icon: QUIP,
-    },
-  ];
+  const isValidEmail = () => {
+    return !!email
+      && String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  }
+
+  const isValidMessage = () => {
+    return !!message
+  }
+
+  const validators = [isValidName, isValidEmail, isValidMessage];
+
+  const handleSubmitPress = () => {
+    const isValid = validators.map(validator => validator()).every(item => !!item)
+    if(isValid){
+      // TODO
+    }else{
+      setIsValidated(true);
+    }
+  }
+
+  const isValid = validators.map(validator => validator()).every(item => !!item)
 
   return (
     <View style={styles.container}>
@@ -81,6 +110,7 @@ export function ProfileContactUs(props){
         placeholder={"Enter name"}
         style={{marginTop: 16, widthX: 512}}
       />
+      {!isValidName() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter a name"}</Text>}
       <RTextInput 
         // label={"Email"}
         value={email}
@@ -88,6 +118,7 @@ export function ProfileContactUs(props){
         placeholder={"Enter email"}
         style={{marginTop: 16, widthX: 512}}
       />
+      {!isValidEmail() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter a vaid email"}</Text>}
       <RTextInput 
         // label={"Message"}
         value={message}
@@ -96,7 +127,11 @@ export function ProfileContactUs(props){
         numberOfLines={12}
         style={{marginTop: 16, widthX: 512}}
       />
-      <Button styles={{marginTop: 16, widthX: 512, justifyContent: 'center'}} title={"Submit your message"} onPress={handleSubmitPress}/>
+      {!isValidMessage() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter a message"}</Text>}
+      {/* <Button styles={{marginTop: 16, widthX: 512, justifyContent: 'center'}} title={"Submit your message"} onPress={handleSubmitPress}/> */}
+      <RButton active={isValid} onPress={handleSubmitPress} style={{marginTop: 16}}>
+        <RButtonText active={isValid} text={"Submit your message"}/>
+      </RButton>
       {/* </View> */}
     </View>
   )
