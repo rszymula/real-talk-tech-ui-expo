@@ -32,7 +32,7 @@ export function RButtonText({text, active = false, style = {}}){
 
 export function RButtonImage({inactiveImage, activeImage = null, active = false, style = {}}){
   return (
-    <View>
+    <View style={{alignSelf: 'center'}}>
       <Image
         source={active ? activeImage : inactiveImage}
         style={[styles.imageBase, style]}
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
   imageBase: {
     width: 12,
     height: 12,
+    // lignSelf: 'center'
   },
 });
 

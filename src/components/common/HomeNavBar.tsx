@@ -17,6 +17,7 @@ import MARKETPLACE_ACTIVE from '../../assets/marketplace_active.png';
 import LOGO_V2 from '../../assets/logo_v2.png';
 import { spacing } from '../../constants/styles';
 import { connect } from '../../state/reduxStore';
+import { RButton, RButtonImage, RButtonText } from '../core/RButton';
 // import BUYERAI from '../../assets/buyerai.png';
 
 const navRouteNames = [...tabs.map(tab => tab.routeName), RouteNames.PROFILE_USER, RouteNames.PROFILE_CREATE_HOME];
@@ -70,7 +71,13 @@ function RawHomeNavBar(props){
             {
               tabs.map(tab => {
                 return (
-                  <Button image={tab.routeName === currentRouteName ? tab.iconActive : tab.icon} title={tab.title} onPress={() => handleTabPress(tab)} styles={styles.tabButton} imageSize={12} imageWidthRatio={1.1} type={tab.routeName === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC}/>
+                  <RButton active={tab.routeName === currentRouteName} onPress={() => handleTabPress(tab)} style={{marginTop: 8, paddingTop: 6, paddingBottom: 6, margin: 4}}>
+                    <View style={{flexDirection: 'row'}}>
+                      <RButtonImage active={tab.routeName === currentRouteName} inactiveImage={tab.icon} activeImage={tab.iconActive} style={{width: 12 * 1.1}}/>
+                      <RButtonText active={tab.routeName === currentRouteName} text={tab.title} style={{marginLeft: 8}} />
+                    </View>
+                  </RButton>
+                  // <Button image={tab.routeName === currentRouteName ? tab.iconActive : tab.icon} title={tab.title} onPress={() => handleTabPress(tab)} styles={styles.tabButton} imageSize={12} imageWidthRatio={1.1} type={tab.routeName === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC}/>
                 );
               })
             }
