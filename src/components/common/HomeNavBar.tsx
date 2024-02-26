@@ -83,8 +83,14 @@ function RawHomeNavBar(props){
             }
           </View>)}
         <View style={styles.rightButtons}>
-          <Button image={RouteNames.PROFILE_WELCOME === currentRouteName ? NOTIFICATIONS_ACTIVE : NOTIFICATIONS} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
-          <Button image={RouteNames.PROFILE_USER === currentRouteName ? SETTINGS_ACTIVE : SETTINGS} imageWidthRatio={1.2} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
+          {/* <Button image={RouteNames.PROFILE_WELCOME === currentRouteName ? NOTIFICATIONS_ACTIVE : NOTIFICATIONS} onPress={handleAddProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_WELCOME === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} />
+          <Button image={RouteNames.PROFILE_USER === currentRouteName ? SETTINGS_ACTIVE : SETTINGS} imageWidthRatio={1.2} onPress={handleViewProfilePress} styles={styles.tabButton} type={RouteNames.PROFILE_USER === currentRouteName ? ButtonType.LOUD : ButtonType.BASIC} /> */}
+          <RButton active={RouteNames.PROFILE_WELCOME === currentRouteName} onPress={handleAddProfilePress} style={{marginTop: 8, margin: 4}}>
+            <RButtonImage active={RouteNames.PROFILE_WELCOME === currentRouteName} inactiveImage={NOTIFICATIONS} activeImage={NOTIFICATIONS_ACTIVE} style={{width: 14, height: 14}}/>
+          </RButton>
+          <RButton active={RouteNames.PROFILE_USER === currentRouteName} onPress={handleViewProfilePress} style={{marginTop: 8, margin: 4}}>
+            <RButtonImage active={RouteNames.PROFILE_USER === currentRouteName} inactiveImage={SETTINGS} activeImage={SETTINGS_ACTIVE} style={{width: 14 * 1.2, height: 14}}/>
+          </RButton>
         </View>
       </View>
     </View>
