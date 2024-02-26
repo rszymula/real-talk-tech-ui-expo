@@ -262,6 +262,25 @@ export function reducer(state = initialState, action){
         commentsLoading: false,
         commentsError: true,
       }
+    case 'COMMENT_UPVOTE_SUCCESS': {
+      const comment = state.comments[action.payload.commentId];
+      const up = action.payload.isUpvote ? comment.numUpvotes + 1: comment.numUpvotes;
+      const down = action.payload.isUpvote ? comment.numDownvotes : comment.numDownvotes + 1;
+      const userVote = action.payload.isUpvote ? comment.userVote + 1 : comment.userVote - 1;
+      console.log("UV", comment.userVote, userVote)
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          [action.payload.commentId]:
+            {...state.comments[action.payload.commentId],
+              numUpvotes: up,
+              numDownvotes: down,
+              userVote,
+            }
+        }
+      }
+    }
     case 'VENDOR_GROUPS_SUCCESS':
       const vendorGroupModified = action.payload.map(item => ({id: item.id, name: item.categoryName, icon: item.icon, vendorIds: []}))
       const vendorGroupMap = vendorGroupModified.reduce((accum, cur) => {

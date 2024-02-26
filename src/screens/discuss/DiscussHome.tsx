@@ -35,8 +35,9 @@ function Username(){
 // function RawComment({id, commentText, username, totalUpvotes, totalDownvotes, userVote, creationTime, navigation, upvoteComment}) {
 function RawComment({commentId, navigation, comments, upvoteComment}) {
 
-  const {commentText, username, totalUpvotes, totalDownvotes, userVote, creationTime} = comments[commentId];
-  console.log("oiuoiu", commentText)
+  const comment = comments[commentId];
+  const {commentText, username, totalUpvotes, totalDownvotes, userVote, creationTime} = comment;
+  console.log("oiuoiu", comment)
   
   const handleUsernamePress = () => {
     navigation.navigate(RouteNames.PROFILE_USER_OTHER, {username})

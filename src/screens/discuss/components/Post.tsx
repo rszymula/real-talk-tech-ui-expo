@@ -15,11 +15,21 @@ import { getCount } from "../../../utils/general";
 import { Link } from "../../../components/core/Link";
 import { fetchComments, makeComment, upvotePost } from "../../../services/DiscussService";
 
-function Comment({commentText, username, upvotes, creationTime, navigation}) {
+function RawComment({commentId, navigation, comments, upvoteComment}) {
+
+  const {commentText, username, totalUpvotes, totalDownvotes, userVote, creationTime} = comments[commentId];
   console.log("oiuoiu", commentText)
   
   const handleUsernamePress = () => {
     navigation.navigate(RouteNames.PROFILE_USER_OTHER, {username})
+  }
+
+  const handleUpvotePress = () => {
+    upvoteComment(commentId, true)
+  }
+
+  const handleDownvotePress = () => {
+    upvoteComment(commentId, false)
   }
 
   return (
@@ -43,10 +53,26 @@ function Comment({commentText, username, upvotes, creationTime, navigation}) {
           <Text style={styles.captionText}>{`| ${getDateText(creationTime)}`}</Text>
         </View>
         <Text style={[styles.bodyText, styles.description]}>{commentText}</Text>
+        <View style={{flexDirection: 'row', marginTop: 8}}>
+          <Text style={{fontSize: 12, color: colors.textRegular}}>{`${totalUpvotes - totalDownvotes} Upvotes`}</Text>
+          <TouchableOpacity onPress={handleUpvotePress} style={{marginLeft: 8}}>
+            <Image source={userVote > 0 ? UPVOTE_ACTIVE : UPVOTE_DEFAULT} style={{height: 16, width: 16}} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleDownvotePress} style={{marginLeft: 8}}>
+            <Image source={userVote < 0 ? DOWNVOTE_ACTIVE : DOWNVOTE_DEFAULT} style={{height: 16, width: 16}}  />
+          </TouchableOpacity>
+        </View>
       </View>
     </>
   )
 }
+const stp = (state) => ({
+  comments: state.comments,
+});
+const dtp = (dispatch, getState) => ({
+  upvoteComment: upvoteComment(dispatch, getState),
+})
+const Comment = connect(stp , dtp)(RawComment);
 
 function CommentsList({commentIds, comments, commentsLoading, commentsError, postId, makeComment, fetchComments, navigation, auth}){
 
