@@ -381,17 +381,25 @@ export function reducer(state = initialState, action){
         userError: true,
       }
     case 'USER_ENDORSE_SUCCESS':
+      // const endorsedUsername = action.payload.user.username
+      // const endorsedUser = 
       return {
         ...state,
         users: {
           ...state.users,
           [action.payload.user.username]: {
             ...state.users[action.payload.user.username],
+            // techStack: action.payload.user.techStack.map(skill => {
+            //   return {
+            //     ...skill,
+            //     endorsed: true,
+            //   }
+            // })
             techStack: action.payload.user.techStack.map(skill => {
-              return {
+              return skill.id === action.payload.item.id ? {
                 ...skill,
                 endorsed: true,
-              }
+              } : skill;
             })
           }
         },
