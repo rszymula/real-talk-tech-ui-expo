@@ -1,36 +1,19 @@
-import React from 'react';
-import { Text, View, StyleSheet, FlatList, TextInput, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
-import { TabView, SceneMap } from 'react-native-tab-view';
-import { Card } from '../../components/core/Card';
-import { InputBar } from '../../components/core/InputBar';
-import { Separator } from '../../components/core/Separator';
-import { RouteNames, INPUT_PLACEHOLDER, CategoryNames, categories, POSTS_COUNT_PER_PAGE, COMMENTS_COUNT_PER_PAGE } from '../../constants/constants';
-import { colors } from '../../context/themes';
-// import { getComments, getPostsWithCommentIdsAndUpvotes } from '../services/DiscussService';
-import { store } from '../../state/basicStore';
-import { connect } from '../../state/reduxStore';
-import { mockFeedResponse } from '../../data/discussMocks';
-import { Link } from '../../components/core/Link';
-import { fetchComments, fetchPosts, makeComment, upvotePost } from '../../services/DiscussService';
-import { createUser } from '../../services/UserServices';
-import { Button } from '../../components/core/Button';
-import UP from '../../assets/up.png';
-import SETTINGS from '../../assets/settings.png';
-import UPVOTE_DEFAULT from '../../assets/upvote_default.png';
-import UPVOTE_ACTIVE from '../../assets/upvote_active.png';
-import DOWNVOTE_DEFAULT from '../../assets/downvote_default.png';
-import DOWNVOTE_ACTIVE from '../../assets/downvote_active.png';
-import moment from 'moment';
-import { Heading } from '../../components/common/Heading';
-import { getDateText } from '../../utils/dateTime';
-import { getCount } from '../../utils/general';
-
-const POST_PAGE_OFFSET = 10;
-const COMMENT_OFFSET = 10;
-
-function Username(){
-
-}
+import React from "react";
+import { View, TouchableOpacity, Text, Image, StyleSheet, ActivityIndicator, FlatList } from "react-native";
+import { COMMENTS_COUNT_PER_PAGE, RouteNames } from "../../../constants/constants";
+import { colors } from "../../../context/themes";
+import { connect } from "../../../state/reduxStore";
+import { getDateText } from "../../../utils/dateTime";
+import UPVOTE_DEFAULT from '../../../assets/upvote_default.png';
+import UPVOTE_ACTIVE from '../../../assets/upvote_active.png';
+import DOWNVOTE_DEFAULT from '../../../assets/downvote_default.png';
+import DOWNVOTE_ACTIVE from '../../../assets/downvote_active.png';
+import UP from '../../../assets/up.png';
+import { InputBar } from "../../../components/core/InputBar";
+import { Separator } from "../../../components/core/Separator";
+import { getCount } from "../../../utils/general";
+import { Link } from "../../../components/core/Link";
+import { fetchComments, makeComment, upvotePost } from "../../../services/DiscussService";
 
 function Comment({commentText, username, upvotes, creationTime, navigation}) {
   console.log("oiuoiu", commentText)
@@ -144,17 +127,17 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
   )
 }
 
-
-// makePost(title, content, selectedCategories, skills, anonymous, auth)
-// id, title, body, user, commentIds, userVote, numUpvotes, numDownvotes, createdTimestamp, 
-function RawPost({ id, categories, title, body, user, commentIds, userVote, numUpvotes, numDownvotes, createdTimestamp, navigation, fetchComments, makeComment, comments, commentsLoading, commentsError, upvotePost, auth}){
+export function RawPost({ id, categories, title, body, user, commentIds, userVote, numUpvotes, numDownvotes, createdTimestamp, navigation, fetchComments, makeComment, comments, commentsLoading, commentsError, upvotePost, auth, initCommentsExpanded = false}){
 
   const {id: userId, username} = user;
 
-  const [commentsExpanded, setCommentsExpanded] = React.useState(false);
+  const [commentsExpanded, setCommentsExpanded] = React.useState(initCommentsExpanded);
+
+  console.log("COMMW", commentsExpanded)
+  console.log("whattt")
 
   const handlePostPress = () => {
-    navigation.navigate(RouteNames.DISCUSS_POST_DETAIL, {postId: id})
+    //navigation.navigate(RouteNames.DISCUSS_POST_DETAIL, {postId: id})
   }
 
   const handleCommentsPress = () => {
@@ -215,85 +198,18 @@ function RawPost({ id, categories, title, body, user, commentIds, userVote, numU
   )
 }
 
-const stpPost = (state) => ({comments: state.comments, commentsLoading: state.commentsLoading, commentsError: state.commentsError, auth: state.auth});
+const stpPost = (state) => ({
+  comments: state.comments,
+  commentsLoading: state.commentsLoading,
+  commentsError: state.commentsError,
+  auth: state.auth
+});
 const dtpPost  = (dispatch, getState) => ({
   fetchComments: fetchComments(dispatch),
   makeComment: makeComment(dispatch, getState),
   upvotePost: upvotePost(dispatch, getState),
-})
-const Post = connect(stpPost , dtpPost )(RawPost);
-
-
-
-function RawDiscussHome(props){
-
-  const {currentCategory, navigation, feed, posts, feedLoading, feedError, fetchPosts, auth} = props
-  console.log("QZ", feed)
-  const postsByCategory = feed[currentCategory].map(item => posts[item])
-  const categoryId = categories.find(item => item.name === currentCategory) || 0
-
-  const loadPosts = () => {
-    const categoryId = categories.find(item => item.name === currentCategory)?.id || -1
-    const postsByCategory = feed[currentCategory].map(item => posts[item])
-    const page = Math.ceil(postsByCategory.length / POSTS_COUNT_PER_PAGE + 1);
-    // const page = 4;
-    console.log("PAGEW", page, postsByCategory)
-    //fetchPosts(1, 1)
-    console.log("PAGEW", page)
-    fetchPosts(categoryId, auth, page)
-  }
-
-  React.useEffect(() => {
-    const postsByCategory = feed[currentCategory].map(item => posts[item])
-    if(postsByCategory.length === 0){
-      loadPosts()
-    }
-  }, [currentCategory])
-
-  console.log("PZZZ", postsByCategory)
-  console.log("E2", feedError)
-
-  return (
-    <>
-      {/* <Heading navigation={navigation}>
-      </Heading> */}
-      <Card styles={{widthX: 512, flexX: 1}}>
-        <InputBar 
-          onPress={(input) => {
-            navigation.navigate(RouteNames.DISCUSS_CREATE_POST, { input })
-          }}
-          title={"Create Post"}
-          placeholder={INPUT_PLACEHOLDER}
-        />
-        <View>
-          <FlatList 
-            data={postsByCategory}
-            keyExtractor={(item) => `${item.id}`}
-            renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
-            ItemSeparatorComponent={() => <Separator />}
-          />
-        </View>
-        <Link onPress={loadPosts} textLink={"Load More Posts..."} style={{alignSelf: 'center', margin: 16}}/>
-        {feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
-        {feedError[currentCategory] && (<View style={{margin: 32}}>
-          <Text style={{alignSelf: 'center', color: colors.textRegular}}>{"Failed loading data..."}</Text>
-          <Link onPress={loadPosts} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
-        </View>)}
-      </Card>
-    </>
-  )
-}
-const stpDiscussHome = (state) => ({
-  feed: state.feed,
-  posts: state.posts,
-  feedLoading: state.feedLoading,
-  feedError: state.feedError,
-  auth: state.auth,
 });
-const dtpDiscussHome  = (dispatch) => ({
-  fetchPosts: fetchPosts(dispatch), 
-})
-export const DiscussHome = connect(stpDiscussHome , dtpDiscussHome )(RawDiscussHome);
+export const Post = connect(stpPost , dtpPost )(RawPost);
 
 const styles = StyleSheet.create({
   container: {

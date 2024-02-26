@@ -43,7 +43,7 @@ export const routes = [
   },
   {
     name: RouteNames.DISCUSS_POST_DETAIL,
-    component: navBarProvider(DiscussPostDetail, true),
+    component: navBarProvider(DiscussPostDetail, false, false),
   },
   {
     name: RouteNames.DISCUSS_CREATE_POST,
