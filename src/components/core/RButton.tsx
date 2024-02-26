@@ -43,13 +43,14 @@ export function RButtonImage({inactiveImage, activeImage = null, active = false,
 
 const styles = StyleSheet.create({
   base: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    paddingLeft: 4,
-    paddingRight: 4,
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 16,
+    paddingRight: 16,
 
     borderWidth: 1,
     borderRadius: 4,
+    fontSize: 12,
   },
   active: {
     backgroundColor: colors.link,

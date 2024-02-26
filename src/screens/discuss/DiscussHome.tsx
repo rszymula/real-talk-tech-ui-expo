@@ -32,7 +32,7 @@ function getDateText(createdTimestamp){
   // console.log(moment.utc(new Date()))
 
   // const MS_IN_MIN = 60000
-  const res = moment.utc(new Date(createdTimestamp)).fromNow()
+  const res = moment(new Date(createdTimestamp)).local().fromNow()
   // const stamp = moment(new Date(createdTimestamp))
   // const now = moment(new Date());
   // const res = now.diff(stamp);

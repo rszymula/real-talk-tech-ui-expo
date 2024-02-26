@@ -435,7 +435,7 @@ export function reducer(state = initialState, action){
         apiCallResult: {
           message: action.payload.message,
           active: action.payload.active,
-          error: action.payload.message,
+          error: action.payload.error,
         }
       }
     default:

@@ -30,6 +30,7 @@ import { ProfileContactUs } from './screens/user/ProfileContactUs';
 import { AlternateNavBar } from './components/common/AlternateNavBar';
 import { spacing } from './constants/styles';
 import { DiscussPostDetail } from './screens/discuss/DiscussPostDetail';
+import { TopBanner } from './components/common/TopBanner';
 
 export const routes = [
   {
@@ -274,9 +275,7 @@ function navBarProvider(Component, hasCategories = false, hasTabs = true){
     return (
       <>
         {props.apiCallResult?.active && (
-        <View style={{backgroundColor: colors.link}}>
-          <Text style={{margin: 8, alignSelf: 'center', backgroundColor: colors.link, fontSize: 12, color: colors.background}}>{props.apiCallResult.message}</Text>
-        </View>
+        <TopBanner apiCallResult={props.apiCallResult}/>
       )}
       <View style={styles.rootContainer}>
         <HomeNavBar {...props} hasTabs={hasTabs} />

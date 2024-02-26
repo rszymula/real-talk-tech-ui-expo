@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TextInput } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet, TextInput, ActivityIndicator } from 'react-native';
 import { ButtonType, Button } from '../../components/core/Button';
 import { BUYERAI_PLACEHOLDER, DEFAULT_TAB, RouteNames } from '../../constants/constants';
 import { colors } from '../../context/themes';
@@ -8,6 +8,7 @@ import { RTextInput } from '../../components/core/RTextInput';
 import { connect } from '../../state/reduxStore';
 import { signup } from '../../services/UserServices';
 import { SelectedItems } from '../../components/common/SelectedItems';
+import { Error } from '../../components/common/Error';
 
 enum ProfileStep {
   INDUSTRY = "Industry",
@@ -66,7 +67,7 @@ const bodySignup = {
   interestAreas: [],
 }
 
-function RawProfileQuestion({route, navigation, industry, categories, interests, signup}) {
+function RawProfileQuestion({route, navigation, industry, categories, interests, signup, auth, authLoading, authError}) {
 
   const [text, setText] = React.useState('')
   const [items, setItems] = React.useState([])
@@ -80,6 +81,15 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
   const stepDetails = getStepDetailsFunc(industry, categories, interests)(step)
   const {next, description, selections, placeholder, stepNumber} = stepDetails
 
+  React.useEffect(() => {
+    console.log({authLoading, authError, auth})
+    if(!authLoading){
+      if(!authError && !!auth.token){
+        navigation.navigate(RouteNames.DISCUSS_HOME)
+      }
+    }
+  }, [authLoading, auth])
+
   const handleNextPress = () => {
     console.log(next)
     if(!next){
@@ -90,16 +100,16 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
         password: route.params.password,
         techStack: route.params.techStack,
         currentCompany: route.params.company,
-        industryInvolvement: route.params[ProfileStep.INDUSTRY].map(item => item.industry_name),
-        workCategories: route.params[ProfileStep.DO].map(item => item.category_name),
+        industryInvolvement: route.params[ProfileStep.INDUSTRY].map(item => item.name),
+        workCategories: route.params[ProfileStep.DO].map(item => item.name),
         linkedinUrl: route.params.linkedIn,
         bio: route.params.bio,
         // interestAreas: route.params[ProfileStep.SOFTWARE],
-        interestAreas: items.map(item => item.interest_area_name),
+        interestAreas: items.map(item => item.name),
       }
       console.log("SIGNUPW", body)
       signup(body)
-      navigation.navigate(DEFAULT_TAB)
+      // navigation.navigate(DEFAULT_TAB)
     }else{
       console.log("ITEMS SEND", items)
       const stepItems = [...items]
@@ -107,6 +117,11 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
       navigation.push(RouteNames.PROFILE_QUESTION, {...route.params, step: next, [step]: stepItems})
     }
   }
+
+  // currently when you restart, error state remains, and autimatically causes error screen to show up 
+  // const handleRestartPress = () => {
+  //   navigation.navigate(RouteNames.PROFILE_WELCOME)
+  // }
 
   const handleOnSelect = (newItem) => {
     if(items.every(item => item.name !== newItem.name)){
@@ -116,6 +131,23 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
 
   const handleRemoveItem = (deleteItem) => {
     setItems(items => items.filter(item => item.name !== deleteItem))
+  }
+
+  if(authLoading){
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator />
+      </View>
+    )
+  }
+
+  if(authError){
+    return (
+      <View style={styles.container}>
+        {/* <Error handleRestartPress={handleRestartPress} handleRetryPress={handleNextPress}/> */}
+        <Error handleRetryPress={handleNextPress}/>
+      </View>
+    )
   }
 
   return (
@@ -145,6 +177,9 @@ const stp = (state) => ({
   industry: state.industry,
   categories: state.categories,
   interests: state.interests,
+  authLoading: state.authLoading,
+  authError: state.authError,
+  auth: state.auth,
 });
 const dtp = (dispatch) => ({
   signup: signup(dispatch),

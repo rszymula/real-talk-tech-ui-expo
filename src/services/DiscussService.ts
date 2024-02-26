@@ -570,28 +570,35 @@ export function makePost(dispatch, getState){
       return res.json()
       // return res.text()
     }).then(json => {
-      const post = {
-        id: json.post_id,
-        title,
-        body,
-        user: {
-          id: userId,
-          username: state.users[userId].username,
-        },
-        categories: categories.map(item => item.name),
-        vendors, // : vendors.map(item => item.id),
-        commentIds: [],
-        userVote: 0,
-        numComments: 0,
-        numUpvotes: 0,
-        numDownvotes: 0,
-        createdTimestamp: new Date().toISOString(),
-        updatedTimestamp: new Date().toISOString()
+      if(json.error){
+        dispatch({
+          type: "API_CALL_RESULT",
+          payload: {message: `Post creation ${FAIL_MESSAGE}`, active: true, error: true}
+        })
+      }else{
+        const post = {
+          id: json.post_id,
+          title,
+          body,
+          user: {
+            id: userId,
+            username: state.users[userId].username,
+          },
+          categories: categories.map(item => item.name),
+          vendors, // : vendors.map(item => item.id),
+          commentIds: [],
+          userVote: 0,
+          numComments: 0,
+          numUpvotes: 0,
+          numDownvotes: 0,
+          createdTimestamp: new Date().toISOString(),
+          updatedTimestamp: new Date().toISOString()
+        }
+        console.log("GOOD-makePost", json, post)
+        dispatch({type: "POSTS_CREATE_SUCCESS", payload: post})
+        console.log("INBETWEEN")
+        dispatch({type: "API_CALL_RESULT", payload: {message: "Post has been successfully created", active: true, error: false}})
       }
-      console.log("GOOD-makePost", json, post)
-      dispatch({type: "POSTS_CREATE_SUCCESS", payload: post})
-      console.log("INBETWEEN")
-      dispatch({type: "API_CALL_RESULT", payload: {message: "Post has been successfully created", active: true, error: false}})
     }).catch((err) => {
       console.log("ERR-makePost", err)
       dispatch({

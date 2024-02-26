@@ -11,8 +11,9 @@ import { connect } from '../../state/reduxStore';
 import { login } from '../../services/UserServices';
 import { fetchOnboarding } from '../../services/UserServices';
 import { Heading } from '../../components/common/Heading';
+import { TopBanner } from '../../components/common/TopBanner';
 
-function RawProfileLogin({navigation, login, loginLoading, loginError, auth}) {
+function RawProfileLogin({navigation, login, authLoading, authError, auth, apiCallResult, dispatch}) {
 
   // const [email, setEmail] = React.useState('');
   const [usernameOrEmail, setUsernameOrEmail] = React.useState('');
@@ -43,63 +44,74 @@ function RawProfileLogin({navigation, login, loginLoading, loginError, auth}) {
     }
   }
 
+  if(apiCallResult?.active){
+    setTimeout(() => {
+      dispatch({type: "API_CALL_RESULT", payload: {...apiCallResult, active: !apiCallResult.active}})
+    }, 4000)
+  }
+
   React.useEffect(() => {
-    console.log({loginLoading, loginError, auth})
-    if(!loginLoading){
-      if(!loginError && !!auth.token){
+    console.log({authLoading, authError, auth})
+    if(!authLoading){
+      if(!authError && !!auth.token){
         navigation.navigate(RouteNames.DISCUSS_HOME)
       }
     }
-  }, [loginLoading, auth])
+  }, [authLoading, auth])
 
   return (
-    <View style={styles.container}>
-      {/* <Image source={REALTALKTECH_WHITE} style={{width: 256, height: 32, alignSelf: 'center'}}/> */}
-      <Image source={LOGO_V2} style={{width: 192, height: 42, alignSelf: 'center'}}/>
-      <Heading navigation={navigation}>
-        <View>
-          <Text style={styles.title}>
-            Welcome!
-          </Text>
-          <Text style={{color: colors.textRegular, margin: 8, alignSelf: 'center'}}>
-            Login to join the conversation!
-          </Text>
-        </View>
-      </Heading>
-        {/* <RTextInput 
-          onChangeText={setEmail}
-          value={email}
-          placeholder={"Enter your email"}
-          style={styles.input}
-        /> */}
-        <RTextInput 
-          onChangeText={setUsernameOrEmail}
-          value={usernameOrEmail}
-          placeholder={"Enter your username or email"}
-          style={styles.input}
-        />
-        {!isValidUsernameOrEmail() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter your username or email"}</Text>}
-        <RTextInput 
-          onChangeText={setPassword}
-          value={password}
-          placeholder={"Enter your password"}
-          secureTextEntry
-          style={styles.input}
-        />
-        {!isValidPassword() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter your password"}</Text>}
-      <Button title="Login" onPress={handleLoginPress} styles={{marginTop: 8, widthX: 512, justifyContent: 'space-around'}}/>
-      <Link style={{margin: 16, alignSelf: 'center'}} textLeft="Forgot your password?" textLink="Reset Password" onPress={handleResetPasswordPress} />
-    </View>
+    <>
+    {apiCallResult.active && <TopBanner apiCallResult={apiCallResult}/>}
+      <View style={styles.container}>
+        {/* <Image source={REALTALKTECH_WHITE} style={{width: 256, height: 32, alignSelf: 'center'}}/> */}
+        <Image source={LOGO_V2} style={{width: 192, height: 42, alignSelf: 'center'}}/>
+        <Heading navigation={navigation}>
+          <View>
+            <Text style={styles.title}>
+              Welcome!
+            </Text>
+            <Text style={{color: colors.textRegular, margin: 8, alignSelf: 'center'}}>
+              Login to join the conversation!
+            </Text>
+          </View>
+        </Heading>
+          {/* <RTextInput 
+            onChangeText={setEmail}
+            value={email}
+            placeholder={"Enter your email"}
+            style={styles.input}
+          /> */}
+          <RTextInput 
+            onChangeText={setUsernameOrEmail}
+            value={usernameOrEmail}
+            placeholder={"Enter your username or email"}
+            style={styles.input}
+          />
+          {!isValidUsernameOrEmail() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter your username or email"}</Text>}
+          <RTextInput 
+            onChangeText={setPassword}
+            value={password}
+            placeholder={"Enter your password"}
+            secureTextEntry
+            style={styles.input}
+          />
+          {!isValidPassword() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter your password"}</Text>}
+        <Button title="Login" onPress={handleLoginPress} styles={{marginTop: 8, widthX: 512, justifyContent: 'space-around'}}/>
+        <Link style={{margin: 16, alignSelf: 'center'}} textLeft="Forgot your password?" textLink="Reset Password" onPress={handleResetPasswordPress} />
+      </View>
+    </>
   )
 }
 
 const stp = (state) => ({
   auth: state.auth,
-  loginLoading: state.loginLoading,
-  loginError: state.loginError,
+  authLoading: state.authLoading,
+  authError: state.authError,
+  apiCallResult: state.apiCallResult,
 })
 const dtp = (dispatch) => ({
   login: login(dispatch),
+  dispatch,
 })
 export const ProfileLogin = connect(stp, dtp)(RawProfileLogin)
 

@@ -75,6 +75,7 @@ export function RawProfileCreateHome({route, navigation, skills}) {
   const handleNextPress = () => {
     // const techStack = selectedSkills// .map(selected => selected.name)
     const techStack = [...selectedSkills.map(item => item.name), ...customSkills];
+    console.log("SELECTED1", techStack)
     const isValid = validators.map(validator => validator()).every(item => !!item)
     if(isValid){
       navigation.navigate(RouteNames.PROFILE_QUESTION, {email, password, fullname, username, linkedIn, bio, company, techStack, step: "Industry"})
