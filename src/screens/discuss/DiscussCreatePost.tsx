@@ -25,11 +25,26 @@ export function RawDiscussCreatePost(props){
   const [content, setContent] = React.useState('');
   const [anonymous, setAnonymous] = React.useState(false);
 
-  const [showVendorDropdown, setShowVendorDropdown] = React.useState(false);
-  const [showCategoryDropdown, setShowCategoryDropdown] = React.useState(false);
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const [selectedSkills, setSelectedSkills] = React.useState([]);
   const [customSkills, setCustomSkills] = React.useState([]);
+
+  const [isValidated, setIsValidated] = React.useState(false);
+
+  const containsCategory = () => {
+    return selectedCategories.length > 0
+  }
+
+  const isValidTitle = () => {
+    return !!title
+  }
+
+  const isValidContent = () => {
+    return !!content
+  }
+
+
+  const validators = [containsCategory, isValidTitle, isValidContent];
 
   console.log({categories, skills})
 
@@ -69,8 +84,23 @@ export function RawDiscussCreatePost(props){
     // TODO use id, createdTimestamp, and updatedTimestamp from api call return
     console.log("AW", auth)
     // makePost(title, content, selectedCategories, skills, anonymous, auth)
-    makePost(title, content, selectedCategories, [...selectedSkills.map(item => item.name), ...customSkills], anonymous, auth)
-    handleExit();
+    const isValid = validators.map(validator => validator()).every(item => !!item)
+    if(isValid){
+      makePost(
+        title,
+        content,
+        selectedCategories, 
+        [
+          ...selectedSkills.map(item => item.name),
+          ...customSkills
+        ],
+        anonymous,
+        auth
+      );
+      handleExit();
+    } else {
+      setIsValidated(true)
+    }
   }
 
   const handleSelectCategory = (item) => {
@@ -123,6 +153,7 @@ export function RawDiscussCreatePost(props){
             onSelect={handleSelectCategory}
           />
           <SelectedItems itemStyle={{color: colors.border, backgroundColor: colors.input}} items={selectedCategories.map(item => item.name)} onDelete={handleDeleteCategory}/>
+          {!containsCategory() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please select at least one category"}</Text>}
           <RTextInput 
             style={{marginTop: 8}}
             label="Title"
@@ -130,6 +161,7 @@ export function RawDiscussCreatePost(props){
             value={title}
             placeholder="Enter post title"
           />
+          {!isValidTitle() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter a post title"}</Text>}
           <RTextInput 
             style={{marginTop: 8}}
             onChangeText={setContent}
@@ -137,6 +169,7 @@ export function RawDiscussCreatePost(props){
             placeholder="Enter your post"
             numberOfLines={12}
           />
+          {!isValidContent() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter content"}</Text>}
           <RTextInput 
             style={{marginTop: 8, position: 'relative', zIndex: 100}}
             label="Tag Software"
