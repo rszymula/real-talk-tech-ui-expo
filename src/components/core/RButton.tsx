@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
   },
   textBase: {
-    fontSize: 12
+    fontSize: 12,
+    alignSelf: 'center',
   },
   textActive: {
     color: colors.background,

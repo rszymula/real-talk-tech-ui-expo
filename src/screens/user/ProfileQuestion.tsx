@@ -9,6 +9,7 @@ import { connect } from '../../state/reduxStore';
 import { signup } from '../../services/UserServices';
 import { SelectedItems } from '../../components/common/SelectedItems';
 import { Error } from '../../components/common/Error';
+import { RButton, RButtonText } from '../../components/core/RButton';
 
 enum ProfileStep {
   INDUSTRY = "Industry",
@@ -167,7 +168,9 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
         style={styles.input}
       />
       <SelectedItems style={{marginTop: 4}} items={items.map(item => item.name)} onDelete={handleRemoveItem}/>
-      <Button title={!!next ? "Next Step" : "Finish"} onPress={handleNextPress} styles={{marginTop: 8, widthX: 512, justifyContent: 'space-around'}}/>
+      <RButton onPress={handleNextPress} style={{marginTop: 8}}>
+        <RButtonText text={!!next ? "Next Step" : "Finish"}/>
+      </RButton>
       <Text style={{marginTop: 256, color: colors.textRegular, alignSelf: 'center'}}>{`Question ${stepNumber} of ${Object.keys(ProfileStep).length}`}</Text>
     </View>
   )

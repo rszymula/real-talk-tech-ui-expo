@@ -12,6 +12,7 @@ import { login } from '../../services/UserServices';
 import { fetchOnboarding } from '../../services/UserServices';
 import { Heading } from '../../components/common/Heading';
 import { TopBanner } from '../../components/common/TopBanner';
+import { RButton, RButtonText } from '../../components/core/RButton';
 
 function RawProfileLogin({navigation, login, authLoading, authError, auth, apiCallResult, dispatch}) {
 
@@ -96,7 +97,9 @@ function RawProfileLogin({navigation, login, authLoading, authError, auth, apiCa
             style={styles.input}
           />
           {!isValidPassword() && isValidated && <Text style={{color: colors.error, fontSize: 10}}>{"Please enter your password"}</Text>}
-        <Button title="Login" onPress={handleLoginPress} styles={{marginTop: 8, widthX: 512, justifyContent: 'space-around'}}/>
+        <RButton onPress={handleLoginPress} style={{marginTop: 8}}>
+          <RButtonText text={"Login"}/>
+        </RButton>
         <Link style={{margin: 16, alignSelf: 'center'}} textLeft="Forgot your password?" textLink="Reset Password" onPress={handleResetPasswordPress} />
       </View>
     </>
