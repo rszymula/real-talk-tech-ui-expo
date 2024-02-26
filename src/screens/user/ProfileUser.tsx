@@ -19,7 +19,7 @@ import { Heading } from '../../components/common/Heading';
 
 export function RawProfileUser(props){
 
-  const { navigation, route, user, editUser, logout} = props;
+  const { navigation, route, user, skills, editUser, logout} = props;
 
   console.log("USD", user)
 
@@ -34,6 +34,39 @@ export function RawProfileUser(props){
   const [currentCompany, setCompany] = React.useState(user.currentCompany)
   const [linkedinUrl, setLinkedin] = React.useState(user.linkedinUrl)
   const [techStack, setTechStack] = React.useState(user.techStack.map(item => item.name));
+
+  const [skill, setSkill] = React.useState('');
+  // const [selectedSkills, setSelectedSkills] = React.useState(user.techStack.map(item => item.name));
+  // const [customSkills, setCustomSkills] = React.useState([]);
+
+  const handleTypeSkill = (text) => {
+    setSkill(text)
+  }
+
+
+  const handleSelectSkill = (item) => {
+    console.log("ITEMTOADW", item)
+    if (!techStack.includes(item.name)) {
+      setTechStack(skill => [...skill, item.name])
+    }
+  }
+
+  const handleSubmitCustomSkill = (item) => {
+    console.log("ITEMTOADW", item)
+    if (!techStack.includes(item)) {
+      setTechStack(skill => [...skill, item])
+    }
+  }
+
+  // const handleDeleteSkill = (item) => {
+  //   console.log({selectedSkills, customSkills, item})
+  //   setSelectedSkills(selectedSkills => selectedSkills.filter(skill => skill.name !== item))
+  //   setCustomSkills(customSkills => customSkills.filter(skill => skill !== item));
+  // }
+
+  const handleDeleteTechStack = (deleteItem) => {
+    setTechStack(techStack => techStack.filter(item => item !== deleteItem))
+  }
 
   const handleEditPress = () => {
     setEditing(true);
@@ -59,10 +92,6 @@ export function RawProfileUser(props){
     }
     editUser(body);
     setEditing(false);
-  }
-
-  const handleDeleteTechStack = (deleteItem) => {
-    setTechStack(techStack => techStack.filter(item => item !== deleteItem))
   }
 
   const handleLogout = () => {
@@ -151,7 +180,22 @@ export function RawProfileUser(props){
       <Text style={styles.h3}>
         Your Tech Stack
       </Text>
-      <SelectedItems items={techStack} style={{marginTop: 8}} onDelete={editing ? (item) => handleDeleteTechStack(item) : null}/>
+      {editing && (<RTextInput 
+        style={{position: 'relative', zIndex: 100, marginTop: 8}}
+        label="Tech Stack"
+        onChangeText={handleTypeSkill}
+        value={skill}
+        placeholder="What software do you use?"
+        selections={skills}
+        onSelect={handleSelectSkill}
+        onSubmit={handleSubmitCustomSkill}
+        dropUp
+      />)}
+      <SelectedItems
+        items={techStack}
+        style={{marginTop: 8}}
+        onDelete={editing ? (item) => handleDeleteTechStack(item) : null}
+      />
       <Link style={{marginTop: 16}} textLink={"Log out from account"} onPress={handleLogout}/>
     </View>
   )
@@ -159,6 +203,7 @@ export function RawProfileUser(props){
 
 const stp = (state) => ({
   user: state.users[state.auth.userId],
+  skills: state.skills,
 });
 const dtp = (dispatch, getState) => ({
   editUser: editUser(dispatch, getState),
