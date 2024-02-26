@@ -94,7 +94,7 @@ export function RTextInput({
 
 const styles = StyleSheet.create({
   labeledInput: {
-    padding: 2,
+    // padding: 2,
     flexDirection: 'row',
     backgroundColor: colors.input,
     borderRadius: 4,
