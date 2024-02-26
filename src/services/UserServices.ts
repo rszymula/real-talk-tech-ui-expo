@@ -155,7 +155,17 @@ export function fetchUser(dispatch){
       return res.json()
     }).then(json => {
       console.log("GOOD-fetchUser", json)
-      dispatch({type: "USER_SUCCESS", payload: {...json.userDetails, techStack: json.vendors.map(item => ({id: item.vendorId, name: item.vendorName}))}})
+      dispatch({type: "USER_SUCCESS", payload: {
+        ...json.userDetails,
+        techStack: json.vendors?.map(
+          item => ({
+            id: item.vendorId,
+            name: item.vendorName,
+            endorsed: item.endorsedByRequester,
+            // TODO endorsementCount: item.endorsementCount,
+          })
+        ) || []
+      }})
     }).catch((err) => {
       console.log("ERR-fetchUser", err)
     })

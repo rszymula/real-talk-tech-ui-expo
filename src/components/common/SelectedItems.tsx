@@ -27,13 +27,14 @@ export function SelectedItems(props){
 
 export function SelectedItemsClickable(props){
   const {items, onDelete, style, onPress, itemStyle = {}} = props
+  console.log("SELECTITEMZ", items)
   return (
     <View style={[{flexDirection: 'row', justifyContent: 'flex-start', flexWrap: 'wrap'}, style]}>
       {items.map(item => {
         return (
-          <TouchableOpacity onPress={() => onPress(item)} style={[item.endorsedByRequester ? styles.itemClickableInactive : styles.itemClickableActive, itemStyle]}>
-            <Text style={item.endorsedByRequester ? styles.textClickableInactive : styles.textClickableActive}>{item.name}</Text>
-            {!item.endorsedByRequester && (<View style={{marginLeft: 4, marginTop: 2}}>
+          <TouchableOpacity onPress={() => onPress(item)} style={[item.endorsed ? styles.itemClickableInactive : styles.itemClickableActive, itemStyle]}>
+            <Text style={item.endorsed ? styles.textClickableInactive : styles.textClickableActive}>{item.name}</Text>
+            {!item.endorsed && (<View style={{marginLeft: 4, marginTop: 2}}>
               <Image source={THUMBSUP} style={{width: 11, height: 11}}/>
             </View>)}
             {/* {!!onDelete && (<TouchableOpacity onPress={() => onDelete(item)}>

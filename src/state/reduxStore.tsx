@@ -380,6 +380,22 @@ export function reducer(state = initialState, action){
         userLoading: false,
         userError: true,
       }
+    case 'USER_ENDORSE_SUCCESS':
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          [action.payload.user.username]: {
+            ...state.users[action.payload.user.username],
+            techStack: action.payload.user.techStack.map(skill => {
+              return {
+                ...skill,
+                endorsed: true,
+              }
+            })
+          }
+        },
+      }
     case 'USER_EDIT_SUCCESS':
       const res5 = {
         ...state,
