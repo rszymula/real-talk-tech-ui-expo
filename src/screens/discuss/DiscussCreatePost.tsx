@@ -62,6 +62,18 @@ export function RawDiscussCreatePost(props){
     },
   ]
 
+  const handleSetTitle = (newTitle) => {
+    if(newTitle.length < 200){
+      setTitle(newTitle)
+    }
+  }
+
+  // const handleSetContent = (newContent) => {
+  //   if(newContent.length < 200){
+  //     setTitle(newContent)
+  //   }
+  // }
+
   const handleTypeCategory = (text) => {
     setCategory(text)
   }
@@ -160,7 +172,7 @@ export function RawDiscussCreatePost(props){
           <RTextInput 
             style={{marginTop: 8}}
             label="Title"
-            onChangeText={setTitle}
+            onChangeText={handleSetTitle}
             value={title}
             placeholder="Enter post title"
           />
@@ -178,7 +190,7 @@ export function RawDiscussCreatePost(props){
             label="Tag Software"
             onChangeText={handleTypeSkill}
             value={skill}
-            placeholder="Add Technology"
+            placeholder="Add Technology (select OR manually enter)"
             selections={skills}
             onSelect={handleSelectSkill}
             onSubmit={handleSubmitCustomSkill}
@@ -193,7 +205,7 @@ export function RawDiscussCreatePost(props){
             style={{marginTop: 8, position: 'relative', zIndex: 100}}
             label="Hide Username"
             onChangeText={null}
-            value={anonymous ? "Yes, post anonymously" : "No, share to discussion"}
+            value={anonymous ? "Yes, post anonymously" : "No"}
             freeze
             placeholder="Enter Text"
             selections={anonymousSelections}

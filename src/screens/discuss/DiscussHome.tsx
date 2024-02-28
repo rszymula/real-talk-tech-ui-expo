@@ -263,7 +263,8 @@ function RawDiscussHome(props){
   const categoryId = categories.find(item => item.name === currentCategory) || 0
 
   const loadPosts = () => {
-    const categoryId = categories.find(item => item.name === currentCategory)?.id || -1
+    console.log("CATW", categories)
+    const categoryId = categories.find(item => item.name === currentCategory)?.id || 0
     const postsByCategory = feed[currentCategory].map(item => posts[item])
     const page = Math.ceil(postsByCategory.length / POSTS_COUNT_PER_PAGE + 1);
     // const page = 4;
@@ -301,6 +302,8 @@ function RawDiscussHome(props){
             keyExtractor={(item) => `${item.id}`}
             renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
             ItemSeparatorComponent={() => <Separator />}
+            // onEndReached={loadPosts}
+            // onEndReachedThreshold={0.5}
           />
         </View>
         <Link onPress={loadPosts} textLink={"Load More Posts..."} style={{alignSelf: 'center', margin: 16}}/>

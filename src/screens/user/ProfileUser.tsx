@@ -185,7 +185,7 @@ export function RawProfileUser(props){
         label="Tech Stack"
         onChangeText={handleTypeSkill}
         value={skill}
-        placeholder="What software do you use?"
+        placeholder="What software do you use? (select OR manually enter)"
         selections={skills}
         onSelect={handleSelectSkill}
         onSubmit={handleSubmitCustomSkill}
