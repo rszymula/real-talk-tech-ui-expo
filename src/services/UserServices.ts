@@ -1,5 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 import { FAIL_MESSAGE } from "../constants/constants";
+import { getConfig } from "../context/config";
 
 export function logout(dispatch, getState){
   return () => {
@@ -10,7 +11,8 @@ export function logout(dispatch, getState){
 export function signup(dispatch){
   return (body) => {
     console.log("SIGNINGUPX", body)
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/signup`
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/signup`
+    const url = `${getConfig().monoServiceUrl}/signup`
     const params = {
       method: "PUT",
       headers: {
@@ -24,11 +26,11 @@ export function signup(dispatch){
     }).then(json => {
       console.log("BEFOREDECODE-signup", json)
       if(json.error){
-        dispatch({type: "LOGIN_ERROR"})
+        dispatch({type: "SIGNUP_ERROR"})
       }else{
         const decodedToken = jwtDecode(json.token)
         console.log("GOOD-signup", json, decodedToken)
-        dispatch({type: "LOGIN_SUCCESS", payload: {
+        dispatch({type: "SIGNUP_SUCCESS", payload: {
           auth: {
             token: json.token,
             username: body.username,
@@ -45,7 +47,7 @@ export function signup(dispatch){
             currentCompany: body.currentCompany,
             linkedinUrl: body.linkedinUrl,
             // occupationalAreas: body.workCategories,
-            techStack: body.techStack,
+            techStack: body.techStack.map(item => ({name: item, endorsed: false, endorsementCount: 0})),
           }
         }})
         dispatch({
@@ -56,7 +58,7 @@ export function signup(dispatch){
       
     }).catch((err) => {
       console.log("ERR-signup", err)
-      dispatch({type: "LOGIN_ERROR"})
+      dispatch({type: "SIGNUP_ERROR"})
       dispatch({
         type: "API_CALL_RESULT",
         payload: {message: `Signup ${FAIL_MESSAGE}`, active: true, error: true}
@@ -68,7 +70,8 @@ export function signup(dispatch){
 export function login(dispatch){
   return (username, password) => {
     dispatch({type: "LOGIN_LOADING"})
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/login`
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/login`
+    const url = `${getConfig().monoServiceUrl}/login`
     console.log("LOGINX", {username, password})
     const params = {
       method: "POST",
@@ -89,6 +92,7 @@ export function login(dispatch){
           type: "API_CALL_RESULT",
           payload: {message: `Login failed due to an invalid username or email and/or an invalid password`, active: true, error: true}
         })
+        dispatch({type: "LOGIN_ERROR"})
       }else{
         const decodedToken = jwtDecode(json.token)
         console.log("GOOD-login", json, decodedToken)
@@ -126,7 +130,8 @@ export function login(dispatch){
 
 export function fetchOnboarding(dispatch) {
   return () => {
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/onboard`
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/onboard`
+    const url = `${getConfig().monoServiceUrl}/onboard`
     const params = {
       method: "GET",
       headers: {
@@ -148,7 +153,8 @@ export function fetchUser(dispatch){
   return (username, auth) => {
     dispatch({type: "USER_LOADING"})
     const {userId, token} = auth;
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/user/${username}`
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/user/${username}`
+    const url = `${getConfig().monoServiceUrl}/user/${username}`
     // const url = `ec2-44-201-178-172.compute-1.amazonaws.com/user/${username}`
     const params = {
       method: "GET",
@@ -169,7 +175,7 @@ export function fetchUser(dispatch){
             id: item.vendorId,
             name: item.vendorName,
             endorsed: item.endorsedByRequester,
-            // TODO endorsementCount: item.endorsementCount,
+            endorsementCount: item.endorsementCount,
           })
         ) || []
       }})
@@ -183,7 +189,8 @@ export function endorseUser(dispatch, getState){
   return (user, item) => {
     const store = getState();
     const {userId, token} = store.auth;
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/endorse`;
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/endorse`;
+    const url = `${getConfig().monoServiceUrl}/endorse`;
     const body = {
       endorseeUsername: user.username,
       vendorId: item.id
@@ -229,7 +236,8 @@ export function editUser(dispatch, getState){
     }
     console.log("STW", state, body, formattedBody)
     const {userId, token} = state.auth;
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/editProfile`
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/editProfile`
+    const url = `${getConfig().monoServiceUrl}/editProfile`
     const params = {
       method: "PUT",
       headers: {

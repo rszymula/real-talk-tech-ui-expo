@@ -68,7 +68,7 @@ const bodySignup = {
   interestAreas: [],
 }
 
-function RawProfileQuestion({route, navigation, industry, categories, interests, signup, auth, authLoading, authError}) {
+function RawProfileQuestion({route, navigation, industry, categories, interests, signup, auth, signupLoading, signupError}) {
 
   const [text, setText] = React.useState('')
   const [items, setItems] = React.useState([])
@@ -83,13 +83,13 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
   const {next, description, selections, placeholder, stepNumber} = stepDetails
 
   React.useEffect(() => {
-    console.log({authLoading, authError, auth})
-    if(!authLoading){
-      if(!authError && !!auth.token){
+    console.log({signupLoading, signupError, auth})
+    if(!signupLoading){
+      if(!signupError && !!auth.token){
         navigation.navigate(RouteNames.DISCUSS_HOME)
       }
     }
-  }, [authLoading, auth])
+  }, [signupLoading, auth])
 
   const handleNextPress = () => {
     console.log(next)
@@ -134,7 +134,7 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
     setItems(items => items.filter(item => item.name !== deleteItem))
   }
 
-  if(authLoading){
+  if(signupLoading){
     return (
       <View style={styles.container}>
         <ActivityIndicator />
@@ -142,7 +142,7 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
     )
   }
 
-  if(authError){
+  if(signupError){
     return (
       <View style={styles.container}>
         {/* <Error handleRestartPress={handleRestartPress} handleRetryPress={handleNextPress}/> */}
@@ -180,8 +180,8 @@ const stp = (state) => ({
   industry: state.industry,
   categories: state.categories,
   interests: state.interests,
-  authLoading: state.authLoading,
-  authError: state.authError,
+  signupLoading: state.signupLoading,
+  signupError: state.signupError,
   auth: state.auth,
 });
 const dtp = (dispatch) => ({

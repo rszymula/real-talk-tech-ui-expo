@@ -32,8 +32,8 @@ export function SelectedItemsClickable(props){
     <View style={[{flexDirection: 'row', justifyContent: 'flex-start', flexWrap: 'wrap'}, style]}>
       {items.map(item => {
         return (
-          <TouchableOpacity onPress={() => onPress(item)} style={[item.endorsed ? styles.itemClickableInactive : styles.itemClickableActive, itemStyle]}>
-            <Text style={item.endorsed ? styles.textClickableInactive : styles.textClickableActive}>{item.name}</Text>
+          <TouchableOpacity onPress={item.endorsed ? () => {} : () => onPress(item)} style={[item.endorsed ? styles.itemClickableInactive : styles.itemClickableActive, itemStyle]}>
+            <Text style={item.endorsed ? styles.textClickableInactive : styles.textClickableActive}>{`${item.name} ${item.endorsementCount}`}</Text>
             {!item.endorsed && (<View style={{marginLeft: 4, marginTop: 2}}>
               <Image source={THUMBSUP} style={{width: 11, height: 11}}/>
             </View>)}

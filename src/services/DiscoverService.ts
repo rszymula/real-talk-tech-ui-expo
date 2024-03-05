@@ -1,3 +1,4 @@
+import { getConfig } from "../context/config";
 
 export enum CompanyType {
   DATABASE = 'Database',
@@ -109,7 +110,8 @@ export function fetchVendorGroups(dispatch){
   return (auth, page = 1) => {
     console.log("FVW2")
     const {userId, token} = auth;
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/categories`;
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/categories`;
+    const url = `${getConfig().monoServiceUrl}/discover/categories`;
     // const url2 = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/items/1`;
     // const url3 = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/user/1`;
     const params = {
@@ -135,7 +137,8 @@ export function fetchVendorsByGroup(dispatch){
   return (vendorGroupId, auth, page = 1) => {
     console.log("FVW2")
     const {userId, token} = auth;
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/categories/${vendorGroupId}?page=${page}?count=${5}`;
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/categories/${vendorGroupId}?page=${page}?count=${5}`;
+    const url = `${getConfig().monoServiceUrl}/discover/categories/${vendorGroupId}?page=${page}?count=${5}`;
     // const url2 = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/items/1`;
     // const url3 = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/user/1`;
     const params = {
@@ -162,7 +165,8 @@ export function fetchVendorDetails(dispatch, getState){
     const state = getState();
     const {userId, token} = state.auth;
     // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/categories`;
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/items/${vendorId}`;
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/items/${vendorId}`;
+    const url = `${getConfig().monoServiceUrl}/discover/items/${vendorId}`;
     // const url3 = `http://ec2-3-95-180-146.compute-1.amazonaws.com/discover/user/1`;
     const params = {
       method: "GET",

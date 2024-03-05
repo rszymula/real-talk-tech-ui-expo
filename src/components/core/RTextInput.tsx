@@ -39,7 +39,7 @@ export function RTextInput({
   const top = dropUp ? -(len * 22) : dropdownStyle.top;
   // const top = -22
 
-  console.log("NUMMW", top)
+  // console.log("NUMMW", top)
 
   return (
     <View style={style}>

@@ -1,9 +1,11 @@
-const DEFAULT_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc3OTg5MzUsImlhdCI6MTcwNzc4ODEzNSwic3ViIjo2fQ.JnUVPGQuVICt_DldpsQjiClADP71XmS3jrhVnhYA_Jo';
+const DEFAULT_TOKEN = 
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDk2MDkxNDEsImlhdCI6MTcwOTU5ODM0MSwic3ViIjoxfQ.-xbu5-85HhJjN_jXVTX29Oyu1ws89c4Al_UpeVTwd-Q"
 
 // User -------------------------------------
 
 const fetchUser = (username, token = DEFAULT_TOKEN) => {
-  const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/user/${username}`
+  // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/user/${username}`
+  const url = `http://localhost:5000/user/${username}/1`
   const params = {
     method: "GET",
     headers: {
@@ -20,7 +22,8 @@ const fetchUser = (username, token = DEFAULT_TOKEN) => {
     console.log("ERR-fetchUser", err)
   })
 }
-fetchUser("msmith21")
+// fetchUser("msmith21")
+fetchUser("elongates")
 
 const endorseUser = (body, token = DEFAULT_TOKEN) => {
   const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/endorseUser`
@@ -48,7 +51,7 @@ const bodyEndorse = {
   endorseeUsername: 2,
   vendorId: 5,
 }
-endorseUser(bodyEndorse)
+//endorseUser(bodyEndorse)
 
 
 

@@ -85,6 +85,10 @@ const initialState = {
     userId: -1,
     token: "",
   },
+  loginLoading: false,
+  loginError: false,
+  signupLoading: false,
+  signupError: false,
   users: {},
   userLoading: false,
   userError: null,
@@ -358,20 +362,20 @@ export function reducer(state = initialState, action){
         ...state,
         auth: action.payload.auth,
         users: {...state.users, [action.payload.user.id]: action.payload.user},
-        authLoading: false,
-        authError: false,
+        loginLoading: false,
+        loginError: false,
       }
     case 'LOGIN_LOADING':
       return {
         ...state,
-        authLoading: true,
-        authError: false,
+        loginLoading: true,
+        loginError: false,
       }
     case 'LOGIN_ERROR':
       return {
         ...state,
-        authLoading: false,
-        authError: true,
+        loginLoading: false,
+        loginError: true,
       }
     case 'LOGOUT':
       return {
@@ -380,6 +384,28 @@ export function reducer(state = initialState, action){
           userId: -1,
           token: "",
         },
+        loginLoading: false,
+        loginError: false,
+      }
+    case 'SIGNUP_SUCCESS':
+      return {
+        ...state,
+        auth: action.payload.auth,
+        users: {...state.users, [action.payload.user.id]: action.payload.user},
+        signupLoading: false,
+        signupError: false,
+      }
+    case 'SIGNUP_LOADING':
+      return {
+        ...state,
+        signupLoading: true,
+        signupError: false,
+      }
+    case 'SIGNUP_ERROR':
+      return {
+        ...state,
+        signupLoading: false,
+        signupError: true,
       }
     case 'USER_SUCCESS':
       return {
@@ -419,6 +445,7 @@ export function reducer(state = initialState, action){
               return skill.id === action.payload.item.id ? {
                 ...skill,
                 endorsed: true,
+                endorsementCount: skill.endorsementCount + 1,
               } : skill;
             })
           }

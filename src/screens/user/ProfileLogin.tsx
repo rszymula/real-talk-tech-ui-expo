@@ -14,7 +14,7 @@ import { Heading } from '../../components/common/Heading';
 import { TopBanner } from '../../components/common/TopBanner';
 import { RButton, RButtonText } from '../../components/core/RButton';
 
-function RawProfileLogin({navigation, login, authLoading, authError, auth, apiCallResult, dispatch}) {
+function RawProfileLogin({navigation, login, loginLoading, loginError, auth, apiCallResult, dispatch}) {
 
   // const [email, setEmail] = React.useState('');
   const [usernameOrEmail, setUsernameOrEmail] = React.useState('');
@@ -52,13 +52,13 @@ function RawProfileLogin({navigation, login, authLoading, authError, auth, apiCa
   }
 
   React.useEffect(() => {
-    console.log({authLoading, authError, auth})
-    if(!authLoading){
-      if(!authError && !!auth.token){
+    console.log({loginLoading, loginError, auth})
+    if(!loginLoading){
+      if(!loginError && !!auth.token){
         navigation.navigate(RouteNames.DISCUSS_HOME)
       }
     }
-  }, [authLoading, auth])
+  }, [loginLoading, auth])
 
   return (
     <>
@@ -108,8 +108,8 @@ function RawProfileLogin({navigation, login, authLoading, authError, auth, apiCa
 
 const stp = (state) => ({
   auth: state.auth,
-  authLoading: state.authLoading,
-  authError: state.authError,
+  loginLoading: state.loginLoading,
+  loginError: state.loginError,
   apiCallResult: state.apiCallResult,
 })
 const dtp = (dispatch) => ({

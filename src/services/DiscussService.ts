@@ -1,4 +1,5 @@
 import { COMMENTS_COUNT_PER_PAGE, FAIL_MESSAGE, POSTS_COUNT_PER_PAGE, categories } from "../constants/constants";
+import { getConfig } from "../context/config";
 
 const mockCommentTag = [
   {
@@ -392,7 +393,8 @@ export function fetchPosts(dispatch){
     const {userId, token} = auth;
     // const userId = 17
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/feed?categoryId=${categoryIdSend}&userId=${userId}&page=${page}&count=${count}`
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/feed?categoryId=${categoryIdSend}&userId=${userId}&page=${page}&count=${count}`
+    const url = `${getConfig().monoServiceUrl}/feed?categoryId=${categoryIdSend}&userId=${userId}&page=${page}&count=${count}`
     console.log("URLW", url)
     const params = {
       method: "GET",
@@ -429,7 +431,8 @@ export function upvotePost(dispatch, getState){
     const {userId, token} = auth;
     // const userId = 17
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/upvotePost`
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/upvotePost`
+    const url = `${getConfig().monoServiceUrl}/upvotePost`
     const params = {
       method: "PUT",
       headers: {
@@ -468,7 +471,8 @@ export function fetchComments(dispatch){
     console.log("C1")
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
     const {userId, token} = auth;
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/getCommentsForPost?postId=${postId}&page=${page}&count=${count}`
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/getCommentsForPost?postId=${postId}&page=${page}&count=${count}`
+    const url = `${getConfig().monoServiceUrl}/getCommentsForPost?postId=${postId}&page=${page}&count=${count}`
     const params = {
       method: "GET",
       headers: {
@@ -497,7 +501,8 @@ export function makeComment(dispatch, getState){
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
     const {userId, token} = auth;
     const username = state.users[userId].username
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/makeComment`
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/makeComment`
+    const url = `${getConfig().monoServiceUrl}/makeComment`
     const params = {
       method: "POST",
       headers: {
@@ -556,7 +561,8 @@ export function makePost(dispatch, getState){
       isAnonymous,
     }
     console.log("MPW", rawBody)
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/makePost`
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/makePost`
+    const url = `${getConfig().monoServiceUrl}/makePost`
     const params = {
       method: "POST",
       headers: {
@@ -625,7 +631,8 @@ export function upvoteComment(dispatch, getState){
     const {userId, token} = auth;
     // const userId = 17
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
-    const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/upvoteComment`
+    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/upvoteComment`
+    const url = `${getConfig().monoServiceUrl}/upvoteComment`
     const params = {
       method: "PUT",
       headers: {
