@@ -14,12 +14,14 @@ import { Heading } from '../../components/common/Heading';
 
 
 function VendorDetail(props){
-  const { vendorName, vendorType, description} = props;
+  const { vendorName, vendorType, vendorLogoUrl, vendorHomepageUrl, description} = props;
 
   return (
       <ListItem
         heading={vendorName}
         subheading={vendorType}
+        image={vendorLogoUrl}
+        link={vendorHomepageUrl}
         body={description}
       />
   );
