@@ -268,9 +268,10 @@ function RawDiscussHome(props){
     // console.log("CATW", categories)
     const categoryId = categories.find(item => item.name === currentCategory)?.id || 0
     const postsByCategory = feed[currentCategory].map(item => posts[item])
-    const page = Math.ceil(postsByCategory.length / POSTS_COUNT_PER_PAGE + 1);
+    // const page = Math.ceil(postsByCategory.length / POSTS_COUNT_PER_PAGE + 1);
+    const page = postsByCategory.length / POSTS_COUNT_PER_PAGE + 1;
     // const page = 4;
-    console.log("PAGEW", page, postsByCategory)
+    console.log("PAGEW FUUUCK", page, postsByCategory)
     //fetchPosts(1, 1)
     // console.log("PAGEW", page)
     fetchPosts(categoryId, auth, page)
@@ -302,12 +303,16 @@ function RawDiscussHome(props){
         {/* <ScrollView> */}
           {postsByCategory.length > 0 && (<FlatList 
             data={postsByCategory}
-            keyExtractor={(item) => `${item.id}`}
+            keyExtractor={(item) => {
+              console.log("EATSHIT", item)
+              // return `FUCKYOU${Math.random() * 100}`
+              return `ID${item.id}`
+            }}
             renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
             ItemSeparatorComponent={() => <Separator />}
             // onEndReached={() => console.log("ONENDDDDDDDDDW")}
             initialNumToRender={3}
-            // onEndReached={loadPosts}
+            onEndReached={loadPosts}
             onEndReachedThreshold={0.7}
             //onMomentumScrollBegin = {() => {setOnEndReachedCalledDuringMomentum(false)}}
             // onEndReached = {() => {
@@ -317,16 +322,16 @@ function RawDiscussHome(props){
             //     }
             //   }
             // }
-            onEndReached={({ distanceFromEnd }) => {
-                if (distanceFromEnd < 0) return;
-                loadPosts()
-              }
-            }
-            // ListFooterComponent={feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
+            // onEndReached={({ distanceFromEnd }) => {
+            //     if (distanceFromEnd < 0) return;
+            //     loadPosts()
+            //   }
+            // }
+            ListFooterComponent={feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
           />)}
         {/* </ScrollView> */}
-        {/* <Link onPress={loadPosts} textLink={"Load More Posts..."} style={{alignSelf: 'center', margin: 16}}/> */}
-        {feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
+        {/* <Link onPress={loadPosts} textLink={"Load More Posts..."} style={{alignSelf: 'center', margin: 16}}/>
+        {feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />} */}
         {feedError[currentCategory] && (<View style={{margin: 32}}>
           <Text style={{alignSelf: 'center', color: colors.textRegular}}>{"Failed loading data..."}</Text>
           <Link onPress={loadPosts} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
