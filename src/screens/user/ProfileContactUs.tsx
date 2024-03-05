@@ -14,23 +14,31 @@ import LinearGradient from 'react-native-linear-gradient';
 import { GridView } from '../../components/common/GridView';
 import { Heading } from '../../components/common/Heading';
 import { RButton, RButtonText } from '../../components/core/RButton';
+import REACH_HELP from '../../assets/contactUs/reach_help.png';
+import SUBMIT_QUESTION from '../../assets/contactUs/submit_question.png';
+import PROVIDE_FEEDBACK from '../../assets/contactUs/provide_feedback.png';
+import INQUIRE_SERVICES from '../../assets/contactUs/inquire_services.png';
 
 const callouts = [
   {
     text: "Reach out for help or assistance",
-    icon: QUOTE,
+    // icon: QUOTE,
+    icon: REACH_HELP,
   },
   {
     text: "Provide Product feedback",
-    icon: QUESTION,
+    // icon: QUESTION,
+    icon: SUBMIT_QUESTION,
   },
   {
     text: "Submit a question",
-    icon: QUESTION_CHECK,
+    // icon: QUESTION_CHECK,
+    icon: PROVIDE_FEEDBACK,
   },
   {
     text: "Inquire about services",
-    icon: QUIP,
+    // icon: QUIP,
+    icon: INQUIRE_SERVICES,
   },
 ];
 
@@ -92,12 +100,13 @@ export function ProfileContactUs(props){
       <GridView 
         elements={callouts}
         renderElement={(element, idx, navigation) => {
-          const background = idx % 2 === 0 ? colors.gradientBlue : colors.gradientPurple;
+          // const background = idx % 2 === 0 ? colors.gradientBlue : colors.gradientPurple;
           return (
             <View style={{flexDirection: 'row', alignItems: 'center', width: 240, marginTop: 8}}>
-              <View style={{justifyContent: 'space-around', alignItems: 'center', borderRadius: 28, width: 28, height: 28, backgroundColor: background}}>
+              {/* <View style={{justifyContent: 'space-around', alignItems: 'center', borderRadius: 28, width: 28, height: 28, backgroundColor: background}}>
                 <Image source={element.icon} style={{width: 14, height: 12}}/>
-              </View>
+              </View> */}
+              <Image source={element.icon} style={{width: 28, height: 24}}/>
               <Text style={{color: colors.textHighlight, fontSize: 12, marginLeft: 8}}>{element.text}</Text>
             </View>
           )
