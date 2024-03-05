@@ -19,11 +19,13 @@ import { spacing } from '../../constants/styles';
 import { connect } from '../../state/reduxStore';
 import { RButton, RButtonImage, RButtonText } from '../core/RButton';
 // import BUYERAI from '../../assets/buyerai.png';
+import { useIsFocused } from '@react-navigation/native';
 
 const navRouteNames = [...tabs.map(tab => tab.routeName), RouteNames.PROFILE_USER, RouteNames.PROFILE_CREATE_HOME];
 
 function getMostRecentNavRoute(routes: Array<any>){
   // using routes?.reverse()?.find does not work, since it seems to first sort and then do binary search. We need it sorted as it wsa to start
+  console.log("ROUTITW", routes)
   for(let i = routes.length - 1; i < routes.length; i--){
     if(navRouteNames.includes(routes[i].name)){
       return routes[i].name
@@ -39,25 +41,38 @@ function RawHomeNavBar(props){
   const {navigation, hasTabs = true, apiCallResult} = props;
   console.log("APIW", props)
 
+  const isFocused = useIsFocused();
+
   const navState = navigation.getState()
-  const currentRouteName = getMostRecentNavRoute(navState.routes);
+  //const currentRouteName = getMostRecentNavRoute(navState.routes);
+
+  const [currentRouteName, setCurrentRouteName] = React.useState(getMostRecentNavRoute(navState.routes));
+
+  React.useEffect(() => {
+    console.log("EFFECTINGIT", props, navState, currentRouteName)
+    setCurrentRouteName(getMostRecentNavRoute(navState.routes));
+  }, [isFocused])
 
   console.log({currentRouteName})
 
   const handleTabPress = (tab) => {
-    navigation.navigate(tab.routeName)
+    // navigation.navigate(tab.routeName)
+    navigation.push(tab.routeName)
   }
 
   const handleViewProfilePress = () => {
-    navigation.navigate(RouteNames.PROFILE_USER)
+    // navigation.navigate(RouteNames.PROFILE_USER)
+    navigation.push(RouteNames.PROFILE_USER)
   }
 
   const handleAddProfilePress = () => {
-    navigation.navigate(RouteNames.PROFILE_WELCOME)
+    // navigation.navigate(RouteNames.PROFILE_WELCOME)
+    navigation.push(RouteNames.PROFILE_WELCOME)
   }
 
   const handleNavigateHomePress = () => {
-    navigation.navigate(RouteNames.DISCUSS_HOME)
+    // navigation.navigate(RouteNames.DISCUSS_HOME)
+    navigation.push(RouteNames.DISCUSS_HOME)
   }
 
   return (

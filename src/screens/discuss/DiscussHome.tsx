@@ -289,7 +289,9 @@ function RawDiscussHome(props){
   // console.log("PZZZ", postsByCategory)
   // console.log("E2", feedError)
 
-  console.log("FEED IT FUCK", feedLoading)
+  // console.log("FEED IT FUCK", feedLoading)
+
+  console.log("REND_DISCUSS")
 
   return (
     <>

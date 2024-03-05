@@ -277,6 +277,7 @@ export function Root(){
 
 function navBarProvider(Component, hasCategories = false, hasTabs = true){
   // const ComponentWithBottomBar = bottomBarProvider(Component)
+  console.log("REDNW-navBar", Component)
   const ComponentWithSideBar = sideBarProvider(Component, hasCategories)
   const stp = (state) => ({
     apiCallResult: state.apiCallResult
