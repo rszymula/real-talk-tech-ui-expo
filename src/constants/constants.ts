@@ -156,3 +156,51 @@ export const tabs = [
 ]
 
 export const FAIL_MESSAGE = "failed due to an issue on our end. Please try again. If the error continues, come back at a later time";
+
+import SALES_TOOLS_IMG from '../assets/discover/sales_tools.png'
+import MARKETING_IMG from '../assets/discover/marketing.png'
+import ANALYTICS_TOOLS_IMG from '../assets/discover/analytics_tools.png'
+import CAD_PLM_IMG from '../assets/discover/cad_plm.png'
+import COLLAB_IMG from '../assets/discover/collab.png'
+import COMMERCE_IMG from '../assets/discover/comerce.png'
+import CONTENT_MGMT_IMG from '../assets/discover/content_mgmt.png'
+import CUSTOMER_SERVICE_IMG from '../assets/discover/customer_service.png'
+import DATA_PRIVACY_IMG from '../assets/discover/data_privacy.png'
+import DESIGN_IMG from '../assets/discover/design.png'
+import DEVELOPMENT_IMG from '../assets/discover/development.png'
+import DIGITAL_AD_IMG from '../assets/discover/digital_ad.png'
+import ERP_IMG from '../assets/discover/erp.png'
+import GOVERNANCE_IMG from '../assets/discover/governance.png'
+import HOSTING_IMG from '../assets/discover/hosting.png'
+import HR_IMG from '../assets/discover/hr.png'
+import IT_INFRA_IMG from '../assets/discover/it_infra.png'
+import IT_MGMT_IMG from '../assets/discover/it_mgmt.png'
+import SECURITY_IMG from '../assets/discover/security.png'
+import SUPPLY_LOGISTICS_IMG from '../assets/discover/supply_logistics.png'
+import VERTICAL_INDUSTRY_IMG from '../assets/discover/vertical_industry.png'
+
+// Temporary, should get SVG's frpm API response
+export const discoverGroupsImages = {
+  1: SALES_TOOLS_IMG,
+  2: MARKETING_IMG,
+  3: ANALYTICS_TOOLS_IMG,
+  4: CAD_PLM_IMG,
+  5: COLLAB_IMG,
+  6: COMMERCE_IMG,
+  7: CONTENT_MGMT_IMG,
+  8: CUSTOMER_SERVICE_IMG,
+  9: DATA_PRIVACY_IMG,
+  10: DESIGN_IMG,
+  11: DEVELOPMENT_IMG,
+  12: DIGITAL_AD_IMG,
+  13: ERP_IMG,
+  14: GOVERNANCE_IMG,
+  15: HOSTING_IMG,
+  16: HR_IMG,
+  17: IT_INFRA_IMG,
+  18: IT_MGMT_IMG,
+  19: SECURITY_IMG,
+  20: SUPPLY_LOGISTICS_IMG,
+  21: VERTICAL_INDUSTRY_IMG,
+};
+

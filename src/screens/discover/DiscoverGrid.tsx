@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, FlatList, SafeAreaView, TouchableOpacity, Image
 import { ButtonType, Button } from '../../components/core/Button';
 import { Card } from '../../components/core/Card';
 import { Separator } from '../../components/core/Separator';
-import { RouteNames } from '../../constants/constants';
+import { RouteNames, discoverGroupsImages } from '../../constants/constants';
 import { colors } from '../../context/themes';
 // import { getCompanies } from '../services/DiscoverService';
 import { store } from '../../state/basicStore';
@@ -25,13 +25,16 @@ const renderElement = (item, idx, navigation) => {
   }
 
   console.log("SVGW", item.icon)
+  const image = discoverGroupsImages[item.id];
   return (
-    <Card styles={{flexDirection: 'row', justifyContent: 'space-between', width: 128, marginRight: 16, marginBottom: 16 ,padding: 0, backgroundColor: colors.input}}>
+    <Card styles={{flexDirection: 'row', justifyContent: 'space-between', width: 176, marginRight: 16, marginBottom: 16 ,padding: 0, backgroundColor: colors.input}}>
       <View style={{flexDirection: 'row', flexShrink: 1, padding: 16, alignItems: 'center'}}>
       {/* <Svg width="80" height="80" style={{width: 80, height: 80}}>
         <Image href={item.icon} />
       </Svg> */}
-        <Text style={{flexDirection: 'row', width: 128, color: colors.textRegular, fontSize: 12}}>
+        <Image source={image} style={{width: 32, height: 32}}/>
+        {/* <Text style={{flexDirection: 'row', width: 128, color: colors.textRegular, fontSize: 12}}> */}
+        <Text style={{color: colors.textRegular, fontSize: 12, marginLeft: 16}}>
           {item.name}
         </Text>
       </View>
