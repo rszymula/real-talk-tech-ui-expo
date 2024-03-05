@@ -7,7 +7,7 @@ import LOGO_V2 from '../../assets/logo_v2.png';
 import { RouteNames } from '../../constants/constants';
 import { Link } from '../../components/core/Link';
 import { RTextInput } from '../../components/core/RTextInput';
-import { fetchOnboarding } from '../../services/UserServices';
+import { fetchOnboarding, reload } from '../../services/UserServices';
 import { connect } from '../../state/reduxStore';
 import { testAwsS3, testAwsS3V2 } from '../../utils/aws';
 import Svg, {
@@ -17,6 +17,7 @@ import Svg, {
 } from 'react-native-svg';
 import { RButton, RButtonText } from '../../components/core/RButton';
 import { getConfig } from '../../context/config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PASSWORD_MIN_LENGTH = 6;
 
@@ -35,7 +36,7 @@ function useStateWithCallback(init){
   return [emailAvailable, setEmailAvailableWithCallback];
 }
 
-export function RawProfileWelcome({navigation, fetchOnboarding}) {
+export function RawProfileWelcome({navigation, fetchOnboarding, auth, reload}) {
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -45,6 +46,16 @@ export function RawProfileWelcome({navigation, fetchOnboarding}) {
   const [emailAvailableError, setEmailAvailableError] = React.useState(false);
 
   const [isValidated, setIsValidated] = React.useState(false)
+
+  // React.useEffect(() => {
+  //   AsyncStorage.getItem("auth")
+  //   .then(() => {
+
+  //   })
+  //   .then(() => {
+  //     navigation.navigate(RouteNames.DISCUSS_HOME)
+  //   })
+  // })
 
   const isValidEmail = () => {
     return !!email 
@@ -152,8 +163,18 @@ export function RawProfileWelcome({navigation, fetchOnboarding}) {
   }
 
   React.useEffect(() => {
+    reload();
     fetchOnboarding()
   }, [])
+
+  React.useEffect(() => {
+    if(auth.userId > 0){
+      console.log("FUCKYOU", auth)
+      navigation.navigate(RouteNames.DISCUSS_HOME)
+    }else{
+      console.log("SUCK COCK", auth)
+    }
+  }, [auth])
 
   return (
     <View style={styles.container}>
@@ -193,9 +214,11 @@ export function RawProfileWelcome({navigation, fetchOnboarding}) {
   )
 }
 const stp = (state) => ({
+  auth: state.auth
 });
 const dtp = (dispatch, getState) => ({
   fetchOnboarding: fetchOnboarding(dispatch),
+  reload: reload(dispatch, getState),
   // fetchUsername: fetchUsername(dispatch, getState)
   // fetchEmail: fetchEmail(dispatch, getState)
 });

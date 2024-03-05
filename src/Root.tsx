@@ -31,6 +31,7 @@ import { AlternateNavBar } from './components/common/AlternateNavBar';
 import { spacing } from './constants/styles';
 import { DiscussPostDetail } from './screens/discuss/DiscussPostDetail';
 import { TopBanner } from './components/common/TopBanner';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const routes = [
   {
@@ -234,22 +235,39 @@ function alternateNavBarProvider(Component){
   }
 }
 
+function RawNavigation(){
+  // const token = AsyncStorage.getItem("token");
+  // AsyncStorage.clear();
+  return (
+    <NavigationContainer>
+      {/* <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName={!!token ? RouteNames.DISCUSS_HOME : RouteNames.PROFILE_WELCOME}> */}
+      <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName={RouteNames.PROFILE_WELCOME}>
+        {
+          routes.map(route => {
+            return (
+              <Stack.Screen name={route.name} component={route.component} />
+            )
+          })
+        }
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}
+const stp = (state) => ({
+});
+const dtp = (dispatch, getState) => ({
+  dispatch,
+});
+export const Navigation = connect(stp, dtp)(RawNavigation)
+
+
 export function Root(){
   const store = createStore(reducer);
+  const token = AsyncStorage.getItem("token");
   return (
     <View style={{backgroundColor: colors.background}}>
       <ReduxContext.Provider value={store}>
-        <NavigationContainer>
-          <Stack.Navigator screenOptions={{headerShown: false}}>
-            {
-              routes.map(route => {
-                return (
-                  <Stack.Screen name={route.name} component={route.component} />
-                )
-              })
-            }
-          </Stack.Navigator>
-        </NavigationContainer>
+        <Navigation />
       </ReduxContext.Provider>
       {/* <Text style={{position: 'absolute', bottom: 20, right: 0, color: colors.textRegular}}>{"LKSDJF"}</Text> */}
     </View>

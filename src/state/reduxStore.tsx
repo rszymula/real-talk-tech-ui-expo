@@ -195,7 +195,8 @@ export function reducer(state = initialState, action){
     console.log("123123", res)
     return res
     case 'POSTS_LOADING':
-      return {
+      console.log("WTFFFF WHERE ARE YOU", action.payload)
+      const resFuck = {
         ...state,
         feedLoading: {
           ...state.feedLoading,
@@ -206,6 +207,8 @@ export function reducer(state = initialState, action){
           [action.payload]: false,
         },
       }
+      console.log("RESFUCKYOU", resFuck)
+      return resFuck
     case 'POSTS_ERROR':
       return {
         ...state,
@@ -384,6 +387,13 @@ export function reducer(state = initialState, action){
           userId: -1,
           token: "",
         },
+        loginLoading: false,
+        loginError: false,
+      }
+    case 'RELOAD':
+      return {
+        ...state,
+        auth: action.payload,
         loginLoading: false,
         loginError: false,
       }

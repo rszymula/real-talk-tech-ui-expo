@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COMMENTS_COUNT_PER_PAGE, FAIL_MESSAGE, POSTS_COUNT_PER_PAGE, categories } from "../constants/constants";
 import { getConfig } from "../context/config";
 
@@ -389,30 +390,37 @@ export function fetchPosts(dispatch){
   return (categoryId, auth, page = 1, count = POSTS_COUNT_PER_PAGE) => {
     const categoryIdSend = categoryId === 0 ? null : categoryId;
     console.log("CATSEW", categoryIdSend)
+    console.log("DISPATCHING BITCH", categories, categoryId, categoryIdSend, categories.find(cat => cat.id === categoryId)?.name)
     dispatch({type: "POSTS_LOADING", payload: categories.find(cat => cat.id === categoryId)?.name})
-    const {userId, token} = auth;
-    // const userId = 17
-    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
-    // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/feed?categoryId=${categoryIdSend}&userId=${userId}&page=${page}&count=${count}`
-    const url = `${getConfig().monoServiceUrl}/feed?categoryId=${categoryIdSend}&userId=${userId}&page=${page}&count=${count}`
-    console.log("URLW", url)
-    const params = {
-      method: "GET",
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
-    }
-    console.log("POSTSZ", url, params)
-    fetch(url, params).then(res => {
-      return res.json()
-    }).then(json => {
-      console.log("GOOD-fetchPosts", json)
-      dispatch({type: "POSTS_SUCCESS", payload: {category: categories.find(cat => cat.id === categoryId)?.name, data: json.posts}})
-    }).catch((err) => {
-      console.log("ERR-fetchPosts", err)
-      dispatch({type: "POSTS_ERROR", payload: categories.find(cat => cat.id === categoryId)?.name})
+    console.log("DISPATCHED BITCH")
+    //const {userId, token} = auth;
+    // const {userId, token} = JSON.parse(AsyncStorage.getItem("auth").then)
+    AsyncStorage.getItem("auth").then(auth => {
+      const {userId, token} = JSON.parse(auth);
+      // const userId = 17
+      // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
+      // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/feed?categoryId=${categoryIdSend}&userId=${userId}&page=${page}&count=${count}`
+      const url = `${getConfig().monoServiceUrl}/feed?categoryId=${categoryIdSend}&userId=${userId}&page=${page}&count=${count}`
+      console.log("URLW", url)
+      const params = {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      }
+      console.log("POSTSZ", url, params)
+      fetch(url, params).then(res => {
+        return res.json()
+      }).then(json => {
+        console.log("GOOD-fetchPosts", json)
+        dispatch({type: "POSTS_SUCCESS", payload: {category: categories.find(cat => cat.id === categoryId)?.name, data: json.posts}})
+      }).catch((err) => {
+        console.log("ERR-fetchPosts", err)
+        dispatch({type: "POSTS_ERROR", payload: categories.find(cat => cat.id === categoryId)?.name})
+      })
     })
+    
   }
 }
 

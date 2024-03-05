@@ -1,10 +1,24 @@
 import { jwtDecode } from "jwt-decode";
 import { FAIL_MESSAGE } from "../constants/constants";
 import { getConfig } from "../context/config";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export function logout(dispatch, getState){
   return () => {
-    dispatch({type: "LOGOUT"})
+    AsyncStorage.clear().then(() => {
+      dispatch({type: "LOGOUT"})
+    })
+  }
+}
+
+export function reload(dispatch, getState){
+  return () => {
+    AsyncStorage.getItem("auth").then((auth) => {
+      if(auth) {
+        const authParsed = JSON.parse(auth)
+        dispatch({type: "RELOAD", payload: authParsed})
+      }
+    })
   }
 }
 
@@ -30,12 +44,14 @@ export function signup(dispatch){
       }else{
         const decodedToken = jwtDecode(json.token)
         console.log("GOOD-signup", json, decodedToken)
+        const auth = {
+          token: json.token,
+          username: body.username,
+          userId: decodedToken.sub
+        };
+        AsyncStorage.setItem("auth", JSON.stringify(auth));
         dispatch({type: "SIGNUP_SUCCESS", payload: {
-          auth: {
-            token: json.token,
-            username: body.username,
-            userId: decodedToken.sub
-          },
+          auth,
           user: {
             id: decodedToken.sub,
             username: body.username,
@@ -96,14 +112,16 @@ export function login(dispatch){
       }else{
         const decodedToken = jwtDecode(json.token)
         console.log("GOOD-login", json, decodedToken)
+        const auth = {
+          token: json.token,
+          username,
+          userId: decodedToken.sub
+        };
+        AsyncStorage.setItem("auth", JSON.stringify(auth));
         dispatch({
           type: "LOGIN_SUCCESS",
           payload: {
-            auth: {
-              token: json.token,
-              username,
-              userId: decodedToken.sub
-            },
+            auth: auth,
             user: {
               id: json.userDetails.id,
               username: json.userDetails.username,
