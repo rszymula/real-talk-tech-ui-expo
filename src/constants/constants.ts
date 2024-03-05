@@ -125,7 +125,7 @@ export const INPUT_PLACEHOLDER = 'Share your SaaS experiences with the community
 
 export const BUYERAI_PLACEHOLDER = 'Message Buyer AI...';
 
-export const POSTS_COUNT_PER_PAGE = 10;
+export const POSTS_COUNT_PER_PAGE = 3;
 export const COMMENTS_COUNT_PER_PAGE = 2;
 
 export const tabs = [

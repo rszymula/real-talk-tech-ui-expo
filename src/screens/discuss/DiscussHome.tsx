@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList, TextInput, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { Text, View, StyleSheet, FlatList, TextInput, TouchableOpacity, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import { Card } from '../../components/core/Card';
 import { InputBar } from '../../components/core/InputBar';
@@ -262,15 +262,17 @@ function RawDiscussHome(props){
   const postsByCategory = feed[currentCategory].map(item => posts[item])
   const categoryId = categories.find(item => item.name === currentCategory) || 0
 
+  const [onEndReachedCalledDuringMomentum, setOnEndReachedCalledDuringMomentum] = React.useState(true)
+
   const loadPosts = () => {
-    console.log("CATW", categories)
+    // console.log("CATW", categories)
     const categoryId = categories.find(item => item.name === currentCategory)?.id || 0
     const postsByCategory = feed[currentCategory].map(item => posts[item])
     const page = Math.ceil(postsByCategory.length / POSTS_COUNT_PER_PAGE + 1);
     // const page = 4;
     console.log("PAGEW", page, postsByCategory)
     //fetchPosts(1, 1)
-    console.log("PAGEW", page)
+    // console.log("PAGEW", page)
     fetchPosts(categoryId, auth, page)
   }
 
@@ -296,17 +298,34 @@ function RawDiscussHome(props){
           title={"Create Post"}
           placeholder={INPUT_PLACEHOLDER}
         />
-        <View>
-          <FlatList 
+        {/* <ScrollView style={{maxHeight: 512}}> */}
+        {/* <ScrollView> */}
+          {postsByCategory.length > 0 && (<FlatList 
             data={postsByCategory}
             keyExtractor={(item) => `${item.id}`}
             renderItem={({item}) => <Post {...item} currentCategory={currentCategory} navigation={navigation} />}
             ItemSeparatorComponent={() => <Separator />}
+            // onEndReached={() => console.log("ONENDDDDDDDDDW")}
+            initialNumToRender={3}
             // onEndReached={loadPosts}
-            // onEndReachedThreshold={0.5}
-          />
-        </View>
-        <Link onPress={loadPosts} textLink={"Load More Posts..."} style={{alignSelf: 'center', margin: 16}}/>
+            onEndReachedThreshold={0.7}
+            //onMomentumScrollBegin = {() => {setOnEndReachedCalledDuringMomentum(false)}}
+            // onEndReached = {() => {
+            //     if (onEndReachedCalledDuringMomentum) {
+            //       loadPosts();    // LOAD MORE DATA
+            //       setOnEndReachedCalledDuringMomentum(true)
+            //     }
+            //   }
+            // }
+            onEndReached={({ distanceFromEnd }) => {
+                if (distanceFromEnd < 0) return;
+                loadPosts()
+              }
+            }
+            // ListFooterComponent={feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
+          />)}
+        {/* </ScrollView> */}
+        {/* <Link onPress={loadPosts} textLink={"Load More Posts..."} style={{alignSelf: 'center', margin: 16}}/> */}
         {feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
         {feedError[currentCategory] && (<View style={{margin: 32}}>
           <Text style={{alignSelf: 'center', color: colors.textRegular}}>{"Failed loading data..."}</Text>
