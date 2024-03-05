@@ -389,7 +389,7 @@ export function fetchPosts(dispatch){
   return (categoryId, auth, page = 1, count = POSTS_COUNT_PER_PAGE) => {
     const categoryIdSend = categoryId === 0 ? null : categoryId;
     console.log("CATSEW", categoryIdSend)
-    dispatch({type: "POSTS_LOADING"})
+    dispatch({type: "POSTS_LOADING", payload: categories.find(cat => cat.id === categoryId)?.name})
     const {userId, token} = auth;
     // const userId = 17
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
@@ -411,7 +411,7 @@ export function fetchPosts(dispatch){
       dispatch({type: "POSTS_SUCCESS", payload: {category: categories.find(cat => cat.id === categoryId)?.name, data: json.posts}})
     }).catch((err) => {
       console.log("ERR-fetchPosts", err)
-      dispatch({type: "POSTS_ERROR"})
+      dispatch({type: "POSTS_ERROR", payload: categories.find(cat => cat.id === categoryId)?.name})
     })
   }
 }
