@@ -56,23 +56,19 @@ function RawHomeNavBar(props){
   console.log({currentRouteName})
 
   const handleTabPress = (tab) => {
-    // navigation.navigate(tab.routeName)
-    navigation.push(tab.routeName)
+    navigation.navigate(tab.routeName)
   }
 
   const handleViewProfilePress = () => {
-    // navigation.navigate(RouteNames.PROFILE_USER)
-    navigation.push(RouteNames.PROFILE_USER)
+    navigation.navigate(RouteNames.PROFILE_USER)
   }
 
   const handleAddProfilePress = () => {
-    // navigation.navigate(RouteNames.PROFILE_WELCOME)
-    navigation.push(RouteNames.PROFILE_WELCOME)
+    navigation.navigate(RouteNames.PROFILE_WELCOME)
   }
 
   const handleNavigateHomePress = () => {
-    // navigation.navigate(RouteNames.DISCUSS_HOME)
-    navigation.push(RouteNames.DISCUSS_HOME)
+    navigation.navigate(RouteNames.DISCUSS_HOME)
   }
 
   return (
