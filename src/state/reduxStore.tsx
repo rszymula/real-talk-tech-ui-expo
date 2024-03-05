@@ -393,7 +393,8 @@ export function reducer(state = initialState, action){
     case 'RELOAD':
       return {
         ...state,
-        auth: action.payload,
+        auth: action.payload.auth,
+        users: {...state.users, [action.payload.user.id]: action.payload.user},
         loginLoading: false,
         loginError: false,
       }

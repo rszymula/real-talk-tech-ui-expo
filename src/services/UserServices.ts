@@ -13,12 +13,18 @@ export function logout(dispatch, getState){
 
 export function reload(dispatch, getState){
   return () => {
-    AsyncStorage.getItem("auth").then((auth) => {
-      if(auth) {
-        const authParsed = JSON.parse(auth)
-        dispatch({type: "RELOAD", payload: authParsed})
+    AsyncStorage.getItem("login").then((login) => {
+      if(login) {
+        const loginParsed = JSON.parse(login)
+        dispatch({type: "RELOAD", payload: loginParsed})
       }
     })
+    // AsyncStorage.getItem("auth").then((auth) => {
+    //   if(auth) {
+    //     const authParsed = JSON.parse(auth)
+    //     dispatch({type: "RELOAD", payload: authParsed})
+    //   }
+    // })
   }
 }
 
@@ -49,22 +55,25 @@ export function signup(dispatch){
           username: body.username,
           userId: decodedToken.sub
         };
-        AsyncStorage.setItem("auth", JSON.stringify(auth));
+        const user = {
+          id: decodedToken.sub,
+          username: body.username,
+          bio: body.bio,
+          email: body.email,
+          fullname: body.fullname, // this ones casing is different
+          // industryInvolvement: body.industryInvolvement,
+          // interestAreas: body.interestAreas,
+          currentCompany: body.currentCompany,
+          linkedinUrl: body.linkedinUrl,
+          // occupationalAreas: body.workCategories,
+          techStack: body.techStack.map(item => ({name: item, endorsed: false, endorsementCount: 0})),
+        }
+        // AsyncStorage.setItem("auth", JSON.stringify(auth));
+        // AsyncStorage.setItem("user", JSON.stringify(user));
+        AsyncStorage.setItem("login", JSON.stringify({auth, user}));
         dispatch({type: "SIGNUP_SUCCESS", payload: {
           auth,
-          user: {
-            id: decodedToken.sub,
-            username: body.username,
-            bio: body.bio,
-            email: body.email,
-            fullname: body.fullname, // this ones casing is different
-            // industryInvolvement: body.industryInvolvement,
-            // interestAreas: body.interestAreas,
-            currentCompany: body.currentCompany,
-            linkedinUrl: body.linkedinUrl,
-            // occupationalAreas: body.workCategories,
-            techStack: body.techStack.map(item => ({name: item, endorsed: false, endorsementCount: 0})),
-          }
+          user,
         }})
         dispatch({
           type: "API_CALL_RESULT",
@@ -117,21 +126,24 @@ export function login(dispatch){
           username,
           userId: decodedToken.sub
         };
-        AsyncStorage.setItem("auth", JSON.stringify(auth));
+        const user = {
+          id: json.userDetails.id,
+          username: json.userDetails.username,
+          fullname: json.userDetails.fullName,
+          email: json.userDetails.email,
+          bio: json.userDetails.bio,
+          currentCompany: json.userDetails.currentCompany,
+          linkedinUrl: json.userDetails.linkedin_url,
+          techStack: json.userDetails.techstack // .map(item => item.name),
+        }
+        // AsyncStorage.setItem("auth", JSON.stringify(auth));
+        // AsyncStorage.setItem("user", JSON.stringify(user));
+        AsyncStorage.setItem("login", JSON.stringify({auth, user}));
         dispatch({
           type: "LOGIN_SUCCESS",
           payload: {
             auth: auth,
-            user: {
-              id: json.userDetails.id,
-              username: json.userDetails.username,
-              fullname: json.userDetails.fullName,
-              email: json.userDetails.email,
-              bio: json.userDetails.bio,
-              currentCompany: json.userDetails.currentCompany,
-              linkedinUrl: json.userDetails.linkedin_url,
-              techStack: json.userDetails.techstack // .map(item => item.name),
-            }
+            user,
           }
         })
       }

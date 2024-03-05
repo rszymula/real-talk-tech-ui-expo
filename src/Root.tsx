@@ -263,7 +263,7 @@ export const Navigation = connect(stp, dtp)(RawNavigation)
 
 export function Root(){
   const store = createStore(reducer);
-  const token = AsyncStorage.getItem("token");
+  // const token = AsyncStorage.getItem("token");
   return (
     <View style={{backgroundColor: colors.background}}>
       <ReduxContext.Provider value={store}>
