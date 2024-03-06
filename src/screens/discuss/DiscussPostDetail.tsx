@@ -14,7 +14,7 @@ export function RawDiscussPostDetail({navigation, route, posts}){
       <Heading navigation={navigation}>
       </Heading>
       <Card styles={{}}>
-        <Post {...post} navigation={navigation} initCommentsExpanded />
+        <Post {...post} navigation={navigation} initCommentsExpanded truncateBody={false} />
       </Card>
     </>
   )

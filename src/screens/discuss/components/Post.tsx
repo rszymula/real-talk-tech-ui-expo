@@ -153,7 +153,9 @@ function CommentsList({commentIds, comments, commentsLoading, commentsError, pos
   )
 }
 
-export function RawPost({ id, categories, title, body, user, commentIds, userVote, numUpvotes, numDownvotes, createdTimestamp, navigation, fetchComments, makeComment, comments, commentsLoading, commentsError, upvotePost, auth, initCommentsExpanded = false}){
+const POST_TRUNCATE_CHARS = 2200;
+
+export function RawPost({ id, categories, title, body, user, commentIds, userVote, numUpvotes, numDownvotes, createdTimestamp, navigation, fetchComments, makeComment, comments, commentsLoading, commentsError, upvotePost, auth, initCommentsExpanded = false, truncateBody = true}){
 
   const {id: userId, username} = user;
 
@@ -185,6 +187,8 @@ export function RawPost({ id, categories, title, body, user, commentIds, userVot
   const commentCount = commentIds.length;
   const commentText = commentCount === 1 ? `${commentCount} Comment` : `${commentCount} Comments`;
 
+  const bodyRefined = truncateBody ? `${body?.substring(0, POST_TRUNCATE_CHARS) || ''}...` : body;
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={handlePostPress}>
@@ -192,7 +196,7 @@ export function RawPost({ id, categories, title, body, user, commentIds, userVot
           {categories.map((category, idx) => (<Text style={styles.captionText}>{idx === 0 ? `${category}` : `, ${category}`}</Text>))}
         </View>
         <Text style={[styles.headingText, styles.title]}>{title}</Text>
-        <Text style={[styles.bodyText, styles.description]}>{body}</Text>
+        <Text style={[styles.bodyText, styles.description]}>{bodyRefined}</Text>
       </TouchableOpacity>
       <View style={styles.bottom}>
         <View style={styles.actionGroup}>

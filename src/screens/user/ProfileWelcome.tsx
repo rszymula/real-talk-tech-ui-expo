@@ -18,6 +18,7 @@ import Svg, {
 import { RButton, RButtonText } from '../../components/core/RButton';
 import { getConfig } from '../../context/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LogoAnimated } from '../../components/animation/LogoAnimated';
 
 const PASSWORD_MIN_LENGTH = 6;
 
@@ -210,6 +211,7 @@ export function RawProfileWelcome({navigation, fetchOnboarding, auth, reload}) {
         <RButtonText active text={"Create Account"}/>
       </RButton>
       <Link style={{margin: 16, alignSelf: 'center'}} textLeft="Already have an account?" textLink="Sign in" onPress={handleLoginPress} />
+      <LogoAnimated />
     </View>
   )
 }
