@@ -1,10 +1,14 @@
-import { ActivityIndicator, View, Text, StyleSheet, Animated } from "react-native"
+import { ActivityIndicator, View, Text, StyleSheet, Animated, Easing } from "react-native"
 import { RButton, RButtonText } from "../core/RButton"
 import { colors } from "../../context/themes"
 import { Translate } from "aws-sdk"
 import React from "react"
 
 const OPACITY = 0.7;
+const opacityEasing = Easing.linear;
+const translateYEasing = Easing.linear;
+const IN_TIME = 2000;
+const DELAY_TIME = 500;
 
 function CyanBubble({styles, spaceScale, timeScale}){
   const opacityAnim = React.useRef(new Animated.Value(0)).current;
@@ -15,9 +19,11 @@ function CyanBubble({styles, spaceScale, timeScale}){
       Animated.sequence([
         Animated.timing(opacityAnim, {
           toValue: OPACITY,
-          duration: 2000 * timeScale,
+          duration: IN_TIME * timeScale,
           useNativeDriver: true,
-        })
+          easing: opacityEasing,
+        }),
+        Animated.delay(DELAY_TIME),
       ])
     );
     setTimeout(() => {
@@ -39,9 +45,11 @@ function CyanBubble({styles, spaceScale, timeScale}){
       Animated.sequence([
         Animated.timing(translateYAnim, {
           toValue: 96 * spaceScale,
-          duration: 2000 * timeScale,
-          useNativeDriver: true
-        })
+          duration: IN_TIME * timeScale,
+          useNativeDriver: true,
+          easing: translateYEasing,
+        }),
+        Animated.delay(DELAY_TIME),
       ])
     )
     loop.start();
@@ -82,9 +90,11 @@ function BlueBubble({styles, spaceScale, timeScale}){
       Animated.sequence([
         Animated.timing(opacityAnim, {
           toValue: OPACITY,
-          duration: 2000 * timeScale,
+          duration: IN_TIME * timeScale,
           useNativeDriver: true,
-        })
+          easing: opacityEasing,
+        }),
+        Animated.delay(DELAY_TIME),
       ])
     )
     setTimeout(() => {
@@ -105,9 +115,11 @@ function BlueBubble({styles, spaceScale, timeScale}){
       Animated.sequence([
         Animated.timing(translateYAnim, {
           toValue: 48 * spaceScale,
-          duration: 2000 * timeScale,
+          duration: IN_TIME * timeScale,
           useNativeDriver: true,
-        })
+          easing: translateYEasing,
+        }),
+        Animated.delay(DELAY_TIME),
       ])
     ).start();
     // const anim = Animated.timing(translateYAnim, {
@@ -152,9 +164,11 @@ function MagentaBubble({styles, spaceScale, timeScale}){
       Animated.sequence([
         Animated.timing(opacityAnim, {
           toValue: 1.0,
-          duration: 2000 * timeScale,
+          duration: IN_TIME * timeScale,
           useNativeDriver: true,
-        })
+          easing: opacityEasing,
+        }),
+        Animated.delay(DELAY_TIME),
       ])
     ).start()
   }, [opacityAnim])
