@@ -4,30 +4,54 @@ import { colors } from "../../context/themes"
 import { Translate } from "aws-sdk"
 import React from "react"
 
+const OPACITY = 0.7;
+
 function CyanBubble({styles, spaceScale, timeScale}){
   const opacityAnim = React.useRef(new Animated.Value(0)).current;
   const translateYAnim = React.useRef(new Animated.Value(0)).current;
 
   React.useEffect(() => {
-    const anim = Animated.timing(opacityAnim, {
-      toValue: 0.9,
-      duration: 2000 * timeScale,
-      useNativeDriver: true,
-    })
+    const loop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(opacityAnim, {
+          toValue: OPACITY,
+          duration: 2000 * timeScale,
+          useNativeDriver: true,
+        })
+      ])
+    );
     setTimeout(() => {
-      anim.start();
+      loop.start();
     }, 0 * timeScale)
-    anim.start();
+    // const anim = Animated.timing(opacityAnim, {
+    //   toValue: OPACITY,
+    //   duration: 2000 * timeScale,
+    //   useNativeDriver: true,
+    // })
+    // setTimeout(() => {
+    //   anim.start();
+    // }, 0 * timeScale)
+    // anim.start();
   }, [opacityAnim])
 
   React.useEffect(() => {
-    const anim = Animated.timing(translateYAnim, {
-      toValue: 96 * spaceScale,
-      duration: 3000 * timeScale,
-      useNativeDriver: true
-    })
-    anim.start();
-  })
+    const loop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(translateYAnim, {
+          toValue: 96 * spaceScale,
+          duration: 2000 * timeScale,
+          useNativeDriver: true
+        })
+      ])
+    )
+    loop.start();
+    // const anim = Animated.timing(translateYAnim, {
+    //   toValue: 96 * spaceScale,
+    //   duration: 3000 * timeScale,
+    //   useNativeDriver: true
+    // })
+    // anim.start();
+  }, [translateYAnim])
 
   return (
     <Animated.View
@@ -54,23 +78,44 @@ function BlueBubble({styles, spaceScale, timeScale}){
   const translateYAnim = React.useRef(new Animated.Value(0)).current;
 
   React.useEffect(() => {
-    const anim = Animated.timing(opacityAnim, {
-      toValue: 0.9,
-      duration: 2000 * timeScale,
-      useNativeDriver: true,
-    });
+    const loop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(opacityAnim, {
+          toValue: OPACITY,
+          duration: 2000 * timeScale,
+          useNativeDriver: true,
+        })
+      ])
+    )
     setTimeout(() => {
-      anim.start();
+      loop.start();
     }, 0 * timeScale);
+    // const anim = Animated.timing(opacityAnim, {
+    //   toValue: OPACITY,
+    //   duration: 2000 * timeScale,
+    //   useNativeDriver: true,
+    // });
+    // setTimeout(() => {
+    //   anim.start();
+    // }, 0 * timeScale);
   }, [opacityAnim])
 
   React.useEffect(() => {
-    const anim = Animated.timing(translateYAnim, {
-      toValue: 48 * spaceScale,
-      duration: 2000 * timeScale,
-      useNativeDriver: true,
-    })
-    anim.start();
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(translateYAnim, {
+          toValue: 48 * spaceScale,
+          duration: 2000 * timeScale,
+          useNativeDriver: true,
+        })
+      ])
+    ).start();
+    // const anim = Animated.timing(translateYAnim, {
+    //   toValue: 48 * spaceScale,
+    //   duration: 2000 * timeScale,
+    //   useNativeDriver: true,
+    // })
+    // anim.start();
   }, [translateYAnim])
 
   return (
@@ -97,12 +142,21 @@ function MagentaBubble({styles, spaceScale, timeScale}){
   const opacityAnim = React.useRef(new Animated.Value(0)).current;
 
   React.useEffect(() => {
-    const anim = Animated.timing(opacityAnim, {
-      toValue: 1.0,
-      duration: 3000 * timeScale,
-      useNativeDriver: true,
-    })
-    anim.start()
+    // const anim = Animated.timing(opacityAnim, {
+    //   toValue: 1.0,
+    //   duration: 3000 * timeScale,
+    //   useNativeDriver: true,
+    // })
+    // anim.start()
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(opacityAnim, {
+          toValue: 1.0,
+          duration: 2000 * timeScale,
+          useNativeDriver: true,
+        })
+      ])
+    ).start()
   }, [opacityAnim])
 
   return (
@@ -124,7 +178,7 @@ function MagentaBubble({styles, spaceScale, timeScale}){
   )
 }
 
-export function LogoAnimated({timeScale = 1, spaceScale = 1}){
+export function LogoAnimated({timeScale = 1, spaceScale = 1, style={}}){
 
   const styles = StyleSheet.create({
     shape: {
@@ -144,9 +198,15 @@ export function LogoAnimated({timeScale = 1, spaceScale = 1}){
   })
 
   return (
-    <View style={{alignItems: 'center', borderColor: 'red', borderWidth: 1,
-      // backgroundColor: 'white'
-    }}>
+    <View style={[
+      {
+        alignItems: 'center',
+        borderColor: 'red',
+        borderWidthX: 1,
+        // backgroundColor: 'white'
+      },
+      style
+    ]}>
       <CyanBubble styles={styles} timeScale={timeScale} spaceScale={spaceScale}/>
       <BlueBubble styles={styles} timeScale={timeScale} spaceScale={spaceScale}/>
       <MagentaBubble styles={styles} timeScale={timeScale} spaceScale={spaceScale}/>

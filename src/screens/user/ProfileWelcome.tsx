@@ -211,7 +211,7 @@ export function RawProfileWelcome({navigation, fetchOnboarding, auth, reload}) {
         <RButtonText active text={"Create Account"}/>
       </RButton>
       <Link style={{margin: 16, alignSelf: 'center'}} textLeft="Already have an account?" textLink="Sign in" onPress={handleLoginPress} />
-      <LogoAnimated />
+      <LogoAnimated timeScale={0.4} />
     </View>
   )
 }
