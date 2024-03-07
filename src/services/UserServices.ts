@@ -279,7 +279,9 @@ export function editUser(dispatch, getState){
     fetch(url, params).then(res => {
       return res.json()
     }).then(json => {
-      dispatch({type: "USER_EDIT_SUCCESS", payload: formattedBody})
+      const techStack = body.techStack.map(item => ({id: -1, name: item}))
+      console.log("TS2", techStack)
+      dispatch({type: "USER_EDIT_SUCCESS", payload: {id: state.auth.userId, ...body, techStack}})
       dispatch({type: "API_CALL_RESULT", payload: {message: "Profile has been successfully updated", active: true, error: false}})
       console.log("GOOD-editUser", json)
     }).catch((err) => {

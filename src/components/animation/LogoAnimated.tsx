@@ -23,7 +23,7 @@ function CyanBubble({styles, spaceScale, timeScale}){
           useNativeDriver: true,
           easing: opacityEasing,
         }),
-        Animated.delay(DELAY_TIME),
+        Animated.delay(DELAY_TIME * timeScale),
       ])
     );
     setTimeout(() => {
@@ -49,7 +49,7 @@ function CyanBubble({styles, spaceScale, timeScale}){
           useNativeDriver: true,
           easing: translateYEasing,
         }),
-        Animated.delay(DELAY_TIME),
+        Animated.delay(DELAY_TIME * timeScale),
       ])
     )
     loop.start();
@@ -94,7 +94,7 @@ function BlueBubble({styles, spaceScale, timeScale}){
           useNativeDriver: true,
           easing: opacityEasing,
         }),
-        Animated.delay(DELAY_TIME),
+        Animated.delay(DELAY_TIME * timeScale),
       ])
     )
     setTimeout(() => {
@@ -119,7 +119,7 @@ function BlueBubble({styles, spaceScale, timeScale}){
           useNativeDriver: true,
           easing: translateYEasing,
         }),
-        Animated.delay(DELAY_TIME),
+        Animated.delay(DELAY_TIME * timeScale),
       ])
     ).start();
     // const anim = Animated.timing(translateYAnim, {
@@ -168,7 +168,7 @@ function MagentaBubble({styles, spaceScale, timeScale}){
           useNativeDriver: true,
           easing: opacityEasing,
         }),
-        Animated.delay(DELAY_TIME),
+        Animated.delay(DELAY_TIME * timeScale),
       ])
     ).start()
   }, [opacityAnim])

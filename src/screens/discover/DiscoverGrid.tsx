@@ -20,11 +20,10 @@ import Svg, {
 
 const renderElement = (item, idx, navigation) => {
   const handleOnPress = (item) => {
-    console.log("NAVW", item)
+    // console.log("NAVW", item)
     navigation.navigate(RouteNames.DISCOVER_LIST, {vendorGroupId: item.id});
   }
 
-  console.log("SVGW", item.icon)
   const image = discoverGroupsImages[item.id];
   return (
     <Card styles={{flexDirection: 'row', justifyContent: 'space-between', width: 176, marginRight: 16, marginBottom: 16 ,padding: 0, backgroundColor: colors.input}}>
