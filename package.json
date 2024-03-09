@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "WEB_PORT=9003 npx expo start --web --https",
-    "fuck": "WEB_PORT=9002 expo start --web --https",
+    "start": "expo start --web",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
@@ -43,8 +42,7 @@
     "typescript": "^5.1.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "@types/react-native": "^0.73.0"
+    "@babel/core": "^7.20.0"
   },
   "private": true
 }

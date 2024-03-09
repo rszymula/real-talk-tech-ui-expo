@@ -1,1 +1,0 @@
-WEB_PORT=$(echo $PORT) expo start:web --https
