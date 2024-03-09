@@ -23,7 +23,7 @@ const config = {
   [Env.INT]: intConfig,
 }
 
-export const environment = Env.PROD;
+export const environment = Env.STAGE;
 
 export function getConfig(){
   const res = config[environment]
