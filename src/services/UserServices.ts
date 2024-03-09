@@ -129,11 +129,11 @@ export function login(dispatch){
         const user = {
           id: json.userDetails.id,
           username: json.userDetails.username,
-          fullname: json.userDetails.fullName,
+          fullname: json.userDetails.fullName || json.userDetails.fullname,
           email: json.userDetails.email,
           bio: json.userDetails.bio,
           currentCompany: json.userDetails.currentCompany,
-          linkedinUrl: json.userDetails.linkedin_url,
+          linkedinUrl: json.userDetails.linkedin_url || json.userDetails.linkedinUrl,
           techStack: json.userDetails.techstack // .map(item => item.name),
         }
         // AsyncStorage.setItem("auth", JSON.stringify(auth));
@@ -202,10 +202,10 @@ export function fetchUser(dispatch){
         ...json.userDetails,
         techStack: json.vendors?.map(
           item => ({
-            id: item.vendorId,
-            name: item.vendorName,
+            id: item.vendorId || item.id,
+            name: item.vendorName || item.name,
             endorsed: item.endorsedByRequester,
-            endorsementCount: item.endorsementCount,
+            endorsementCount: item.endorsementCount || item.totalEndorsements,
           })
         ) || []
       }})
@@ -236,12 +236,20 @@ export function endorseUser(dispatch, getState){
     fetch(url, params).then(res => {
       return res.json()
     }).then(json => {
-      console.log("GOOD-endorseUser", json)
-      dispatch({type: "USER_ENDORSE_SUCCESS", payload: {user, item}})
-      dispatch({
-        type: "API_CALL_RESULT",
-        payload: {message: "Endorsement has been successful", active: true, error: false}
-      })
+      if(!json.error){
+        console.log("ERR-endorseUser2", json.error)
+        dispatch({
+          type: "API_CALL_RESULT",
+          payload: {message: `Endorsement ${FAIL_MESSAGE}`, active: true, error: true}
+        })
+      }else{
+        console.log("GOOD-endorseUser", json)
+        dispatch({type: "USER_ENDORSE_SUCCESS", payload: {user, item}})
+        dispatch({
+          type: "API_CALL_RESULT",
+          payload: {message: "Endorsement has been successful", active: true, error: false}
+        })
+      }
     }).catch((err) => {
       console.log("ERR-endorseUser", err)
       dispatch({

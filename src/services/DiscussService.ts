@@ -562,7 +562,8 @@ export function makePost(dispatch, getState){
       userId,
       title,
       body,
-      categories: categories.map(item => item.name),
+      // categories: categories.map(item => item.name),
+      categories: categories.map(item => item.id),
       vendors, // : vendors.map(item => item.id),
       isAnonymous,
     }
