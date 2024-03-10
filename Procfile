@@ -1,1 +1,1 @@
-web: npx serve dist --single
+web: npx serve web-build
