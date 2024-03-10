@@ -13,10 +13,10 @@ import { connect } from '../../state/reduxStore';
 import FORWARD_THIN from '../../assets/forward_thin.png';
 import BACK from '../../assets/back.png';
 import { Heading } from '../../components/common/Heading';
-import Svg, {
-  Use,
-  Image as SvgImage,
-} from 'react-native-svg';
+// import Svg, {
+//   Use,
+//   Image as SvgImage,
+// } from 'react-native-svg';
 
 const renderElement = (item, idx, navigation) => {
   const handleOnPress = (item) => {

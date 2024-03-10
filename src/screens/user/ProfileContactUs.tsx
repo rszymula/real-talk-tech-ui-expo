@@ -10,7 +10,7 @@ import QUOTE from '../../assets/quote.png';
 import QUESTION_CHECK from '../../assets/question_check.png';
 import QUIP from '../../assets/quip.png';
 import { Separator } from '../../components/core/Separator';
-import LinearGradient from 'react-native-linear-gradient';
+// import LinearGradient from 'react-native-linear-gradient';
 import { GridView } from '../../components/common/GridView';
 import { Heading } from '../../components/common/Heading';
 import { RButton, RButtonText } from '../../components/core/RButton';

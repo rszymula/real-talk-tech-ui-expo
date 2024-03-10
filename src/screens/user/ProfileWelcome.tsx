@@ -10,14 +10,14 @@ import { RTextInput } from '../../components/core/RTextInput';
 import { fetchOnboarding, reload } from '../../services/UserServices';
 import { connect } from '../../state/reduxStore';
 import { testAwsS3, testAwsS3V2 } from '../../utils/aws';
-import Svg, {
-  Use,
-  Image as SvgImage,
-  SvgXml,
-} from 'react-native-svg';
+// import Svg, {
+//   Use,
+//   Image as SvgImage,
+//   SvgXml,
+// } from 'react-native-svg';
 import { RButton, RButtonText } from '../../components/core/RButton';
 import { getConfig } from '../../context/config';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LogoAnimated } from '../../components/animation/LogoAnimated';
 
 const PASSWORD_MIN_LENGTH = 6;

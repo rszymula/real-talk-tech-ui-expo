@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, FlatList, TextInput, TouchableOpacity, Image, ActivityIndicator, ScrollView } from 'react-native';
-import { TabView, SceneMap } from 'react-native-tab-view';
+// import { TabView, SceneMap } from 'react-native-tab-view';
 import { Card } from '../../components/core/Card';
 import { InputBar } from '../../components/core/InputBar';
 import { Separator } from '../../components/core/Separator';

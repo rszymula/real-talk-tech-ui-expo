@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COMMENTS_COUNT_PER_PAGE, FAIL_MESSAGE, POSTS_COUNT_PER_PAGE, categories } from "../constants/constants";
 import { getConfig } from "../context/config";
 

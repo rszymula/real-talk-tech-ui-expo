@@ -6,7 +6,7 @@ enum Env {
 };
 
 const prodConfig = {
-  monoServiceUrl: 'ec2-44-201-178-172.compute-1.amazonaws.com',
+  monoServiceUrl: 'http://ec2-3-95-180-146.compute-1.amazonaws.com',
 }
 
 const stageConfig = {
@@ -23,7 +23,7 @@ const config = {
   [Env.INT]: intConfig,
 }
 
-export const environment = Env.PROD;
+export const environment = Env.STAGE;
 
 export function getConfig(){
   const res = config[environment]

@@ -1,1 +1,0 @@
-WEB_PORT=9002 expo start:web --https

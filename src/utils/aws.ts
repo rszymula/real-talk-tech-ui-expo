@@ -1,10 +1,10 @@
 // Load the AWS SDK for Node.js
 const AWS = require('aws-sdk');
+const AmazonS3URI = require('amazon-s3-uri')
 
 const uri = "https://vendor-logos-bucket.s3.amazonaws.com/vendor_logos_prod/sales-tools/outreach.png"
 
 export function testAwsS3V2(){
-    const AmazonS3URI = require('amazon-s3-uri')
     const { region, bucket, key } = AmazonS3URI(uri)
     console.log("URIW", {region, bucket, key})
 
