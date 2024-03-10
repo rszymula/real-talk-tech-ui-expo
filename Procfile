@@ -1,1 +1,1 @@
-web: serve web-build
+web: serve dist
