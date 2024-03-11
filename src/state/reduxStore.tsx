@@ -158,7 +158,7 @@ export function reducer(state = initialState, action){
     // console.log("123123", res3)
     return res3
     case 'POSTS_SUCCESS':
-      console.log("ESZ", action)
+      console.log("POST_PAY", action.payload)
 
       const logthis = {
         ...state.feed,
@@ -243,12 +243,14 @@ export function reducer(state = initialState, action){
       console.log("Mkaing comments", action.payload, res4)
       return res4
     case 'COMMENTS_SUCCESS':
+      console.log("COM_PAY", action.payload)
       const res2 = {
         ...state,
         comments: {
           ...state.comments,
           ...action.payload.reduce((accum, cur) => {
-            const userVote = cur.userVote === true ? 1 : cur.userVote === false ? -1 : 0
+            const userVote = typeof cur.userVote === 'number' ? cur.userVote :
+              cur.userVote === true ? 1 : cur.userVote === false ? -1 : 0
             accum[cur.id] = {...cur, userVote}
             return accum
           }, {}),
