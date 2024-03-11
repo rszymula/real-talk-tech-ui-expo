@@ -89,6 +89,7 @@ export function RawProfileUser(props){
       bio,
       currentCompany,
       linkedinUrl,
+      username,
     }
     editUser(body);
     setEditing(false);

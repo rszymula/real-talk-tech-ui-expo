@@ -263,6 +263,7 @@ export function editUser(dispatch, getState){
       bio: body.bio,
       company: body.currentCompany,
       linkedin: body.linkedinUrl,
+      username: body.username,
     }
     console.log("STW", state, body, formattedBody)
     const {userId, token} = state.auth;
