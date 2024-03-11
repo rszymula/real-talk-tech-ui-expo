@@ -266,12 +266,12 @@ export function Root(){
   const store = createStore(reducer);
   // const token = AsyncStorage.getItem("token");
   return (
-    <View style={{backgroundColor: colors.background}}>
+    <ScrollView style={{backgroundColor: colors.background}}>
       <ReduxContext.Provider value={store}>
         <Navigation />
       </ReduxContext.Provider>
       {/* <Text style={{position: 'absolute', bottom: 20, right: 0, color: colors.textRegular}}>{"LKSDJF"}</Text> */}
-    </View>
+    </ScrollView>
   );
 }
 
