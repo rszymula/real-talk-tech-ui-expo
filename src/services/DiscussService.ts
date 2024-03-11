@@ -389,10 +389,11 @@ export function getPostsWithCommentIdsAndUpvotes(category: CategoryNames, page: 
 export function fetchPosts(dispatch){
   return (categoryId, auth, page = 1, count = POSTS_COUNT_PER_PAGE) => {
     const categoryIdSend = categoryId === 0 ? null : categoryId;
-    console.log("CATSEW", categoryIdSend)
-    console.log("DISPATCHING BITCH", categories, categoryId, categoryIdSend, categories.find(cat => cat.id === categoryId)?.name)
+    // console.log("LOADINGW2")
+    //console.log("CATSEW", categoryIdSend)
+    //console.log("DISPATCHING BITCH", categories, categoryId, categoryIdSend, categories.find(cat => cat.id === categoryId)?.name)
     dispatch({type: "POSTS_LOADING", payload: categories.find(cat => cat.id === categoryId)?.name})
-    console.log("DISPATCHED BITCH")
+    // console.log("DISPATCHED BITCH")
     const {userId, token} = auth;
     // const {userId, token} = JSON.parse(AsyncStorage.getItem("auth").then)
     // AsyncStorage.getItem("auth").then(auth => {
@@ -401,7 +402,7 @@ export function fetchPosts(dispatch){
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDc5MzMyOTQsImlhdCI6MTcwNzkyMjQ5NCwic3ViIjoxN30.5p8yH6BVTGIs_MPUKXqO9CJqZz10anU1nbbg3QoyPXc"
     // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/feed?categoryId=${categoryIdSend}&userId=${userId}&page=${page}&count=${count}`
     const url = `${getConfig().monoServiceUrl}/feed?categoryId=${categoryIdSend}&userId=${userId}&page=${page}&count=${count}`
-    console.log("URLW", url)
+    // console.log("URLW", url)
     const params = {
       method: "GET",
       headers: {
@@ -409,7 +410,7 @@ export function fetchPosts(dispatch){
         'Authorization': `Bearer ${token}`,
       },
     }
-    console.log("POSTSZ", url, params)
+    // console.log("POSTSZ", url, params)
     fetch(url, params).then(res => {
       return res.json()
     }).then(json => {
@@ -428,7 +429,7 @@ export function upvotePost(dispatch, getState){
     const { posts, auth } = state
     const post = posts[postId]
     if(post.userVote > 0 && isUpvote || post.userVote < 0 && !isUpvote){
-      console.log("SHORTCIRC")
+      // console.log("SHORTCIRC")
       return 
     }else{
       console.log("SHOTNO")
@@ -627,11 +628,12 @@ export function upvoteComment(dispatch, getState){
     const state = getState();
     const { comments, auth } = state
     const comment = comments[commentId]
-    if(comments.userVote > 0 && isUpvote || comment.userVote < 0 && !isUpvote){
-      console.log("SHORTCIRC")
+    console.log("CU_", comment.userVote, isUpvote)
+    if(comment.userVote > 0 && isUpvote || comment.userVote < 0 && !isUpvote){
+      console.log("CU_SHORTCIRC")
       return 
     }else{
-      console.log("SHOTNO")
+      console.log("CU_SHOTNO")
     }
     console.log("HERE1")
     const {userId, token} = auth;
