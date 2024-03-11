@@ -194,7 +194,7 @@ export function RawProfileUser(props){
       />)}
       <SelectedItems
         items={techStack}
-        style={{marginTop: 8}}
+        style={{marginTop: 4}}
         onDelete={editing ? (item) => handleDeleteTechStack(item) : null}
       />
       <Link style={{marginTop: 16}} textLink={"Log out from account"} onPress={handleLogout}/>

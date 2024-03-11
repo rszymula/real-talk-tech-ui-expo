@@ -2,7 +2,7 @@ import { View, TouchableOpacity, Image } from "react-native";
 import { colors } from "../../context/themes";
 import BACK from '../../assets/back.png';
 
-export function Heading({navigation, children}){
+export function Heading({navigation, children = null}){
 
   const handleBackPress = () => {
     // navigation.pop(1);

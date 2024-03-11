@@ -32,6 +32,7 @@ import { spacing } from './constants/styles';
 import { DiscussPostDetail } from './screens/discuss/DiscussPostDetail';
 import { TopBanner } from './components/common/TopBanner';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ProfileUserOtherOriginal } from './screens/user/ProfileUserOtherOriginal';
 
 export const routes = [
   {
@@ -84,7 +85,7 @@ export const routes = [
   },
   {
     name: RouteNames.PROFILE_USER_OTHER,
-    component: navBarProvider(ProfileUserOther),
+    component: navBarProvider(ProfileUserOtherOriginal),
   },
   {
     name: RouteNames.PROFILE_LOGIN,
