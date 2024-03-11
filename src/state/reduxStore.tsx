@@ -18,8 +18,9 @@ export function createStore(reducer){
       }
     },
     dispatch: (action) => {
-      console.log("Dispatching")
+      console.log("Dispatching", action)
       state = reducer(state, action)
+      console.log("NEW_STATE", state)
       listeners.forEach(listener => listener())
     }
   }
@@ -128,10 +129,10 @@ const initialState = {
 
 export function reducer(state = initialState, action){
 
-  console.log("STOREW", state, action)
+  console.log("STORE_BEFORE", state, action)
   switch(action.type){
     case 'POSTS_CREATE_SUCCESS':
-      console.log("STEP0W", action.payload.categories)
+      // console.log("STEP0W", action.payload)
       const temp = action.payload.categories.reduce((accum, curr) => {
         // accum[curr] = [...state.feed[curr], action.payload.id]
         console.log(curr, action.payload.id, state.feed[curr])
@@ -139,7 +140,7 @@ export function reducer(state = initialState, action){
         console.log({accum})
         return accum
       }, {});
-      console.log("STEP1W", temp)
+      // console.log("STEP1W", temp)
       const res3 = {
         ...state,
         feed: {
@@ -153,8 +154,8 @@ export function reducer(state = initialState, action){
         postCreateLoading: false,
         postCreateError: false,
       }
-    console.log("STEP2W")
-    console.log("123123", res3)
+    // console.log("STEP2W")
+    // console.log("123123", res3)
     return res3
     case 'POSTS_SUCCESS':
       console.log("ESZ", action)
@@ -271,8 +272,8 @@ export function reducer(state = initialState, action){
       }
     case 'COMMENT_UPVOTE_SUCCESS': {
       const comment = state.comments[action.payload.commentId];
-      const up = action.payload.isUpvote ? comment.totalUpvotes + 1: comment.totalUpvotes;
-      const down = action.payload.isUpvote ? comment.totalDownvotes : comment.totalDownvotes + 1;
+      const up = action.payload.isUpvote ? comment.totalUpvotes + 1 : comment.totalUpvotes;
+      const down = !action.payload.isUpvote ? comment.totalDownvotes + 1 : comment.totalDownvotes;
       const userVote = action.payload.isUpvote ? comment.userVote + 1 : comment.userVote - 1;
       console.log("UV", comment.userVote, userVote)
       return {
@@ -471,10 +472,11 @@ export function reducer(state = initialState, action){
       return res5
     case 'POST_UPVOTE_SUCCESS':
       const post = state.posts[action.payload.postId];
-      const up = action.payload.isUpvote ? post.numUpvotes + 1: post.numUpvotes;
-      const down = action.payload.isUpvote ? post.numDownvotes : post.numDownvotes + 1;
+      console.log("PU_", post.numUpvotes, post.numDownvotes)
+      const up = action.payload.isUpvote ? post.numUpvotes + 1 : post.numUpvotes;
+      const down = !action.payload.isUpvote ? post.numDownvotes + 1 : post.numDownvotes;
       const userVote = action.payload.isUpvote ? post.userVote + 1 : post.userVote - 1;
-      console.log("UV", post.userVote, userVote)
+      console.log("PU_UV", post.userVote, {userVote, up, down})
       return {
         ...state,
         posts: {
