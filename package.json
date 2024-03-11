@@ -4,7 +4,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "build": "npx expo export -p web",
-    "start": "expo start --port $(echo $PORT) --web",
+    "start": "npx expo start --port $(echo $PORT) --web",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
@@ -19,7 +19,6 @@
     "amazon-s3-uri": "^0.1.1",
     "aws-sdk": "^2.1574.0",
     "expo": "~50.0.11",
-    "expo-cli": "^6.3.10",
     "expo-status-bar": "~1.11.1",
     "jwt-decode": "^4.0.0",
     "moment": "^2.30.1",
