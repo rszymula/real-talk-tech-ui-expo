@@ -301,7 +301,7 @@ function RawDiscussHome(props){
       <Card styles={{widthX: 512, flexX: 1}}>
         <InputBar 
           onPress={(input) => {
-            navigation.navigate(RouteNames.DISCUSS_CREATE_POST, { input })
+            navigation.navigate(RouteNames.DISCUSS_CREATE_POST, { input, currentCategory })
           }}
           title={"Create Post"}
           placeholder={INPUT_PLACEHOLDER}

@@ -18,7 +18,7 @@ import { RButton, RButtonText } from '../../components/core/RButton';
 export function RawDiscussCreatePost(props){
 
   const { navigation, route, makePost, skills, auth } = props;
-  const { input } = route?.params;
+  const { input, currentCategory } = route?.params;
 
   const [category, setCategory] = React.useState('');
   const [skill, setSkill] = React.useState('');
@@ -26,7 +26,7 @@ export function RawDiscussCreatePost(props){
   const [content, setContent] = React.useState('');
   const [anonymous, setAnonymous] = React.useState(false);
 
-  const [selectedCategories, setSelectedCategories] = React.useState([]);
+  const [selectedCategories, setSelectedCategories] = React.useState(categories.filter(item => item.name === currentCategory));
   const [selectedSkills, setSelectedSkills] = React.useState([]);
   const [customSkills, setCustomSkills] = React.useState([]);
 
@@ -47,7 +47,7 @@ export function RawDiscussCreatePost(props){
 
   const validators = [containsCategory, isValidTitle, isValidContent];
 
-  console.log({categories, skills})
+  console.log({categories, currentCategory, skills})
 
   // const vendorList = Object.keys(vendors).map(id => ({id, name: vendors[id].vendorName}))
 
