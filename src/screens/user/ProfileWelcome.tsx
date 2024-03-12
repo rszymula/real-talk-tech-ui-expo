@@ -169,6 +169,9 @@ export function RawProfileWelcome({navigation, fetchOnboarding, auth, reload}) {
   }, [])
 
   React.useEffect(() => {
+    // const nowMillis = new Date().getTime();
+    // console.log("TIMECHECK", auth?.expires, nowMillis)
+    // if(auth.userId > 0 && auth?.expires && nowMillis < auth?.expires){
     if(auth.userId > 0){
       // console.log("FUCKYOU", auth)
       navigation.navigate(RouteNames.DISCUSS_HOME)
@@ -211,7 +214,7 @@ export function RawProfileWelcome({navigation, fetchOnboarding, auth, reload}) {
         <RButtonText active text={"Create Account"}/>
       </RButton>
       <Link style={{margin: 16, alignSelf: 'center'}} textLeft="Already have an account?" textLink="Sign in" onPress={handleLoginPress} />
-      <LogoAnimated timeScale={0.4} />
+      {/* <LogoAnimated timeScale={0.4} /> */}
     </View>
   )
 }
