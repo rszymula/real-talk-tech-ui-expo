@@ -30,6 +30,7 @@ export function reload(dispatch, getState){
 
 export function signup(dispatch){
   return (body) => {
+    dispatch({type: "SIGNUP_LOADING"})
     console.log("SIGNINGUPX", body)
     // const url = `http://ec2-3-95-180-146.compute-1.amazonaws.com/signup`
     const url = `${getConfig().monoServiceUrl}/signup`

@@ -82,14 +82,14 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
   const stepDetails = getStepDetailsFunc(industry, categories, interests)(step)
   const {next, description, selections, placeholder, stepNumber} = stepDetails
 
-  React.useEffect(() => {
-    console.log({signupLoading, signupError, auth})
-    if(!signupLoading){
-      if(!signupError && !!auth.token){
-        navigation.navigate(RouteNames.DISCUSS_HOME)
-      }
-    }
-  }, [signupLoading, auth])
+  // React.useEffect(() => {
+  //   console.log({signupLoading, signupError, auth})
+  //   if(!signupLoading){
+  //     if(!signupError && !!auth.token){
+  //       navigation.navigate(RouteNames.DISCUSS_HOME)
+  //     }
+  //   }
+  // }, [signupLoading, auth])
 
   const handleNextPress = () => {
     console.log(next)
@@ -109,8 +109,9 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
         interestAreas: items.map(item => item.name),
       }
       console.log("SIGNUPW", body)
-      signup(body)
+      // signup(body)
       // navigation.navigate(DEFAULT_TAB)
+      navigation.navigate(RouteNames.PROFILE_LOADING, { body })
     }else{
       console.log("ITEMS SEND", items)
       const stepItems = [...items]
@@ -134,22 +135,22 @@ function RawProfileQuestion({route, navigation, industry, categories, interests,
     setItems(items => items.filter(item => item.name !== deleteItem))
   }
 
-  if(signupLoading){
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator />
-      </View>
-    )
-  }
+  // if(signupLoading){
+  //   return (
+  //     <View style={styles.container}>
+  //       <ActivityIndicator />
+  //     </View>
+  //   )
+  // }
 
-  if(signupError){
-    return (
-      <View style={styles.container}>
-        {/* <Error handleRestartPress={handleRestartPress} handleRetryPress={handleNextPress}/> */}
-        <Error handleRetryPress={handleNextPress}/>
-      </View>
-    )
-  }
+  // if(signupError){
+  //   return (
+  //     <View style={styles.container}>
+  //       {/* <Error handleRestartPress={handleRestartPress} handleRetryPress={handleNextPress}/> */}
+  //       <Error handleRetryPress={handleNextPress}/>
+  //     </View>
+  //   )
+  // }
 
   return (
     <View style={styles.container}>

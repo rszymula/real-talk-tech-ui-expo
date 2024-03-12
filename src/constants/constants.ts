@@ -23,6 +23,7 @@ export enum RouteNames {
   PROFILE_CREATE_HOME = "ProfileCreateHome",
   PROFILE_QUESTION = "ProfileQuestion",
   PROFILE_CONTACT_US = "ProfileContactUs",
+  PROFILE_LOADING = "ProfileLoading",
 };
 
 export const DEFAULT_TAB = "DiscussHome";

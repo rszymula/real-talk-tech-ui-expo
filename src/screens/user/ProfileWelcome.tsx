@@ -37,7 +37,7 @@ function useStateWithCallback(init){
   return [emailAvailable, setEmailAvailableWithCallback];
 }
 
-export function RawProfileWelcome({navigation, fetchOnboarding, auth, reload}) {
+export function RawProfileWelcome({navigation, fetchOnboarding, auth, reload, signupLoading}) {
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -169,13 +169,13 @@ export function RawProfileWelcome({navigation, fetchOnboarding, auth, reload}) {
   }, [])
 
   React.useEffect(() => {
-    if(auth.userId > 0){
-      console.log("FUCKYOU", auth)
-      navigation.navigate(RouteNames.DISCUSS_HOME)
+    if(auth.userId > 0 && !signupLoading){
+      // console.log("FUCKYOU", auth)
+      // navigation.navigate(RouteNames.DISCUSS_HOME)
     }else{
-      console.log("SUCK COCK", auth)
+      // console.log("SUCK COCK", auth)
     }
-  }, [auth])
+  }, [auth, signupLoading])
 
   return (
     <View style={styles.container}>

@@ -18,10 +18,13 @@ export function createStore(reducer){
       }
     },
     dispatch: (action) => {
-      console.log("Dispatching", action)
+      console.log("LD3-Dispatching", action)
       state = reducer(state, action)
-      console.log("NEW_STATE", state)
-      listeners.forEach(listener => listener())
+      console.log("LD3-NEW_STATE", state)
+      listeners.forEach(listener => {
+        console.log(`LD3-calling-${listener}`)
+        listener()
+      })
     }
   }
 }
@@ -402,6 +405,7 @@ export function reducer(state = initialState, action){
         loginError: false,
       }
     case 'SIGNUP_SUCCESS':
+      console.log("LD3-success")
       return {
         ...state,
         auth: action.payload.auth,
@@ -410,12 +414,14 @@ export function reducer(state = initialState, action){
         signupError: false,
       }
     case 'SIGNUP_LOADING':
+      console.log("LD3-setLoad")
       return {
         ...state,
         signupLoading: true,
         signupError: false,
       }
     case 'SIGNUP_ERROR':
+      console.log("LD3-setErr")
       return {
         ...state,
         signupLoading: false,

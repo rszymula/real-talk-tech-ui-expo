@@ -265,6 +265,8 @@ function RawDiscussHome(props){
 
   const [onEndReachedCalledDuringMomentum, setOnEndReachedCalledDuringMomentum] = React.useState(true)
 
+  console.log("LD-feed", {ld: feedLoading[currentCategory], err: feedError[currentCategory]})
+
   const loadPosts = () => {
     console.log("LOADINGW1")
     const categoryId = categories.find(item => item.name === currentCategory)?.id || 0

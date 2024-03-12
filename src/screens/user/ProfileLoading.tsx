@@ -12,17 +12,34 @@ import { login } from '../../services/UserServices';
 import { fetchOnboarding } from '../../services/UserServices';
 import { Heading } from '../../components/common/Heading';
 import { RButton } from '../../components/core/RButton';
+import { signup } from '../../services/UserServices';
 
-function RawProfileLoading({navigation, login, loginLoading, loginError, auth}) {
+function RawProfileLoading(props) {
+
+  const {route, navigation, signup, signupLoading, signupError, auth} = props;
+  console.log("LD3-wtf", signupLoading)
+
+  const [animate, setAnimate] = React.useState(true);
+
+  const body = route?.params?.body;
+  console.log("LD4-update", {animate, signupLoading, signupError, auth, body})
 
   React.useEffect(() => {
-    console.log({loginLoading, loginError, auth})
-    if(!loginLoading){
-      if(!loginError && !!auth.token){
+    signup(body)
+    setTimeout(() => {
+      setAnimate(false)
+    }, 5000)
+  }, [])
+
+  React.useEffect(() => {
+    console.log("LD4-2", {signupLoading, signupError, auth})
+    if(!signupLoading && !animate){
+      if(!signupError && !!auth.token){
+        console.log("LD4-3", {signupLoading, signupError, auth})
         navigation.navigate(RouteNames.DISCUSS_HOME)
       }
     }
-  }, [loginLoading, auth])
+  }, [signupLoading, auth, animate])
 
   const handleRestartPress = () => {
     navigation.navigate(RouteNames.PROFILE_WELCOME)
@@ -32,20 +49,25 @@ function RawProfileLoading({navigation, login, loginLoading, loginError, auth}) 
 
   }
 
-  if(loginLoading){
+  // if(signupLoading){
+  if(signupLoading || animate){
+    console.log("LD4-anim")
     return <ActivityIndicator />
   }
 
-  if(loginError){
-    <View style={{alignItems: 'center'}}>
-      <Text>{"Oops, we experienced an error on our end"}</Text>
-      <RButton onPress={handleRetryPress} active style={{marginTop: 8}}>
-        <Text>{"Click here to Retry"}</Text>
-      </RButton>
-      <RButton onPress={handleRestartPress} active style={{marginTop: 8}}>
-        <Text>{"Click here to start over again"}</Text>
-      </RButton>
-    </View>
+  if(signupError || !auth.token){
+    console.log("LD4-err")
+    return (
+      <View style={{alignItems: 'center'}}>
+        <Text>{"Oops, we experienced an error on our end"}</Text>
+        <RButton onPress={handleRetryPress} active style={{marginTop: 8}}>
+          <Text>{"Click here to Retry"}</Text>
+        </RButton>
+        <RButton onPress={handleRestartPress} active style={{marginTop: 8}}>
+          <Text>{"Click here to start over again"}</Text>
+        </RButton>
+      </View>
+    )
   }
 
   return (
@@ -56,11 +78,11 @@ function RawProfileLoading({navigation, login, loginLoading, loginError, auth}) 
 
 const stp = (state) => ({
   auth: state.auth,
-  loginLoading: state.loginLoading,
-  loginError: state.loginError,
+  signupLoading: state.signupLoading,
+  signupError: state.signupError,
 })
 const dtp = (dispatch) => ({
-  login: login(dispatch),
+  signup: signup(dispatch),
 })
 export const ProfileLoading = connect(stp, dtp)(RawProfileLoading)
 

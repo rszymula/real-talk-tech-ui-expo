@@ -33,6 +33,7 @@ import { DiscussPostDetail } from './screens/discuss/DiscussPostDetail';
 import { TopBanner } from './components/common/TopBanner';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ProfileUserOtherOriginal } from './screens/user/ProfileUserOtherOriginal';
+import { ProfileLoading } from './screens/user/ProfileLoading';
 
 export const routes = [
   {
@@ -102,6 +103,10 @@ export const routes = [
   {
     name: RouteNames.PROFILE_CONTACT_US,
     component: navBarProvider(ProfileContactUs),
+  },
+  {
+    name: RouteNames.PROFILE_LOADING,
+    component: alternateNavBarProvider(ProfileLoading),
   },
 ]
 
@@ -238,7 +243,7 @@ function alternateNavBarProvider(Component){
 
 function RawNavigation(){
   // const token = AsyncStorage.getItem("token");
-  // AsyncStorage.clear();
+  AsyncStorage.clear();
   return (
     <NavigationContainer>
       {/* <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName={!!token ? RouteNames.DISCUSS_HOME : RouteNames.PROFILE_WELCOME}> */}
