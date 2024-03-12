@@ -106,7 +106,7 @@ export const routes = [
   },
   {
     name: RouteNames.PROFILE_LOADING,
-    component: alternateNavBarProvider(ProfileLoading),
+    component: ProfileLoading,
   },
 ]
 

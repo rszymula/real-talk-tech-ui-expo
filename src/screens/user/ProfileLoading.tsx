@@ -13,6 +13,7 @@ import { fetchOnboarding } from '../../services/UserServices';
 import { Heading } from '../../components/common/Heading';
 import { RButton } from '../../components/core/RButton';
 import { signup } from '../../services/UserServices';
+import { LogoAnimated } from '../../components/animation/LogoAnimated';
 
 function RawProfileLoading(props) {
 
@@ -52,7 +53,13 @@ function RawProfileLoading(props) {
   // if(signupLoading){
   if(signupLoading || animate){
     console.log("LD4-anim")
-    return <ActivityIndicator />
+    // return <ActivityIndicator />
+    return (
+      <>
+        <Text style={{color: colors.textHighlight, alignSelf: 'center', marginTop: 32, marginBottom: 32}}>Creating your account...</Text>
+        <LogoAnimated timeScale={0.4} />
+      </>
+    )
   }
 
   if(signupError || !auth.token){
