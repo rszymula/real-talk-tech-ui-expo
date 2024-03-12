@@ -322,8 +322,8 @@ function RawDiscussHome(props){
           />)}
         {/* </ScrollView> */}
         <Link onPress={loadPosts} textLink={"Load More Posts..."} style={{alignSelf: 'center', margin: 16}}/>
-        {feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />}
-        {/* {feedLoading[currentCategory] && <LogoAnimated timeScale={0.2} spaceScale={0.6} style={{marginTop: 16}} />} */}
+        {/* {feedLoading[currentCategory] && <ActivityIndicator style={{marginTop: 16}} />} */}
+        {feedLoading[currentCategory] && <LogoAnimated timeScale={0.2} spaceScale={0.6} style={{marginTop: 16}} />}
         {feedError[currentCategory] && (<View style={{margin: 32}}>
           <Text style={{alignSelf: 'center', color: colors.textRegular}}>{"Failed loading data..."}</Text>
           <Link onPress={loadPosts} textLink={"Retry"} style={{alignSelf: 'center', marginTop: 8}}/>
