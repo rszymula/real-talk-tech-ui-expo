@@ -25,9 +25,9 @@ function RawProfileLoading(props) {
   console.log("LD4-update", {animate, signupLoading, signupError, auth, body})
 
   React.useEffect(() => {
-    signup(body)
     setTimeout(() => {
       setAnimate(false)
+      signup(body)
     }, 5000)
   }, [])
 
