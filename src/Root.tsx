@@ -243,7 +243,7 @@ function alternateNavBarProvider(Component){
 
 function RawNavigation(){
   // const token = AsyncStorage.getItem("token");
-  AsyncStorage.clear();
+  // AsyncStorage.clear();
   return (
     <NavigationContainer>
       {/* <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName={!!token ? RouteNames.DISCUSS_HOME : RouteNames.PROFILE_WELCOME}> */}
