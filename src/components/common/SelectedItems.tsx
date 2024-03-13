@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { colors } from "../../context/themes";
 import X from '../../assets/x.png';
 import THUMBSUP from '../../assets/thumbsup.png';
+import THUMBSUP_ACTIVE from '../../assets/thumbsup_active.png';
 import { Button, ButtonType } from "../core/Button";
 
 
@@ -34,9 +35,9 @@ export function SelectedItemsClickable(props){
         return (
           <TouchableOpacity onPress={item.endorsed ? () => {} : () => onPress(item)} style={[item.endorsed ? styles.itemClickableInactive : styles.itemClickableActive, itemStyle]}>
             <Text style={item.endorsed ? styles.textClickableInactive : styles.textClickableActive}>{`${item.name} ${item.endorsementCount}`}</Text>
-            {!item.endorsed && (<View style={{marginLeft: 4, marginTop: 2}}>
-              <Image source={THUMBSUP} style={{width: 11, height: 11}}/>
-            </View>)}
+            <View style={{marginLeft: 4}}>
+              <Image source={!item.endorsed ? THUMBSUP : THUMBSUP_ACTIVE} style={{width: 11, height: 9}}/>
+            </View>
             {/* {!!onDelete && (<TouchableOpacity onPress={() => onDelete(item)}>
               <View style={{marginLeft: 4, marginTop: 2}}>
                 <Image source={X} style={{width: 8, height: 8}}/>

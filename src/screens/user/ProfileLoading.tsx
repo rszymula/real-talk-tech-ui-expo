@@ -56,7 +56,7 @@ function RawProfileLoading(props) {
     // return <ActivityIndicator />
     return (
       <>
-        <Text style={{color: colors.textHighlight, alignSelf: 'center', marginTop: 32, marginBottom: 32}}>Creating your account...</Text>
+        <Text style={{color: colors.textHighlight, alignSelf: 'center', marginTop: 32, marginBottom: 32}}>Verifying your account...</Text>
         <LogoAnimated timeScale={0.4} />
       </>
     )
